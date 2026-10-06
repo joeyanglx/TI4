@@ -19,6 +19,14 @@ export interface Piece {
   /** Free position on the board, in board pixels. */
   x: number;
   y: number;
+  /** Units in this stack (1 if unset). Tokens never stack. */
+  count?: number;
+  /** How many units in the stack have sustained damage. */
+  damaged?: number;
+}
+
+export function stackSize(piece: Piece): number {
+  return piece.count ?? 1;
 }
 
 export interface GameState {
@@ -37,6 +45,14 @@ export type Action =
   | { type: 'piece/add'; piece: Piece }
   | { type: 'piece/move'; id: string; x: number; y: number }
   | { type: 'piece/remove'; id: string }
+  /** Add units to (or take them from) a stack; it never drops below 1, remove the piece for that. */
+  | { type: 'piece/count'; id: string; amount: number }
+  /** Mark units in a stack as damaged (or repaired). */
+  | { type: 'piece/damage'; id: string; amount: number }
+  /** Drop one stack onto another of the same unit and colour. */
+  | { type: 'piece/merge'; from: string; into: string }
+  /** Take one unit off a stack as its own piece, preferring an undamaged one. */
+  | { type: 'piece/split'; id: string; newId: string; x: number; y: number }
   | { type: 'tile/place'; tile: Tile }
   | { type: 'tile/remove'; id: string }
   | { type: 'tile/rotate'; id: string }
@@ -53,7 +69,11 @@ export type Action =
  * and sends them to everyone.
  */
 export function isServerOrdered(action: Action): boolean {
-  return /^(cards?|strategy|seat|planet|tech|token|speaker|promissory)\//.test(action.type);
+  return (
+    /^(cards?|strategy|seat|planet|tech|token|speaker|promissory)\//.test(action.type) ||
+    // Stack edits depend on the current count; moving pieces stays instant.
+    /^piece\/(count|damage|merge|split)$/.test(action.type)
+  );
 }
 
 /**
@@ -75,6 +95,40 @@ export function applyAction(state: GameState, action: Action): GameState {
     case 'piece/remove': {
       const { [action.id]: _removed, ...pieces } = state.pieces;
       return { ...state, pieces };
+    }
+    case 'piece/count': {
+      const piece = state.pieces[action.id];
+      if (!piece) return state;
+      const count = Math.max(1, stackSize(piece) + action.amount);
+      return withPiece(state, { ...piece, count, damaged: Math.min(piece.damaged ?? 0, count) });
+    }
+    case 'piece/damage': {
+      const piece = state.pieces[action.id];
+      if (!piece) return state;
+      const damaged = Math.min(stackSize(piece), Math.max(0, (piece.damaged ?? 0) + action.amount));
+      return withPiece(state, { ...piece, damaged });
+    }
+    case 'piece/merge': {
+      const from = state.pieces[action.from];
+      const into = state.pieces[action.into];
+      if (!from || !into || from.id === into.id || from.kind !== into.kind || from.color !== into.color) return state;
+      const { [from.id]: _merged, ...pieces } = state.pieces;
+      const merged = {
+        ...into,
+        count: stackSize(into) + stackSize(from),
+        damaged: (into.damaged ?? 0) + (from.damaged ?? 0),
+      };
+      return { ...state, pieces: { ...pieces, [into.id]: merged } };
+    }
+    case 'piece/split': {
+      const piece = state.pieces[action.id];
+      if (!piece || stackSize(piece) < 2) return state;
+      // Leave damaged units in the stack unless they're all damaged.
+      const damaged = piece.damaged ?? 0;
+      const splitDamaged = damaged >= stackSize(piece) ? 1 : 0;
+      const rest = { ...piece, count: stackSize(piece) - 1, damaged: damaged - splitDamaged };
+      const single = { ...piece, id: action.newId, x: action.x, y: action.y, count: 1, damaged: splitDamaged };
+      return { ...state, pieces: { ...state.pieces, [rest.id]: rest, [single.id]: single } };
     }
     case 'tile/place':
       return { ...state, tiles: { ...state.tiles, [action.tile.id]: action.tile } };
@@ -119,6 +173,10 @@ export function applyAction(state: GameState, action: Action): GameState {
       }
       return { ...state, cards: applyCardAction(state.cards, action as CardAction) };
   }
+}
+
+function withPiece(state: GameState, piece: Piece): GameState {
+  return { ...state, pieces: { ...state.pieces, [piece.id]: piece } };
 }
 
 export function makeTile(hex: Hex, system: string, rotation = 0): Tile {

@@ -4,12 +4,14 @@ import type Konva from 'konva';
 import {
   PIECE_STYLE,
   PLAYER_COLORS,
+  UNIT_KINDS,
   hexCorners,
   hexKey,
   hexToPixel,
   hexesInRadius,
   makeTile,
   pixelToHex,
+  stackSize,
   type Action,
   type GameState,
   type Piece,
@@ -18,6 +20,7 @@ import {
 } from '@ti4/shared';
 import { PIECE_MIME, SYSTEM_MIME, TOKEN_MIME, tokenDropTarget, type TokenDrag } from '../dnd';
 import { newId } from '../id';
+import { PieceMenu } from './PieceMenu';
 import { SystemCard } from './SystemCard';
 import { TileShape } from './TileShape';
 
@@ -42,7 +45,22 @@ export function Board({ state, color, mode, dispatch }: Props) {
   const stageRef = useRef<Konva.Stage>(null);
   const size = useElementSize(containerRef);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [menu, setMenu] = useState<{ piece: string; x: number; y: number } | null>(null);
   const editing = mode === 'edit';
+
+  /** A unit of the same kind and colour under this point, to stack onto. */
+  function stackAt(kind: PieceKind, pieceColor: PlayerColor, x: number, y: number, except?: string) {
+    if (!isUnit(kind)) return undefined;
+    const reach = PIECE_STYLE[kind].radius * 1.2;
+    return Object.values(state.pieces).find(
+      (p) => p.id !== except && p.kind === kind && p.color === pieceColor && Math.hypot(p.x - x, p.y - y) <= reach,
+    );
+  }
+
+  function openMenu(piece: Piece, clientX: number, clientY: number) {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (rect) setMenu({ piece: piece.id, x: clientX - rect.left, y: clientY - rect.top });
+  }
 
   function handleWheel(e: Konva.KonvaEventObject<WheelEvent>) {
     e.evt.preventDefault();
@@ -74,7 +92,10 @@ export function Board({ state, color, mode, dispatch }: Props) {
     }
     const kind = e.dataTransfer.getData(PIECE_MIME) as PieceKind;
     if (kind) {
-      dispatch({ type: 'piece/add', piece: { id: newId(), kind, color, x: pos.x, y: pos.y } });
+      // Dropping a unit on a matching one adds to its stack.
+      const stack = stackAt(kind, color, pos.x, pos.y);
+      if (stack) dispatch({ type: 'piece/count', id: stack.id, amount: 1 });
+      else dispatch({ type: 'piece/add', piece: { id: newId(), kind, color, x: pos.x, y: pos.y } });
       return;
     }
     const system = e.dataTransfer.getData(SYSTEM_MIME);
@@ -99,6 +120,7 @@ export function Board({ state, color, mode, dispatch }: Props) {
         scaleY={0.6}
         draggable
         onWheel={handleWheel}
+        onDragStart={() => setMenu(null)}
       >
         <Layer listening={false}>
           {GUIDE_HEXES.filter((hex) => !state.tiles[hexKey(hex)]).map((hex) => {
@@ -125,21 +147,46 @@ export function Board({ state, color, mode, dispatch }: Props) {
         {/* Pieces sit above tiles; in edit mode they're dimmed and ignore the mouse so tiles can be grabbed. */}
         <Layer listening={!editing} opacity={editing ? 0.4 : 1}>
           {Object.values(state.pieces).map((piece) => (
-            <PieceShape key={piece.id} piece={piece} dispatch={dispatch} />
+            <PieceShape
+              key={piece.id}
+              piece={piece}
+              dispatch={dispatch}
+              stackAt={stackAt}
+              onMenu={openMenu}
+            />
           ))}
         </Layer>
       </Stage>
       {hovered && <SystemCard system={hovered} state={state} />}
+      {menu && state.pieces[menu.piece] && (
+        <PieceMenu
+          piece={state.pieces[menu.piece]}
+          x={menu.x}
+          y={menu.y}
+          dispatch={dispatch}
+          onClose={() => setMenu(null)}
+        />
+      )}
     </div>
   );
 }
 
-function PieceShape({ piece, dispatch }: { piece: Piece; dispatch: (action: Action) => void }) {
+interface PieceProps {
+  piece: Piece;
+  dispatch: (action: Action) => void;
+  stackAt: (kind: PieceKind, color: PlayerColor, x: number, y: number, except?: string) => Piece | undefined;
+  onMenu: (piece: Piece, clientX: number, clientY: number) => void;
+}
+
+function PieceShape({ piece, dispatch, stackAt, onMenu }: PieceProps) {
   const style = PIECE_STYLE[piece.kind];
   const isToken = piece.kind === 'command' || piece.kind === 'control';
   const isSpeaker = piece.kind === 'speaker';
   // Command and speaker tokens can be dragged off the map onto a player's panel.
   const returnable = piece.kind === 'command' || isSpeaker;
+  const count = stackSize(piece);
+  const damaged = piece.damaged ?? 0;
+  const badge = style.radius * 0.75;
   return (
     <Group
       x={piece.x}
@@ -152,14 +199,21 @@ function PieceShape({ piece, dispatch }: { piece: Piece; dispatch: (action: Acti
       onDragEnd={(e) => {
         e.cancelBubble = true;
         const target = returnable && 'clientX' in e.evt ? tokenDropTarget(e.evt.clientX, e.evt.clientY) : undefined;
+        const stack = stackAt(piece.kind, piece.color, e.target.x(), e.target.y(), piece.id);
         if (target) dispatch({ type: 'token/return', piece: piece.id, player: target.player, to: target.slot });
+        else if (stack) dispatch({ type: 'piece/merge', from: piece.id, into: stack.id });
         else dispatch({ type: 'piece/move', id: piece.id, x: e.target.x(), y: e.target.y() });
       }}
       onContextMenu={(e) => {
         e.evt.preventDefault();
-        dispatch({ type: 'piece/remove', id: piece.id });
+        e.cancelBubble = true;
+        onMenu(piece, e.evt.clientX, e.evt.clientY);
       }}
     >
+      {damaged > 0 && (
+        // Sustained damage: a red dashed ring around the stack.
+        <Circle radius={style.radius + 5} stroke="#ff3b3b" strokeWidth={3} dash={[6, 4]} listening={false} />
+      )}
       <Circle
         radius={style.radius}
         fill={isSpeaker ? '#8b1a1a' : PLAYER_COLORS[piece.color]}
@@ -180,8 +234,36 @@ function PieceShape({ piece, dispatch }: { piece: Piece; dispatch: (action: Acti
         align="center"
         verticalAlign="middle"
       />
+      {count > 1 && <Badge x={badge} y={-badge} text={String(count)} fill="#111" />}
+      {damaged > 0 && count > 1 && <Badge x={-badge} y={-badge} text={String(damaged)} fill="#c62828" />}
     </Group>
   );
+}
+
+/** A small numbered circle on a piece: stack size (top right) or damaged units (top left). */
+function Badge({ x, y, text, fill }: { x: number; y: number; text: string; fill: string }) {
+  const r = 10;
+  return (
+    <Group x={x} y={y} listening={false}>
+      <Circle radius={r} fill={fill} stroke="#fff" strokeWidth={1.5} />
+      <Text
+        text={text}
+        fontSize={12}
+        fontStyle="bold"
+        fill="#fff"
+        width={r * 2}
+        height={r * 2}
+        offsetX={r}
+        offsetY={r}
+        align="center"
+        verticalAlign="middle"
+      />
+    </Group>
+  );
+}
+
+function isUnit(kind: PieceKind) {
+  return (UNIT_KINDS as readonly string[]).includes(kind);
 }
 
 function useElementSize(ref: React.RefObject<HTMLElement | null>) {

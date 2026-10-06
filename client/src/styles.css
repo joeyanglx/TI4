@@ -1301,3 +1301,53 @@ button {
   background: #7a2c2c;
   border-color: #7a2c2c;
 }
+
+/* Right-click menu on a piece */
+.piece-menu {
+  position: absolute;
+  z-index: 15;
+  min-width: 170px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+}
+
+.piece-menu-title {
+  padding: 4px 8px 6px;
+  color: var(--muted);
+  text-transform: capitalize;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
+.piece-menu-title .damaged {
+  color: #ff6b6b;
+  text-transform: none;
+}
+
+.piece-menu button {
+  text-align: left;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+}
+
+.piece-menu button:hover:not(:disabled) {
+  background: #222a42;
+}
+
+.piece-menu button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.piece-menu button.danger {
+  color: #ff6b6b;
+}

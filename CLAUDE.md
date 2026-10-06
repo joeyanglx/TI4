@@ -32,4 +32,4 @@ npm workspaces, all TypeScript (ESM, strict):
 
 ## Ideas not yet built
 
-Unit stacking (e.g. "3× fighter"), faction rules (commodity limits, leaders, tech prerequisites; a faction sets an icon and starting techs, and its sheet is shown read-only), planet attachments, exploration decks and relic fragments, truly secret hands (server-side filtering), undo, auth for public hosting.
+faction rules (commodity limits, leaders, tech prerequisites; a faction sets an icon and starting techs, and its sheet is shown read-only), planet attachments, exploration decks and relic fragments, truly secret hands (server-side filtering), undo, auth for public hosting.

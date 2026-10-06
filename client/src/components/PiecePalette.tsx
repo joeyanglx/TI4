@@ -37,7 +37,7 @@ export function PiecePalette({ color, onColorChange, edition }: Props) {
       <h2>Tokens</h2>
       <PieceList kinds={TOKEN_KINDS} color={color} />
       <p className="hint">
-        Drag onto the board. Drag empty space to pan, scroll to zoom. Right-click a piece to remove it.
+        Drag onto the board; drop a unit on a matching one to stack it. Right-click a piece to change the stack, split one off, mark sustained damage or remove it. Drag empty space to pan, scroll to zoom.
       </p>
     </>
   );
