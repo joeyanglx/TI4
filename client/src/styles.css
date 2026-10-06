@@ -216,6 +216,25 @@ button {
   border: 2px solid #111;
 }
 
+.dot-square {
+  border-radius: 3px;
+}
+
+/* clip-path drops the border, which is fine at palette size. */
+.dot-hexagon {
+  border: 0;
+  border-radius: 0;
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+
+.dot-triangle {
+  border: 0;
+  border-radius: 0;
+  padding-top: 9px;
+  font-size: 8px;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
 .board {
   position: relative;
   overflow: hidden;
@@ -1640,4 +1659,38 @@ button {
 .history-panel .history-start {
   align-self: flex-start;
   margin-top: 8px;
+}
+
+.unit-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.unit-stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 2px;
+  border-radius: 6px;
+  background: var(--bg);
+}
+
+.unit-stats span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.unit-stats strong {
+  font-size: 15px;
+}
+
+.unit-abilities {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.unit-note {
+  color: var(--muted);
+  font-size: 12px;
 }

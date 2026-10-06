@@ -53,7 +53,7 @@ function PieceList({ kinds, color }: { kinds: readonly PieceKind[]; color: Playe
           draggable
           onDragStart={(e) => e.dataTransfer.setData(PIECE_MIME, kind)}
         >
-          <span className="dot" style={{ background: PLAYER_COLORS[color] }}>
+          <span className={`dot dot-${PIECE_STYLE[kind].shape}`} style={{ background: PLAYER_COLORS[color] }}>
             {PIECE_STYLE[kind].label}
           </span>
           {kind}

@@ -28,6 +28,8 @@ export interface Roll {
   groups: RollGroup[];
   /** Set when this re-rolls the misses of an earlier roll. */
   rerollOf?: string;
+  /** Always-on faction ability already folded into each group's hitsOn, shown in the log (e.g. Unrelenting +1). */
+  ability?: { source: string; amount: number };
 }
 
 export type DiceAction = { type: 'dice/roll'; roll: Roll };
@@ -48,6 +50,11 @@ export function rollHits(roll: Roll): number {
     (sum, g) => sum + g.results.filter((r) => isHit(r, g.hitsOn, roll.modifier)).length,
     0,
   );
+}
+
+/** Space and ground combat are "combat rolls"; unit abilities like BOMBARDMENT are not. */
+export function isCombatRoll(kind: RollKind): boolean {
+  return kind === 'space' || kind === 'ground';
 }
 
 /** Which of a unit's stats a roll uses. */

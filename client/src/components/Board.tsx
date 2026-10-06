@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type DragEvent } from 'react';
-import { Circle, Group, Layer, Line, Stage, Text } from 'react-konva';
+import { Circle, Group, Layer, Line, Rect, RegularPolygon, Stage, Text } from 'react-konva';
 import type Konva from 'konva';
 import {
   PIECE_STYLE,
@@ -15,6 +15,7 @@ import {
   type Action,
   type GameState,
   type Piece,
+  type PieceShapeKind,
   type PieceKind,
   type PlayerColor,
 } from '@ti4/shared';
@@ -22,6 +23,7 @@ import { PIECE_MIME, SYSTEM_MIME, TOKEN_MIME, tokenDropTarget, type TokenDrag } 
 import { newId } from '../id';
 import { PieceMenu } from './PieceMenu';
 import { SystemCard } from './SystemCard';
+import { UnitCard } from './UnitCard';
 import { TileShape } from './TileShape';
 
 export type BoardMode = 'play' | 'edit';
@@ -45,6 +47,7 @@ export function Board({ state, color, mode, dispatch }: Props) {
   const stageRef = useRef<Konva.Stage>(null);
   const size = useElementSize(containerRef);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [hoveredPiece, setHoveredPiece] = useState<string | null>(null);
   const [menu, setMenu] = useState<{ piece: string; x: number; y: number } | null>(null);
   const editing = mode === 'edit';
 
@@ -153,11 +156,17 @@ export function Board({ state, color, mode, dispatch }: Props) {
               dispatch={dispatch}
               stackAt={stackAt}
               onMenu={openMenu}
+              onHover={setHoveredPiece}
             />
           ))}
         </Layer>
       </Stage>
-      {hovered && <SystemCard system={hovered} state={state} />}
+      {/* A unit's stats take the place of the system card while hovering a unit. */}
+      {hoveredPiece && state.pieces[hoveredPiece] && isUnit(state.pieces[hoveredPiece].kind) ? (
+        <UnitCard piece={state.pieces[hoveredPiece]} state={state} />
+      ) : (
+        hovered && <SystemCard system={hovered} state={state} />
+      )}
       {menu && state.pieces[menu.piece] && (
         <PieceMenu
           piece={state.pieces[menu.piece]}
@@ -176,9 +185,10 @@ interface PieceProps {
   dispatch: (action: Action) => void;
   stackAt: (kind: PieceKind, color: PlayerColor, x: number, y: number, except?: string) => Piece | undefined;
   onMenu: (piece: Piece, clientX: number, clientY: number) => void;
+  onHover: (piece: string | null) => void;
 }
 
-function PieceShape({ piece, dispatch, stackAt, onMenu }: PieceProps) {
+function PieceShape({ piece, dispatch, stackAt, onMenu, onHover }: PieceProps) {
   const style = PIECE_STYLE[piece.kind];
   const isToken = piece.kind === 'command' || piece.kind === 'control';
   const isSpeaker = piece.kind === 'speaker';
@@ -192,6 +202,8 @@ function PieceShape({ piece, dispatch, stackAt, onMenu }: PieceProps) {
       x={piece.x}
       y={piece.y}
       draggable
+      onMouseEnter={() => onHover(piece.id)}
+      onMouseLeave={() => onHover(null)}
       onDragStart={(e) => {
         e.cancelBubble = true; // don't pan the board while moving a piece
         e.target.moveToTop();
@@ -214,17 +226,19 @@ function PieceShape({ piece, dispatch, stackAt, onMenu }: PieceProps) {
         // Sustained damage: a red dashed ring around the stack.
         <Circle radius={style.radius + 5} stroke="#ff3b3b" strokeWidth={3} dash={[6, 4]} listening={false} />
       )}
-      <Circle
+      <PieceBody
+        shape={style.shape}
         radius={style.radius}
         fill={isSpeaker ? '#8b1a1a' : PLAYER_COLORS[piece.color]}
         stroke={isSpeaker ? '#f2c94c' : isToken ? '#fff' : '#111'}
         strokeWidth={isToken || isSpeaker ? 3 : 2}
-        shadowBlur={4}
-        shadowOpacity={0.5}
       />
       <Text
         text={style.label}
-        fontSize={style.label.length > 3 ? style.radius * 0.36 : style.radius * 0.8}
+        // Triangles have less room around their centre, so their label is smaller.
+        fontSize={
+          style.label.length > 3 ? style.radius * 0.36 : style.radius * (style.shape === 'triangle' ? 0.6 : 0.8)
+        }
         fontStyle="bold"
         fill="#fff"
         width={style.radius * 2}
@@ -238,6 +252,32 @@ function PieceShape({ piece, dispatch, stackAt, onMenu }: PieceProps) {
       {damaged > 0 && count > 1 && <Badge x={-badge} y={-badge} text={String(damaged)} fill="#c62828" />}
     </Group>
   );
+}
+
+interface BodyProps {
+  shape: PieceShapeKind;
+  radius: number;
+  fill: string;
+  stroke: string;
+  strokeWidth: number;
+}
+
+/** The piece outline, sized so every shape covers roughly the same area as a circle of `radius`. */
+function PieceBody({ shape, radius, ...paint }: BodyProps) {
+  const common = { ...paint, shadowBlur: 4, shadowOpacity: 0.5 };
+  switch (shape) {
+    case 'square': {
+      const side = radius * 1.75;
+      return <Rect width={side} height={side} offsetX={side / 2} offsetY={side / 2} cornerRadius={2} {...common} />;
+    }
+    case 'hexagon':
+      // Flat-topped, to match the system tiles.
+      return <RegularPolygon sides={6} radius={radius * 1.1} rotation={30} {...common} />;
+    case 'triangle':
+      return <RegularPolygon sides={3} radius={radius * 1.4} {...common} />;
+    case 'circle':
+      return <Circle radius={radius} {...common} />;
+  }
 }
 
 /** A small numbered circle on a piece: stack size (top right) or damaged units (top left). */

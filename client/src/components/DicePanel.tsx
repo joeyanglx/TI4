@@ -2,7 +2,10 @@ import { useMemo, useState } from 'react';
 import {
   ROLL_KINDS,
   SYSTEMS,
+  effectiveHitsOn,
+  factionCombatModifier,
   hexKey,
+  isCombatRoll,
   isHit,
   pixelToHex,
   playerUnits,
@@ -41,8 +44,13 @@ export function DicePanel({ state, me, dispatch }: Props) {
   const [hitsOn, setHitsOn] = useState<Record<string, number>>({});
   const [modifier, setModifier] = useState(0);
 
+  // Fragile / Unrelenting change combat rolls only, so they're folded into the hit value for those.
+  const ability = isCombatRoll(kind) ? factionCombatModifier(seat.faction) : undefined;
   const units = playerUnits(seat.faction, seat.technologies, state.cards.edition)
-    .map((unit) => ({ unit, roll: unitRoll(unit, kind) }))
+    .map((unit) => {
+      const stat = unitRoll(unit, kind);
+      return { unit, roll: stat && { ...stat, hitsOn: effectiveHitsOn(stat.hitsOn, ability?.amount) } };
+    })
     .filter((u) => u.roll);
   const systems = useMemo(() => systemsWithMyUnits(state, me), [state, me]);
 
@@ -63,7 +71,9 @@ export function DicePanel({ state, me, dispatch }: Props) {
         hitsOn: hitsOn[unit.name] ?? roll!.hitsOn,
         results: d10s((counts[unit.name] ?? 0) * roll!.dice),
       }));
-    if (groups.length) dispatch({ type: 'dice/roll', roll: { id: newId(), player: me, kind, modifier, groups } });
+    if (groups.length) {
+      dispatch({ type: 'dice/roll', roll: { id: newId(), player: me, kind, modifier, groups, ability } });
+    }
   }
 
   const totalDice = units.reduce((n, { unit, roll }) => n + (counts[unit.name] ?? 0) * roll!.dice, 0);
@@ -128,6 +138,12 @@ export function DicePanel({ state, me, dispatch }: Props) {
           </tbody>
         </table>
         {units.length === 0 && <p className="hint">None of your units roll for this.</p>}
+        {ability && units.length > 0 && (
+          <p className="hint">
+            {ability.source} ({ability.amount > 0 ? '+' : '−'}
+            {Math.abs(ability.amount)} to combat rolls) is already included in the hit values.
+          </p>
+        )}
         <div className="counter-row">
           <span>Modifier to each die</span>
           <span className="counter">
@@ -172,6 +188,7 @@ function RollEntry({ roll, state, onRerollMisses }: { roll: Roll; state: GameSta
           {label}
           {roll.rerollOf && ' · re-roll'}
           {roll.modifier !== 0 && ` · ${roll.modifier > 0 ? '+' : ''}${roll.modifier}`}
+          {roll.ability && ` · ${roll.ability.source} ${roll.ability.amount > 0 ? '+' : '−'}${Math.abs(roll.ability.amount)}`}
         </span>
         <span className="roll-hits">
           {hits} {hits === 1 ? 'hit' : 'hits'}
