@@ -1,8 +1,6 @@
 import {
   TECHNOLOGIES,
-  TOKEN_POOLS,
   editionTechnologies,
-  reinforcements,
   seatOf,
   type Action,
   type GameState,
@@ -10,6 +8,7 @@ import {
 } from '@ti4/shared';
 import { TECH_TYPES, describeRequirements, techColor } from '../techs';
 import { CardDetails } from './cardParts';
+import { SpeakerBadge, TokenPools, acceptTokens, readTokenDrag } from './TokenPools';
 
 interface Props {
   state: GameState;
@@ -17,37 +16,54 @@ interface Props {
   dispatch: (action: Action) => void;
 }
 
-const POOL_LABELS = { tactic: 'Tactic', fleet: 'Fleet', strategy: 'Strategy' };
+interface TokenProps extends Props {
+  players: string[];
+}
 
-/** Your command sheet's token pools; reinforcements count down as tokens go onto the sheet or the board. */
-export function TokenSection({ state, me, dispatch }: Props) {
-  const seat = seatOf(state.seats, me);
-  const left = reinforcements(state, me);
+/**
+ * Your command sheet, drawn like the overview: drag tokens between pools, onto the map, or from the map
+ * back onto a pool. The speaker token lives here too while you hold it (or nobody does).
+ */
+export function TokenSection({ state, me, players, dispatch }: TokenProps) {
+  const speakerOnMap = Object.values(state.pieces).some((p) => p.kind === 'speaker');
+  const canDragSpeaker = state.speaker === me || (!state.speaker && !speakerOnMap);
   return (
-    <section>
+    <section
+      // Dropping the speaker token from the map anywhere on this section makes you speaker.
+      data-token-slot="speaker"
+      data-player={me}
+      onDragOver={acceptTokens}
+      onDrop={(e) => {
+        if (readTokenDrag(e)?.from === 'speaker') dispatch({ type: 'speaker/set', player: me });
+      }}
+    >
       <h2>Command tokens</h2>
-      {TOKEN_POOLS.map((pool) => (
-        <div key={pool} className="counter-row">
-          <span>{POOL_LABELS[pool]}</span>
-          <span className="counter">
-            <button onClick={() => dispatch({ type: 'seat/tokens', player: me, pool, amount: -1 })}>−</button>
-            <b>{seat.tokens[pool]}</b>
-            <button
-              disabled={left <= 0}
-              onClick={() => dispatch({ type: 'seat/tokens', player: me, pool, amount: 1 })}
-            >
-              +
-            </button>
+      <TokenPools state={state} player={me} dispatch={dispatch} />
+      <div className="row speaker-row">
+        {canDragSpeaker ? (
+          <SpeakerBadge player={state.speaker ?? ''} draggable />
+        ) : (
+          <span className="muted">
+            {state.speaker ? `${state.speaker} is the speaker` : 'Speaker token is on the map'}
           </span>
-        </div>
-      ))}
-      <div className="counter-row">
-        <span>Reinforcements</span>
-        <span className={`counter ${left < 0 ? 'warning' : ''}`} title="16 minus tokens on your sheet and the board">
-          <b>{left}</b>
-        </span>
+        )}
+        <select
+          value=""
+          onChange={(e) => e.target.value && dispatch({ type: 'speaker/set', player: e.target.value })}
+          title="Hand the speaker token to a player"
+        >
+          <option value="">Give speaker to…</option>
+          {players.map((p) => (
+            <option key={p} value={p}>
+              {p}
+            </option>
+          ))}
+        </select>
       </div>
-      <p className="hint">Command tokens you drag onto the board in your colour count against reinforcements.</p>
+      <p className="hint">
+        Drag tokens between pools or onto the map, and drag tokens on the map back onto a pool (onto
+        reinforcements to just remove them). Everyone sees the result in the Overview.
+      </p>
     </section>
   );
 }

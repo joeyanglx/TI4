@@ -5,18 +5,13 @@ import {
   PLAYER_COLORS,
   STRATEGY_CARDS,
   TECHNOLOGIES,
-  TOKEN_POOLS,
   isActionCard,
-  reinforcements,
   seatOf,
-  type Action,
   type GameState,
-  type TokenPool,
 } from '@ti4/shared';
-import type { DragEvent } from 'react';
-import { TOKEN_MIME, type TokenDrag } from '../dnd';
 import { knownPlayers, victoryPoints } from '../players';
 import { FactionIcon } from './cardParts';
+import { SpeakerBadge, TokenPools } from './TokenPools';
 import { TECH_TYPES, techTooltip } from '../techs';
 
 /** Points needed to win in a standard game. */
@@ -27,14 +22,13 @@ interface Props {
   room: string;
   online: string[];
   me: string;
-  dispatch: (action: Action) => void;
 }
 
 /**
- * Summary of every player, in the style of Twilight Wars' info panel. Command tokens and the speaker
- * token can be dragged between the panel and the map.
+ * Read-only summary of every player, in the style of Twilight Wars' info panel. Tokens are moved on
+ * each player's own board; this shows everyone the result.
  */
-export function Overview({ state, room, online, me, dispatch }: Props) {
+export function Overview({ state, room, online, me }: Props) {
   const players = knownPlayers(state, online, me);
   const speakerOnMap = Object.values(state.pieces).some((p) => p.kind === 'speaker');
   return (
@@ -45,23 +39,14 @@ export function Overview({ state, room, online, me, dispatch }: Props) {
           <div className="muted">{EDITION_NAMES[state.cards.edition]}</div>
         </div>
         <div className="speaker-status">
-          {state.speaker ? null : speakerOnMap ? (
-            <span className="muted">Speaker token is on the map</span>
-          ) : (
-            <>
-              <span className="muted">Drag to a player:</span>
-              <SpeakerBadge player="" />
-            </>
+          {!state.speaker && (
+            <span className="muted">{speakerOnMap ? 'Speaker token is on the map' : 'No speaker yet'}</span>
           )}
         </div>
       </header>
       {players.map((p) => (
-        <PlayerOverview key={p} state={state} player={p} online={online.includes(p)} dispatch={dispatch} />
+        <PlayerOverview key={p} state={state} player={p} online={online.includes(p)} />
       ))}
-      <p className="hint">
-        Drag command tokens between pools or onto the map, and drag tokens on the map back onto a pool. Drag the
-        speaker token to another player or onto the map.
-      </p>
     </div>
   );
 }
@@ -70,10 +55,9 @@ interface PlayerProps {
   state: GameState;
   player: string;
   online: boolean;
-  dispatch: (action: Action) => void;
 }
 
-function PlayerOverview({ state, player, online, dispatch }: PlayerProps) {
+function PlayerOverview({ state, player, online }: PlayerProps) {
   const seat = seatOf(state.seats, player);
   const color = seat.color ? PLAYER_COLORS[seat.color] : 'var(--muted)';
   const { cards } = state;
@@ -85,21 +69,9 @@ function PlayerOverview({ state, player, online, dispatch }: PlayerProps) {
     .sort(([a], [b]) => a.localeCompare(b));
   const sum = (key: 'resources' | 'influence', readyOnly: boolean) =>
     planets.reduce((n, [name, p]) => (readyOnly && p.exhausted ? n : n + PLANETS[name][key]), 0);
-  const left = reinforcements(state, player);
 
   return (
-    <article
-      className="player-overview"
-      style={{ borderLeftColor: color }}
-      // Dropping the speaker token anywhere on a player's card hands it to them.
-      data-token-slot="speaker"
-      data-player={player}
-      onDragOver={acceptTokens}
-      onDrop={(e) => {
-        const drag = readDrag(e);
-        if (drag?.from === 'speaker') dispatch({ type: 'speaker/set', player });
-      }}
-    >
+    <article className="player-overview" style={{ borderLeftColor: color }}>
       <div className="po-header">
         {seat.faction ? (
           <FactionIcon faction={seat.faction} size={34} />
@@ -119,12 +91,7 @@ function PlayerOverview({ state, player, online, dispatch }: PlayerProps) {
         </span>
       </div>
 
-      <div className="po-tokens">
-        {TOKEN_POOLS.map((pool) => (
-          <Token key={pool} player={player} slot={pool} color={color} count={seat.tokens[pool]} dispatch={dispatch} />
-        ))}
-        <Token player={player} slot="reinforcements" color={color} count={left} dispatch={dispatch} />
-      </div>
+      <TokenPools state={state} player={player} />
 
       <div className="po-counts">
         <Count value={seat.tradeGoods} label="Trade goods" className="tg" />
@@ -198,72 +165,6 @@ function PlayerOverview({ state, player, online, dispatch }: PlayerProps) {
       </div>
     </article>
   );
-}
-
-interface TokenProps {
-  player: string;
-  slot: TokenPool | 'reinforcements';
-  color: string;
-  count: number;
-  dispatch: (action: Action) => void;
-}
-
-/** A command token pool: drag tokens out of it onto the map or another pool, or drop them back in. */
-function Token({ player, slot, color, count, dispatch }: TokenProps) {
-  return (
-    <div
-      className={`po-token ${count > 0 ? 'draggable' : ''}`}
-      title={`${slot}: ${count}`}
-      draggable={count > 0}
-      onDragStart={(e) => startDrag(e, { player, from: slot })}
-      data-token-slot={slot}
-      data-player={player}
-      onDragOver={acceptTokens}
-      onDrop={(e) => {
-        const drag = readDrag(e);
-        if (!drag || drag.from === 'speaker') return; // the card handles the speaker
-        e.stopPropagation();
-        // Moving tokens between your own pools; reinforcements adjust by themselves.
-        if (drag.player !== player || drag.from === slot) return;
-        if (drag.from !== 'reinforcements') dispatch({ type: 'seat/tokens', player, pool: drag.from, amount: -1 });
-        if (slot !== 'reinforcements') dispatch({ type: 'seat/tokens', player, pool: slot, amount: 1 });
-      }}
-    >
-      <span className="triangle" style={{ borderBottomColor: color }}>
-        <b>{count}</b>
-      </span>
-      <small>{slot}</small>
-    </div>
-  );
-}
-
-function SpeakerBadge({ player }: { player: string }) {
-  return (
-    <span
-      className="speaker-badge"
-      title="Speaker token: drag it to another player or onto the map"
-      draggable
-      onDragStart={(e) => startDrag(e, { player, from: 'speaker' })}
-    >
-      SPEAKER
-    </span>
-  );
-}
-
-function startDrag(e: DragEvent, drag: TokenDrag) {
-  e.dataTransfer.setData(TOKEN_MIME, JSON.stringify(drag));
-  e.dataTransfer.effectAllowed = 'move';
-}
-
-function acceptTokens(e: DragEvent) {
-  if (e.dataTransfer.types.includes(TOKEN_MIME)) e.preventDefault();
-}
-
-function readDrag(e: DragEvent): TokenDrag | undefined {
-  const data = e.dataTransfer.getData(TOKEN_MIME);
-  if (!data) return undefined;
-  e.preventDefault();
-  return JSON.parse(data) as TokenDrag;
 }
 
 function Count({ value, label, className }: { value: number | string; label: string; className: string }) {

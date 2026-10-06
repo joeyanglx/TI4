@@ -971,3 +971,20 @@ button {
   text-align: center;
   line-height: 1.15;
 }
+
+.speaker-row {
+  align-items: center;
+}
+
+.speaker-badge.draggable {
+  cursor: grab;
+}
+
+.speaker-badge:not(.draggable) {
+  cursor: default;
+}
+
+/* More tokens out than you own: reinforcements went negative. */
+.triangle.over b {
+  color: #ff8a8a;
+}

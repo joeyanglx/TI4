@@ -194,7 +194,8 @@ const editions = {
     agenda: decks.agendas_pok.map((id) => AGENDA + id),
     relic: decks.relics_pok_te.map((id) => RELIC + id),
     strategy: STRATEGY_SETS.te,
-    technology: [...decks.techs_pok, ...teTechs.map((t) => t.alias)].map((id) => TECH + id),
+    // Executive Order is in both lists, hence the Set.
+    technology: [...new Set([...decks.techs_pok, ...teTechs.map((t) => t.alias)])].map((id) => TECH + id),
     faction: Object.values(FACTION_SETS).flat(),
   },
 };

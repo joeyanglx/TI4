@@ -31,7 +31,7 @@ export function RightPanel({ state, room, online, me, dispatch }: Props) {
         {tab === 'board' ? (
           <CardsPanel state={state} online={online} me={me} dispatch={dispatch} />
         ) : (
-          <Overview state={state} room={room} online={online} me={me} dispatch={dispatch} />
+          <Overview state={state} room={room} online={online} me={me} />
         )}
       </div>
     </aside>

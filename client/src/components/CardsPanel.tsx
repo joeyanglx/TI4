@@ -106,7 +106,7 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
             </div>
           </section>
           <YourPlanets state={state} players={players} me={me} dispatch={dispatch} />
-          <TokenSection state={state} me={me} dispatch={dispatch} />
+          <TokenSection state={state} me={me} players={players} dispatch={dispatch} />
           <TechSection state={state} me={me} dispatch={dispatch} />
         </>
       ) : (
