@@ -35,7 +35,7 @@ export function PromissorySection({ state, players, me, dispatch }: Props) {
         <div key={n.note.id} className="card-row">
           {text(n)}
           <div className="card-actions">
-            <GiveSelect players={players} exclude={me} onGive={(p) => give(n, p)} />
+            <GiveSelect players={players} exclude={me} label="Give to…" onGive={(p) => give(n, p)} />
           </div>
         </div>
       ))}
@@ -53,6 +53,7 @@ export function PromissorySection({ state, players, me, dispatch }: Props) {
                 Play
               </button>
             )}
+            <GiveSelect players={players} exclude={me} label="Give to…" onGive={(p) => give(n, p)} />
             <button title={`Return it to ${n.owner}`} onClick={() => give(n, n.owner)}>
               Return
             </button>
@@ -65,6 +66,7 @@ export function PromissorySection({ state, players, me, dispatch }: Props) {
         <div key={`${n.owner}/${n.note.id}`} className="card-row">
           {text(n)}
           <div className="card-actions">
+            <GiveSelect players={players} exclude={me} label="Give to…" onGive={(p) => give(n, p)} />
             <button title={`Return it to ${n.owner}`} onClick={() => give(n, n.owner)}>
               Return
             </button>
