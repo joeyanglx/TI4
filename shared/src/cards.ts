@@ -1,8 +1,8 @@
 import cardsJson from './data/cards.json';
 
 // Card data comes from the AsyncTI4 bot (official cards only), see scripts/import-cards.mjs.
-// Card ids are unique per physical copy, e.g. "sabo1".."sabo4". Agendas and relics are prefixed
-// ("agenda_", "relic_") because their AsyncTI4 aliases can clash with action cards.
+// Card ids are unique per physical copy, e.g. "sabo1".."sabo4". Agendas, relics and technologies are
+// prefixed ("agenda_", "relic_", "tech_") because their AsyncTI4 aliases can clash with action cards.
 
 export type CardExpansion = 'base' | 'pok' | 'te';
 export type ObjectiveType = 'stage1' | 'stage2' | 'secret';
@@ -49,6 +49,19 @@ export interface RelicInfo {
   text: string;
 }
 
+export type TechType = 'biotic' | 'cybernetic' | 'propulsion' | 'warfare' | 'unit' | 'none';
+
+export interface TechnologyInfo {
+  name: string;
+  expansion: CardExpansion;
+  type: TechType;
+  /** One letter per prerequisite: G biotic, Y cybernetic, B propulsion, R warfare. */
+  requirements: string;
+  /** Faction name, for faction technologies. */
+  faction?: string;
+  text: string;
+}
+
 export interface StrategyCardInfo {
   name: string;
   initiative: number;
@@ -63,12 +76,18 @@ export const OBJECTIVES = cardsJson.objectives as Record<string, ObjectiveInfo>;
 export const AGENDAS = cardsJson.agendas as Record<string, AgendaInfo>;
 export const RELICS = cardsJson.relics as Record<string, RelicInfo>;
 export const STRATEGY_CARDS = cardsJson.strategyCards as Record<string, StrategyCardInfo>;
+export const TECHNOLOGIES = cardsJson.technologies as Record<string, TechnologyInfo>;
 
 export type DeckId = 'action' | ObjectiveType | 'agenda' | 'relic';
 export const DECK_IDS: DeckId[] = ['action', 'secret', 'stage1', 'stage2', 'agenda', 'relic'];
 
 /** The cards in each edition's decks, straight from AsyncTI4's deck lists. */
-const EDITION_DECKS = cardsJson.editions as Record<Edition, Record<DeckId | 'strategy', string[]>>;
+const EDITION_DECKS = cardsJson.editions as Record<Edition, Record<DeckId | 'strategy' | 'technology', string[]>>;
+
+/** Technologies available in an edition: generic ones plus every faction's. */
+export function editionTechnologies(edition: Edition): string[] {
+  return EDITION_DECKS[edition].technology;
+}
 
 export interface StrategyCardState {
   id: string;

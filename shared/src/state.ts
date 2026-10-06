@@ -47,7 +47,7 @@ export type Action =
  * and sends them to everyone.
  */
 export function isServerOrdered(action: Action): boolean {
-  return /^(cards?|strategy|seat|planet)\//.test(action.type);
+  return /^(cards?|strategy|seat|planet|tech)\//.test(action.type);
 }
 
 /**
@@ -107,7 +107,7 @@ export function applyAction(state: GameState, action: Action): GameState {
       return applyPlayerAction(picked, { type: 'seat/tradeGoods', player: action.player, amount: card.tradeGoods });
     }
     default:
-      if (action.type.startsWith('seat/') || action.type.startsWith('planet/')) {
+      if (/^(seat|planet|tech)\//.test(action.type)) {
         return applyPlayerAction(state, action as PlayerAction);
       }
       return { ...state, cards: applyCardAction(state.cards, action as CardAction) };

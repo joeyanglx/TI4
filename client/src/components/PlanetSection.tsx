@@ -68,11 +68,11 @@ export function YourPlanets({ state, players, me, dispatch }: Props) {
             );
           })}
         </select>
-        <button disabled={!mine.length} onClick={() => dispatch({ type: 'planet/readyAll', player: me })}>
+        <button disabled={!mine.length} onClick={() => dispatch({ type: 'seat/readyAll', player: me })}>
           Ready all
         </button>
       </div>
-      <p className="hint">Only planets on the map are listed. A newly gained planet comes in exhausted.</p>
+      <p className="hint">Only planets on the map are listed. A newly gained planet comes in exhausted. Ready all also readies your technologies.</p>
     </section>
   );
 }

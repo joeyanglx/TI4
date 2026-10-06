@@ -9,7 +9,17 @@ export interface Seat {
   commodities: number;
   /** Set by the faction sheet (2–6); there are no faction sheets here, so players set it. */
   commodityMax: number;
+  /** Command tokens on the command sheet. Reinforcements are whatever's left of the 16. */
+  tokens: Record<TokenPool, number>;
+  /** Researched technology ids. */
+  technologies: string[];
+  exhaustedTechnologies: string[];
 }
+
+export type TokenPool = 'tactic' | 'fleet' | 'strategy';
+export const TOKEN_POOLS: TokenPool[] = ['tactic', 'fleet', 'strategy'];
+/** Each player has 16 command tokens in all. */
+export const COMMAND_TOKENS = 16;
 
 /** A planet card. Keyed by planet name, which is unique apart from alternate tiles of the same planet. */
 export interface PlanetState {
@@ -31,18 +41,31 @@ export type PlayerAction =
   | { type: 'seat/convert'; player: string; amount: number }
   /** A transaction. Commodities given to another player arrive as trade goods. */
   | { type: 'seat/give'; from: string; to: string; kind: Commodity; amount: number }
+  | { type: 'seat/tokens'; player: string; pool: TokenPool; amount: number }
+  /** Status phase: ready every planet and technology a player has. */
+  | { type: 'seat/readyAll'; player: string }
+  | { type: 'tech/research'; player: string; tech: string }
+  | { type: 'tech/remove'; player: string; tech: string }
+  | { type: 'tech/exhaust'; player: string; tech: string; exhausted: boolean }
   /** Gain or lose control of a planet. A newly gained planet card comes in exhausted. */
   | { type: 'planet/control'; planet: string; player?: string }
-  | { type: 'planet/exhaust'; planet: string; exhausted: boolean }
-  /** Status phase: ready every planet a player controls. */
-  | { type: 'planet/readyAll'; player: string };
+  | { type: 'planet/exhaust'; planet: string; exhausted: boolean };
 
 export interface PlayersState {
   seats: Record<string, Seat>;
   planets: Record<string, PlanetState>;
 }
 
-const DEFAULT_SEAT: Seat = { bonusVp: 0, tradeGoods: 0, commodities: 0, commodityMax: 3 };
+// Game setup: 3 tactic, 3 fleet and 2 strategy tokens.
+const DEFAULT_SEAT: Seat = {
+  bonusVp: 0,
+  tradeGoods: 0,
+  commodities: 0,
+  commodityMax: 3,
+  tokens: { tactic: 3, fleet: 3, strategy: 2 },
+  technologies: [],
+  exhaustedTechnologies: [],
+};
 
 /** A player's seat, with defaults for players who haven't done anything yet (or joined before a field existed). */
 export function seatOf(seats: Record<string, Seat>, player: string): Seat {
@@ -86,6 +109,34 @@ export function applyPlayerAction<S extends PlayersState>(state: S, action: Play
       const given = applyPlayerAction(state, { type: `seat/${action.kind}`, player: action.from, amount: -amount });
       return applyPlayerAction(given, { type: 'seat/tradeGoods', player: action.to, amount });
     }
+    case 'seat/tokens':
+      return update(action.player, (s) => ({
+        tokens: { ...s.tokens, [action.pool]: add(s.tokens[action.pool], action.amount) },
+      }));
+    case 'seat/readyAll': {
+      const readied = update(action.player, () => ({ exhaustedTechnologies: [] }));
+      return {
+        ...readied,
+        planets: Object.fromEntries(
+          Object.entries(state.planets).map(([name, p]) => [name, p.owner === action.player ? { ...p, exhausted: false } : p]),
+        ),
+      };
+    }
+    case 'tech/research':
+      return update(action.player, (s) =>
+        s.technologies.includes(action.tech) ? {} : { technologies: [...s.technologies, action.tech] },
+      );
+    case 'tech/remove':
+      return update(action.player, (s) => ({
+        technologies: s.technologies.filter((t) => t !== action.tech),
+        exhaustedTechnologies: s.exhaustedTechnologies.filter((t) => t !== action.tech),
+      }));
+    case 'tech/exhaust':
+      return update(action.player, (s) => {
+        const exhaustedTechnologies = s.exhaustedTechnologies.filter((t) => t !== action.tech);
+        if (action.exhausted && s.technologies.includes(action.tech)) exhaustedTechnologies.push(action.tech);
+        return { exhaustedTechnologies };
+      });
     case 'planet/control': {
       const current = state.planets[action.planet];
       const planets = { ...state.planets };
@@ -98,12 +149,5 @@ export function applyPlayerAction<S extends PlayersState>(state: S, action: Play
       if (!planet) return state;
       return { ...state, planets: { ...state.planets, [action.planet]: { ...planet, exhausted: action.exhausted } } };
     }
-    case 'planet/readyAll':
-      return {
-        ...state,
-        planets: Object.fromEntries(
-          Object.entries(state.planets).map(([name, p]) => [name, p.owner === action.player ? { ...p, exhausted: false } : p]),
-        ),
-      };
   }
 }

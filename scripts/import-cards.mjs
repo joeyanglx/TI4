@@ -2,7 +2,7 @@
 //
 //   git clone --depth 1 https://github.com/AsyncTI4/TI4_map_generator_bot.git
 //   node scripts/import-cards.mjs TI4_map_generator_bot/src/main/resources/data
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 const dataDir = process.argv[2];
@@ -12,6 +12,7 @@ if (!dataDir) {
 }
 
 const read = (file) => JSON.parse(readFileSync(path.join(dataDir, file), 'utf8'));
+const readAll = (dir) => readdirSync(path.join(dataDir, dir)).flatMap((f) => read(`${dir}/${f}`));
 const byAlias = (list) => Object.fromEntries(list.map((x) => [x.alias, x]));
 const decks = Object.fromEntries(
   ['base_game.json', 'pok.json', 'thundersedge.json'].flatMap((f) => read(`decks/${f}`)).map((d) => [d.alias, d.cardIDs]),
@@ -19,15 +20,17 @@ const decks = Object.fromEntries(
 
 // AsyncTI4 tags half of PoK's action cards as "codex1", and some relics as later Codices; all are in a PoK game.
 const EXPANSION = { base: 'base', pok: 'pok', codex1: 'pok', codex2: 'pok', codex4: 'pok', thunders_edge: 'te' };
+const isTe = (card) => card.source === 'thunders_edge';
 const expansion = (source) => {
   const e = EXPANSION[source];
   if (!e) throw new Error(`Unknown card source: ${source}`);
   return e;
 };
 
-// Agenda and relic aliases can clash with action cards (e.g. "crisis"), so they get a prefix.
+// Agenda, relic and technology aliases can clash with action cards (e.g. "crisis"), so they get a prefix.
 const AGENDA = 'agenda_';
 const RELIC = 'relic_';
+const TECH = 'tech_';
 
 const actionSource = byAlias([
   ...read('action_cards/action_cards.json'),
@@ -96,6 +99,39 @@ for (const id of new Set(Object.values(STRATEGY_SETS).flat())) {
   };
 }
 
+// Technologies: generic techs plus every faction's techs (there are no faction sheets, so anyone can take any).
+const TECH_TYPES = {
+  BIOTIC: 'biotic',
+  CYBERNETIC: 'cybernetic',
+  PROPULSION: 'propulsion',
+  WARFARE: 'warfare',
+  UNITUPGRADE: 'unit',
+  NONE: 'none',
+};
+const factionNames = { keleres: 'The Council Keleres' };
+for (const file of ['base.json', 'pok.json', 'te_factions.json']) {
+  for (const f of read(`factions/${file}`)) factionNames[f.alias] ??= f.factionName;
+}
+const teTechs = read('technologies/te_techs.json');
+const techSource = byAlias([...read('technologies/pok.json'), ...readAll('technologies'), ...teTechs]);
+const technologies = {};
+const pokTechs = decks.techs_pok.filter((id) => !isTe(techSource[id]));
+for (const id of new Set([...decks.techs_base, ...decks.techs_pok, ...teTechs.map((t) => t.alias)])) {
+  const t = techSource[id];
+  const type = TECH_TYPES[t.types[0]];
+  if (!type) throw new Error(`Unknown tech type: ${t.types}`);
+  if (t.faction && !factionNames[t.faction]) throw new Error(`Unknown faction: ${t.faction}`);
+  technologies[TECH + id] = {
+    name: t.name,
+    expansion: expansion(t.source),
+    type,
+    /** One letter per prerequisite: G biotic, Y cybernetic, B propulsion, R warfare. */
+    requirements: t.requirements ?? '',
+    faction: t.faction ? factionNames[t.faction] : undefined,
+    text: t.text,
+  };
+}
+
 const editions = {
   base: {
     action: decks.action_cards_basegame,
@@ -105,6 +141,7 @@ const editions = {
     agenda: decks.agendas_base_game.map((id) => AGENDA + id),
     relic: [],
     strategy: STRATEGY_SETS.base,
+    technology: decks.techs_base.map((id) => TECH + id),
   },
   pok: {
     action: decks.action_cards_pok,
@@ -114,6 +151,7 @@ const editions = {
     agenda: decks.agendas_pok.map((id) => AGENDA + id),
     relic: decks.relics_pok.map((id) => RELIC + id),
     strategy: STRATEGY_SETS.pok,
+    technology: pokTechs.map((id) => TECH + id),
   },
   te: {
     action: decks.action_cards_te,
@@ -123,11 +161,12 @@ const editions = {
     agenda: decks.agendas_pok.map((id) => AGENDA + id),
     relic: decks.relics_pok_te.map((id) => RELIC + id),
     strategy: STRATEGY_SETS.te,
+    technology: [...decks.techs_pok, ...teTechs.map((t) => t.alias)].map((id) => TECH + id),
   },
 };
 
 const out = path.resolve(import.meta.dirname, '../shared/src/data/cards.json');
-writeFileSync(out, JSON.stringify({ actionCards, objectives, agendas, relics, strategyCards, editions }, null, 1) + '\n');
+writeFileSync(out, JSON.stringify({ actionCards, objectives, agendas, relics, strategyCards, technologies, editions }, null, 1) + '\n');
 for (const [name, e] of Object.entries(editions)) {
   console.log(name, Object.fromEntries(Object.entries(e).map(([k, v]) => [k, v.length])));
 }

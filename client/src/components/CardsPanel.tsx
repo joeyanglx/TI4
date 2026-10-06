@@ -11,8 +11,10 @@ import {
   type Edition,
   type GameState,
 } from '@ti4/shared';
+import { knownPlayers, victoryPoints } from '../players';
 import { AgendaSection } from './AgendaSection';
 import { CardDetails, GiveSelect, PlayerTag } from './cardParts';
+import { TechSection, TokenSection } from './CommandSheet';
 import { EconomySection } from './EconomySection';
 import { AllPlanets, YourPlanets } from './PlanetSection';
 import { RelicSection } from './RelicSection';
@@ -102,6 +104,8 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
             </div>
           </section>
           <YourPlanets state={state} players={players} me={me} dispatch={dispatch} />
+          <TokenSection state={state} me={me} dispatch={dispatch} />
+          <TechSection state={state} me={me} dispatch={dispatch} />
         </>
       ) : (
         <>
@@ -346,24 +350,4 @@ function AbilitySteps({ label, steps }: { label: string; steps: string[] }) {
       </ul>
     </>
   );
-}
-
-/** Everyone who's online or has left a mark on the game, you first. */
-function knownPlayers(state: GameState, online: string[], me: string): string[] {
-  const { cards } = state;
-  const names = new Set([me, ...online, ...Object.keys(state.seats)]);
-  for (const [p, hand] of Object.entries(cards.hands)) if (hand.length) names.add(p);
-  for (const s of cards.strategy) if (s.holder) names.add(s.holder);
-  for (const scorers of Object.values(cards.scored)) scorers.forEach((p) => names.add(p));
-  for (const [p, relics] of Object.entries(cards.relics)) if (relics.length) names.add(p);
-  for (const planet of Object.values(state.planets)) if (planet.owner) names.add(planet.owner);
-  return [...names];
-}
-
-function victoryPoints(state: GameState, player: string): number {
-  let vp = seatOf(state.seats, player).bonusVp;
-  for (const [id, scorers] of Object.entries(state.cards.scored)) {
-    if (scorers.includes(player)) vp += OBJECTIVES[id]?.points ?? 0;
-  }
-  return vp;
 }
