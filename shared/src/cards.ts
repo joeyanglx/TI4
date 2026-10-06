@@ -73,9 +73,21 @@ export interface FactionInfo {
   choose?: { count: number; options: string[] };
   commodities: number;
   abilities: { name: string; text: string }[];
-  promissoryNotes: { name: string; text: string }[];
+  promissoryNotes: PromissoryNoteInfo[];
   /** One unit id per unit type, with the faction's own units in place of the generic ones (see UNITS). */
   units: string[];
+}
+
+export interface PromissoryNoteInfo {
+  id: string;
+  name: string;
+  /** Generic notes say "<color>" where the owning player goes; see promissoryText. */
+  text: string;
+  expansion: CardExpansion;
+  /** Played face up into the holder's play area. */
+  playArea?: boolean;
+  /** Goes straight into the play area when received (Support for the Throne, Alliance). */
+  playImmediately?: boolean;
 }
 
 export interface DiceRoll {
@@ -122,6 +134,30 @@ export const STRATEGY_CARDS = cardsJson.strategyCards as Record<string, Strategy
 export const TECHNOLOGIES = cardsJson.technologies as Record<string, TechnologyInfo>;
 /** Keyed by AsyncTI4 faction alias, e.g. "hacan". */
 export const FACTIONS = cardsJson.factions as Record<string, FactionInfo>;
+/** The notes every player has their own copy of: Ceasefire, Political Secret, Support for the Throne, ... */
+export const GENERIC_PROMISSORY_NOTES = cardsJson.genericPromissoryNotes as PromissoryNoteInfo[];
+
+const PROMISSORY_NOTES: Record<string, PromissoryNoteInfo> = Object.fromEntries(
+  [...GENERIC_PROMISSORY_NOTES, ...Object.values(cardsJson.factions as Record<string, FactionInfo>).flatMap((f) => f.promissoryNotes)].map(
+    (n) => [n.id, n],
+  ),
+);
+
+export function promissoryNote(id: string): PromissoryNoteInfo | undefined {
+  return PROMISSORY_NOTES[id];
+}
+
+/** A player's own promissory notes: the generic ones for the edition plus their faction's. */
+export function promissoryNotesOf(edition: Edition, faction: string | undefined): PromissoryNoteInfo[] {
+  const generic = GENERIC_PROMISSORY_NOTES.filter((n) => edition !== 'base' || n.expansion === 'base');
+  return [...generic, ...((faction && FACTIONS[faction]?.promissoryNotes) || [])];
+}
+
+/** Note text with the owner's name in place of "<color>". */
+export function promissoryText(note: PromissoryNoteInfo, owner: string): string {
+  return note.text.replaceAll('<color>', owner);
+}
+
 /** Generic and faction units, keyed by AsyncTI4 unit id, e.g. "carrier", "sol_carrier2". */
 export const UNITS = cardsJson.units as Record<string, UnitInfo>;
 

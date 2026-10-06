@@ -10,7 +10,7 @@ import {
   seatOf,
   type GameState,
 } from '@ti4/shared';
-import { knownPlayers, victoryPoints } from '../players';
+import { allPromissoryNotes, knownPlayers, victoryPoints } from '../players';
 import { FactionIcon } from './cardParts';
 import { FactionSheet } from './FactionSheet';
 import { SpeakerBadge, TokenPools } from './TokenPools';
@@ -47,7 +47,7 @@ export function Overview({ state, room, online, me }: Props) {
         </div>
       </header>
       {players.map((p) => (
-        <PlayerOverview key={p} state={state} player={p} online={online.includes(p)} />
+        <PlayerOverview key={p} state={state} player={p} players={players} online={online.includes(p)} />
       ))}
     </div>
   );
@@ -56,10 +56,12 @@ export function Overview({ state, room, online, me }: Props) {
 interface PlayerProps {
   state: GameState;
   player: string;
+  /** Everyone at the table, to find whose promissory notes this player holds. */
+  players: string[];
   online: boolean;
 }
 
-function PlayerOverview({ state, player, online }: PlayerProps) {
+function PlayerOverview({ state, player, players, online }: PlayerProps) {
   const seat = seatOf(state.seats, player);
   const [showSheet, setShowSheet] = useState(false);
   const color = seat.color ? PLAYER_COLORS[seat.color] : 'var(--muted)';
@@ -67,6 +69,9 @@ function PlayerOverview({ state, player, online }: PlayerProps) {
   const hand = cards.hands[player] ?? [];
   const actionCards = hand.filter(isActionCard).length;
   const strategy = cards.strategy.filter((s) => s.holder === player);
+  const notes = allPromissoryNotes(state, players).filter((n) => n.holder === player);
+  const notesInHand = notes.filter((n) => !n.inPlay).length;
+  const playArea = notes.filter((n) => n.inPlay);
   const planets = Object.entries(state.planets)
     .filter(([name, p]) => p.owner === player && PLANETS[name])
     .sort(([a], [b]) => a.localeCompare(b));
@@ -112,10 +117,24 @@ function PlayerOverview({ state, player, online }: PlayerProps) {
         <Count value={`${seat.commodities}/${seat.commodityMax}`} label="Commodities" className="commodity" />
         <Count value={actionCards} label="Action cards" className="action-card" />
         <Count value={hand.length - actionCards} label="Secret objectives" className="secret-card" />
+        <Count value={notesInHand} label="Promissory notes" className="promissory-card" />
         {cards.edition !== 'base' && (
           <Count value={cards.relics[player]?.length ?? 0} label="Relics" className="relic-card" />
         )}
       </div>
+
+      {playArea.length > 0 && (
+        <div className="po-block">
+          <h4>Play area</h4>
+          <div className="po-names">
+            {playArea.map((n) => (
+              <span key={`${n.owner}/${n.note.id}`} className="ready" title={`${n.owner}'s ${n.note.name}`}>
+                {n.note.name} ({n.owner})
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="po-block">
         <h4>Strategy cards</h4>

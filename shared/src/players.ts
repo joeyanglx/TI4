@@ -1,4 +1,4 @@
-import { FACTIONS } from './cards';
+import { FACTIONS, promissoryNote } from './cards';
 import type { PlayerColor } from './pieces';
 
 /** Per-player info everyone can see, keyed by player name. */
@@ -54,11 +54,34 @@ export type PlayerAction =
   | { type: 'tech/exhaust'; player: string; tech: string; exhausted: boolean }
   /** Gain or lose control of a planet. A newly gained planet card comes in exhausted. */
   | { type: 'planet/control'; planet: string; player?: string }
-  | { type: 'planet/exhaust'; planet: string; exhausted: boolean };
+  | { type: 'planet/exhaust'; planet: string; exhausted: boolean }
+  /** Give a player's note to someone; giving it to its owner returns it. */
+  | { type: 'promissory/give'; owner: string; note: string; to: string }
+  /** Put a held note face up in the holder's play area, or take it back into their hand. */
+  | { type: 'promissory/play'; owner: string; note: string; inPlay: boolean };
+
+/** Where a promissory note is when it's not in its owner's hand. */
+export interface PromissoryState {
+  holder: string;
+  /** Face up in the holder's play area rather than in their hand. */
+  inPlay: boolean;
+}
+
+/** Key for a player's copy of a note, e.g. "Ann/sftt". */
+export function promissoryKey(owner: string, note: string): string {
+  return `${owner}/${note}`;
+}
 
 export interface PlayersState {
   seats: Record<string, Seat>;
   planets: Record<string, PlanetState>;
+  /** Only notes that have left their owner's hand are listed. */
+  promissory: Record<string, PromissoryState>;
+}
+
+/** Where a player's copy of a note is right now. */
+export function promissoryLocation(state: PlayersState, owner: string, note: string): PromissoryState {
+  return state.promissory[promissoryKey(owner, note)] ?? { holder: owner, inPlay: false };
 }
 
 // Game setup: 3 tactic, 3 fleet and 2 strategy tokens.
@@ -153,6 +176,19 @@ export function applyPlayerAction<S extends PlayersState>(state: S, action: Play
         if (action.exhausted && s.technologies.includes(action.tech)) exhaustedTechnologies.push(action.tech);
         return { exhaustedTechnologies };
       });
+    case 'promissory/give': {
+      const key = promissoryKey(action.owner, action.note);
+      const promissory = { ...state.promissory };
+      if (action.to === action.owner) delete promissory[key];
+      else promissory[key] = { holder: action.to, inPlay: !!promissoryNote(action.note)?.playImmediately };
+      return { ...state, promissory };
+    }
+    case 'promissory/play': {
+      const key = promissoryKey(action.owner, action.note);
+      const current = state.promissory[key];
+      if (!current) return state;
+      return { ...state, promissory: { ...state.promissory, [key]: { ...current, inPlay: action.inPlay } } };
+    }
     case 'planet/control': {
       const current = state.planets[action.planet];
       const planets = { ...state.planets };

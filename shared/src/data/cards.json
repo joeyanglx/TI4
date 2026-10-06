@@ -3171,8 +3171,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "stymie",
      "name": "Stymie",
-     "text": "After another player moves ships into a system that contains 1 or more of your units: You may place 1 command token from that player's reinforcements in any non-home system. Then, return this card to the Arborec player."
+     "text": "After another player moves ships into a system that contains 1 or more of your units: You may place 1 command token from that player's reinforcements in any non-home system. Then, return this card to the Arborec player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3212,8 +3214,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "iff",
      "name": "Creuss Iff",
-     "text": "At the start of your turn during the action phase: Place or move a Creuss wormhole token into either a system that contains a planet you control or a non-home system that does not contain another player's ships. Then, return this card to the Creuss player."
+     "text": "At the start of your turn during the action phase: Place or move a Creuss wormhole token into either a system that contains a planet you control or a non-home system that does not contain another player's ships. Then, return this card to the Creuss player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3254,8 +3258,11 @@
    ],
    "promissoryNotes": [
     {
+     "id": "convoys",
      "name": "Trade Convoys",
-     "text": "ACTION: Place this card faceup in your play area. While this card is in your play area, you may negotiate transactions with players who are not your neighbor.  If you activate a system that contains 1 or more of the Hacan player's units, return this card to the Hacan player."
+     "text": "ACTION: Place this card faceup in your play area. While this card is in your play area, you may negotiate transactions with players who are not your neighbor.  If you activate a system that contains 1 or more of the Hacan player's units, return this card to the Hacan player.",
+     "expansion": "base",
+     "playArea": true
     }
    ],
    "units": [
@@ -3298,8 +3305,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "ra",
      "name": "Research Agreement",
-     "text": "After the Jol-Nar player researches a technology that is not a faction technology: Gain that technology. Then, return this card to the Jol-Nar player."
+     "text": "After the Jol-Nar player researches a technology that is not a faction technology: Gain that technology. Then, return this card to the Jol-Nar player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3336,8 +3345,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "ce",
      "name": "Cybernetic Enhancements",
-     "text": "When you gain command tokens during the status phase: Gain 1 additional command token. Then, return this card to the L1Z1X player."
+     "text": "When you gain command tokens during the status phase: Gain 1 additional command token. Then, return this card to the L1Z1X player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3374,8 +3385,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "war_funding",
      "name": "War Funding",
-     "text": "After you and your opponent roll dice during space combat: You may reroll all of your opponent's dice. You may reroll any number of your dice. Then, return this card to the Letnev player."
+     "text": "After you and your opponent roll dice during space combat: You may reroll all of your opponent's dice. You may reroll any number of your dice. Then, return this card to the Letnev player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3412,8 +3425,11 @@
    ],
    "promissoryNotes": [
     {
+     "id": "pop",
      "name": "Promise of Protection",
-     "text": "ACTION: Place this card faceup in your play area. While this card is in your play area, the Mentak player cannot use their Pillage faction ability against you. If you activate a system that contains 1 or more of the Mentak player's units, return this card to the Mentak player."
+     "text": "ACTION: Place this card faceup in your play area. While this card is in your play area, the Mentak player cannot use their Pillage faction ability against you. If you activate a system that contains 1 or more of the Mentak player's units, return this card to the Mentak player.",
+     "expansion": "base",
+     "playArea": true
     }
    ],
    "units": [
@@ -3449,8 +3465,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "fires",
      "name": "Fires of the Gashlai",
-     "text": "ACTION: Remove 1 token from the Muaat player's fleet pool and return it to their reinforcements. Then, gain your war sun unit upgrade technology card.  Then, return this card to the Muaat Player."
+     "text": "ACTION: Remove 1 token from the Muaat player's fleet pool and return it to their reinforcements. Then, gain your war sun unit upgrade technology card.  Then, return this card to the Muaat Player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3487,8 +3505,11 @@
    ],
    "promissoryNotes": [
     {
+     "id": "gift",
      "name": "Gift of Prescience",
-     "text": "At the end of the Strategy Phase: Place this card faceup in your play area and place the Naalu '0' token on your strategy card, you are the first in initiative order. The Naalu player cannot use their Telepathic faction ability during this game round. Return this card to the Naalu player at the end of the status phase."
+     "text": "At the end of the Strategy Phase: Place this card faceup in your play area and place the Naalu '0' token on your strategy card, you are the first in initiative order. The Naalu player cannot use their Telepathic faction ability during this game round. Return this card to the Naalu player at the end of the status phase.",
+     "expansion": "base",
+     "playArea": true
     }
    ],
    "units": [
@@ -3528,8 +3549,11 @@
    ],
    "promissoryNotes": [
     {
+     "id": "antivirus",
      "name": "Antivirus",
-     "text": "At the start of a combat: Place this card faceup in your play area. While this card is in your play area, the Nekro player cannot use their Technological Singularity faction ability against you. If you activate a system that contains 1 or more of the Nekro player's units, return this card to the Nekro player."
+     "text": "At the start of a combat: Place this card faceup in your play area. While this card is in your play area, the Nekro player cannot use their Technological Singularity faction ability against you. If you activate a system that contains 1 or more of the Nekro player's units, return this card to the Nekro player.",
+     "expansion": "base",
+     "playArea": true
     }
    ],
    "units": [
@@ -3565,8 +3589,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "ragh",
      "name": "Raghs Call",
-     "text": "After you commit 1 or more units to land on a planet: Remove all of the Saar player's ground forces from that planet and place them on a planet controlled by the Saar player. Then, return this card to the Saar player."
+     "text": "After you commit 1 or more units to land on a planet: Remove all of the Saar player's ground forces from that planet and place them on a planet controlled by the Saar player. Then, return this card to the Saar player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3596,8 +3622,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "tekklar",
      "name": "Tekklar Legion",
-     "text": "At the start of an invasion combat: Apply +1 to the result of each of your unit's combat rolls during this combat. If your opponent is the N'orr player, apply -1 to the result of each of their unit's combat rolls during this combat. Then, return this card to the N'orr player."
+     "text": "At the start of an invasion combat: Apply +1 to the result of each of your unit's combat rolls during this combat. If your opponent is the N'orr player, apply -1 to the result of each of their unit's combat rolls during this combat. Then, return this card to the N'orr player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3634,8 +3662,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "ms",
      "name": "Military Support",
-     "text": "At the start of the Sol player's turn: Remove 1 token from the Sol player's strategy pool, if able, and return it to their reinforcements. Then, you may place 2 infantry from your reinforcements on any planet you control. Then, return this card to the Sol player."
+     "text": "At the start of the Sol player's turn: Remove 1 token from the Sol player's strategy pool, if able, and return it to their reinforcements. Then, you may place 2 infantry from your reinforcements on any planet you control. Then, return this card to the Sol player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3682,8 +3712,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "acq",
      "name": "Acquiescence",
-     "text": "When the Winnu player resolves a strategic action: You do not have to spend or place a command token to resolve the secondary ability of that strategy card. Then, return this card to the Winnu player."
+     "text": "When the Winnu player resolves a strategic action: You do not have to spend or place a command token to resolve the secondary ability of that strategy card. Then, return this card to the Winnu player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3719,8 +3751,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "favor",
      "name": "Political Favor",
-     "text": "When an agenda is revealed: Remove 1 token from the Xxcha player's strategy pool and return it to their reinforcements. Then, discard the revealed agenda and reveal 1 agenda from the top of the deck. Players vote on this agenda instead. Then, return this card to the Xxcha player."
+     "text": "When an agenda is revealed: Remove 1 token from the Xxcha player's strategy pool and return it to their reinforcements. Then, discard the revealed agenda and reveal 1 agenda from the top of the deck. Players vote on this agenda instead. Then, return this card to the Xxcha player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3756,8 +3790,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "greyfire",
      "name": "Greyfire Mutagen",
-     "text": "At the start of a ground combat against 2 or more ground forces that are not controlled by the Yin player: Replace 1 of your opponent's infantry with 1 infantry from your reinforcements. Then, return this card to the Yin player."
+     "text": "At the start of a ground combat against 2 or more ground forces that are not controlled by the Yin player: Replace 1 of your opponent's infantry with 1 infantry from your reinforcements. Then, return this card to the Yin player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3797,8 +3833,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "spynet",
      "name": "Spy Net",
-     "text": "At the start of your turn: Look at the Yssaril player's hand of action cards. Choose 1 of those cards and add it to your hand. Then, return this card to the Yssaril player."
+     "text": "At the start of your turn: Look at the Yssaril player's hand of action cards. Choose 1 of those cards and add it to your hand. Then, return this card to the Yssaril player.",
+     "expansion": "base"
     }
    ],
    "units": [
@@ -3840,8 +3878,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "ambuscade",
      "name": "Strike Wing Ambuscade",
-     "text": "When 1 or more of your units make a roll for a unit ability: Choose 1 of those units to roll 1 additional die. Then, return this card to the Argent player."
+     "text": "When 1 or more of your units make a roll for a unit ability: Choose 1 of those units to roll 1 additional die. Then, return this card to the Argent player.",
+     "expansion": "pok"
     }
    ],
    "units": [
@@ -3881,8 +3921,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "crucible",
      "name": "Crucible",
-     "text": "After you activate a system: Your ships do not roll for gravity rifts during this movement, apply an additional +1 to the move values of your ships that would move out of or through a gravity rift instead. Then, return this card to the Vuil'raith player."
+     "text": "After you activate a system: Your ships do not roll for gravity rifts during this movement, apply an additional +1 to the move values of your ships that would move out of or through a gravity rift instead. Then, return this card to the Vuil'raith player.",
+     "expansion": "pok"
     }
    ],
    "units": [
@@ -3922,12 +3964,18 @@
    ],
    "promissoryNotes": [
     {
+     "id": "dark_pact",
      "name": "Dark Pact",
-     "text": "ACTION: Place this card faceup in your play area. When you give a number of commodities to the Empyrean player equal to your maximum commodity value, you each gain 1 trade good. If you activate a system that contains 1 or more of the Empyrean player's units, return this card to the Empyrean player."
+     "text": "ACTION: Place this card faceup in your play area. When you give a number of commodities to the Empyrean player equal to your maximum commodity value, you each gain 1 trade good. If you activate a system that contains 1 or more of the Empyrean player's units, return this card to the Empyrean player.",
+     "expansion": "pok",
+     "playArea": true
     },
     {
+     "id": "blood_pact",
      "name": "Blood Pact",
-     "text": "ACTION: Place this card faceup in your play area. When you and the Empyrean player cast votes for the same outcome, cast 4 additional votes for that outcome. If you activate a system that contains 1 or more of the Empyrean player's units, return this card to the Empyrean player."
+     "text": "ACTION: Place this card faceup in your play area. When you and the Empyrean player cast votes for the same outcome, cast 4 additional votes for that outcome. If you activate a system that contains 1 or more of the Empyrean player's units, return this card to the Empyrean player.",
+     "expansion": "pok",
+     "playArea": true
     }
    ],
    "units": [
@@ -3968,8 +4016,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "scepter",
      "name": "Scepter of Dominion",
-     "text": "At the start of the strategy phase: Choose 1 non-home system that contains your units, each other player who has a token on the Mahact player's command sheet places a token from their reinforcements in that system. Then, return this card to the Mahact player."
+     "text": "At the start of the strategy phase: Choose 1 non-home system that contains your units, each other player who has a token on the Mahact player's command sheet places a token from their reinforcements in that system. Then, return this card to the Mahact player.",
+     "expansion": "pok"
     }
    ],
    "units": [
@@ -4005,8 +4055,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "cavalry",
      "name": "The Cavalry",
-     "text": "At the start of a space combat against a player other than the Nomad: During this combat, treat 1 of your non-fighter ships as if it has the SUSTAIN DAMAGE ability, combat value, and ANTI-FIGHTER BARRAGE value of the Nomad's flagship. Return this card to the Nomad player at the end of the combat."
+     "text": "At the start of a space combat against a player other than the Nomad: During this combat, treat 1 of your non-fighter ships as if it has the SUSTAIN DAMAGE ability, combat value, and ANTI-FIGHTER BARRAGE value of the Nomad's flagship. Return this card to the Nomad player at the end of the combat.",
+     "expansion": "pok"
     }
    ],
    "units": [
@@ -4043,8 +4095,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "bmf",
      "name": "Black Market Forgery",
-     "text": "ACTION: Purge 2 of your relic fragments of the same type to gain 1 relic. Then, return this card to the Naaz-Rokha player."
+     "text": "ACTION: Purge 2 of your relic fragments of the same type to gain 1 relic. Then, return this card to the Naaz-Rokha player.",
+     "expansion": "pok"
     }
    ],
    "units": [
@@ -4085,8 +4139,11 @@
    ],
    "promissoryNotes": [
     {
+     "id": "terraform",
      "name": "Terraform",
-     "text": "ACTION: Attach this card to a non-home planet you control other than Mecatol Rex. Its resource and influence values are each increased by 1, and it is treated as having all 3 planet traits (cultural, hazardous, and industrial)."
+     "text": "ACTION: Attach this card to a non-home planet you control other than Mecatol Rex. Its resource and influence values are each increased by 1, and it is treated as having all 3 planet traits (cultural, hazardous, and industrial).",
+     "expansion": "pok",
+     "playArea": true
     }
    ],
    "units": [
@@ -4128,8 +4185,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "riderm",
      "name": "Keleres Rider",
-     "text": "After an agenda is revealed: You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, draw 1 action card and gain 2 trade goods. Then, return this card to the Keleres player."
+     "text": "After an agenda is revealed: You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, draw 1 action card and gain 2 trade goods. Then, return this card to the Keleres player.",
+     "expansion": "pok"
     }
    ],
    "units": [
@@ -4176,8 +4235,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "raisethestandard",
      "name": "Raise the Standard",
-     "text": "At the end of a combat: Galvanize 1 of your units that participated. Then, return this card to the Last Bastion player."
+     "text": "At the end of a combat: Galvanize 1 of your units that participated. Then, return this card to the Last Bastion player.",
+     "expansion": "te"
     }
    ],
    "units": [
@@ -4224,8 +4285,11 @@
    ],
    "promissoryNotes": [
     {
+     "id": "sever",
      "name": "Sever",
-     "text": "ACTION: place this card face up in your play area, and place the sever token in a system that contains your units, wormholes in that system have no effect during movement. Remove the sever token and return this card to the Rebellion player at end of the status phase."
+     "text": "ACTION: place this card face up in your play area, and place the sever token in a system that contains your units, wormholes in that system have no effect during movement. Remove the sever token and return this card to the Rebellion player at end of the status phase.",
+     "expansion": "te",
+     "playArea": true
     }
    ],
    "units": [
@@ -4263,8 +4327,11 @@
    ],
    "promissoryNotes": [
     {
+     "id": "shareknowledge",
      "name": "Share Knowledge",
-     "text": "ACTION: Place this card faceup in your play area and gain 1 non-faction, non-unit upgrade technology that the Deepwrought player owns; place that technology on this card. Return that technology to the deck and this card to the Deepwrought player at the end of the status phase."
+     "text": "ACTION: Place this card faceup in your play area and gain 1 non-faction, non-unit upgrade technology that the Deepwrought player owns; place that technology on this card. Return that technology to the deck and this card to the Deepwrought player at the end of the status phase.",
+     "expansion": "te",
+     "playArea": true
     }
    ],
    "units": [
@@ -4307,8 +4374,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "blackops",
      "name": "Black Ops",
-     "text": "When you receive this card, if you are not the Firmament: The Firmament player may place 1 facedown plot card in their play area with your control token on it. Then, gain 2 command tokens, gain 2 trade goods, and purge this card."
+     "text": "When you receive this card, if you are not the Firmament: The Firmament player may place 1 facedown plot card in their play area with your control token on it. Then, gain 2 command tokens, gain 2 trade goods, and purge this card.",
+     "expansion": "te"
     }
    ],
    "units": [
@@ -4351,8 +4420,10 @@
    ],
    "promissoryNotes": [
     {
+     "id": "nanolink",
      "name": "Nano-Link Permit",
-     "text": "After you activate a system: You may move your structures from adjacent systems that do not contain your command tokens onto planets you control in the active system. Then, return this card to the Ral Nel player."
+     "text": "After you activate a system: You may move your structures from adjacent systems that do not contain your command tokens onto planets you control in the active system. Then, return this card to the Ral Nel player.",
+     "expansion": "te"
     }
    ],
    "units": [
@@ -5854,6 +5925,42 @@
    "ability": "At the end of a round of combat on this planet, you may move up to 2 of your ground forces to this planet from planets in adjacent systems."
   }
  },
+ "genericPromissoryNotes": [
+  {
+   "id": "cf",
+   "name": "Ceasefire",
+   "text": "After the <color> player activates a system that contains 1 or more of your units: The <color> player cannot move units to the active system. Then return this card to the <color> player.",
+   "expansion": "base"
+  },
+  {
+   "id": "ps",
+   "name": "Political Secret",
+   "text": "When an agenda is revealed: The <color> player cannot vote, play action cards, or use faction abilities until after that agenda has been resolved. Then, return this card to the <color> player.",
+   "expansion": "base"
+  },
+  {
+   "id": "sftt",
+   "name": "Support for the Throne",
+   "text": "When you receive this card, if you are not the <color> player, you must place it faceup in your play area and gain 1 victory point. When you activate a system that contains 1 or more of the <color> player's units, or if the <color> player is eliminated, lose 1 victory point and return this card to the <color> player.",
+   "expansion": "base",
+   "playArea": true,
+   "playImmediately": true
+  },
+  {
+   "id": "ta",
+   "name": "Trade Agreement",
+   "text": "When the <color> player replenishes commodities: The <color> player gives you all of their commodities. Then, return this card to the <color> player.",
+   "expansion": "base"
+  },
+  {
+   "id": "an",
+   "name": "Alliance",
+   "text": "When you receive this card, if you are not the <color> player, you must place it faceup in your play area. While this card is in your play area, you can use the <color> player's commander ability, if it is unlocked. When you activate a system that contains 1 or more of the <color> player's units, return this card to the <color> player.",
+   "expansion": "pok",
+   "playArea": true,
+   "playImmediately": true
+  }
+ ],
  "editions": {
   "base": {
    "action": [

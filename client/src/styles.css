@@ -1276,3 +1276,7 @@ button {
 .unit-keywords {
   font-size: 12px;
 }
+
+.po-icon.promissory-card {
+  background: #4f5d75;
+}

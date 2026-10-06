@@ -1,7 +1,7 @@
 import { applyCardAction, emptyCards, type CardAction, type CardsState } from './cards';
 import { hexKey, type Hex } from './hex';
 import type { PieceKind, PlayerColor } from './pieces';
-import { applyPlayerAction, type PlanetState, type PlayerAction, type Seat } from './players';
+import { applyPlayerAction, type PlanetState, type PlayerAction, type PromissoryState, type Seat } from './players';
 import { applyTokenAction, type TokenAction } from './tokens';
 
 export interface Tile extends Hex {
@@ -27,6 +27,8 @@ export interface GameState {
   cards: CardsState;
   seats: Record<string, Seat>;
   planets: Record<string, PlanetState>;
+  /** Promissory notes that have left their owner's hand, keyed by promissoryKey. */
+  promissory: Record<string, PromissoryState>;
   /** Player holding the speaker token. Undefined while it's on the map (as a "speaker" piece) or unassigned. */
   speaker?: string;
 }
@@ -51,7 +53,7 @@ export type Action =
  * and sends them to everyone.
  */
 export function isServerOrdered(action: Action): boolean {
-  return /^(cards?|strategy|seat|planet|tech|token|speaker)\//.test(action.type);
+  return /^(cards?|strategy|seat|planet|tech|token|speaker|promissory)\//.test(action.type);
 }
 
 /**
@@ -112,7 +114,7 @@ export function applyAction(state: GameState, action: Action): GameState {
     }
     default:
       if (/^(token|speaker)\//.test(action.type)) return applyTokenAction(state, action as TokenAction);
-      if (/^(seat|planet|tech)\//.test(action.type)) {
+      if (/^(seat|planet|tech|promissory)\//.test(action.type)) {
         return applyPlayerAction(state, action as PlayerAction);
       }
       return { ...state, cards: applyCardAction(state.cards, action as CardAction) };
@@ -124,5 +126,5 @@ export function makeTile(hex: Hex, system: string, rotation = 0): Tile {
 }
 
 export function emptyState(): GameState {
-  return { tiles: {}, pieces: {}, cards: emptyCards(), seats: {}, planets: {} };
+  return { tiles: {}, pieces: {}, cards: emptyCards(), seats: {}, planets: {}, promissory: {} };
 }

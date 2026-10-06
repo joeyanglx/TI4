@@ -18,6 +18,7 @@ import { TechSection, TokenSection } from './CommandSheet';
 import { EconomySection } from './EconomySection';
 import { FactionSection } from './FactionSection';
 import { AllPlanets, YourPlanets } from './PlanetSection';
+import { PromissorySection } from './PromissorySection';
 import { RelicSection } from './RelicSection';
 
 interface Props {
@@ -105,6 +106,7 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
               </button>
             </div>
           </section>
+          <PromissorySection state={state} players={players} me={me} dispatch={dispatch} />
           <YourPlanets state={state} players={players} me={me} dispatch={dispatch} />
           <TokenSection state={state} me={me} players={players} dispatch={dispatch} />
           <TechSection state={state} me={me} dispatch={dispatch} />

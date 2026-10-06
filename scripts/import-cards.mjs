@@ -188,6 +188,18 @@ const addUnit = (id) => {
   };
   addUnit(u.upgradesToUnitId);
 };
+const promissoryNote = (id, n) => ({
+  id,
+  name: n.name,
+  text: n.text,
+  expansion: expansion(n.source),
+  playArea: n.playArea || undefined,
+  playImmediately: n.playImmediately || undefined,
+});
+// Every player's own copies of these; the text says "<color>" where the owner goes.
+const genericPromissoryNotes = read('promissory_notes/color.json').map((n) =>
+  promissoryNote(n.alias.replace('<color>_', ''), n),
+);
 const abilityText = (a) => [a.permanentEffect, a.window && `${a.window}: ${a.windowEffect}`].filter(Boolean).join('\n');
 
 const factions = {};
@@ -209,7 +221,7 @@ for (const alias of Object.values(FACTION_SETS).flat()) {
         : undefined,
     commodities: f.commodities,
     abilities: f.abilities.map((id) => ({ name: abilitySource[id].name, text: abilityText(abilitySource[id]) })),
-    promissoryNotes: f.promissoryNotes.map((id) => ({ name: promissorySource[id].name, text: promissorySource[id].text })),
+    promissoryNotes: f.promissoryNotes.map((id) => promissoryNote(id, promissorySource[id])),
     units: factionUnits,
   };
 }
@@ -254,7 +266,7 @@ const editions = {
 };
 
 const out = path.resolve(import.meta.dirname, '../shared/src/data/cards.json');
-writeFileSync(out, JSON.stringify({ actionCards, objectives, agendas, relics, strategyCards, technologies, factions, units, editions }, null, 1) + '\n');
+writeFileSync(out, JSON.stringify({ actionCards, objectives, agendas, relics, strategyCards, technologies, factions, units, genericPromissoryNotes, editions }, null, 1) + '\n');
 for (const [name, e] of Object.entries(editions)) {
   console.log(name, Object.fromEntries(Object.entries(e).map(([k, v]) => [k, v.length])));
 }
