@@ -71,6 +71,38 @@ export interface FactionInfo {
   startingTech: string[];
   /** Factions that pick their starting techs instead; no options means any technology. */
   choose?: { count: number; options: string[] };
+  commodities: number;
+  abilities: { name: string; text: string }[];
+  promissoryNotes: { name: string; text: string }[];
+  /** One unit id per unit type, with the faction's own units in place of the generic ones (see UNITS). */
+  units: string[];
+}
+
+export interface DiceRoll {
+  hitsOn: number;
+  dice: number;
+}
+
+export interface UnitInfo {
+  name: string;
+  /** Upgraded units' card title, e.g. "Advanced Fighters". */
+  subtitle?: string;
+  type: string;
+  expansion: CardExpansion;
+  /** 0.5 for fighters and infantry: 1 cost buys 2. */
+  cost?: number;
+  combat?: DiceRoll;
+  move?: number;
+  capacity?: number;
+  sustainDamage?: boolean;
+  bombardment?: DiceRoll;
+  antiFighterBarrage?: DiceRoll;
+  spaceCannon?: DiceRoll & { deepSpace?: boolean };
+  planetaryShield?: boolean;
+  production?: string;
+  ability?: string;
+  /** Unit id of the upgraded version. */
+  upgrade?: string;
 }
 
 export interface StrategyCardInfo {
@@ -90,6 +122,8 @@ export const STRATEGY_CARDS = cardsJson.strategyCards as Record<string, Strategy
 export const TECHNOLOGIES = cardsJson.technologies as Record<string, TechnologyInfo>;
 /** Keyed by AsyncTI4 faction alias, e.g. "hacan". */
 export const FACTIONS = cardsJson.factions as Record<string, FactionInfo>;
+/** Generic and faction units, keyed by AsyncTI4 unit id, e.g. "carrier", "sol_carrier2". */
+export const UNITS = cardsJson.units as Record<string, UnitInfo>;
 
 export type DeckId = 'action' | ObjectiveType | 'agenda' | 'relic';
 export const DECK_IDS: DeckId[] = ['action', 'secret', 'stage1', 'stage2', 'agenda', 'relic'];

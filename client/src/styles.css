@@ -1158,3 +1158,121 @@ button {
   color: #fff;
   cursor: pointer;
 }
+
+/* Faction sheet ("i" next to a faction in the overview) */
+.po-faction {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 4px;
+}
+
+.info-button {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font: italic 700 11px Georgia, serif;
+  line-height: 14px;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.faction-sheet {
+  width: min(960px, 95vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+}
+
+.faction-sheet-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.faction-sheet-body section {
+  margin-bottom: 18px;
+}
+
+.faction-sheet-body h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.sheet-entry {
+  margin-bottom: 8px;
+}
+
+.sheet-entry p {
+  margin: 2px 0 0;
+  line-height: 1.4;
+  white-space: pre-line;
+  color: #c4cadb;
+}
+
+.sheet-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.unit-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.unit-table th,
+.unit-table td {
+  padding: 5px 8px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.unit-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.unit-table td:nth-child(n + 2):nth-child(-n + 5) {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.unit-table tr.upgrade td {
+  background: rgba(108, 140, 255, 0.06);
+}
+
+.unit-table tr.upgrade td:first-child strong::before {
+  content: '↳ ';
+  color: var(--muted);
+}
+
+.unit-ability {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: pre-line;
+  color: var(--muted);
+}
+
+.unit-keywords {
+  font-size: 12px;
+}

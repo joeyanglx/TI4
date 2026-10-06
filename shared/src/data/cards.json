@@ -3161,6 +3161,32 @@
    "expansion": "base",
    "startingTech": [
     "tech_md"
+   ],
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Mitosis",
+     "text": "Your space docks cannot produce infantry\nAt the start of the status phase: Place 1 infantry from your reinforcements on any planet you control."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Stymie",
+     "text": "After another player moves ships into a system that contains 1 or more of your units: You may place 1 command token from that player's reinforcements in any non-home system. Then, return this card to the Arborec player."
+    }
+   ],
+   "units": [
+    "arborec_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "arborec_mech",
+    "arborec_infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "ghost": {
@@ -3168,6 +3194,40 @@
    "expansion": "base",
    "startingTech": [
     "tech_gd"
+   ],
+   "commodities": 4,
+   "abilities": [
+    {
+     "name": "Quantum Entanglement",
+     "text": "You treat all systems that contain either an alpha or beta wormhole as adjacent to each other. Game effects cannot prevent you from using this ability."
+    },
+    {
+     "name": "Slipstream",
+     "text": "During your tactical actions: Apply +1 to the move value of each of your ships that starts its movement in your home system or in a system that contains either an alpha or beta wormhole."
+    },
+    {
+     "name": "Creuss Gate",
+     "text": "When you create the game board, place the Creuss Gate (tile 17) where your home system would normally be placed. The Creuss Gate system is not a home system. Then, place your home system (tile 51) in your play area."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Creuss Iff",
+     "text": "At the start of your turn during the action phase: Place or move a Creuss wormhole token into either a system that contains a planet you control or a non-home system that does not contain another player's ships. Then, return this card to the Creuss player."
+    }
+   ],
+   "units": [
+    "ghost_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "ghost_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "hacan": {
@@ -3176,6 +3236,40 @@
    "startingTech": [
     "tech_st",
     "tech_amd"
+   ],
+   "commodities": 6,
+   "abilities": [
+    {
+     "name": "Masters of Trade",
+     "text": "You do not have to spend a command token to resolve the secondary ability of the \"Trade\" strategy card."
+    },
+    {
+     "name": "Guild Ships",
+     "text": "You can negotiate transactions with players who are not your neighbor."
+    },
+    {
+     "name": "Arbiters",
+     "text": "When you are negotiating a transaction, action cards can be exchanged as part of that transaction."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Trade Convoys",
+     "text": "ACTION: Place this card faceup in your play area. While this card is in your play area, you may negotiate transactions with players who are not your neighbor.  If you activate a system that contains 1 or more of the Hacan player's units, return this card to the Hacan player."
+    }
+   ],
+   "units": [
+    "hacan_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "hacan_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "jolnar": {
@@ -3186,6 +3280,40 @@
     "tech_st",
     "tech_nm",
     "tech_ps"
+   ],
+   "commodities": 4,
+   "abilities": [
+    {
+     "name": "Fragile",
+     "text": "Apply -1 to the result of each of your unit's combat rolls."
+    },
+    {
+     "name": "Brilliant",
+     "text": "When you spend a command token to resolve the secondary ability of the \"Technology\" strategy card: You may resolve the primary ability instead."
+    },
+    {
+     "name": "Analytical",
+     "text": "When you research a technology that is not a unit upgrade technology: You may ignore 1 prerequisite."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Research Agreement",
+     "text": "After the Jol-Nar player researches a technology that is not a faction technology: Gain that technology. Then, return this card to the Jol-Nar player."
+    }
+   ],
+   "units": [
+    "jolnar_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "jolnar_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "l1z1x": {
@@ -3194,6 +3322,36 @@
    "startingTech": [
     "tech_ps",
     "tech_nm"
+   ],
+   "commodities": 2,
+   "abilities": [
+    {
+     "name": "Assimilate",
+     "text": "When you gain control of a planet: Replace each PDS and space dock that is on that planet with a matching unit from your reinforcements."
+    },
+    {
+     "name": "Harrow",
+     "text": "At the end of each round of ground combat: Your ships in the active system may use their BOMBARDMENT abilities against your opponent's ground forces on the planet."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Cybernetic Enhancements",
+     "text": "When you gain command tokens during the status phase: Gain 1 additional command token. Then, return this card to the L1Z1X player."
+    }
+   ],
+   "units": [
+    "l1z1x_flagship",
+    "warsun",
+    "l1z1x_dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "l1z1x_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "letnev": {
@@ -3202,6 +3360,36 @@
    "startingTech": [
     "tech_amd",
     "tech_ps"
+   ],
+   "commodities": 2,
+   "abilities": [
+    {
+     "name": "Munitions Reserves",
+     "text": "At the start of each round of space combat: You may spend 2 trade goods to re-roll any number of your dice during that combat round."
+    },
+    {
+     "name": "Armada",
+     "text": "The maximum number of non-fighter ships you can have in each system is equal to 2 more than the number of tokens in your fleet pool"
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "War Funding",
+     "text": "After you and your opponent roll dice during space combat: You may reroll all of your opponent's dice. You may reroll any number of your dice. Then, return this card to the Letnev player."
+    }
+   ],
+   "units": [
+    "letnev_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "letnev_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "mentak": {
@@ -3210,6 +3398,36 @@
    "startingTech": [
     "tech_ps",
     "tech_st"
+   ],
+   "commodities": 2,
+   "abilities": [
+    {
+     "name": "Ambush",
+     "text": "At the start of a space combat: You may roll 1 die for each of up to 2 of your cruisers or destroyers in the system. For each result equal to or greater than that ship's combat value, produce 1 hit; your opponent must assign it to 1 of their ships."
+    },
+    {
+     "name": "Pillage",
+     "text": "After 1 of your neighbors gains trade goods or resolves a transaction: If they have 3 or more trade goods, you may take 1 of their trade goods or commodities."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Promise of Protection",
+     "text": "ACTION: Place this card faceup in your play area. While this card is in your play area, the Mentak player cannot use their Pillage faction ability against you. If you activate a system that contains 1 or more of the Mentak player's units, return this card to the Mentak player."
+    }
+   ],
+   "units": [
+    "mentak_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "mentak_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "muaat": {
@@ -3217,6 +3435,36 @@
    "expansion": "base",
    "startingTech": [
     "tech_ps"
+   ],
+   "commodities": 4,
+   "abilities": [
+    {
+     "name": "Star Forge",
+     "text": "ACTION: Spend 1 token from your strategy pool to place either 2 fighters or 1 destroyer from your reinforcements in a system that contains 1 or more of your war suns."
+    },
+    {
+     "name": "Gashlai Physiology",
+     "text": "Your ships can move through supernovas"
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Fires of the Gashlai",
+     "text": "ACTION: Remove 1 token from the Muaat player's fleet pool and return it to their reinforcements. Then, gain your war sun unit upgrade technology card.  Then, return this card to the Muaat Player."
+    }
+   ],
+   "units": [
+    "muaat_flagship",
+    "muaat_warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "muaat_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "naalu": {
@@ -3225,6 +3473,36 @@
    "startingTech": [
     "tech_st",
     "tech_nm"
+   ],
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Telepathic",
+     "text": "At the end of the strategy phase: Place the Naalu \"0\" token on your strategy card; you are first in initiative order."
+    },
+    {
+     "name": "Foresight",
+     "text": "After another player moves ships into a system that contains 1 or more of your ships: You may place 1 token from your strategy pool in an adjacent system that does not contain another player's ships; move your ships from the active system into that system."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Gift of Prescience",
+     "text": "At the end of the Strategy Phase: Place this card faceup in your play area and place the Naalu '0' token on your strategy card, you are the first in initiative order. The Naalu player cannot use their Telepathic faction ability during this game round. Return this card to the Naalu player at the end of the status phase."
+    }
+   ],
+   "units": [
+    "naalu_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "naalu_fighter",
+    "naalu_mech_te",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "nekro": {
@@ -3232,6 +3510,40 @@
    "expansion": "base",
    "startingTech": [
     "tech_dxa"
+   ],
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Galactic Threat",
+     "text": "You cannot vote on agendas\nOnce per agenda phase, after an agenda is revealed: You may predict aloud the outcome of that agenda. If your prediction is correct, gain 1 technology that is owned by a player who voted how you predicted."
+    },
+    {
+     "name": "Technological Singularity",
+     "text": "Once per combat, after 1 of your opponent's units is destroyed: You may gain 1 technology that is owned by that player."
+    },
+    {
+     "name": "Propagation",
+     "text": "You cannot research technology\nWhen you would research a technology: Gain 3 command tokens instead."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Antivirus",
+     "text": "At the start of a combat: Place this card faceup in your play area. While this card is in your play area, the Nekro player cannot use their Technological Singularity faction ability against you. If you activate a system that contains 1 or more of the Nekro player's units, return this card to the Nekro player."
+    }
+   ],
+   "units": [
+    "nekro_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "nekro_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "saar": {
@@ -3239,12 +3551,68 @@
    "expansion": "base",
    "startingTech": [
     "tech_amd"
+   ],
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Scavenge",
+     "text": "After you gain control of a planet: Gain 1 trade good."
+    },
+    {
+     "name": "Nomadic",
+     "text": "You can score objectives even if you do not control the planets in your home system."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Raghs Call",
+     "text": "After you commit 1 or more units to land on a planet: Remove all of the Saar player's ground forces from that planet and place them on a planet controlled by the Saar player. Then, return this card to the Saar player."
+    }
+   ],
+   "units": [
+    "saar_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "saar_mech",
+    "infantry",
+    "pds",
+    "saar_spacedock"
    ]
   },
   "sardakk": {
    "name": "Sardakk Norr",
    "expansion": "base",
-   "startingTech": []
+   "startingTech": [],
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Unrelenting",
+     "text": "Apply +1 to the result of each of your unit's combat rolls."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Tekklar Legion",
+     "text": "At the start of an invasion combat: Apply +1 to the result of each of your unit's combat rolls during this combat. If your opponent is the N'orr player, apply -1 to the result of each of their unit's combat rolls during this combat. Then, return this card to the N'orr player."
+    }
+   ],
+   "units": [
+    "sardakk_flagship",
+    "warsun",
+    "sardakk_dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "sardakk_mech",
+    "infantry",
+    "pds",
+    "spacedock"
+   ]
   },
   "sol": {
    "name": "The Federation of Sol",
@@ -3252,6 +3620,36 @@
    "startingTech": [
     "tech_amd",
     "tech_nm"
+   ],
+   "commodities": 4,
+   "abilities": [
+    {
+     "name": "Orbital Drop",
+     "text": "ACTION: Spend 1 token from your strategy pool to place 2 infantry from your reinforcements on 1 planet you control."
+    },
+    {
+     "name": "Versatile",
+     "text": "When you gain command tokens during the status phase: Gain 1 additional command token."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Military Support",
+     "text": "At the start of the Sol player's turn: Remove 1 token from the Sol player's strategy pool, if able, and return it to their reinforcements. Then, you may place 2 infantry from your reinforcements on any planet you control. Then, return this card to the Sol player."
+    }
+   ],
+   "units": [
+    "sol_flagship",
+    "warsun",
+    "dreadnought",
+    "sol_carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "sol_mech",
+    "sol_infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "winnu": {
@@ -3270,13 +3668,73 @@
      "tech_ps",
      "tech_aida"
     ]
-   }
+   },
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Blood Ties",
+     "text": "You do not have to spend influence to remove the custodians token from Mecatol Rex."
+    },
+    {
+     "name": "Reclamation",
+     "text": "After you resolve a tactical action during which you gained control of Mecatol Rex: You may place 1 PDS and 1 space dock from your reinforcements on Mecatol Rex."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Acquiescence",
+     "text": "When the Winnu player resolves a strategic action: You do not have to spend or place a command token to resolve the secondary ability of that strategy card. Then, return this card to the Winnu player."
+    }
+   ],
+   "units": [
+    "winnu_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "winnu_mech",
+    "infantry",
+    "pds",
+    "spacedock"
+   ]
   },
   "xxcha": {
    "name": "The Xxcha Kingdom",
    "expansion": "base",
    "startingTech": [
     "tech_gls"
+   ],
+   "commodities": 4,
+   "abilities": [
+    {
+     "name": "Peace Accords",
+     "text": "After you resolve the primary or secondary ability of the \"Diplomacy\" strategy card: You may gain control of 1 planet other than Mecatol Rex that does not contain any units and is in a system that is adjacent to a planet you control."
+    },
+    {
+     "name": "Quash",
+     "text": "When an agenda is revealed: You may spend 1 token from your strategy pool to discard that agenda and reveal 1 agenda from the top of the deck. Players vote on this agenda instead."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Political Favor",
+     "text": "When an agenda is revealed: Remove 1 token from the Xxcha player's strategy pool and return it to their reinforcements. Then, discard the revealed agenda and reveal 1 agenda from the top of the deck. Players vote on this agenda instead. Then, return this card to the Xxcha player."
+    }
+   ],
+   "units": [
+    "xxcha_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "xxcha_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "yin": {
@@ -3284,6 +3742,36 @@
    "expansion": "base",
    "startingTech": [
     "tech_st"
+   ],
+   "commodities": 2,
+   "abilities": [
+    {
+     "name": "Indoctrination",
+     "text": "At the start of a ground combat: You may spend 2 influence to replace 1 of your opponent's participating infantry with 1 infantry from your reinforcements."
+    },
+    {
+     "name": "Devotion",
+     "text": "After each space combat round: You may destroy 1 of your cruisers or destroyers in the active system to produce 1 hit and assign it to 1 of your opponent's ships in that system."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Greyfire Mutagen",
+     "text": "At the start of a ground combat against 2 or more ground forces that are not controlled by the Yin player: Replace 1 of your opponent's infantry with 1 infantry from your reinforcements. Then, return this card to the Yin player."
+    }
+   ],
+   "units": [
+    "yin_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "yin_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "yssaril": {
@@ -3291,6 +3779,40 @@
    "expansion": "base",
    "startingTech": [
     "tech_nm"
+   ],
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Stall Tactics",
+     "text": "ACTION: Discard 1 action card from your hand"
+    },
+    {
+     "name": "Scheming",
+     "text": "When you draw 1 or more action cards: Draw 1 additional action card. Then, choose and discard 1 action card from your hand."
+    },
+    {
+     "name": "Crafty",
+     "text": "You can have any number of action cards in your hand. Game effects cannot prevent you from using this ability."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Spy Net",
+     "text": "At the start of your turn: Look at the Yssaril player's hand of action cards. Choose 1 of those cards and add it to your hand. Then, return this card to the Yssaril player."
+    }
+   ],
+   "units": [
+    "yssaril_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "yssaril_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "argent": {
@@ -3304,13 +3826,77 @@
      "tech_st",
      "tech_ps"
     ]
-   }
+   },
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Zeal",
+     "text": "You always vote first during the agenda phase\nWhen you cast at least 1 vote: cast 1 additional vote for each player in the game including you."
+    },
+    {
+     "name": "Raid Formation",
+     "text": "When 1 or more of your units uses ANTI-FIGHTER BARRAGE: for each hit produced in excess of your opponent's fighters, choose 1 of your opponent's ships that has SUSTAIN DAMAGE to become damaged."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Strike Wing Ambuscade",
+     "text": "When 1 or more of your units make a roll for a unit ability: Choose 1 of those units to roll 1 additional die. Then, return this card to the Argent player."
+    }
+   ],
+   "units": [
+    "argent_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "argent_destroyer",
+    "fighter",
+    "argent_mech",
+    "infantry",
+    "pds",
+    "spacedock"
+   ]
   },
   "cabal": {
    "name": "The Vuil'raith Cabal",
    "expansion": "pok",
    "startingTech": [
     "tech_sar"
+   ],
+   "commodities": 2,
+   "abilities": [
+    {
+     "name": "Devour",
+     "text": "Capture your opponent's non-structure units that are destroyed during combat."
+    },
+    {
+     "name": "Amalgamation",
+     "text": "When you produce a unit: You may return 1 captured unit of that type to produce that unit without spending resources."
+    },
+    {
+     "name": "Riftmeld",
+     "text": "When you research a unit upgrade technology: You may return 1 captured unit of that type to ignore all of the technology's prerequisites."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Crucible",
+     "text": "After you activate a system: Your ships do not roll for gravity rifts during this movement, apply an additional +1 to the move values of your ships that would move out of or through a gravity rift instead. Then, return this card to the Vuil'raith player."
+    }
+   ],
+   "units": [
+    "cabal_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "cabal_mech",
+    "infantry",
+    "pds",
+    "cabal_spacedock"
    ]
   },
   "empyrean": {
@@ -3318,6 +3904,44 @@
    "expansion": "pok",
    "startingTech": [
     "tech_det"
+   ],
+   "commodities": 4,
+   "abilities": [
+    {
+     "name": "Voidborn",
+     "text": "Nebulae do not affect your ships' movement"
+    },
+    {
+     "name": "Aetherpassage",
+     "text": "After a player activates a system: You may allow that player to move their ships through systems that contain your ships."
+    },
+    {
+     "name": "Dark Whispers",
+     "text": "During setup, take the additional Empyrean faction promissory note; you have 2 faction promissory notes"
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Dark Pact",
+     "text": "ACTION: Place this card faceup in your play area. When you give a number of commodities to the Empyrean player equal to your maximum commodity value, you each gain 1 trade good. If you activate a system that contains 1 or more of the Empyrean player's units, return this card to the Empyrean player."
+    },
+    {
+     "name": "Blood Pact",
+     "text": "ACTION: Place this card faceup in your play area. When you and the Empyrean player cast votes for the same outcome, cast 4 additional votes for that outcome. If you activate a system that contains 1 or more of the Empyrean player's units, return this card to the Empyrean player."
+    }
+   ],
+   "units": [
+    "empyrean_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "empyrean_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "mahact": {
@@ -3326,6 +3950,40 @@
    "startingTech": [
     "tech_pi",
     "tech_bs"
+   ],
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Edict",
+     "text": "Other player's tokens in your fleet pool increase your fleet limit but cannot be redistributed.\nWhen you win a combat: Place 1 command token from your opponent's reinforcements in your fleet pool if it does not already contain 1 of that player's tokens."
+    },
+    {
+     "name": "Imperia",
+     "text": "While another player's command token is in your fleet pool, you can use the ability of that player's commander, if it is unlocked."
+    },
+    {
+     "name": "Hubris",
+     "text": "During setup, purge your \"Alliance\" promissory note. Other players cannot give you their 'Alliance\" promissory note."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Scepter of Dominion",
+     "text": "At the start of the strategy phase: Choose 1 non-home system that contains your units, each other player who has a token on the Mahact player's command sheet places a token from their reinforcements in that system. Then, return this card to the Mahact player."
+    }
+   ],
+   "units": [
+    "mahact_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "mahact_mech",
+    "mahact_infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "nomad": {
@@ -3333,6 +3991,36 @@
    "expansion": "pok",
    "startingTech": [
     "tech_sr"
+   ],
+   "commodities": 4,
+   "abilities": [
+    {
+     "name": "The Company",
+     "text": "During setup, take the 2 additional Nomad faction agents and place them next to your faction sheet; you have 3 agents"
+    },
+    {
+     "name": "Future Sight",
+     "text": "During the Agenda phase, after an outcome that you voted for or predicted is resolved: Gain 1 trade good"
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "The Cavalry",
+     "text": "At the start of a space combat against a player other than the Nomad: During this combat, treat 1 of your non-fighter ships as if it has the SUSTAIN DAMAGE ability, combat value, and ANTI-FIGHTER BARRAGE value of the Nomad's flagship. Return this card to the Nomad player at the end of the combat."
+    }
+   ],
+   "units": [
+    "nomad_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "nomad_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "naaz": {
@@ -3341,6 +4029,36 @@
    "startingTech": [
     "tech_pa",
     "tech_aida"
+   ],
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Distant Suns",
+     "text": "When you explore a planet that contains 1 of your mechs: You may draw 1 additional card; choose 1 to resolve and discard the rest."
+    },
+    {
+     "name": "Fabrication",
+     "text": "ACTION: Either purge 2 of your relic fragments of the same type to gain 1 relic; or purge 1 of your relic fragments to gain 1 command token."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Black Market Forgery",
+     "text": "ACTION: Purge 2 of your relic fragments of the same type to gain 1 relic. Then, return this card to the Naaz-Rokha player."
+    }
+   ],
+   "units": [
+    "naaz_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "naaz_mech",
+    "infantry",
+    "pds",
+    "spacedock"
    ]
   },
   "titans": {
@@ -3349,6 +4067,40 @@
    "startingTech": [
     "tech_amd",
     "tech_sdn"
+   ],
+   "commodities": 2,
+   "abilities": [
+    {
+     "name": "Terragenesis",
+     "text": "After you explore a planet that does not have a sleeper token: You may place or move 1 sleeper token onto that planet."
+    },
+    {
+     "name": "Awaken",
+     "text": "After you activate a system that contains 1 or more of your sleeper tokens: You may replace each of those tokens with 1 PDS from your reinforcements."
+    },
+    {
+     "name": "Coalescence",
+     "text": "If your flagship or your AWAKEN faction ability places your units into the same space area or onto the same planet as another player's units, your units must participate in combat during \"Space Combat\" or \"Ground Combat\" steps."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Terraform",
+     "text": "ACTION: Attach this card to a non-home planet you control other than Mecatol Rex. Its resource and influence values are each increased by 1, and it is treated as having all 3 planet traits (cultural, hazardous, and industrial)."
+    }
+   ],
+   "units": [
+    "titans_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "titans_cruiser",
+    "destroyer",
+    "fighter",
+    "titans_mech",
+    "infantry",
+    "titans_pds",
+    "spacedock"
    ]
   },
   "keleres": {
@@ -3358,7 +4110,41 @@
    "choose": {
     "count": 2,
     "options": []
-   }
+   },
+   "commodities": 2,
+   "abilities": [
+    {
+     "name": "The Tribuni",
+     "text": "During setup, choose an unplayed faction from among the Mentak, the Xxcha and The Argent Flight; take that faction's home system, command tokens and control markers. Additionally, take the Keleres Hero that corresponds to that faction"
+    },
+    {
+     "name": "Council Patronage",
+     "text": "At the start of the strategy phase: Replenish your commodities, then gain 1 trade good."
+    },
+    {
+     "name": "Law's Order",
+     "text": "At the start of any player's turn: You may spend 1 trade good or 1 commodity to treat all laws as blank until the end of that turn."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Keleres Rider",
+     "text": "After an agenda is revealed: You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, draw 1 action card and gain 2 trade goods. Then, return this card to the Keleres player."
+    }
+   ],
+   "units": [
+    "keleres_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "keleres_mech",
+    "infantry",
+    "pds",
+    "spacedock"
+   ]
   },
   "bastion": {
    "name": "Last Bastion",
@@ -3372,7 +4158,41 @@
      "tech_st",
      "tech_sdn"
     ]
-   }
+   },
+   "commodities": 1,
+   "abilities": [
+    {
+     "name": "Liberate",
+     "text": "When you gain control of a planet: ready that planet if it contains a number of your infantry equal to or greater than that planet's resource value; otherwise, place 1 infantry on that planet."
+    },
+    {
+     "name": "Galvanize",
+     "text": "Galvanized units roll 1 additional die for combat rolls and unit abilities.\nWhen a game effect instructs a player to galvanize a unit: they place a galvanize token beneath it if it does not have one. "
+    },
+    {
+     "name": "Phoenix Standard",
+     "text": "At the end of combat: you may galvanize 1 of your units that participated."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Raise the Standard",
+     "text": "At the end of a combat: Galvanize 1 of your units that participated. Then, return this card to the Last Bastion player."
+    }
+   ],
+   "units": [
+    "bastion_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "bastion_mech",
+    "infantry",
+    "pds",
+    "bastion_spacedock"
+   ]
   },
   "crimson": {
    "name": "The Crimson Rebellion",
@@ -3386,7 +4206,41 @@
      "tech_ps",
      "tech_aida"
     ]
-   }
+   },
+   "commodities": 2,
+   "abilities": [
+    {
+     "name": "Sundered",
+     "text": "You cannot use wormholes other than epsilon wormholes. Other players' units that move or are placed into your home system are destroyed."
+    },
+    {
+     "name": "Incursion",
+     "text": "When you activate a system that contains a breach, you may flip that breach; systems that contain active breaches are adjacent. at the end of the status phase, any player with ships in a system that contain an active breach may remove that breach."
+    },
+    {
+     "name": "Sorrow",
+     "text": "When you create the game board, place the Sorrow (tile 94) where your home system would normally be placed, then place a inactive breach there. The Sorrow is not a home system. Then, place your home system (tile 118) in your play area."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Sever",
+     "text": "ACTION: place this card face up in your play area, and place the sever token in a system that contains your units, wormholes in that system have no effect during movement. Remove the sever token and return this card to the Rebellion player at end of the status phase."
+    }
+   ],
+   "units": [
+    "crimson_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "crimson_destroyer",
+    "fighter",
+    "crimson_mech",
+    "infantry",
+    "pds",
+    "spacedock"
+   ]
   },
   "deepwrought": {
    "name": "The Deepwrought Scholarate",
@@ -3395,7 +4249,37 @@
    "choose": {
     "count": 2,
     "options": []
-   }
+   },
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Research Team",
+     "text": "When ground forces are committed: if your units on that planet are not already coexisting, you may choose for your units to coexist."
+    },
+    {
+     "name": "Oceanbound",
+     "text": "Any time you have more ocean cards than there are planets that contain your coexisting units, discard ocean cards until you do not.\nWhen your units begin coexisting on a planet: gain an ocean card and ready it."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Share Knowledge",
+     "text": "ACTION: Place this card faceup in your play area and gain 1 non-faction, non-unit upgrade technology that the Deepwrought player owns; place that technology on this card. Return that technology to the deck and this card to the Deepwrought player at the end of the status phase."
+    }
+   ],
+   "units": [
+    "deepwrought_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "deepwrought_mech",
+    "infantry",
+    "pds",
+    "spacedock"
+   ]
   },
   "firmament": {
    "name": "The Firmament",
@@ -3409,7 +4293,37 @@
      "tech_st",
      "tech_sdn"
     ]
-   }
+   },
+   "commodities": 3,
+   "abilities": [
+    {
+     "name": "Plots Within Plots",
+     "text": "You can score secret objectives already scored by other players if you fulfill their requirements; this does not count against your secret objective limit or the number you can score in a round.\nWhen you score another player's secret objective: do not gain a victory point; instead, place a facedown plot card into your play area with that player's control token on it."
+    },
+    {
+     "name": "Puppets of the Blade",
+     "text": "If you have at least 1 plot card in your play area, gain the following ability:: ACTION: Purge The Firmament's faction sheet, leaders, planet cards, and promissory note. Then, gain all of the faction components for The Obsidian."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Black Ops",
+     "text": "When you receive this card, if you are not the Firmament: The Firmament player may place 1 facedown plot card in their play area with your control token on it. Then, gain 2 command tokens, gain 2 trade goods, and purge this card."
+    }
+   ],
+   "units": [
+    "firmament_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "destroyer",
+    "fighter",
+    "firmament_mech",
+    "infantry",
+    "pds",
+    "spacedock"
+   ]
   },
   "ralnel": {
    "name": "The Ral Nel Consortium",
@@ -3423,7 +4337,1521 @@
      "tech_ps",
      "tech_aida"
     ]
+   },
+   "commodities": 4,
+   "abilities": [
+    {
+     "name": "Survival Instinct",
+     "text": "After another player activates a system that contains your ships: you may move up to 2 of your ships into the active system from adjacent systems that do not contain your command tokens."
+    },
+    {
+     "name": "Miniaturization",
+     "text": "Your structures can be transported by any ship; this does not require or count against capacity. While your structures are in the space area, they cannot use their unit abilities.\nAt the end of your tactical actions: you may place your structures that are in space areas onto planets you control in their respective systems."
+    }
+   ],
+   "promissoryNotes": [
+    {
+     "name": "Nano-Link Permit",
+     "text": "After you activate a system: You may move your structures from adjacent systems that do not contain your command tokens onto planets you control in the active system. Then, return this card to the Ral Nel player."
+    }
+   ],
+   "units": [
+    "ralnel_flagship",
+    "warsun",
+    "dreadnought",
+    "carrier",
+    "cruiser",
+    "ralnel_destroyer",
+    "fighter",
+    "ralnel_mech",
+    "infantry",
+    "pds",
+    "spacedock"
+   ]
+  }
+ },
+ "units": {
+  "arborec_flagship": {
+   "name": "Duha Menaimon",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 5,
+   "sustainDamage": true,
+   "ability": "After you activate this system, you may produce up to 5 units in this system."
+  },
+  "warsun": {
+   "name": "War Sun",
+   "subtitle": "Mobile Base",
+   "type": "warsun",
+   "expansion": "base",
+   "cost": 12,
+   "combat": {
+    "hitsOn": 3,
+    "dice": 3
+   },
+   "move": 2,
+   "capacity": 6,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 3,
+    "dice": 3
+   },
+   "ability": "Other player's units in this system lose PLANETARY SHIELD."
+  },
+  "dreadnought": {
+   "name": "Dreadnought I",
+   "type": "dreadnought",
+   "expansion": "base",
+   "cost": 4,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "move": 1,
+   "capacity": 1,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "upgrade": "dreadnought2"
+  },
+  "dreadnought2": {
+   "name": "Dreadnought II",
+   "subtitle": "Type IV Drive",
+   "type": "dreadnought",
+   "expansion": "base",
+   "cost": 4,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "move": 2,
+   "capacity": 1,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards."
+  },
+  "carrier": {
+   "name": "Carrier I",
+   "type": "carrier",
+   "expansion": "base",
+   "cost": 3,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 1
+   },
+   "move": 1,
+   "capacity": 4,
+   "upgrade": "carrier2"
+  },
+  "carrier2": {
+   "name": "Carrier II",
+   "subtitle": "XRD Transporters",
+   "type": "carrier",
+   "expansion": "base",
+   "cost": 3,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 1
+   },
+   "move": 2,
+   "capacity": 6
+  },
+  "cruiser": {
+   "name": "Cruiser I",
+   "type": "cruiser",
+   "expansion": "base",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "move": 2,
+   "upgrade": "cruiser2"
+  },
+  "cruiser2": {
+   "name": "Cruiser II",
+   "subtitle": "Stasis Capsules",
+   "type": "cruiser",
+   "expansion": "base",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "move": 3,
+   "capacity": 1
+  },
+  "destroyer": {
+   "name": "Destroyer I",
+   "type": "destroyer",
+   "expansion": "base",
+   "cost": 1,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 1
+   },
+   "move": 2,
+   "antiFighterBarrage": {
+    "hitsOn": 9,
+    "dice": 2
+   },
+   "upgrade": "destroyer2"
+  },
+  "destroyer2": {
+   "name": "Destroyer II",
+   "subtitle": "Automated Defense Turrets",
+   "type": "destroyer",
+   "expansion": "base",
+   "cost": 1,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "move": 2,
+   "antiFighterBarrage": {
+    "hitsOn": 6,
+    "dice": 3
    }
+  },
+  "fighter": {
+   "name": "Fighter I",
+   "type": "fighter",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 1
+   },
+   "upgrade": "fighter2"
+  },
+  "fighter2": {
+   "name": "Fighter II",
+   "subtitle": "Advanced Fighters",
+   "type": "fighter",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "move": 2,
+   "ability": "This unit may move without being transported.\nFighters in excess of your ships' capacity count against your fleet pool."
+  },
+  "arborec_mech": {
+   "name": "Letani Behemoth",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "planetaryShield": true,
+   "production": "2",
+   "ability": "DEPLOY: When you would use your Mitosis faction ability you may replace 1 of your infantry with 1 mech from your reinforcements instead."
+  },
+  "arborec_infantry": {
+   "name": "Letani Warrior I",
+   "type": "infantry",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "production": "1",
+   "upgrade": "arborec_infantry2"
+  },
+  "arborec_infantry2": {
+   "name": "Letani Warrior II",
+   "type": "infantry",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "production": "2",
+   "ability": "After this unit is destroyed, roll 1 die. If the result is 6 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
+  },
+  "pds": {
+   "name": "PDS I",
+   "type": "pds",
+   "expansion": "base",
+   "spaceCannon": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "planetaryShield": true,
+   "upgrade": "pds2"
+  },
+  "pds2": {
+   "name": "PDS II",
+   "subtitle": "Deep Space Cannon",
+   "type": "pds",
+   "expansion": "base",
+   "spaceCannon": {
+    "hitsOn": 5,
+    "dice": 1,
+    "deepSpace": true
+   },
+   "planetaryShield": true,
+   "ability": "You may use this unit's SPACE CANNON against ships that are in adjacent systems."
+  },
+  "spacedock": {
+   "name": "Space Dock I",
+   "type": "spacedock",
+   "expansion": "base",
+   "capacity": 3,
+   "production": "resources +2",
+   "ability": "This unit's PRODUCTION value is equal to 2 more than the resource value of this planet.\nUp to 3 fighters in this system do not count against your ships' capacity.",
+   "upgrade": "spacedock2"
+  },
+  "spacedock2": {
+   "name": "Space Dock II",
+   "subtitle": "Enviro Compensator",
+   "type": "spacedock",
+   "expansion": "base",
+   "capacity": 3,
+   "production": "resources +4",
+   "ability": "This unit's PRODUCTION value is equal to 4 more than the resource value of this planet.\nUp to 3 fighters in this system do not count against your ships' capacity."
+  },
+  "ghost_flagship": {
+   "name": "Hil Colish",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "This ship's system contains a delta wormhole.\nDuring movement, this ship may move before or after your other ships."
+  },
+  "ghost_mech": {
+   "name": "Icarus Drive",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "After any player activates a system, you may remove this unit from the game board to place or move a Creuss wormhole token into this system."
+  },
+  "infantry": {
+   "name": "Infantry I",
+   "type": "infantry",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "upgrade": "infantry2"
+  },
+  "infantry2": {
+   "name": "Infantry II",
+   "subtitle": "Gen Synthesis",
+   "type": "infantry",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "ability": "After this unit is destroyed, roll 1 die. If the result is 6 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home."
+  },
+  "hacan_flagship": {
+   "name": "Wrath of Kenara",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "After you roll a die during a space combat in this system, you may spend 1 trade good to apply +1 to the result."
+  },
+  "hacan_mech": {
+   "name": "Pride of Kenara",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "This planet's card may be traded as part of a transaction; if you do, move all of your units from this planet to another planet you control."
+  },
+  "jolnar_flagship": {
+   "name": "J.N.S. Hylarim",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "When making a combat roll for this ship, each result of 9 or 10, before applying modifiers, produces 2 additional hits."
+  },
+  "jolnar_mech": {
+   "name": "Shield Paling",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "Your infantry on this planet are not affected by your Fragile faction ability."
+  },
+  "l1z1x_flagship": {
+   "name": "[0.0.1]",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 5,
+   "sustainDamage": true,
+   "ability": "During a space combat, hits produced by this ship and by your dreadnoughts in this system must be assigned to non-fighter ships if able."
+  },
+  "l1z1x_dreadnought": {
+   "name": "Super Dreadnought I",
+   "type": "dreadnought",
+   "expansion": "base",
+   "cost": 4,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "move": 1,
+   "capacity": 2,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "upgrade": "l1z1x_dreadnought2"
+  },
+  "l1z1x_dreadnought2": {
+   "name": "Super Dreadnought II",
+   "type": "dreadnought",
+   "expansion": "base",
+   "cost": 4,
+   "combat": {
+    "hitsOn": 4,
+    "dice": 1
+   },
+   "move": 2,
+   "capacity": 2,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 4,
+    "dice": 1
+   },
+   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards."
+  },
+  "l1z1x_mech": {
+   "name": "Annihilator",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "ability": "While not participating in ground combat, this unit can use its BOMBARDMENT ability on planets in its system as if it were a ship."
+  },
+  "letnev_flagship": {
+   "name": "Arc Secundus",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 5,
+    "dice": 3
+   },
+   "ability": "Other player's units in this system lose PLANETARY SHIELD.\nAt the start of each space combat round, repair this ship."
+  },
+  "letnev_mech": {
+   "name": "Dunlain Reaper",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "DEPLOY: At the start of a round of ground combat, you may spend 2 resources to replace 1 of your infantry in that combat with 1 mech."
+  },
+  "mentak_flagship": {
+   "name": "Fourth Moon",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "Other player's ships in this system cannot use SUSTAIN DAMAGE."
+  },
+  "mentak_mech": {
+   "name": "Moll Terminus",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "Other player's ground forces on this planet cannot use SUSTAIN DAMAGE."
+  },
+  "muaat_flagship": {
+   "name": "The Inferno",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "ACTION: Spend 1 token from your strategy pool to place 1 cruiser in this system."
+  },
+  "muaat_warsun": {
+   "name": "Prototype War Sun I",
+   "type": "warsun",
+   "expansion": "base",
+   "cost": 12,
+   "combat": {
+    "hitsOn": 3,
+    "dice": 3
+   },
+   "move": 1,
+   "capacity": 6,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 3,
+    "dice": 3
+   },
+   "ability": "Other players' units in this system lose the PLANETARY SHIELD ability.",
+   "upgrade": "muaat_warsun2"
+  },
+  "muaat_warsun2": {
+   "name": "Prototype War Sun II",
+   "type": "warsun",
+   "expansion": "base",
+   "cost": 10,
+   "combat": {
+    "hitsOn": 3,
+    "dice": 3
+   },
+   "move": 3,
+   "capacity": 6,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 3,
+    "dice": 3
+   },
+   "ability": "Other players' units in this system lose the PLANETARY SHIELD ability."
+  },
+  "muaat_mech": {
+   "name": "Ember Colossus",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "When you use your Star Forge faction ability in this system or an adjacent system, you may place 1 infantry from your reinforcements with this unit."
+  },
+  "naalu_flagship": {
+   "name": "Matriarch",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 6,
+   "sustainDamage": true,
+   "ability": "During an invasion in this system, you may commit fighters to planets as if they were ground forces. After combat, return those units to the space area."
+  },
+  "naalu_fighter": {
+   "name": "Hybrid Crystal Fighter I",
+   "type": "fighter",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "upgrade": "naalu_fighter2"
+  },
+  "naalu_fighter2": {
+   "name": "Hybrid Crystal Fighter II",
+   "type": "fighter",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "move": 2,
+   "ability": "This unit may move without being transported.\nEach fighter in excess of your ships' capacity counts as 1/2 of a ship against your fleet pool."
+  },
+  "naalu_mech_te": {
+   "name": "Iconoclast TE",
+   "type": "mech",
+   "expansion": "te",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "DEPLOY: When another player gains a relic, place 1 mech on any planet you control."
+  },
+  "nekro_flagship": {
+   "name": "The Alastor",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "At the start of a space combat, choose any number of your ground forces in this system to participate in that combat as if they were ships."
+  },
+  "nekro_mech": {
+   "name": "Mordred",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "During combat against an opponent who has an \"X\" or \"Y\" token on 1 or more of their technologies, apply +2 to the result of each of this unit's combat rolls."
+  },
+  "saar_flagship": {
+   "name": "Son of Ragh",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "antiFighterBarrage": {
+    "hitsOn": 6,
+    "dice": 4
+   }
+  },
+  "saar_mech": {
+   "name": "Scavenger Zeta",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "DEPLOY: After you gain control of a planet, you may spend 1 trade good to place 1 mech on that planet"
+  },
+  "saar_spacedock": {
+   "name": "Floating Factory I",
+   "type": "spacedock",
+   "expansion": "base",
+   "move": 1,
+   "capacity": 4,
+   "production": "5",
+   "ability": "This unit is placed in the space area instead of on a planet.\nThis unit can move and retreat as if it were a ship.\nIf this unit is blockaded, it is destroyed.",
+   "upgrade": "saar_spacedock2"
+  },
+  "saar_spacedock2": {
+   "name": "Floating Factory II",
+   "type": "spacedock",
+   "expansion": "base",
+   "move": 2,
+   "capacity": 5,
+   "production": "7",
+   "ability": "This unit is placed in the space area instead of on a planet.\nThis unit can move and retreat as if it were a ship.\nIf this unit is blockaded, it is destroyed."
+  },
+  "sardakk_flagship": {
+   "name": "C'morran N'orr",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "Apply +1 to the result of each of your other ship's combat rolls in this system."
+  },
+  "sardakk_dreadnought": {
+   "name": "Exotrireme I",
+   "type": "dreadnought",
+   "expansion": "base",
+   "cost": 4,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "move": 1,
+   "capacity": 1,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 4,
+    "dice": 2
+   },
+   "upgrade": "sardakk_dreadnought2"
+  },
+  "sardakk_dreadnought2": {
+   "name": "Exotrireme II",
+   "type": "dreadnought",
+   "expansion": "base",
+   "cost": 4,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "move": 2,
+   "capacity": 1,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 4,
+    "dice": 2
+   },
+   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards.\nAfter a round of space combat, you may destroy this unit to destroy up to 2 ships in the system."
+  },
+  "sardakk_mech": {
+   "name": "Valkyrie Exoskeleton",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "After this unit uses its SUSTAIN DAMAGE ability during ground combat, it produces 1 hit against your opponent's ground forces on this planet."
+  },
+  "sol_flagship": {
+   "name": "Genesis ",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 12,
+   "sustainDamage": true,
+   "ability": "At the end of the status phase, place 1 infantry from your reinforcements in this system's space area."
+  },
+  "sol_carrier": {
+   "name": "Advanced Carrier I",
+   "type": "carrier",
+   "expansion": "base",
+   "cost": 3,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 1
+   },
+   "move": 1,
+   "capacity": 6,
+   "upgrade": "sol_carrier2"
+  },
+  "sol_carrier2": {
+   "name": "Advanced Carrier II",
+   "type": "carrier",
+   "expansion": "base",
+   "cost": 3,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 1
+   },
+   "move": 2,
+   "capacity": 8,
+   "sustainDamage": true
+  },
+  "sol_mech": {
+   "name": "ZS Thunderbolt M2",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "DEPLOY: After you use your Orbital Drop faction ability, you may spend 3 resources to place 1 mech on that planet."
+  },
+  "sol_infantry": {
+   "name": "Spec Ops I",
+   "type": "infantry",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "upgrade": "sol_infantry2"
+  },
+  "sol_infantry2": {
+   "name": "Spec Ops II",
+   "type": "infantry",
+   "expansion": "base",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "ability": "After this unit is destroyed, roll 1 die. If the result is 5 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
+  },
+  "winnu_flagship": {
+   "name": "Salai Sai Corian",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 0
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "When this unit makes a combat roll, it rolls a number of dice (hit on a 7) equal to the number of your opponent's non-fighter ships in this system."
+  },
+  "winnu_mech": {
+   "name": "Reclaimer",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "After you resolve a tactical action where you gained control of this planet, you may place 1 PDS or 1 Space Dock from your reinforcements on this planet."
+  },
+  "xxcha_flagship": {
+   "name": "Loncara Ssodu",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "spaceCannon": {
+    "hitsOn": 5,
+    "dice": 3,
+    "deepSpace": true
+   },
+   "ability": "You may use this unit's SPACE CANNON against ships that are in adjacent systems."
+  },
+  "xxcha_mech": {
+   "name": "Indomitus",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "spaceCannon": {
+    "hitsOn": 8,
+    "dice": 1,
+    "deepSpace": true
+   },
+   "ability": "You may use this unit's SPACE CANNON against ships that are in adjacent systems."
+  },
+  "yin_flagship": {
+   "name": "Van Hauge",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "When this ship is destroyed, destroy all ships in this system."
+  },
+  "yin_mech": {
+   "name": "Moyin's Ashes",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "DEPLOY: When you use your Indoctrination faction ability, you may spend 1 additional influence to replace your opponent's unit with 1 mech instead of 1 infantry."
+  },
+  "yssaril_flagship": {
+   "name": "Y'sia Y'ssrila",
+   "type": "flagship",
+   "expansion": "base",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 2,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "This ship can move through systems that contain other player's ships."
+  },
+  "yssaril_mech": {
+   "name": "Blackshade Infiltrator",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "DEPLOY: After you use your Stall Tactics faction ability, you may place 1 mech on a planet you control."
+  },
+  "argent_flagship": {
+   "name": "Quetzecoatl",
+   "type": "flagship",
+   "expansion": "pok",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "Other players cannot use space cannon against your ships in this system."
+  },
+  "argent_destroyer": {
+   "name": "Strike Wing Alpha I",
+   "type": "destroyer",
+   "expansion": "pok",
+   "cost": 1,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "move": 2,
+   "capacity": 1,
+   "antiFighterBarrage": {
+    "hitsOn": 9,
+    "dice": 2
+   },
+   "upgrade": "argent_destroyer2"
+  },
+  "argent_destroyer2": {
+   "name": "Strike Wing Alpha II",
+   "type": "destroyer",
+   "expansion": "pok",
+   "cost": 1,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "move": 2,
+   "capacity": 1,
+   "antiFighterBarrage": {
+    "hitsOn": 6,
+    "dice": 3
+   },
+   "ability": "When this unit uses ANTI-FIGHTER BARRAGE, each result of 9 or 10 also destroys 1 of your opponent's infantry in the space area of the active system."
+  },
+  "argent_mech": {
+   "name": "Aerie Sentinel",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "This unit does not count against capacity if it is being transported or if it is in a space area with 1 or more of your ships that have capacity values."
+  },
+  "cabal_flagship": {
+   "name": "The Terror Between",
+   "type": "flagship",
+   "expansion": "pok",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "bombardment": {
+    "hitsOn": 5,
+    "dice": 1
+   },
+   "ability": "Capture all other non-structure units that are destroyed in this system, including your own."
+  },
+  "cabal_mech": {
+   "name": "Reanimator",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "When your infantry on this planet are destroyed, place them on your faction sheet; those units are captured."
+  },
+  "cabal_spacedock": {
+   "name": "Dimensional Tear I",
+   "type": "spacedock",
+   "expansion": "pok",
+   "production": "5",
+   "ability": "This system is a gravity rift; your ships do not roll for this gravity rift. Place a dimensional tear token beneath this unit as a reminder.\nUp to 6 fighters in this system do not count against your ships' capacity.",
+   "upgrade": "cabal_spacedock2"
+  },
+  "cabal_spacedock2": {
+   "name": "Dimensional Tear II",
+   "type": "spacedock",
+   "expansion": "pok",
+   "production": "7",
+   "ability": "This system is a gravity rift; your ships do not roll for this gravity rift. Place a dimensional tear token beneath this unit as a reminder.\nUp to 12 fighters in this system do not count against your ships' capacity."
+  },
+  "empyrean_flagship": {
+   "name": "Dynamo",
+   "type": "flagship",
+   "expansion": "pok",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "After any player's unit in this system or an adjacent system uses SUSTAIN DAMAGE, you may spend 2 influence to repair that unit."
+  },
+  "empyrean_mech": {
+   "name": "Watcher",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "You may remove this unit from a system that contains or is adjacent to another player's units to cancel an action card played by that player."
+  },
+  "mahact_flagship": {
+   "name": "Arvicon Rex",
+   "type": "flagship",
+   "expansion": "pok",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "During combat against an opponent whose command token is not in your fleet pool, apply +2 to the results of this unit's combat rolls."
+  },
+  "mahact_mech": {
+   "name": "Starlancer",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "After a player whose command token is in your fleet pool activates this system, you may spend their token from your fleet pool to end their turn; they gain that token."
+  },
+  "mahact_infantry": {
+   "name": "Crimson Legionnaire I",
+   "type": "infantry",
+   "expansion": "pok",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "ability": "After this unit is destroyed, gain 1 commodity or convert 1 of your commodities to a trade good.",
+   "upgrade": "mahact_infantry2"
+  },
+  "mahact_infantry2": {
+   "name": "Crimson Legionnaire II",
+   "type": "infantry",
+   "expansion": "pok",
+   "cost": 0.5,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "ability": "After this unit is destroyed, gain 1 commodity or convert 1 of your commodities to a trade good. Then, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
+  },
+  "nomad_flagship": {
+   "name": "Memoria I",
+   "type": "flagship",
+   "expansion": "pok",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "antiFighterBarrage": {
+    "hitsOn": 8,
+    "dice": 3
+   },
+   "ability": "You may treat this unit as if it were adjacent to systems that contain 1 or more of your mechs.",
+   "upgrade": "nomad_flagship"
+  },
+  "nomad_mech": {
+   "name": "Quantum Manipulator",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "While this unit is in a space area during combat, you may use its SUSTAIN DAMAGE ability to cancel a hit that is produced against your ships in this system."
+  },
+  "naaz_flagship": {
+   "name": "Visz El Vir",
+   "type": "flagship",
+   "expansion": "pok",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 4,
+   "sustainDamage": true,
+   "ability": "Your mechs in this system roll 1 additional die during combat."
+  },
+  "naaz_mech": {
+   "name": "Eidolon",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 2
+   },
+   "sustainDamage": true,
+   "ability": "If this unit is in the space area of the active system at the start of a space combat, flip this card."
+  },
+  "titans_flagship": {
+   "name": "Ouranos",
+   "type": "flagship",
+   "expansion": "pok",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "DEPLOY: After you activate a system that contains 1 or more of your PDS, you may replace 1 of those PDS with this unit."
+  },
+  "titans_cruiser": {
+   "name": "Saturn Engine I",
+   "type": "cruiser",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "move": 2,
+   "capacity": 1,
+   "upgrade": "titans_cruiser2"
+  },
+  "titans_cruiser2": {
+   "name": "Saturn Engine II",
+   "type": "cruiser",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "move": 3,
+   "capacity": 2,
+   "sustainDamage": true
+  },
+  "titans_mech": {
+   "name": "Hecatoncheires",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "DEPLOY: When you would place a PDS on a planet, you may place 1 mech and 1 infantry on that planet instead."
+  },
+  "titans_pds": {
+   "name": "Hel-Titan I",
+   "type": "pds",
+   "expansion": "pok",
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "spaceCannon": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "planetaryShield": true,
+   "production": "1",
+   "ability": "This unit is treated as both a structure and a ground force. It cannot be transported.",
+   "upgrade": "titans_pds2"
+  },
+  "titans_pds2": {
+   "name": "Hel-Titan II",
+   "type": "pds",
+   "expansion": "pok",
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "spaceCannon": {
+    "hitsOn": 5,
+    "dice": 1,
+    "deepSpace": true
+   },
+   "planetaryShield": true,
+   "production": "1",
+   "ability": "This unit is treated as both a structure and a ground force. It cannot be transported.\nYou may use this unit's SPACE CANNON against ships that are adjacent to this unit's systems."
+  },
+  "keleres_flagship": {
+   "name": "Artemiris",
+   "type": "flagship",
+   "expansion": "pok",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 6,
+   "sustainDamage": true,
+   "ability": "Other players must spend 2 influence to activate the system that contains this ship."
+  },
+  "keleres_mech": {
+   "name": "Omniopiares",
+   "type": "mech",
+   "expansion": "pok",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "Other players must spend 1 influence to commit ground forces to the planet that contains this unit."
+  },
+  "bastion_flagship": {
+   "name": "The Egeiro",
+   "type": "flagship",
+   "expansion": "te",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 1
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "production": "1",
+   "ability": "Apply +1 to the result of each of this unit's combat rolls for each non-home system that contains a planet you control."
+  },
+  "bastion_mech": {
+   "name": "A3 Valiance",
+   "type": "mech",
+   "expansion": "te",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "When this unit is destroyed, if it was galvanized, galvanize up to 3 of your infantry in its system."
+  },
+  "bastion_spacedock": {
+   "name": "4x41C \"Helios\" V1",
+   "type": "spacedock",
+   "expansion": "te",
+   "capacity": 3,
+   "production": "resources +2",
+   "ability": "The resource value of this planet is increased by 1. This unit's PRODUCTION value is equal to 2 more than the resource value of this planet.\nUp to 3 fighters in this system do not count against your ships' capacity",
+   "upgrade": "bastion_spacedock2"
+  },
+  "bastion_spacedock2": {
+   "name": "4x41C \"Helios\" V2",
+   "type": "spacedock",
+   "expansion": "te",
+   "capacity": 3,
+   "production": "resources +4",
+   "ability": "The resource value of this planet is increased by 2. This unit's PRODUCTION value is equal to 4 more than the resource value of this planet.\nUp to 3 fighters in this system do not count against your ships' capacity"
+  },
+  "crimson_flagship": {
+   "name": "Quietus",
+   "type": "flagship",
+   "expansion": "te",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "While this unit is in a system that contains an active breach, other players' units in systems with active breaches lose all of their unit abilities"
+  },
+  "crimson_destroyer": {
+   "name": "Exile I",
+   "type": "destroyer",
+   "expansion": "te",
+   "cost": 1,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "move": 2,
+   "antiFighterBarrage": {
+    "hitsOn": 9,
+    "dice": 2
+   },
+   "ability": "At the end of any player's combat in this unit's system or an adjacent system, you may place 1 inactive breach in that system.",
+   "upgrade": "crimson_destroyer2"
+  },
+  "crimson_destroyer2": {
+   "name": "Exile II",
+   "type": "destroyer",
+   "expansion": "te",
+   "cost": 1,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 1
+   },
+   "move": 2,
+   "antiFighterBarrage": {
+    "hitsOn": 6,
+    "dice": 3
+   },
+   "ability": "At the end of any players' combat in this unit's system or up to 2 systems away, you may place 1 active or inactive breach in that system."
+  },
+  "crimson_mech": {
+   "name": "Revenant",
+   "type": "mech",
+   "expansion": "te",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "DEPLOY: During the \"Commit Ground Forces\" step of your tactical action in a system that contains an active breach, you may commit 1 mech, even if you have no units in the system."
+  },
+  "deepwrought_flagship": {
+   "name": "D.W.S. Luminous",
+   "type": "flagship",
+   "expansion": "te",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 7,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 6,
+   "sustainDamage": true,
+   "ability": "This ship can move through systems that contain your units, even if other players' units are present; if it would, apply +1 to its move value for each of those systems."
+  },
+  "deepwrought_mech": {
+   "name": "Eanautic",
+   "type": "mech",
+   "expansion": "te",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "production": "1",
+   "ability": "When another player activates this system, if this unit is coexisting, you may move it and any of your infantry on its planet to a planet you control in your home system."
+  },
+  "firmament_flagship": {
+   "name": "Heaven's Eye",
+   "type": "flagship",
+   "expansion": "te",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 5,
+    "dice": 2
+   },
+   "move": 1,
+   "capacity": 3,
+   "sustainDamage": true,
+   "ability": "If the active system contains units that belong to a player who has a control marker on 1 of your plots, apply +1 to this ship's move value and repair it at the end of every combat round."
+  },
+  "firmament_mech": {
+   "name": "Viper EX-23",
+   "type": "mech",
+   "expansion": "te",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "When ground forces are committed to this planet, you may choose for your units to coexist, if they were not already. Flip this card if your faction becomes the Obsidian."
+  },
+  "ralnel_flagship": {
+   "name": "Last Dispatch",
+   "type": "flagship",
+   "expansion": "te",
+   "cost": 8,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 2
+   },
+   "move": 2,
+   "capacity": 4,
+   "sustainDamage": true,
+   "ability": "When this unit retreats, you may destroy 1 ship in the active system that does not have SUSTAIN DAMAGE."
+  },
+  "ralnel_destroyer": {
+   "name": "Linkship I",
+   "type": "destroyer",
+   "expansion": "te",
+   "cost": 1,
+   "combat": {
+    "hitsOn": 9,
+    "dice": 1
+   },
+   "move": 3,
+   "antiFighterBarrage": {
+    "hitsOn": 9,
+    "dice": 2
+   },
+   "ability": "This unit can use the SPACE CANNON ability of one of your structures in its space area; each structure can only be triggered once.",
+   "upgrade": "ralnel_destroyer2"
+  },
+  "ralnel_destroyer2": {
+   "name": "Linkship II",
+   "type": "destroyer",
+   "expansion": "te",
+   "cost": 1,
+   "combat": {
+    "hitsOn": 8,
+    "dice": 1
+   },
+   "move": 4,
+   "antiFighterBarrage": {
+    "hitsOn": 6,
+    "dice": 3
+   },
+   "ability": "This unit can use the SPACE CANNON ability of one of your structures in its space area; each linkship can trigger the same structure."
+  },
+  "ralnel_mech": {
+   "name": "Alarum",
+   "type": "mech",
+   "expansion": "te",
+   "cost": 2,
+   "combat": {
+    "hitsOn": 6,
+    "dice": 1
+   },
+   "sustainDamage": true,
+   "ability": "At the end of a round of combat on this planet, you may move up to 2 of your ground forces to this planet from planets in adjacent systems."
   }
  },
  "editions": {

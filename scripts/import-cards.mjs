@@ -151,9 +151,51 @@ const FACTION_SETS = {
   pok: [...read('factions/pok.json').map((f) => f.alias), 'keleres'],
   te: ['bastion', 'crimson', 'deepwrought', 'firmament', 'ralnel'],
 };
+// Faction sheet details for the faction info panel: abilities, promissory note and units.
+const abilitySource = byAlias(
+  ['base.json', 'pok.json', 'te_abilities.json', 'keleresplus.json', 'other.json']
+    .flatMap((f) => read(`abilities/${f}`))
+    .map((a) => ({ ...a, alias: a.id })),
+);
+const promissorySource = byAlias(readAll('promissory_notes'));
+const unitSource = byAlias(
+  ['baseUnits.json', 'pok.json', 'te_units.json', 'keleres.json'].flatMap((f) => read(`units/${f}`)).map((u) => ({ ...u, alias: u.id })),
+);
+const UNIT_TYPES = ['flagship', 'warsun', 'dreadnought', 'carrier', 'cruiser', 'destroyer', 'fighter', 'mech', 'infantry', 'pds', 'spacedock'];
+const units = {};
+const roll = (hitsOn, dice) => (hitsOn ? { hitsOn, dice: dice ?? 1 } : undefined);
+const addUnit = (id) => {
+  if (!id || units[id]) return;
+  const u = unitSource[id];
+  if (!u) throw new Error(`Unknown unit ${id}`);
+  units[id] = {
+    name: u.name,
+    subtitle: u.subtitle,
+    type: u.baseType,
+    expansion: expansion(u.source),
+    cost: u.cost,
+    combat: roll(u.combatHitsOn, u.combatDieCount),
+    move: u.moveValue,
+    capacity: u.capacityValue,
+    sustainDamage: u.sustainDamage || undefined,
+    bombardment: roll(u.bombardHitsOn, u.bombardDieCount),
+    antiFighterBarrage: roll(u.afbHitsOn, u.afbDieCount),
+    spaceCannon: u.spaceCannonHitsOn ? { ...roll(u.spaceCannonHitsOn, u.spaceCannonDieCount), deepSpace: u.deepSpaceCannon || undefined } : undefined,
+    planetaryShield: u.planetaryShield || undefined,
+    production: u.productionValue === undefined ? undefined : u.basicProduction === 'res' ? `resources ${u.productionValue}` : String(u.productionValue),
+    ability: u.ability,
+    upgrade: u.upgradesToUnitId,
+  };
+  addUnit(u.upgradesToUnitId);
+};
+const abilityText = (a) => [a.permanentEffect, a.window && `${a.window}: ${a.windowEffect}`].filter(Boolean).join('\n');
+
 const factions = {};
 for (const alias of Object.values(FACTION_SETS).flat()) {
   const f = factionSource[alias === 'keleres' ? 'keleresm' : alias];
+  // Factions list their own units; fill in the generic unit for any type they don't replace (e.g. the War Sun).
+  const factionUnits = UNIT_TYPES.map((type) => f.units.find((id) => unitSource[id]?.baseType === type) ?? type);
+  factionUnits.forEach(addUnit);
   const known = (ids) => ids.map((id) => TECH + id).filter((id) => technologies[id] || console.warn(`No tech ${id}`));
   factions[alias] = {
     name: alias === 'keleres' ? 'The Council Keleres' : f.factionName,
@@ -165,6 +207,10 @@ for (const alias of Object.values(FACTION_SETS).flat()) {
       : alias === 'keleres'
         ? { count: 2, options: [] }
         : undefined,
+    commodities: f.commodities,
+    abilities: f.abilities.map((id) => ({ name: abilitySource[id].name, text: abilityText(abilitySource[id]) })),
+    promissoryNotes: f.promissoryNotes.map((id) => ({ name: promissorySource[id].name, text: promissorySource[id].text })),
+    units: factionUnits,
   };
 }
 
@@ -208,7 +254,7 @@ const editions = {
 };
 
 const out = path.resolve(import.meta.dirname, '../shared/src/data/cards.json');
-writeFileSync(out, JSON.stringify({ actionCards, objectives, agendas, relics, strategyCards, technologies, factions, editions }, null, 1) + '\n');
+writeFileSync(out, JSON.stringify({ actionCards, objectives, agendas, relics, strategyCards, technologies, factions, units, editions }, null, 1) + '\n');
 for (const [name, e] of Object.entries(editions)) {
   console.log(name, Object.fromEntries(Object.entries(e).map(([k, v]) => [k, v.length])));
 }

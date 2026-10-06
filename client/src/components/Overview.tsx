@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   EDITION_NAMES,
   FACTIONS,
@@ -11,6 +12,7 @@ import {
 } from '@ti4/shared';
 import { knownPlayers, victoryPoints } from '../players';
 import { FactionIcon } from './cardParts';
+import { FactionSheet } from './FactionSheet';
 import { SpeakerBadge, TokenPools } from './TokenPools';
 import { TECH_TYPES, techTooltip } from '../techs';
 
@@ -59,6 +61,7 @@ interface PlayerProps {
 
 function PlayerOverview({ state, player, online }: PlayerProps) {
   const seat = seatOf(state.seats, player);
+  const [showSheet, setShowSheet] = useState(false);
   const color = seat.color ? PLAYER_COLORS[seat.color] : 'var(--muted)';
   const { cards } = state;
   const hand = cards.hands[player] ?? [];
@@ -72,6 +75,9 @@ function PlayerOverview({ state, player, online }: PlayerProps) {
 
   return (
     <article className="player-overview" style={{ borderLeftColor: color }}>
+      {showSheet && seat.faction && (
+        <FactionSheet faction={seat.faction} edition={cards.edition} onClose={() => setShowSheet(false)} />
+      )}
       <div className="po-header">
         {seat.faction ? (
           <FactionIcon faction={seat.faction} size={34} />
@@ -80,8 +86,16 @@ function PlayerOverview({ state, player, online }: PlayerProps) {
         )}
         <div className="po-name">
           <strong>{player}</strong>
-          <div className="muted">
-            {seat.faction && `${FACTIONS[seat.faction]?.name} · `}
+          <div className="muted po-faction">
+            {seat.faction && (
+              <>
+                {FACTIONS[seat.faction]?.name}
+                <button className="info-button" title="Faction sheet" onClick={() => setShowSheet(true)}>
+                  i
+                </button>
+                {' · '}
+              </>
+            )}
             {online ? 'Online' : 'Offline'}
           </div>
         </div>
