@@ -113,10 +113,14 @@ for (const file of ['base.json', 'pok.json', 'te_factions.json']) {
   for (const f of read(`factions/${file}`)) factionNames[f.alias] ??= f.factionName;
 }
 const teTechs = read('technologies/te_techs.json');
+// AsyncTI4's PoK deck has both the Ω and ΩΩ versions of Magen Defense Grid and X-89 Bacterial Weapon;
+// we play with ΩΩ only.
+const SUPERSEDED_TECHS = new Set(['x89', 'md_c1']);
 const techSource = byAlias([...read('technologies/pok.json'), ...readAll('technologies'), ...teTechs]);
 const technologies = {};
-const pokTechs = decks.techs_pok.filter((id) => !isTe(techSource[id]));
+const pokTechs = decks.techs_pok.filter((id) => !isTe(techSource[id]) && !SUPERSEDED_TECHS.has(id));
 for (const id of new Set([...decks.techs_base, ...decks.techs_pok, ...teTechs.map((t) => t.alias)])) {
+  if (SUPERSEDED_TECHS.has(id)) continue;
   const t = techSource[id];
   const type = TECH_TYPES[t.types[0]];
   if (!type) throw new Error(`Unknown tech type: ${t.types}`);
@@ -196,7 +200,9 @@ const editions = {
     relic: decks.relics_pok_te.map((id) => RELIC + id),
     strategy: STRATEGY_SETS.te,
     // Executive Order is in both lists, hence the Set.
-    technology: [...new Set([...decks.techs_pok, ...teTechs.map((t) => t.alias)])].map((id) => TECH + id),
+    technology: [...new Set([...decks.techs_pok, ...teTechs.map((t) => t.alias)])]
+      .filter((id) => !SUPERSEDED_TECHS.has(id))
+      .map((id) => TECH + id),
     faction: Object.values(FACTION_SETS).flat(),
   },
 };

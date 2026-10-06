@@ -76,7 +76,7 @@ export function TechSection({ state, me, dispatch }: Props) {
   return (
     <section>
       <h2>Technology ({seat.technologies.length})</h2>
-      {seat.technologies.map((id) => {
+      {seat.technologies.filter((id) => TECHNOLOGIES[id]).map((id) => {
         const info = TECHNOLOGIES[id];
         const exhausted = seat.exhaustedTechnologies.includes(id);
         return (

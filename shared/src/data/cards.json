@@ -2837,20 +2837,6 @@
    "factionId": "yssaril",
    "text": "During your turn of the action phase, players that have passed cannot play action cards."
   },
-  "tech_x89": {
-   "name": "X-89 Bacterial Weapon Ω",
-   "expansion": "pok",
-   "type": "biotic",
-   "requirements": "GGG",
-   "text": "After 1 or more of your units use BOMBARDMENT against a planet, if at least 1 of your opponent's infantry was destroyed, you may destroy all of your opponent's infantry on that planet."
-  },
-  "tech_md_c1": {
-   "name": "Magen Defense Grid Ω",
-   "expansion": "pok",
-   "type": "warfare",
-   "requirements": "R",
-   "text": "At the start of ground combat on a planet that contains 1 or more of your structures, produce 1 hit and assign it to 1 of your opponent's ground forces."
-  },
   "tech_det": {
    "name": "Dark Energy Tap",
    "expansion": "pok",
@@ -4011,11 +3997,9 @@
     "tech_nm",
     "tech_dxa",
     "tech_hm",
-    "tech_x89",
     "tech_x89c4",
     "tech_ps",
     "tech_md",
-    "tech_md_c1",
     "tech_da",
     "tech_asc",
     "tech_st",
@@ -4442,11 +4426,9 @@
     "tech_nm",
     "tech_dxa",
     "tech_hm",
-    "tech_x89",
     "tech_x89c4",
     "tech_ps",
     "tech_md",
-    "tech_md_c1",
     "tech_da",
     "tech_asc",
     "tech_st",
