@@ -1,0 +1,1758 @@
+{
+ "actionCards": {
+  "abs": {
+   "name": "Ancient Burial Sites",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "At the start of the agenda phase",
+   "text": "Choose 1 player. Exhaust each cultural planet owned by that player."
+  },
+  "arch_expedition": {
+   "name": "Archaeological Expedition",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Reveal the top 3 cards of an exploration deck that matches a planet you control; gain any relic fragments that you reveal and discard the rest."
+  },
+  "assassin": {
+   "name": "Assassinate Representative",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "Choose 1 player. That player cannot vote on this agenda."
+  },
+  "blitz": {
+   "name": "Blitz",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "At the start of an invasion",
+   "text": "Each of your non-fighter ships in the active system that do not have BOMBARDMENT gain BOMBARDMENT 6 until the end of the invasion."
+  },
+  "bribery": {
+   "name": "Bribery",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After the speaker votes on an agenda",
+   "text": "Spend any number of trade goods. For each trade good spent, cast 1 additional vote for the outcome on which you voted."
+  },
+  "bunker": {
+   "name": "Bunker",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of an invasion",
+   "text": "During this invasion, apply -4 to the result of each BOMBARDMENT roll against planets you control."
+  },
+  "confounding": {
+   "name": "Confounding Legal Text",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "When another player is elected as the outcome of an agenda",
+   "text": "You are the elected player instead."
+  },
+  "confusing": {
+   "name": "Confusing Legal Text",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "When you are elected as the outcome of an agenda",
+   "text": "Choose 1 player. That player is the elected player instead."
+  },
+  "const_rider": {
+   "name": "Construction Rider",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, place 1 space dock from your reinforcements on a planet you control."
+  },
+  "counterstroke": {
+   "name": "Counterstroke",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After another player activates a system that contains 1 of your command tokens",
+   "text": "Return that command token to your tactic pool."
+  },
+  "coup": {
+   "name": "Coup d'Etat",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "When another player would perform a strategic action",
+   "text": "End that player's turn, the strategic action is not resolved and the strategy card is not exhausted."
+  },
+  "courageous": {
+   "name": "Courageous to the End",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After 1 of your ships is destroyed during a space combat",
+   "text": "Roll 2 dice. For each result equal to or greater than that ship's combat value, your opponent must choose and destroy 1 of their ships."
+  },
+  "cripple": {
+   "name": "Cripple Defenses",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 planet. Destroy each PDS on that planet."
+  },
+  "deadly_plot": {
+   "name": "Deadly Plot",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "During the agenda phase when an outcome would be resolved",
+   "text": "If you voted for or predicted another outcome, discard the agenda instead. The agenda is resolved with no effect and it is not replaced. Then, exhaust all of your planets."
+  },
+  "decoy": {
+   "name": "Decoy Operation",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After another player activates a system that contains 1 or more of your structures",
+   "text": "Remove up to 2 of your ground forces from the game board and place them on a planet you control in the active system."
+  },
+  "dh1": {
+   "name": "Direct Hit",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After another player's ship uses SUSTAIN DAMAGE to cancel a hit produced by your units or abilities",
+   "text": "Destroy that ship."
+  },
+  "dh2": {
+   "name": "Direct Hit",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After another player's ship uses SUSTAIN DAMAGE to cancel a hit produced by your units or abilities",
+   "text": "Destroy that ship."
+  },
+  "dh3": {
+   "name": "Direct Hit",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After another player's ship uses SUSTAIN DAMAGE to cancel a hit produced by your units or abilities",
+   "text": "Destroy that ship."
+  },
+  "dh4": {
+   "name": "Direct Hit",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After another player's ship uses SUSTAIN DAMAGE to cancel a hit produced by your units or abilities",
+   "text": "Destroy that ship."
+  },
+  "diplo_rider": {
+   "name": "Diplomacy Rider",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, choose 1 system that contains a planet you control. Each other player places a command token from their reinforcements in that system."
+  },
+  "disable": {
+   "name": "Disable",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of an invasion in a system that contains 1 or more of your opponents' PDS units",
+   "text": "Your opponents' PDS units lose PLANETARY SHIELD and SPACE CANNON during this invasion."
+  },
+  "disgrace": {
+   "name": "Public Disgrace",
+   "expansion": "base",
+   "phase": "Strategy",
+   "window": "When another player chooses a strategy card during the strategy phase",
+   "text": "That player must choose a different strategy card instead, if able."
+  },
+  "distinguished": {
+   "name": "Distinguished Councilor",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After you cast votes on an outcome of an agenda",
+   "text": "Cast 5 additional votes for that outcome."
+  },
+  "divert_funding": {
+   "name": "Divert Funding",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Return a non-unit upgrade, non-faction technology that you own to your technology deck. Then, research another technology."
+  },
+  "dp1": {
+   "name": "Diplomatic Pressure",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "When an agenda is revealed",
+   "text": "Choose another player. That player must give you 1 promissory note from their hand."
+  },
+  "dp2": {
+   "name": "Diplomatic Pressure",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "When an agenda is revealed",
+   "text": "Choose another player. That player must give you 1 promissory note from their hand."
+  },
+  "dp3": {
+   "name": "Diplomatic Pressure",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "When an agenda is revealed",
+   "text": "Choose another player. That player must give you 1 promissory note from their hand."
+  },
+  "dp4": {
+   "name": "Diplomatic Pressure",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "When an agenda is revealed",
+   "text": "Choose another player. That player must give you 1 promissory note from their hand."
+  },
+  "economic_initiative": {
+   "name": "Economic Initiative",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Ready each cultural planet you control."
+  },
+  "emergency": {
+   "name": "Emergency Repairs",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start or end of a combat round",
+   "text": "Repair all of your units that have SUSTAIN DAMAGE in the active system."
+  },
+  "experimental": {
+   "name": "Experimental Battlestation",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After the active player moves ships into the active system during a tactical action",
+   "text": "Choose 1 of your space docks that is either in or adjacent to that system. That space dock uses SPACE CANNON 5(x3) against the active player's ships in the active system."
+  },
+  "f_conscription": {
+   "name": "Fighter Conscription",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 1 fighter from your reinforcements in each system that contains 1 or more of your space docks or units that have capacity. They cannot be placed in systems that contain other players' ships."
+  },
+  "f_deployment": {
+   "name": "Frontline Deployment",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 3 infantry from your reinforcements on 1 planet you control."
+  },
+  "f_prototype": {
+   "name": "Fighter Prototype",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of the first round of a space combat",
+   "text": "Apply +2 to the result of each of your fighters' combat rolls during this combat round."
+  },
+  "f_researched": {
+   "name": "Focused Research",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Spend 4 trade goods to research 1 technology"
+  },
+  "fire_team": {
+   "name": "Fire Team",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After your ground forces make combat rolls during a round of ground combat",
+   "text": "Reroll any number of your dice."
+  },
+  "fs1": {
+   "name": "Flank Speed",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After you activate a system",
+   "text": "Apply +1 to the move value of each of your ships during this tactical action."
+  },
+  "fs2": {
+   "name": "Flank Speed",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After you activate a system",
+   "text": "Apply +1 to the move value of each of your ships during this tactical action."
+  },
+  "fs3": {
+   "name": "Flank Speed",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After you activate a system",
+   "text": "Apply +1 to the move value of each of your ships during this tactical action."
+  },
+  "fs4": {
+   "name": "Flank Speed",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After you activate a system",
+   "text": "Apply +1 to the move value of each of your ships during this tactical action."
+  },
+  "fsb": {
+   "name": "Forward Supply Base",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After another player activates a system that contains your units",
+   "text": "Gain 3 trade goods. Then, choose another player to gain 1 trade good."
+  },
+  "ghost_ship": {
+   "name": "Ghost Ship",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 1 destroyer from your reinforcements in a non-home system that contains a wormhole and does not contain other players' ships."
+  },
+  "ghost_squad": {
+   "name": "Ghost Squad",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After another player commits units to land on a planet you control",
+   "text": "Move any number of your ground forces from any planet you control in the active system to any other planet you control in the active system."
+  },
+  "hack": {
+   "name": "Hack Election",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "During this agenda, you vote last."
+  },
+  "harness": {
+   "name": "Harness Energy",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After you activate an anomaly",
+   "text": "Replenish your commodities."
+  },
+  "imp_rider": {
+   "name": "Imperial Rider",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, gain 1 victory point."
+  },
+  "impersonation": {
+   "name": "Impersonation",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Spend 3 influence to draw 1 secret objective."
+  },
+  "industrial_initiative": {
+   "name": "Industrial Initiative",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Gain 1 trade good for each industrial planet you control."
+  },
+  "infiltrate": {
+   "name": "Infiltrate",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "When you gain control of a planet",
+   "text": "Replace each PDS and space dock that is on that planet with a matching unit from your reinforcements."
+  },
+  "insider": {
+   "name": "Insider Information",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "Look at the top 3 cards of the agenda deck."
+  },
+  "insub": {
+   "name": "Insubordination",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Remove 1 token from another player's tactic pool and return it to their reinforcements."
+  },
+  "intercept": {
+   "name": "Intercept",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After your opponent declares a retreat during a space combat",
+   "text": "Your opponent cannot retreat during this round of space combat."
+  },
+  "investments": {
+   "name": "Manipulate Investments",
+   "expansion": "pok",
+   "phase": "Strategy",
+   "window": "At the start of the strategy phase",
+   "text": "Place a total of 5 trade goods from the supply on strategy cards of your choice. You must place these tokens on at least 3 different cards."
+  },
+  "jamming": {
+   "name": "Signal Jamming",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 non-home system that contains or is adjacent to 1 of your ships. Place a command token from another player's reinforcements in that system."
+  },
+  "lead_rider": {
+   "name": "Leadership Rider",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, gain 3 command tokens."
+  },
+  "lost_star": {
+   "name": "Lost Star Chart",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After you activate a system",
+   "text": "During this tactical action, systems that contain alpha and beta wormholes are adjacent to each other."
+  },
+  "lucky": {
+   "name": "Lucky Shot",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Destroy 1 dreadnought, cruiser, or destroyer in a system that contains a planet you control."
+  },
+  "master_plan": {
+   "name": "Master Plan",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After you perform an action",
+   "text": "Perform an additional action."
+  },
+  "mb1": {
+   "name": "Morale Boost",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of a combat round",
+   "text": "Apply +1 to the result of each of your unit's combat rolls during this combat round."
+  },
+  "mb2": {
+   "name": "Morale Boost",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of a combat round",
+   "text": "Apply +1 to the result of each of your unit's combat rolls during this combat round."
+  },
+  "mb3": {
+   "name": "Morale Boost",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of a combat round",
+   "text": "Apply +1 to the result of each of your unit's combat rolls during this combat round."
+  },
+  "mb4": {
+   "name": "Morale Boost",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of a combat round",
+   "text": "Apply +1 to the result of each of your unit's combat rolls during this combat round."
+  },
+  "meltdown": {
+   "name": "Reactor Meltdown",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Destroy 1 space dock in a non-home system."
+  },
+  "messiah": {
+   "name": "Rise of a Messiah",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 1 infantry from your reinforcements on each planet you control."
+  },
+  "mining_initiative": {
+   "name": "Mining Initiative",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Gain trade goods equal to the resource value of 1 planet you control."
+  },
+  "mjets1": {
+   "name": "Maneuvering Jets",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Before you assign hits produced by another player's SPACE CANNON roll",
+   "text": "Cancel 1 hit."
+  },
+  "mjets2": {
+   "name": "Maneuvering Jets",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Before you assign hits produced by another player's SPACE CANNON roll",
+   "text": "Cancel 1 hit."
+  },
+  "mjets3": {
+   "name": "Maneuvering Jets",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Before you assign hits produced by another player's SPACE CANNON roll",
+   "text": "Cancel 1 hit."
+  },
+  "mjets4": {
+   "name": "Maneuvering Jets",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Before you assign hits produced by another player's SPACE CANNON roll",
+   "text": "Cancel 1 hit."
+  },
+  "nav_suite": {
+   "name": "Nav Suite",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After you activate a system",
+   "text": "During the 'Movement' step of this tactical action, ignore the effect of anomalies."
+  },
+  "parley": {
+   "name": "Parley",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After another player commits units to land on a planet you control",
+   "text": "Return the committed units to the space area."
+  },
+  "plagiarize": {
+   "name": "Plagiarize",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Spend 5 influence and choose a non-faction technology owned by 1 of your neighbors. Gain that technology."
+  },
+  "plague": {
+   "name": "Plague",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 planet that is controlled by another player. Roll 1 die for each infantry on that planet. For each result of 6 or greater, destroy 1 of those units."
+  },
+  "politic_rider": {
+   "name": "Politics Rider",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, draw 3 action cards and gain the speaker token."
+  },
+  "probe": {
+   "name": "Exploration Probe",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Explore a frontier token that is in or adjacent to a system that contains 1 or more of your ships."
+  },
+  "rally": {
+   "name": "Rally",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After you activate a system that contains another player's ships",
+   "text": "Place 2 command tokens from your reinforcements in your fleet pool."
+  },
+  "refit": {
+   "name": "Refit Troops",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 or 2 of your infantry on the game board. Replace each of those infantry with mechs."
+  },
+  "reflective": {
+   "name": "Reflective Shielding",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "When one of your ships uses SUSTAIN DAMAGE during combat",
+   "text": "Produce 2 hits against your opponent's ships in the active system."
+  },
+  "reparations": {
+   "name": "Reparations",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After another player gains control of a planet you control",
+   "text": "Exhaust 1 planet that player controls and ready 1 planet you control."
+  },
+  "repeal": {
+   "name": "Repeal Law",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Discard 1 law from play."
+  },
+  "reveal_prototype": {
+   "name": "Reveal Prototype",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "At the start of a combat",
+   "text": "Spend 4 resources to research a unit upgrade technology of the same type as 1 of your units that is participating in this combat."
+  },
+  "reverse_engineer": {
+   "name": "Reverse Engineer",
+   "expansion": "pok",
+   "phase": "Any",
+   "window": "After another player discards an action card that has a component action",
+   "text": "Take that action card from the discard pile."
+  },
+  "rout": {
+   "name": "Rout",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "At the start of the 'Announce Retreats' step of space combat, if you are the defender",
+   "text": "Your opponent must announce a retreat, if able."
+  },
+  "s_retreat1": {
+   "name": "Skilled Retreat",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of a combat round",
+   "text": "Move all of your ships from the active system into an adjacent system that does not contain another player's ships. The space combat ends in a draw. Then, place a command token from your reinforcements in that system."
+  },
+  "s_retreat2": {
+   "name": "Skilled Retreat",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of a combat round",
+   "text": "Move all of your ships from the active system into an adjacent system that does not contain another player's ships. The space combat ends in a draw. Then, place a command token from your reinforcements in that system."
+  },
+  "s_retreat3": {
+   "name": "Skilled Retreat",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of a combat round",
+   "text": "Move all of your ships from the active system into an adjacent system that does not contain another player's ships. The space combat ends in a draw. Then, place a command token from your reinforcements in that system."
+  },
+  "s_retreat4": {
+   "name": "Skilled Retreat",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "At the start of a combat round",
+   "text": "Move all of your ships from the active system into an adjacent system that does not contain another player's ships. The space combat ends in a draw. Then, place a command token from your reinforcements in that system."
+  },
+  "sabo1": {
+   "name": "Sabotage",
+   "expansion": "base",
+   "phase": "Any",
+   "window": "When another player plays an action card other than 'Sabotage'",
+   "text": "Cancel that action card."
+  },
+  "sabo2": {
+   "name": "Sabotage",
+   "expansion": "base",
+   "phase": "Any",
+   "window": "When another player plays an action card other than 'Sabotage'",
+   "text": "Cancel that action card."
+  },
+  "sabo3": {
+   "name": "Sabotage",
+   "expansion": "base",
+   "phase": "Any",
+   "window": "When another player plays an action card other than 'Sabotage'",
+   "text": "Cancel that action card."
+  },
+  "sabo4": {
+   "name": "Sabotage",
+   "expansion": "base",
+   "phase": "Any",
+   "window": "When another player plays an action card other than 'Sabotage'",
+   "text": "Cancel that action card."
+  },
+  "salvage": {
+   "name": "Salvage",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After you win a space combat",
+   "text": "Your opponent gives you all of their commodities."
+  },
+  "sanction": {
+   "name": "Sanction",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, each player that voted for that outcome returns 1 command token from their fleet supply to their reinforcements."
+  },
+  "scramble": {
+   "name": "Scramble Frequency",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After another player makes a BOMBARDMENT, SPACE CANNON, or ANTI-FIGHTER BARRAGE roll",
+   "text": "That player rerolls all of their dice."
+  },
+  "scuttle": {
+   "name": "Scuttle",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 or 2 of your non-fighter ships on the game board and return them to your reinforcements. Gain trade goods equal to the combined cost of those ships."
+  },
+  "seize": {
+   "name": "Seize Artifact",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 of your neighbors that has 1 or more relic fragments. That player must give you 1 relic fragment of your choice."
+  },
+  "sh1": {
+   "name": "Shields Holding",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Before you assign hits to your ships during a space combat",
+   "text": "Cancel up to 2 hits."
+  },
+  "sh2": {
+   "name": "Shields Holding",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Before you assign hits to your ships during a space combat",
+   "text": "Cancel up to 2 hits."
+  },
+  "sh3": {
+   "name": "Shields Holding",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Before you assign hits to your ships during a space combat",
+   "text": "Cancel up to 2 hits."
+  },
+  "sh4": {
+   "name": "Shields Holding",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Before you assign hits to your ships during a space combat",
+   "text": "Cancel up to 2 hits."
+  },
+  "silence_space": {
+   "name": "In The Silence Of Space",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After you activate a system",
+   "text": "Choose 1 system. During this tactical action, your ships in the chosen system can move through systems that contain other players' ships."
+  },
+  "solar_flare": {
+   "name": "Solar Flare",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "After you activate a system",
+   "text": "During the \"Movement\" step of this tactical action, other players cannot use SPACE CANNON against your ships."
+  },
+  "spy": {
+   "name": "Spy",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 player. That player gives you 1 random action card from their hand."
+  },
+  "stability": {
+   "name": "Political Stability",
+   "expansion": "base",
+   "phase": "Status",
+   "window": "When you would return your strategy card(s) during the status phase",
+   "text": "Do not return your strategy card(s). You do not choose strategy cards during the next strategy phase."
+  },
+  "summit": {
+   "name": "Summit",
+   "expansion": "base",
+   "phase": "Strategy",
+   "window": "At the start of the strategy phase",
+   "text": "Gain 2 command tokens."
+  },
+  "tactical": {
+   "name": "Tactical Bombardment",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 system that contains 1 or more of your units that have BOMBARDMENT. Exhaust each planet controlled by other players in that system."
+  },
+  "tech_rider": {
+   "name": "Technology Rider",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, research 1 technology."
+  },
+  "trade_rider": {
+   "name": "Trade Rider",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, gain 5 trade goods."
+  },
+  "unexpected": {
+   "name": "Unexpected Action",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Remove 1 of your command tokens from the game board and return it to your reinforcements."
+  },
+  "unstable": {
+   "name": "Unstable Planet",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose 1 hazardous planet. Exhaust that planet and destroy up to 3 infantry on it."
+  },
+  "upgrade": {
+   "name": "Upgrade",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "After you activate a system that contains 1 or more of your ships",
+   "text": "Replace 1 of your cruisers in that system with 1 dreadnought from your reinforcements."
+  },
+  "uprising": {
+   "name": "Uprising",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Exhaust 1 non-home planet controlled by another player. Then gain trade goods equal to its resource value."
+  },
+  "veto": {
+   "name": "Veto",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "When an agenda is revealed",
+   "text": "Discard that agenda and reveal 1 agenda from the top of the deck. Players vote on this agenda instead."
+  },
+  "war_effort": {
+   "name": "War Effort",
+   "expansion": "base",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 1 cruiser from your reinforcements in a system that contains 1 or more of your ships."
+  },
+  "war_machine1": {
+   "name": "War Machine",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "When 1 or more of your units use PRODUCTION",
+   "text": "Apply +4 to the total PRODUCTION value of your units and reduce the combined cost of the produced units by 1."
+  },
+  "war_machine2": {
+   "name": "War Machine",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "When 1 or more of your units use PRODUCTION",
+   "text": "Apply +4 to the total PRODUCTION value of your units and reduce the combined cost of the produced units by 1."
+  },
+  "war_machine3": {
+   "name": "War Machine",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "When 1 or more of your units use PRODUCTION",
+   "text": "Apply +4 to the total PRODUCTION value of your units and reduce the combined cost of the produced units by 1."
+  },
+  "war_machine4": {
+   "name": "War Machine",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "When 1 or more of your units use PRODUCTION",
+   "text": "Apply +4 to the total PRODUCTION value of your units and reduce the combined cost of the produced units by 1."
+  },
+  "war_rider": {
+   "name": "Warfare Rider",
+   "expansion": "base",
+   "phase": "Agenda",
+   "window": "After an agenda is revealed",
+   "text": "You cannot vote on this agenda. Predict aloud an outcome of this agenda. If your prediction is correct, place 1 dreadnought from your reinforcements in a system that contains 1 or more of your ships."
+  },
+  "waylay": {
+   "name": "Waylay",
+   "expansion": "pok",
+   "phase": "Action",
+   "window": "Before you roll dice for ANTI-FIGHTER BARRAGE",
+   "text": "Hits from this roll are produced against all ships (not just fighters)."
+  },
+  "strategize1": {
+   "name": "Strategize",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Perform the secondary ability of any readied or unchosen strategy card."
+  },
+  "strategize2": {
+   "name": "Strategize",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Perform the secondary ability of any readied or unchosen strategy card."
+  },
+  "strategize3": {
+   "name": "Strategize",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Perform the secondary ability of any readied or unchosen strategy card."
+  },
+  "strategize4": {
+   "name": "Strategize",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Perform the secondary ability of any readied or unchosen strategy card."
+  },
+  "piratecontract1": {
+   "name": "Pirate Contract",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 1 neutral destroyer in a non-home system that contains no non-neutral ships."
+  },
+  "piratecontract2": {
+   "name": "Pirate Contract",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 1 neutral destroyer in a non-home system that contains no non-neutral ships."
+  },
+  "piratecontract3": {
+   "name": "Pirate Contract",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 1 neutral destroyer in a non-home system that contains no non-neutral ships."
+  },
+  "piratecontract4": {
+   "name": "Pirate Contract",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Place 1 neutral destroyer in a non-home system that contains no non-neutral ships."
+  },
+  "rescue": {
+   "name": "Rescue",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "After another player moves ships into a system that contains your ships",
+   "text": "You may move 1 of your ships into the active system from any system that does not contain one of your command tokens."
+  },
+  "piratefleet": {
+   "name": "Pirate Fleet",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Spend 3 resources to place 1 neutral carrier, 1 neutral cruiser, 1 neutral destroyer, and 2 neutral fighters in a non-home system that contains no non-neutral ships."
+  },
+  "brilliance": {
+   "name": "Brilliance",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Ready 1 of your planets that has a technology specialty or choose 1 player to gain their breakthrough."
+  },
+  "crashlanding": {
+   "name": "Crash Landing",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "When your last ship in the active system is destroyed",
+   "text": "Place 1 of your ground forces from the space area of the active system onto a planet in that system other than Mecatol Rex; if the planet contains other players' units, place your ground force into coexistence."
+  },
+  "puppetsonastring": {
+   "name": "Puppets on a String",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "At the end of a player's turn, if you have passed",
+   "text": "Perform 1 action."
+  },
+  "exchangeprogram": {
+   "name": "Exchange Program",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Choose another player. You and that player may agree to place 1 infantry from each of your reinforcements into coexistence on a planet the other player controls that contains their ground forces; if no agreement is reached, you each discard 1 token from your fleet pool."
+  },
+  "crisis": {
+   "name": "Crisis",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "At the end of any players turn, if there are at least 2 players who have not passed",
+   "text": "Skip the next player's turn."
+  },
+  "lieinwait": {
+   "name": "Lie in Wait",
+   "expansion": "te",
+   "phase": "Any",
+   "window": "After 2 of your neighbors resolve a transaction",
+   "text": "Look at each of those players' hands of action cards, then choose and take 1 action card from each."
+  },
+  "extremeduress": {
+   "name": "Extreme Duress",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "At the start of another player's turn, if they have a readied strategy card",
+   "text": "If that player's next action is not a strategic action, they discard all of their action cards, give you all of their trade goods, and show you all of their secret objectives."
+  },
+  "overrule": {
+   "name": "Overrule",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Perform the primary ability of a readied or unchosen strategy card."
+  },
+  "blackmarketdealing": {
+   "name": "Black Market Dealings",
+   "expansion": "te",
+   "phase": "Any",
+   "window": "When you are negotiating a transaction",
+   "text": "You and the other player may include relics, action cards, and unscored secret objectives as part of the transaction. This card cannot be canceled."
+  },
+  "mercenarycontract": {
+   "name": "Mercenary Contract",
+   "expansion": "te",
+   "phase": "Action",
+   "window": "Action",
+   "text": "Spend 2 trade goods to place 2 neutral infantry on any non-home planet that contains no units; if that planet was owned by another player, they return its planet card to the planet card deck."
+  }
+ },
+ "objectives": {
+  "amass_wealth": {
+   "name": "Amass Wealth",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Spend 3 influence, 3 resources, and 3 trade goods."
+  },
+  "build_defenses": {
+   "name": "Build Defenses",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 4 or more structures."
+  },
+  "corner": {
+   "name": "Corner the Market",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control 4 planets that each have the same planet trait."
+  },
+  "deep_space": {
+   "name": "Explore Deep Space",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have units in 3 systems that do not contain planets."
+  },
+  "develop": {
+   "name": "Develop Weaponry",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Own 2 unit upgrade technologies."
+  },
+  "diversify": {
+   "name": "Diversify Research",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Own 2 technologies in each of 2 colors."
+  },
+  "engineer_marvel": {
+   "name": "Engineer a Marvel",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have your flagship or a war sun on the game board."
+  },
+  "expand_borders": {
+   "name": "Expand Borders",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control 6 planets in non-home systems."
+  },
+  "infrastructure": {
+   "name": "Improve Infrastructure",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have structures on 3 planets outside of your home system."
+  },
+  "intimidate": {
+   "name": "Intimidate Council",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 1 or more ships in 2 systems that are adjacent to Mecatol Rex's system."
+  },
+  "lead": {
+   "name": "Lead From the Front",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Spend a total of 3 tokens from your tactic and/or strategy pools."
+  },
+  "lost_outposts": {
+   "name": "Discover Lost Outposts",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control 2 planets that have attachments."
+  },
+  "make_history": {
+   "name": "Make History",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have units in 2 systems that contain legendary planets, Mecatol Rex, or anomalies."
+  },
+  "monument": {
+   "name": "Erect a Monument",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Spend 8 resources."
+  },
+  "outer_rim": {
+   "name": "Populate the Outer Rim",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have units in 3 systems on the edge of the game board other than your home system."
+  },
+  "push_boundaries": {
+   "name": "Push Boundaries",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control more planets than each of 2 of your neighbors."
+  },
+  "raise_fleet": {
+   "name": "Raise a Fleet",
+   "type": "stage1",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 5 or more non-fighter ships in 1 system."
+  },
+  "research_outposts": {
+   "name": "Found Research Outposts",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control 3 planets that have technology specialties."
+  },
+  "sway_council": {
+   "name": "Sway the Council",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Spend 8 influence."
+  },
+  "trade_routes": {
+   "name": "Negotiate Trade Routes",
+   "type": "stage1",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Spend 5 trade goods."
+  },
+  "ancient_monuments": {
+   "name": "Reclaim Ancient Monuments",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Control 3 planets that have attachments."
+  },
+  "become_legend": {
+   "name": "Become a Legend",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Have units in 4 systems that contain legendary planets, Mecatol Rex, or anomalies."
+  },
+  "brain_trust": {
+   "name": "Form Galactic Brain Trust",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Control 5 planets that have technology specialties."
+  },
+  "centralize_trade": {
+   "name": "Centralize Galactic Trade",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Spend 10 trade goods."
+  },
+  "command_armada": {
+   "name": "Command an Armada",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Have 8 or more non-fighter ships in 1 system."
+  },
+  "conquer": {
+   "name": "Conquer the Weak",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Control 1 planet that is in another player's home system."
+  },
+  "control_borderlands": {
+   "name": "Control the Borderlands",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Have units in 5 systems on the edge of the game board other than your home system."
+  },
+  "distant_lands": {
+   "name": "Rule Distant Lands",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Control 2 planets that are each in or adjacent to a different, other player's home system."
+  },
+  "galvanize": {
+   "name": "Galvanize the People",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Spend a total of 6 tokens from your tactic and/or strategy pools."
+  },
+  "golden_age": {
+   "name": "Found a Golden Age",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Spend 16 resources."
+  },
+  "manipulate_law": {
+   "name": "Manipulate Galactic Law",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Spend 16 influence."
+  },
+  "massive_cities": {
+   "name": "Construct Massive Cities",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Have 7 or more structures."
+  },
+  "master_science": {
+   "name": "Master the Sciences",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Own 2 technologies in each of 4 colors."
+  },
+  "protect_border": {
+   "name": "Protect the Border",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Have structures on 5 planets outside of your home system."
+  },
+  "revolutionize": {
+   "name": "Revolutionize Warfare",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Own 3 unit upgrade technologies."
+  },
+  "subdue": {
+   "name": "Subdue the Galaxy",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Control 11 planets in non-home systems."
+  },
+  "supremacy": {
+   "name": "Achieve Supremacy",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Have your flagship or war sun in another player's home system or the Mecatol Rex system."
+  },
+  "unify_colonies": {
+   "name": "Unify the Colonies",
+   "type": "stage2",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 2,
+   "text": "Control 6 planets that each have the same planet trait."
+  },
+  "vast_reserves": {
+   "name": "Hold Vast Reserves",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Spend 6 influence, 6 resources, and 6 trade goods."
+  },
+  "vast_territories": {
+   "name": "Patrol Vast Territories",
+   "type": "stage2",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 2,
+   "text": "Have units in 5 systems that do not contain planets."
+  },
+  "ans": {
+   "name": "Adapt New Strategies",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Own 2 faction technologies. 'Valefar Assimilator' technologies do not count toward this objective."
+  },
+  "baf": {
+   "name": "Betray a Friend",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Action",
+   "points": 1,
+   "text": "Win a combat against a player whose promissory note you had in your play area at the start of your tactical action."
+  },
+  "bam": {
+   "name": "Become a Martyr",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Action",
+   "points": 1,
+   "text": "Lose control of a planet in a home system."
+  },
+  "btv": {
+   "name": "Brave the Void",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Action",
+   "points": 1,
+   "text": "Win a combat in an anomaly."
+  },
+  "btgk": {
+   "name": "Become the Gatekeeper",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 1 or more ships in a system that contains an alpha wormhole and 1 or more ships in a system that contains a beta wormhole."
+  },
+  "csl": {
+   "name": "Cut Supply Lines",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 1 or more ships in the same system as another player's space dock."
+  },
+  "ctr": {
+   "name": "Control the Region",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 1 or more ships in 6 systems."
+  },
+  "dfat": {
+   "name": "Defy Space and Time",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have units in the wormhole nexus."
+  },
+  "dhw": {
+   "name": "Destroy Heretical Works",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Purge 2 of your relic fragments of any type."
+  },
+  "dp": {
+   "name": "Dictate Policy",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "points": 1,
+   "text": "There are 3 or more laws in play."
+  },
+  "dtd": {
+   "name": "Drive the Debate",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Agenda",
+   "points": 1,
+   "text": "You or a planet you control are elected by an agenda."
+  },
+  "dtgs": {
+   "name": "Destroy Their Greatest Ship",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Action",
+   "points": 1,
+   "text": "Destroy another player's war sun or flagship."
+  },
+  "dts": {
+   "name": "Darken the Skies",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Action",
+   "points": 1,
+   "text": "Win a combat in another player's home system."
+  },
+  "dyp": {
+   "name": "Demonstrate Your Power",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Action",
+   "points": 1,
+   "text": "Have 3 or more non-fighter ships in the active system at the end of a space combat."
+  },
+  "eap": {
+   "name": "Establish a Perimeter",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 4 PDS units on the game board."
+  },
+  "eh": {
+   "name": "Establish Hegemony",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control planets that have a combined influence value of at least 12."
+  },
+  "faa": {
+   "name": "Forge an Alliance",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control 4 cultural planets."
+  },
+  "fc": {
+   "name": "Foster Cohesion",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Be neighbors with all other players."
+  },
+  "fsn": {
+   "name": "Form a Spy Network",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Discard 5 action cards."
+  },
+  "fwm": {
+   "name": "Fuel the War Machine",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 3 space docks on the game board."
+  },
+  "fwp": {
+   "name": "Fight with Precision",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Action",
+   "points": 1,
+   "text": "Destroy the last of a player's fighters in the active system during the anti-fighter barrage step."
+  },
+  "gamf": {
+   "name": "Gather a Mighty Fleet",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 5 dreadnoughts on the game board."
+  },
+  "hrm": {
+   "name": "Hoard Raw Materials",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control planets that have a combined resource value of at least 12."
+  },
+  "lsc": {
+   "name": "Learn the Secrets of the Cosmos",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 1 or more ships in 3 systems that are each adjacent to an anomaly."
+  },
+  "mew": {
+   "name": "Make an Example of Their World",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Action",
+   "points": 1,
+   "text": "Destroy the last of a player's ground forces on a planet during the bombardment step."
+  },
+  "mlp": {
+   "name": "Master the Laws of Physics",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Own 4 technologies of the same color."
+  },
+  "mp": {
+   "name": "Monopolize Production",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control 4 industrial planets."
+  },
+  "mrm": {
+   "name": "Mine Rare Metals",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control 4 hazardous planets."
+  },
+  "mtm": {
+   "name": "Mechanize the Military",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 1 mech on each of 4 planets."
+  },
+  "ose": {
+   "name": "Occupy the Seat of the Empire",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control Mecatol Rex and have 3 or more ships in its system."
+  },
+  "otf": {
+   "name": "Occupy the Fringe",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 9 or more ground forces on a planet that does not contain 1 of your space docks."
+  },
+  "pe": {
+   "name": "Prove Endurance",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Action",
+   "points": 1,
+   "text": "Be the last player to pass during a game round."
+  },
+  "pem": {
+   "name": "Produce en Masse",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have units with a combined PRODUCTION value of at least 8 in a single system."
+  },
+  "sai": {
+   "name": "Seize an Icon",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control a legendary planet."
+  },
+  "sar": {
+   "name": "Spark a Rebellion",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Action",
+   "points": 1,
+   "text": "Win a combat against a player who has the most victory points."
+  },
+  "sb": {
+   "name": "Strengthen Bonds",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have another player's promissory note in your play area."
+  },
+  "syc": {
+   "name": "Stake Your Claim",
+   "type": "secret",
+   "expansion": "pok",
+   "phase": "Status",
+   "points": 1,
+   "text": "Control a planet in a system that contains a planet controlled by another player."
+  },
+  "te": {
+   "name": "Threaten Enemies",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Status",
+   "points": 1,
+   "text": "Have 1 or more ships in a system that is adjacent to another player's home system."
+  },
+  "ttfd": {
+   "name": "Turn Their Fleets to Dust",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Action",
+   "points": 1,
+   "text": "Destroy the last of a player's non-fighter ships in the active system during the space cannon offense step."
+  },
+  "uf": {
+   "name": "Unveil Flagship",
+   "type": "secret",
+   "expansion": "base",
+   "phase": "Action",
+   "points": 1,
+   "text": "Win a space combat in a system that contains your flagship. You cannot score this objective if your flagship is destroyed in the combat."
+  }
+ },
+ "strategyCards": {
+  "pok1leadership": {
+   "name": "Leadership",
+   "initiative": 1,
+   "expansion": "base",
+   "color": "#ec1c24",
+   "primary": [
+    "Gain 3 command tokens",
+    "Spend any amount of influence to gain 1 command token for every 3 influence spent"
+   ],
+   "secondary": [
+    "Spend any amount of influence to gain 1 command token for every 3 influence spent"
+   ]
+  },
+  "pok2diplomacy": {
+   "name": "Diplomacy",
+   "initiative": 2,
+   "expansion": "pok",
+   "color": "#f69421",
+   "primary": [
+    "Choose 1 system other than the Mecatol Rex system that contains a planet you control; each other player places a command token from their reinforcements in the chosen system. Then, ready up to 2 exhausted planets you control."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool to ready up to 2 exhausted planets you control."
+   ]
+  },
+  "pok3politics": {
+   "name": "Politics",
+   "initiative": 3,
+   "expansion": "base",
+   "color": "#fff200",
+   "primary": [
+    "Choose a player other than the speaker.  That player gains the speaker token.",
+    "Draw 2 action cards",
+    "Look at the top 2 cards of the agenda deck. Place each card on the top or bottom of the deck in any order."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool to draw 2 action cards."
+   ]
+  },
+  "pok4construction": {
+   "name": "Construction",
+   "initiative": 4,
+   "expansion": "pok",
+   "color": "#39b54a",
+   "primary": [
+    "Place 1 PDS or 1 Space Dock on a planet you control.",
+    "Place 1 PDS on a planet you control."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool and place it in any system; you may place either 1 space dock or 1 PDS on a planet you control in that system"
+   ]
+  },
+  "pok5trade": {
+   "name": "Trade",
+   "initiative": 5,
+   "expansion": "base",
+   "color": "#00a99d",
+   "primary": [
+    "Gain 3 trade goods.",
+    "Replenish commodities.",
+    "Choose any number of other players. Those players use the secondary ability of this strategy card without spending a command token."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool to replenish your commodities."
+   ]
+  },
+  "pok6warfare": {
+   "name": "Warfare",
+   "initiative": 6,
+   "expansion": "base",
+   "color": "#008ed4",
+   "primary": [
+    "Remove 1 of your command tokens from the game board; then, gain 1 command token.",
+    "Redistribute any number of the command tokens on your command sheet."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool to use the PRODUCTION ability of 1 of your space docks in your home system (this token is not placed in your home system)."
+   ]
+  },
+  "pok7technology": {
+   "name": "Technology",
+   "initiative": 7,
+   "expansion": "base",
+   "color": "#15489f",
+   "primary": [
+    "Research 1 technology.",
+    "Spend 6 resources to research 1 technology."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool and 4 resources to research 1 technology."
+   ]
+  },
+  "pok8imperial": {
+   "name": "Imperial",
+   "initiative": 8,
+   "expansion": "base",
+   "color": "#752b90",
+   "primary": [
+    "Immediately score 1 public objective if you fulfill its requirements.",
+    "Gain 1 victory point if you control Mecatol Rex; otherwise, draw 1 secret objective."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool to draw 1 secret objective."
+   ]
+  },
+  "te4construction": {
+   "name": "Construction",
+   "initiative": 4,
+   "expansion": "te",
+   "color": "#39b54a",
+   "primary": [
+    "Either place 1 structure on a planet you control, or use the PRODUCTION ability of 1 of your space docks.",
+    "Place 1 structure on a planet you control."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool to place 1 structure on a planet you control."
+   ]
+  },
+  "te6warfare": {
+   "name": "Warfare",
+   "initiative": 6,
+   "expansion": "te",
+   "color": "#008ed4",
+   "primary": [
+    "Perform a tactical action in any system without placing a command token, even if the system already has your command token in it: that system still counts as being activated. You may redistribute your command tokens before and after this action."
+   ],
+   "secondary": [
+    "Spend 1 token from your strategy pool to use the Production abilities of the units in your home system. (This token is not placed in your home system)"
+   ]
+  }
+ }
+}

@@ -1,3 +1,4 @@
+export * from './cards';
 export * from './hex';
 export * from './pieces';
 export * from './state';

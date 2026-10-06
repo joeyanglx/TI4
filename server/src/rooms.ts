@@ -1,7 +1,15 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { WebSocket } from 'ws';
-import { applyAction, defaultBoard, type Action, type GameState, type ServerMessage } from '@ti4/shared';
+import {
+  applyAction,
+  defaultBoard,
+  isServerOrdered,
+  withDefaults,
+  type Action,
+  type GameState,
+  type ServerMessage,
+} from '@ti4/shared';
 
 const DATA_DIR = path.resolve(import.meta.dirname, '../data');
 const SAVE_DELAY_MS = 1000;
@@ -35,8 +43,8 @@ export class Room {
 
   apply(action: Action, from: Client) {
     this.state = applyAction(this.state, action);
-    // The sender already applied the action locally, so only tell everyone else.
-    this.broadcast({ type: 'action', action }, from);
+    // The sender already applied most actions locally; ordered ones it waits to hear back about.
+    this.broadcast({ type: 'action', action }, isServerOrdered(action) ? undefined : from);
     this.scheduleSave();
   }
 
@@ -83,7 +91,7 @@ function roomFile(id: string) {
 
 async function loadRoom(id: string): Promise<GameState | undefined> {
   try {
-    return JSON.parse(await readFile(roomFile(id), 'utf8')) as GameState;
+    return withDefaults(JSON.parse(await readFile(roomFile(id), 'utf8')) as Partial<GameState>);
   } catch {
     return undefined;
   }

@@ -3,6 +3,7 @@ import {
   WS_PATH,
   applyAction,
   emptyState,
+  isServerOrdered,
   type Action,
   type ClientMessage,
   type GameState,
@@ -30,14 +31,13 @@ export function useGame(room: string, name: string) {
       socketRef.current = socket;
       setStatus('connecting');
 
-      socket.onopen = () => {
-        setStatus('online');
-        send(socket, { type: 'join', room, name });
-      };
+      socket.onopen = () => send(socket, { type: 'join', room, name });
       socket.onmessage = (event) => {
         const message = JSON.parse(event.data) as ServerMessage;
         switch (message.type) {
           case 'snapshot':
+            // Only count as online once synced, so nothing is dispatched against the empty placeholder state.
+            setStatus('online');
             setState(message.state);
             setPlayers(message.players);
             break;
@@ -65,7 +65,7 @@ export function useGame(room: string, name: string) {
 
   /** Apply locally right away (so dragging feels instant), then tell the server. */
   const dispatch = useCallback((action: Action) => {
-    setState((s) => applyAction(s, action));
+    if (!isServerOrdered(action)) setState((s) => applyAction(s, action));
     const socket = socketRef.current;
     if (socket) send(socket, { type: 'action', action });
   }, []);

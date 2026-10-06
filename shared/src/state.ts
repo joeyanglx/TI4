@@ -1,3 +1,4 @@
+import { applyCardAction, emptyCards, type CardAction, type CardsState } from './cards';
 import { hexKey, type Hex } from './hex';
 import type { PieceKind, PlayerColor } from './pieces';
 
@@ -18,9 +19,18 @@ export interface Piece {
   y: number;
 }
 
+/** Per-player info everyone can see, keyed by player name. */
+export interface Seat {
+  color?: PlayerColor;
+  /** Victory points from anything other than objectives: custodians, agendas, relics, Imperial. */
+  bonusVp: number;
+}
+
 export interface GameState {
   tiles: Record<string, Tile>;
   pieces: Record<string, Piece>;
+  cards: CardsState;
+  seats: Record<string, Seat>;
 }
 
 export type Action =
@@ -32,7 +42,18 @@ export type Action =
   | { type: 'tile/rotate'; id: string }
   | { type: 'tile/move'; from: Hex; to: Hex }
   | { type: 'map/set'; tiles: Record<string, Tile> }
-  | { type: 'game/reset'; state: GameState };
+  | { type: 'seat/color'; player: string; color: PlayerColor }
+  | { type: 'seat/bonusVp'; player: string; amount: number }
+  | { type: 'game/reset'; state: GameState }
+  | CardAction;
+
+/**
+ * Card actions depend on order (two players drawing at once must get different cards), so clients
+ * don't apply them optimistically: the server applies them first and sends them to everyone.
+ */
+export function isServerOrdered(action: Action): boolean {
+  return /^(cards?|strategy)\//.test(action.type);
+}
 
 /**
  * Pure state update shared by client (optimistic) and server (authoritative).
@@ -81,9 +102,24 @@ export function applyAction(state: GameState, action: Action): GameState {
     }
     case 'map/set':
       return { ...state, tiles: action.tiles };
+    case 'seat/color':
+      return { ...state, seats: { ...state.seats, [action.player]: { ...seat(state, action.player), color: action.color } } };
+    case 'seat/bonusVp': {
+      const current = seat(state, action.player);
+      return {
+        ...state,
+        seats: { ...state.seats, [action.player]: { ...current, bonusVp: Math.max(0, current.bonusVp + action.amount) } },
+      };
+    }
     case 'game/reset':
       return action.state;
+    default:
+      return { ...state, cards: applyCardAction(state.cards, action) };
   }
+}
+
+function seat(state: GameState, player: string): Seat {
+  return state.seats[player] ?? { bonusVp: 0 };
 }
 
 export function makeTile(hex: Hex, system: string, rotation = 0): Tile {
@@ -91,5 +127,5 @@ export function makeTile(hex: Hex, system: string, rotation = 0): Tile {
 }
 
 export function emptyState(): GameState {
-  return { tiles: {}, pieces: {} };
+  return { tiles: {}, pieces: {}, cards: emptyCards(), seats: {} };
 }
