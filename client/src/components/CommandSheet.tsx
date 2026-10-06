@@ -2,12 +2,12 @@ import {
   TECHNOLOGIES,
   TOKEN_POOLS,
   editionTechnologies,
+  reinforcements,
   seatOf,
   type Action,
   type GameState,
   type TechnologyInfo,
 } from '@ti4/shared';
-import { reinforcements } from '../players';
 import { TECH_TYPES, describeRequirements, techColor } from '../techs';
 import { CardDetails } from './cardParts';
 

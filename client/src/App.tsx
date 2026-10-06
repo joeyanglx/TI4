@@ -105,7 +105,14 @@ function Table({ room, name }: Session) {
       <Board state={state} color={color} mode={mode} dispatch={dispatch} />
       {showCards && <CardsPanel state={state} online={players} me={name} dispatch={dispatch} />}
       {showOverview && (
-        <Overview state={state} room={room} online={players} me={name} onClose={() => setShowOverview(false)} />
+        <Overview
+          state={state}
+          room={room}
+          online={players}
+          me={name}
+          dispatch={dispatch}
+          onClose={() => setShowOverview(false)}
+        />
       )}
     </div>
   );

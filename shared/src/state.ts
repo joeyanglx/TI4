@@ -2,6 +2,7 @@ import { applyCardAction, emptyCards, type CardAction, type CardsState } from '.
 import { hexKey, type Hex } from './hex';
 import type { PieceKind, PlayerColor } from './pieces';
 import { applyPlayerAction, type PlanetState, type PlayerAction, type Seat } from './players';
+import { applyTokenAction, type TokenAction } from './tokens';
 
 export interface Tile extends Hex {
   id: string;
@@ -26,6 +27,8 @@ export interface GameState {
   cards: CardsState;
   seats: Record<string, Seat>;
   planets: Record<string, PlanetState>;
+  /** Player holding the speaker token. Undefined while it's on the map (as a "speaker" piece) or unassigned. */
+  speaker?: string;
 }
 
 export type Action =
@@ -39,7 +42,8 @@ export type Action =
   | { type: 'map/set'; tiles: Record<string, Tile> }
   | { type: 'game/reset'; state: GameState }
   | CardAction
-  | PlayerAction;
+  | PlayerAction
+  | TokenAction;
 
 /**
  * Card, seat and planet actions depend on order (two players drawing at once must get different cards,
@@ -47,7 +51,7 @@ export type Action =
  * and sends them to everyone.
  */
 export function isServerOrdered(action: Action): boolean {
-  return /^(cards?|strategy|seat|planet|tech)\//.test(action.type);
+  return /^(cards?|strategy|seat|planet|tech|token|speaker)\//.test(action.type);
 }
 
 /**
@@ -107,6 +111,7 @@ export function applyAction(state: GameState, action: Action): GameState {
       return applyPlayerAction(picked, { type: 'seat/tradeGoods', player: action.player, amount: card.tradeGoods });
     }
     default:
+      if (/^(token|speaker)\//.test(action.type)) return applyTokenAction(state, action as TokenAction);
       if (/^(seat|planet|tech)\//.test(action.type)) {
         return applyPlayerAction(state, action as PlayerAction);
       }

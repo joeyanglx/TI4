@@ -960,3 +960,30 @@ button {
   align-items: center;
   gap: 4px;
 }
+
+/* Draggable tokens in the overview */
+.po-token.draggable {
+  cursor: grab;
+}
+
+.speaker-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+.speaker-badge {
+  padding: 3px 7px;
+  border-radius: 5px;
+  border: 2px solid #f2c94c;
+  background: #8b1a1a;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: grab;
+  user-select: none;
+}

@@ -29,7 +29,8 @@ export const TOKEN_KINDS = ['command', 'control'] as const;
 
 export type UnitKind = (typeof UNIT_KINDS)[number];
 export type TokenKind = (typeof TOKEN_KINDS)[number];
-export type PieceKind = UnitKind | TokenKind;
+/** The speaker token is a piece only while it's on the map; there's just one, so it's not in the palette. */
+export type PieceKind = UnitKind | TokenKind | 'speaker';
 
 /** Short label and radius used to draw placeholder pieces until real art exists. */
 export const PIECE_STYLE: Record<PieceKind, { label: string; radius: number }> = {
@@ -46,4 +47,5 @@ export const PIECE_STYLE: Record<PieceKind, { label: string; radius: number }> =
   spacedock: { label: 'SD', radius: 18 },
   command: { label: 'CT', radius: 16 },
   control: { label: '⚑', radius: 14 },
+  speaker: { label: 'SPEAKER', radius: 24 },
 };

@@ -23,5 +23,6 @@ export function withDefaults(saved: Partial<GameState>): GameState {
       : fresh.cards,
     seats: saved.seats ?? fresh.seats,
     planets: saved.planets ?? fresh.planets,
+    speaker: saved.speaker,
   };
 }

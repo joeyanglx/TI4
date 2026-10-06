@@ -16,7 +16,7 @@ import {
   type PieceKind,
   type PlayerColor,
 } from '@ti4/shared';
-import { PIECE_MIME, SYSTEM_MIME } from '../dnd';
+import { PIECE_MIME, SYSTEM_MIME, TOKEN_MIME, tokenDropTarget, type TokenDrag } from '../dnd';
 import { newId } from '../id';
 import { SystemCard } from './SystemCard';
 import { TileShape } from './TileShape';
@@ -64,6 +64,14 @@ export function Board({ state, color, mode, dispatch }: Props) {
     const pos = stage.getRelativePointerPosition();
     if (!pos) return;
 
+    const token = e.dataTransfer.getData(TOKEN_MIME);
+    if (token) {
+      const { player, from } = JSON.parse(token) as TokenDrag;
+      const tokenColor = state.seats[player]?.color ?? color;
+      const kind = from === 'speaker' ? 'speaker' : 'command';
+      dispatch({ type: 'token/place', player, from, piece: { id: newId(), kind, color: tokenColor, x: pos.x, y: pos.y } });
+      return;
+    }
     const kind = e.dataTransfer.getData(PIECE_MIME) as PieceKind;
     if (kind) {
       dispatch({ type: 'piece/add', piece: { id: newId(), kind, color, x: pos.x, y: pos.y } });
@@ -129,6 +137,9 @@ export function Board({ state, color, mode, dispatch }: Props) {
 function PieceShape({ piece, dispatch }: { piece: Piece; dispatch: (action: Action) => void }) {
   const style = PIECE_STYLE[piece.kind];
   const isToken = piece.kind === 'command' || piece.kind === 'control';
+  const isSpeaker = piece.kind === 'speaker';
+  // Command and speaker tokens can be dragged off the map onto a player's panel.
+  const returnable = piece.kind === 'command' || isSpeaker;
   return (
     <Group
       x={piece.x}
@@ -140,7 +151,9 @@ function PieceShape({ piece, dispatch }: { piece: Piece; dispatch: (action: Acti
       }}
       onDragEnd={(e) => {
         e.cancelBubble = true;
-        dispatch({ type: 'piece/move', id: piece.id, x: e.target.x(), y: e.target.y() });
+        const target = returnable && 'clientX' in e.evt ? tokenDropTarget(e.evt.clientX, e.evt.clientY) : undefined;
+        if (target) dispatch({ type: 'token/return', piece: piece.id, player: target.player, to: target.slot });
+        else dispatch({ type: 'piece/move', id: piece.id, x: e.target.x(), y: e.target.y() });
       }}
       onContextMenu={(e) => {
         e.evt.preventDefault();
@@ -149,15 +162,15 @@ function PieceShape({ piece, dispatch }: { piece: Piece; dispatch: (action: Acti
     >
       <Circle
         radius={style.radius}
-        fill={PLAYER_COLORS[piece.color]}
-        stroke={isToken ? '#fff' : '#111'}
-        strokeWidth={isToken ? 3 : 2}
+        fill={isSpeaker ? '#8b1a1a' : PLAYER_COLORS[piece.color]}
+        stroke={isSpeaker ? '#f2c94c' : isToken ? '#fff' : '#111'}
+        strokeWidth={isToken || isSpeaker ? 3 : 2}
         shadowBlur={4}
         shadowOpacity={0.5}
       />
       <Text
         text={style.label}
-        fontSize={style.radius * 0.8}
+        fontSize={style.label.length > 3 ? style.radius * 0.36 : style.radius * 0.8}
         fontStyle="bold"
         fill="#fff"
         width={style.radius * 2}

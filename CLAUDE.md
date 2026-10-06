@@ -19,7 +19,7 @@ npm workspaces, all TypeScript (ESM, strict):
 ## Conventions
 
 - **Every board change is an `Action`** handled in `applyAction` (`shared/src/state.ts`), which must stay pure. The client applies actions optimistically, the server applies the same function and relays to the other clients. Never mutate state outside it.
-- **Card, strategy, seat and planet actions are server-ordered** (`isServerOrdered`): clients don't apply them optimistically, the server echoes them to everyone including the sender, so concurrent draws and clamped counters can't diverge. Player economy and planet cards live in `shared/src/players.ts`; read seats through `seatOf` so older seats get defaults. Randomness goes in the action as a `seed` (`seededRandom`), never `Math.random` inside `applyAction`.
+- **Card, strategy, seat and planet actions are server-ordered** (`isServerOrdered`): clients don't apply them optimistically, the server echoes them to everyone including the sender, so concurrent draws and clamped counters can't diverge. Player economy and planet cards live in `shared/src/players.ts`, command/speaker token moves between panel and map in `shared/src/tokens.ts` (the speaker is either `state.speaker` or a single `speaker` piece on the map); read seats through `seatOf` so older seats get defaults. Randomness goes in the action as a `seed` (`seededRandom`), never `Math.random` inside `applyAction`.
 - Hands (`state.cards.hands`) are keyed by player name and sent to everyone; the UI just hides other players' cards. `withDefaults` (`shared/src/setup.ts`) fills in fields missing from older saved rooms — extend it when adding top-level state.
 - New features usually mean: add an `Action` variant → handle it in `applyAction` → dispatch it from the UI. The server needs no change.
 - Board coordinates are in "board pixels" (`HEX_SIZE` = 100, hex centre to corner). Tiles are keyed by `hexKey(q, r)`; pieces have free x/y.
@@ -32,4 +32,4 @@ npm workspaces, all TypeScript (ESM, strict):
 
 ## Ideas not yet built
 
-Unit stacking (e.g. "3× fighter"), faction sheets (commodity limits, abilities, leaders, tech prerequisites; a faction is only an icon plus starting techs so far), promissory notes, the speaker token, planet attachments, exploration decks and relic fragments, truly secret hands (server-side filtering), undo, auth for public hosting.
+Unit stacking (e.g. "3× fighter"), faction sheets (commodity limits, abilities, leaders, tech prerequisites; a faction is only an icon plus starting techs so far), promissory notes, planet attachments, exploration decks and relic fragments, truly secret hands (server-side filtering), undo, auth for public hosting.
