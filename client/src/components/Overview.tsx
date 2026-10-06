@@ -28,18 +28,17 @@ interface Props {
   online: string[];
   me: string;
   dispatch: (action: Action) => void;
-  onClose: () => void;
 }
 
 /**
  * Summary of every player, in the style of Twilight Wars' info panel. Command tokens and the speaker
  * token can be dragged between the panel and the map.
  */
-export function Overview({ state, room, online, me, dispatch, onClose }: Props) {
+export function Overview({ state, room, online, me, dispatch }: Props) {
   const players = knownPlayers(state, online, me);
   const speakerOnMap = Object.values(state.pieces).some((p) => p.kind === 'speaker');
   return (
-    <aside className="overview">
+    <div className="overview">
       <header className="overview-header">
         <div>
           <strong>Room {room}</strong>
@@ -55,9 +54,6 @@ export function Overview({ state, room, online, me, dispatch, onClose }: Props) 
             </>
           )}
         </div>
-        <button onClick={onClose} title="Close">
-          ×
-        </button>
       </header>
       {players.map((p) => (
         <PlayerOverview key={p} state={state} player={p} online={online.includes(p)} dispatch={dispatch} />
@@ -66,7 +62,7 @@ export function Overview({ state, room, online, me, dispatch, onClose }: Props) 
         Drag command tokens between pools or onto the map, and drag tokens on the map back onto a pool. Drag the
         speaker token to another player or onto the map.
       </p>
-    </aside>
+    </div>
   );
 }
 

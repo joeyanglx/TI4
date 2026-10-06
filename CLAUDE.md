@@ -14,7 +14,7 @@ npm workspaces, all TypeScript (ESM, strict):
 
 - `shared/` — imported as `@ti4/shared` straight from source (no build step). Hex math (axial, flat-top), piece kinds, `GameState`, `Action`, `applyAction`, websocket protocol, map-string parsing, system data.
 - `server/` — plain Node `http` + `ws`. One `Room` per room id, in memory, debounced save to `server/data/<room>.json` (gitignored).
-- `client/` — React 19 + react-konva. `useGame` owns the socket and local state; `Board` renders tiles/pieces; `Sidebar` holds the piece and system palettes.
+- `client/` — React 19 + react-konva. `useGame` owns the socket and local state; `Board` renders tiles/pieces; `Sidebar` holds the piece and system palettes; `RightPanel` holds the player board (`CardsPanel`, with Game/You views) and the `Overview`.
 
 ## Conventions
 

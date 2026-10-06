@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { PlayerColor } from '@ti4/shared';
 import { Board, type BoardMode } from './components/Board';
-import { CardsPanel } from './components/CardsPanel';
 import { FactionIcon } from './components/cardParts';
 import { Lobby } from './components/Lobby';
-import { Overview } from './components/Overview';
+import { RightPanel } from './components/RightPanel';
 import { Sidebar } from './components/Sidebar';
 import { useGame } from './useGame';
 
@@ -42,8 +41,6 @@ function Table({ room, name }: Session) {
     () => (safeGet('ti4.color') as PlayerColor | null) ?? 'red',
   );
   const [mode, setMode] = useState<BoardMode>('play');
-  const [showCards, setShowCards] = useState(() => safeGet('ti4.showCards') !== 'false');
-  const [showOverview, setShowOverview] = useState(false);
 
   // Share your colour so score markers and strategy card holders show it to everyone.
   const seatColor = state.seats[name]?.color;
@@ -52,7 +49,7 @@ function Table({ room, name }: Session) {
   }, [status, seatColor, color, name, dispatch]);
 
   return (
-    <div className={`table ${showCards ? 'with-cards' : ''}`}>
+    <div className="table">
       <header className="topbar">
         <strong>TI4 Table</strong>
         <span>Room: {room}</span>
@@ -76,22 +73,6 @@ function Table({ room, name }: Session) {
             );
           })}
         </span>
-        <button
-          className={`toggle ${showCards ? 'selected' : ''}`}
-          onClick={() => {
-            safeSet('ti4.showCards', String(!showCards));
-            setShowCards(!showCards);
-          }}
-        >
-          Cards
-        </button>
-        <button
-          className={`toggle info ${showOverview ? 'selected' : ''}`}
-          title="Player overview"
-          onClick={() => setShowOverview(!showOverview)}
-        >
-          i
-        </button>
       </header>
       <Sidebar
         color={color}
@@ -103,17 +84,7 @@ function Table({ room, name }: Session) {
         dispatch={dispatch}
       />
       <Board state={state} color={color} mode={mode} dispatch={dispatch} />
-      {showCards && <CardsPanel state={state} online={players} me={name} dispatch={dispatch} />}
-      {showOverview && (
-        <Overview
-          state={state}
-          room={room}
-          online={players}
-          me={name}
-          dispatch={dispatch}
-          onClose={() => setShowOverview(false)}
-        />
-      )}
+      <RightPanel state={state} room={room} online={players} me={name} dispatch={dispatch} />
     </div>
   );
 }

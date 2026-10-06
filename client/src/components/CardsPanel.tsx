@@ -43,7 +43,7 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
   const [tab, setTab] = useState<'game' | 'you'>('game');
 
   return (
-    <aside className="cards-panel">
+    <div className="cards-panel">
       <div className="tabs panel-tabs">
         <button className={tab === 'game' ? 'selected' : ''} onClick={() => setTab('game')}>
           Game
@@ -288,7 +288,7 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
           <CardSetup key={cards.edition} edition={cards.edition} dispatch={dispatch} />
         </>
       )}
-    </aside>
+    </div>
   );
 }
 
