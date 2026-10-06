@@ -1,13 +1,14 @@
+import { useState } from 'react';
 import {
   TECHNOLOGIES,
-  editionTechnologies,
   seatOf,
   type Action,
   type GameState,
   type TechnologyInfo,
 } from '@ti4/shared';
-import { TECH_TYPES, describeRequirements, techColor } from '../techs';
+import { describeRequirements, techColor } from '../techs';
 import { CardDetails } from './cardParts';
+import { TechBrowser } from './TechBrowser';
 import { SpeakerBadge, TokenPools, acceptTokens, readTokenDrag } from './TokenPools';
 
 interface Props {
@@ -70,9 +71,7 @@ export function TokenSection({ state, me, players, dispatch }: TokenProps) {
 
 export function TechSection({ state, me, dispatch }: Props) {
   const seat = seatOf(state.seats, me);
-  const available = editionTechnologies(state.cards.edition).filter((id) => !seat.technologies.includes(id));
-  const generic = (type: string) => available.filter((id) => !TECHNOLOGIES[id].faction && TECHNOLOGIES[id].type === type);
-  const factions = [...new Set(available.map((id) => TECHNOLOGIES[id].faction).filter((f): f is string => !!f))].sort();
+  const [browsing, setBrowsing] = useState(false);
 
   return (
     <section>
@@ -100,34 +99,10 @@ export function TechSection({ state, me, dispatch }: Props) {
         );
       })}
       <div className="row">
-        <select
-          value=""
-          onChange={(e) => e.target.value && dispatch({ type: 'tech/research', player: me, tech: e.target.value })}
-        >
-          <option value="">Research a technology…</option>
-          {TECH_TYPES.map(({ type, label }) => (
-            <optgroup key={type} label={label}>
-              {generic(type).map((id) => (
-                <option key={id} value={id}>
-                  {optionLabel(TECHNOLOGIES[id])}
-                </option>
-              ))}
-            </optgroup>
-          ))}
-          {factions.map((faction) => (
-            <optgroup key={faction} label={faction}>
-              {available
-                .filter((id) => TECHNOLOGIES[id].faction === faction)
-                .map((id) => (
-                  <option key={id} value={id}>
-                    {optionLabel(TECHNOLOGIES[id])}
-                  </option>
-                ))}
-            </optgroup>
-          ))}
-        </select>
+        <button onClick={() => setBrowsing(true)}>Research a technology…</button>
       </div>
-      <p className="hint">Prerequisites aren't checked. Ready all on your planets also readies technologies.</p>
+      {browsing && <TechBrowser state={state} me={me} dispatch={dispatch} onClose={() => setBrowsing(false)} />}
+      <p className="hint">Ready all on your planets also readies technologies.</p>
     </section>
   );
 }
@@ -136,8 +111,4 @@ function subtitle(info: TechnologyInfo) {
   return [info.faction, info.requirements && `needs ${describeRequirements(info.requirements)}`]
     .filter(Boolean)
     .join(' · ');
-}
-
-function optionLabel(info: TechnologyInfo) {
-  return info.requirements ? `${info.name} (${describeRequirements(info.requirements)})` : info.name;
 }

@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
 import {
+  MAP_PRESETS,
   SYSTEMS,
   defaultBoard,
+  presetTiles,
   parseMapString,
   toMapString,
   type Action,
@@ -42,6 +44,17 @@ export function SystemPalette({ tiles, dispatch }: Props) {
 
   return (
     <>
+      <div className="presets">
+        {MAP_PRESETS.map((preset) => (
+          <button
+            key={preset.name}
+            title={preset.description}
+            onClick={() => dispatch({ type: 'map/set', tiles: presetTiles(preset) })}
+          >
+            Load {preset.name.toLowerCase()}
+          </button>
+        ))}
+      </div>
       <input
         className="search"
         placeholder="Search number, planet, faction…"

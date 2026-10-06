@@ -988,3 +988,173 @@ button {
 .triangle.over b {
   color: #ff8a8a;
 }
+
+/* Technology browser (modal) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 8, 18, 0.7);
+}
+
+.tech-browser {
+  width: min(1200px, 95vw);
+  height: min(880px, 90vh);
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+}
+
+.tech-browser-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tech-browser-header h2 {
+  font-size: 16px;
+}
+
+.tech-browser-header .hint {
+  margin: 4px 0 0;
+}
+
+.tech-browser-header .close {
+  border: 0;
+  background: none;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.tech-browser-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px 18px;
+}
+
+.tech-columns {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+}
+
+.tech-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tech-column h3,
+.faction-techs-title {
+  margin: 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.faction-techs-title {
+  margin: 18px 0 8px;
+  color: var(--muted);
+}
+
+.tech-faction-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--muted);
+  border-radius: 6px;
+}
+
+.tech-card.locked {
+  opacity: 0.6;
+}
+
+.tech-card.available {
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.tech-card.researched {
+  opacity: 0.75;
+}
+
+.tech-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.requirements {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+  padding-top: 3px;
+}
+
+.req-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.tech-card-text {
+  margin: 0;
+  white-space: pre-line;
+  line-height: 1.35;
+  color: #c4cadb;
+  font-size: 12px;
+}
+
+.tech-card-foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tech-card-foot button {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.presets {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.presets button {
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}

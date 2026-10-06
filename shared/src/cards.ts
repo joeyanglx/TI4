@@ -59,6 +59,8 @@ export interface TechnologyInfo {
   requirements: string;
   /** Faction name, for faction technologies. */
   faction?: string;
+  /** Faction alias (see FACTIONS), for faction technologies. */
+  factionId?: string;
   text: string;
 }
 
@@ -97,6 +99,13 @@ const EDITION_DECKS = cardsJson.editions as Record<
   Edition,
   Record<DeckId | 'strategy' | 'technology' | 'faction', string[]>
 >;
+
+/** Technologies only the given faction can research. The Firmament flips into the Obsidian, so it gets both. */
+export function factionTechnologies(edition: Edition, faction: string | undefined): string[] {
+  if (!faction) return [];
+  const factions = faction === 'firmament' ? ['firmament', 'obsidian'] : [faction];
+  return editionTechnologies(edition).filter((id) => factions.includes(TECHNOLOGIES[id].factionId ?? ''));
+}
 
 /** Factions playable in an edition. */
 export function editionFactions(edition: Edition): string[] {

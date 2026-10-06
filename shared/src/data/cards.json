@@ -2488,6 +2488,7 @@
    "type": "unit",
    "requirements": "GG",
    "faction": "The Arborec",
+   "factionId": "arborec",
    "text": "Cost 1(x2), Combat 7\nPRODUCTION 2\nAfter this unit is destroyed, roll 1 die. If the result is 6 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
   },
   "tech_l4": {
@@ -2496,6 +2497,7 @@
    "type": "cybernetic",
    "requirements": "Y",
    "faction": "The Barony of Letnev",
+   "factionId": "letnev",
    "text": "During an invasion, units cannot use SPACE CANNON against your units."
   },
   "tech_cm": {
@@ -2504,6 +2506,7 @@
    "type": "propulsion",
    "requirements": "B",
    "faction": "The Clan of Saar",
+   "factionId": "saar",
    "text": "Other players cannot activate asteroid fields that contain 1 or more of your ships.\nAt the start of your turn during the action phase, you may produce 1 unit in a system that contains at least 1 of your units that has PRODUCTION."
   },
   "tech_pws2": {
@@ -2512,6 +2515,7 @@
    "type": "unit",
    "requirements": "RRRY",
    "faction": "The Embers of Muaat",
+   "factionId": "muaat",
    "text": "Cost 10, Combat 3(x3), Move 3, Capacity 6\nSUSTAIN DAMAGE, BOMBARDMENT 3(x3)\nOther players' units in this system lose PLANETARY SHIELD."
   },
   "tech_qdn": {
@@ -2520,6 +2524,7 @@
    "type": "cybernetic",
    "requirements": "YYY",
    "faction": "The Emirates of Hacan",
+   "factionId": "hacan",
    "text": "At the end of the strategy phase, you may spend 1 token from your strategy pool and give another player 3 of your trade goods. If you do, give 1 of your strategy cards to that player and take 1 of their strategy cards."
   },
   "tech_ac2": {
@@ -2528,6 +2533,7 @@
    "type": "unit",
    "requirements": "BB",
    "faction": "The Federation of Sol",
+   "factionId": "sol",
    "text": "Cost 3, Combat 9, Move 2, Capacity 8\nSUSTAIN DAMAGE"
   },
   "tech_sdn2": {
@@ -2536,6 +2542,7 @@
    "type": "unit",
    "requirements": "BBY",
    "faction": "The L1Z1X Mindnet",
+   "factionId": "l1z1x",
    "text": "Cost 4, Combat 4, Move 2, Capacity 2\nSUSTAIN DAMAGE, BOMBARDMENT 4\nThis unit cannot be destroyed by \"Direct Hit\" action cards."
   },
   "tech_mc": {
@@ -2544,6 +2551,7 @@
    "type": "cybernetic",
    "requirements": "YYY",
    "faction": "The Mentak Coalition",
+   "factionId": "mentak",
    "text": "When you spend trade goods, each trade good is worth 2 resources or influence instead of 1."
   },
   "tech_hcf2": {
@@ -2552,6 +2560,7 @@
    "type": "unit",
    "requirements": "GB",
    "faction": "The Naalu Collective",
+   "factionId": "naalu",
    "text": "Cost 1(x2), Combat 7, Move 2\nThis unit may move without being transported.\nFighters in excess of your ships' capacity count as 1/2 of a ship against your fleet pool."
   },
   "tech_vax": {
@@ -2560,6 +2569,7 @@
    "type": "none",
    "requirements": "",
    "faction": "The Nekro Virus",
+   "factionId": "nekro",
    "text": "When you would gain another player's technology using 1 of your faction abilities, you may place the \"X\" assimilator token on a faction technology owned by that player instead.\nWhile that token is on a technology, this card gains that technology's text.\nYou cannot place an assimilator token on technology that already has an assimilator token."
   },
   "tech_exo2": {
@@ -2568,6 +2578,7 @@
    "type": "unit",
    "requirements": "BBY",
    "faction": "Sardakk Norr",
+   "factionId": "sardakk",
    "text": "Cost 4, Combat 5, Move 2, Capacity 1\nSUSTAIN DAMAGE, BOMBARDMENT 4(x2)\nThis unit cannot be destroyed by \"Direct Hit\" action cards.\nAfter a round of space combat, you may destroy this unit to destroy up to 2 ships in this system."
   },
   "tech_cr2": {
@@ -2583,6 +2594,7 @@
    "type": "propulsion",
    "requirements": "BB",
    "faction": "The Universities of Jol-Nar",
+   "factionId": "jolnar",
    "text": "You may exhaust this card after you activate a system that contains 1 or more of your units; that system is adjacent to all other systems that contain 1 or more of your units during this activation."
   },
   "tech_lgf": {
@@ -2591,6 +2603,7 @@
    "type": "propulsion",
    "requirements": "BB",
    "faction": "The Winnu",
+   "factionId": "winnu",
    "text": "During your tactical actions, if you do not control Mecatol Rex, treat its system as if it has both an α and β wormhole.\nACTION: If you control Mecatol Rex, exhaust this card to place 1 infantry from your reinforcements on Mecatol Rex."
   },
   "tech_it": {
@@ -2599,6 +2612,7 @@
    "type": "biotic",
    "requirements": "G",
    "faction": "The Xxcha Kingdom",
+   "factionId": "xxcha",
    "text": "You may exhaust this card and spend 1 token from your strategy pool when another player plays an action card; cancel that action card."
   },
   "tech_mi": {
@@ -2607,6 +2621,7 @@
    "type": "biotic",
    "requirements": "GGG",
    "faction": "The Yssaril Tribes",
+   "factionId": "yssaril",
    "text": "ACTION: Exhaust this card to look at another player's hand of action cards.  Choose 1 of those cards and add it to your hand."
   },
   "tech_bio": {
@@ -2615,6 +2630,7 @@
    "type": "biotic",
    "requirements": "GG",
    "faction": "The Arborec",
+   "factionId": "arborec",
    "text": "At the end of the status phase, you may remove any number of infantry from planets you control and place them on 1 or more planets you control in the same or adjacent systems."
   },
   "tech_nes": {
@@ -2623,6 +2639,7 @@
    "type": "warfare",
    "requirements": "RR",
    "faction": "The Barony of Letnev",
+   "factionId": "letnev",
    "text": "When 1 of your units uses SUSTAIN DAMAGE, cancel 2 hits instead of 1."
   },
   "tech_ffac2": {
@@ -2631,6 +2648,7 @@
    "type": "unit",
    "requirements": "YY",
    "faction": "The Clan of Saar",
+   "factionId": "saar",
    "text": "Move 2, Capacity 5\nPRODUCTION 7.\nThis unit is placed in the space area instead of on a planet.\nThis unit can move and retreat as if it were a ship.\nIf this unit is blockaded, it is destroyed."
   },
   "tech_mr": {
@@ -2639,6 +2657,7 @@
    "type": "warfare",
    "requirements": "RR",
    "faction": "The Embers of Muaat",
+   "factionId": "muaat",
    "text": "Your ships can move into supernovas.\nEach supernova that contains 1 or more of your units gains the PRODUCTION 5 ability as if it were 1 of your units."
   },
   "tech_pm": {
@@ -2647,6 +2666,7 @@
    "type": "biotic",
    "requirements": "GG",
    "faction": "The Emirates of Hacan",
+   "factionId": "hacan",
    "text": "ACTION: Exhaust this card and spend 1 token from your strategy pool to gain 4 trade goods and choose 1 other player; that player gains 2 trade goods."
   },
   "tech_so2": {
@@ -2655,6 +2675,7 @@
    "type": "unit",
    "requirements": "GG",
    "faction": "The Federation of Sol",
+   "factionId": "sol",
    "text": "Cost 1(x2), Combat 6\nAfter this unit is destroyed, roll 1 die. If the result is 5 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
   },
   "tech_wg": {
@@ -2663,6 +2684,7 @@
    "type": "propulsion",
    "requirements": "BB",
    "faction": "The Ghosts of Creuss",
+   "factionId": "ghost",
    "text": "ACTION: Exhaust this card to place or move a Creuss wormhole token into either a system that contains a planet you control or a non-home system that does not contain another player's ships."
   },
   "tech_ds": {
@@ -2671,6 +2693,7 @@
    "type": "warfare",
    "requirements": "R",
    "faction": "The Ghosts of Creuss",
+   "factionId": "ghost",
    "text": "At the start of space combat in a system that contains a wormhole and 1 or more of your ships, you may produce 1 hit and assign it to 1 of your opponent's ships."
   },
   "tech_is": {
@@ -2679,6 +2702,7 @@
    "type": "cybernetic",
    "requirements": "YY",
    "faction": "The L1Z1X Mindnet",
+   "factionId": "l1z1x",
    "text": "You may exhaust this card and spend 2 resources when you research a technology; ignore all of that technology's prerequisites."
   },
   "tech_so": {
@@ -2687,6 +2711,7 @@
    "type": "cybernetic",
    "requirements": "YY",
    "faction": "The Mentak Coalition",
+   "factionId": "mentak",
    "text": "After you win or lose a space combat, gain 1 trade good; if you won the combat, you may also produce 1 ship in that system of any ship type that was destroyed during the combat."
   },
   "tech_ng": {
@@ -2695,6 +2720,7 @@
    "type": "biotic",
    "requirements": "GGG",
    "faction": "The Naalu Collective",
+   "factionId": "naalu",
    "text": "After another player activates a system that contains 1 or more of your ships, that player removes 1 token from their fleet pool and returns it to their reinforcements."
   },
   "tech_vay": {
@@ -2703,6 +2729,7 @@
    "type": "none",
    "requirements": "",
    "faction": "The Nekro Virus",
+   "factionId": "nekro",
    "text": "When you would gain another player's technology using 1 of your faction abilities, you may place the \"Y\" assimilator token on a faction technology owned by that player instead.\nWhile that token is on a technology, this card gains that technology's text.\nYou cannot place an assimilator token on technology that already has an assimilator token."
   },
   "tech_vpw": {
@@ -2711,6 +2738,7 @@
    "type": "warfare",
    "requirements": "RR",
    "faction": "Sardakk Norr",
+   "factionId": "sardakk",
    "text": "After making combat rolls during a round of ground combat, if your opponent produced 1 or more hits, you produce 1 additional hit."
   },
   "tech_ers": {
@@ -2719,6 +2747,7 @@
    "type": "cybernetic",
    "requirements": "YY",
    "faction": "The Universities of Jol-Nar",
+   "factionId": "jolnar",
    "text": "After another player activates a system that contains 1 or more of your ships, gain 4 trade goods."
   },
   "tech_dn2": {
@@ -2769,6 +2798,7 @@
    "type": "cybernetic",
    "requirements": "YY",
    "faction": "The Winnu",
+   "factionId": "winnu",
    "text": "Exhaust this card when 1 or more of your units use PRODUCTION; swap the resource and influence values of 1 planet you control during that use of Production."
   },
   "tech_nf": {
@@ -2777,6 +2807,7 @@
    "type": "cybernetic",
    "requirements": "YY",
    "faction": "The Xxcha Kingdom",
+   "factionId": "xxcha",
    "text": "After another player activates a system that contains 1 or more of your ships, you may exhaust this card and spend 1 token from your strategy pool; immediately end that player's turn."
   },
   "tech_yso": {
@@ -2785,6 +2816,7 @@
    "type": "biotic",
    "requirements": "GG",
    "faction": "The Yin Brotherhood",
+   "factionId": "yin",
    "text": "After you produce units, place up to 2 infantry from your reinforcements on any planet you control or in any space area that contains 1 or more of your ships."
   },
   "tech_ic": {
@@ -2793,6 +2825,7 @@
    "type": "cybernetic",
    "requirements": "YY",
    "faction": "The Yin Brotherhood",
+   "factionId": "yin",
    "text": "At the start of a space combat, you may destroy 1 of your cruisers or destroyers in the active system to produce 1 hit against your opponent's ships; that hit must be assigned by your opponent to 1 of their non-fighters ships if able."
   },
   "tech_tp": {
@@ -2801,6 +2834,7 @@
    "type": "biotic",
    "requirements": "G",
    "faction": "The Yssaril Tribes",
+   "factionId": "yssaril",
    "text": "During your turn of the action phase, players that have passed cannot play action cards."
   },
   "tech_x89": {
@@ -2879,6 +2913,7 @@
    "type": "unit",
    "requirements": "RR",
    "faction": "The Argent Flight",
+   "factionId": "argent",
    "text": "Cost 1, Combat 7, Move 2, Capacity 1\nANTI-FIGHTER BARRAGE 6(x3)\nWhen this unit uses ANTI-FIGHTER BARRAGE, each result of 9 or 10 also destroys 1 of your opponents infantry in the space area of the active system."
   },
   "tech_as": {
@@ -2887,6 +2922,7 @@
    "type": "propulsion",
    "requirements": "BB",
    "faction": "The Empyrean",
+   "factionId": "empyrean",
    "text": "After you or one of your neighbors activates a system that is adjacent to an anomaly, you may apply +1 to the move value of all of that player's ships during this tactical action."
   },
   "tech_cl2": {
@@ -2895,6 +2931,7 @@
    "type": "unit",
    "requirements": "GG",
    "faction": "The Mahact Gene-Sorcerers",
+   "factionId": "mahact",
    "text": "Cost 1(x2), Combat 7\nAfter this unit is destroyed, gain 1 commodity or convert 1 of your commodities to a trade good. Then, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
   },
   "tech_pfa": {
@@ -2903,6 +2940,7 @@
    "type": "biotic",
    "requirements": "GGG",
    "faction": "The Naaz-Rokha Alliance",
+   "factionId": "naaz",
    "text": "After you explore a planet, ready that planet."
   },
   "tech_m2": {
@@ -2911,6 +2949,7 @@
    "type": "unit",
    "requirements": "GBY",
    "faction": "The Nomad",
+   "factionId": "nomad",
    "text": "Cost 8, Combat 5(x2), Move 2, Capacity 6\nSUSTAIN DAMAGE, ANTI-FIGHTER BARRAGE 5(x3)\nYou may treat this unit as if it were adjacent to systems that contain one or more of your mechs."
   },
   "tech_se2": {
@@ -2919,6 +2958,7 @@
    "type": "unit",
    "requirements": "GYR",
    "faction": "The Titans of Ul",
+   "factionId": "titans",
    "text": "Cost 2, Combat 6, Move 3, Capacity 2\nSUSTAIN DAMAGE"
   },
   "tech_dt2": {
@@ -2927,6 +2967,7 @@
    "type": "unit",
    "requirements": "YY",
    "faction": "The Vuil'raith Cabal",
+   "factionId": "cabal",
    "text": "PRODUCTION 7\nThis system is a gravity rift; your ships do not roll for this gravity rift. Place a dimensional tear token beneath this unit as a reminder.\nUp to 12 fighters in this system do not count against your ships' capacity."
   },
   "tech_ah": {
@@ -2935,6 +2976,7 @@
    "type": "cybernetic",
    "requirements": "Y",
    "faction": "The Argent Flight",
+   "factionId": "argent",
    "text": "Other players cannot move ships through systems that contain your structures.\nEach planet that contains 1 or more of your structures gains the PRODUCTION 1 ability as if it were a unit."
   },
   "tech_vw": {
@@ -2943,6 +2985,7 @@
    "type": "biotic",
    "requirements": "G",
    "faction": "The Empyrean",
+   "factionId": "empyrean",
    "text": "After a player moves ships into a system that contains 1 or more of your units, they must give you 1 promissory note from their hand, if able."
   },
   "tech_gr": {
@@ -2951,6 +2994,7 @@
    "type": "biotic",
    "requirements": "G",
    "faction": "The Mahact Gene-Sorcerers",
+   "factionId": "mahact",
    "text": "You may exhaust this card before a player casts votes; that player must cast at least 1 vote for an outcome of your choice or remove 1 token from their fleet pool and return it to their reinforcements."
   },
   "tech_sc": {
@@ -2959,6 +3003,7 @@
    "type": "warfare",
    "requirements": "R",
    "faction": "The Naaz-Rokha Alliance",
+   "factionId": "naaz",
    "text": "At the start of a combat round, you may exhaust this card to apply +1 to the result of each of your unit's combat rolls during this combat round."
   },
   "tech_tcs": {
@@ -2967,6 +3012,7 @@
    "type": "cybernetic",
    "requirements": "Y",
    "faction": "The Nomad",
+   "factionId": "nomad",
    "text": "After any player's agent becomes exhausted, you may exhaust this card to ready that agent; if you ready another player's agent, you may perform a transaction with that player."
   },
   "tech_ht2": {
@@ -2975,6 +3021,7 @@
    "type": "unit",
    "requirements": "YR",
    "faction": "The Titans of Ul",
+   "factionId": "titans",
    "text": "Combat 6\nPLANETARY SHIELD, SPACE CANNON 5, SUSTAIN DAMAGE, PRODUCTION 1\nThis unit is treated as both a structure and a ground force. It cannot be transported.\nYou may use this unit's SPACE CANNON against ships that are adjacent to this unit's systems."
   },
   "tech_vtx": {
@@ -2983,6 +3030,7 @@
    "type": "warfare",
    "requirements": "R",
    "faction": "The Vuil'raith Cabal",
+   "factionId": "cabal",
    "text": "ACTION: Exhaust this card to choose another player's non-structure unit in a system that is adjacent to 1 or more of your space docks. Capture 1 unit of that type from that player's reinforcements."
   },
   "tech_iihq": {
@@ -2991,6 +3039,7 @@
    "type": "cybernetic",
    "requirements": "Y",
    "faction": "The Council Keleres",
+   "factionId": "keleres",
    "text": "You are neighbors with all players that have units or control planets in or adjacent to the Mecatol Rex system.\nGain the Custodia Vigilia planet card and its legendary planet ability card. You cannot lose these cards, and this card cannot have an X or Y assimilator token placed on it."
   },
   "tech_asn": {
@@ -2999,6 +3048,7 @@
    "type": "cybernetic",
    "requirements": "YY",
    "faction": "The Council Keleres",
+   "factionId": "keleres",
    "text": "Once per action, when you resolve a unit's PRODUCTION ability, you may resolve another of your unit's PRODUCTION abilities in any system."
   },
   "tech_executiveorder": {
@@ -3007,6 +3057,7 @@
    "type": "cybernetic",
    "requirements": "Y",
    "faction": "The Council Keleres",
+   "factionId": "keleres",
    "text": "ACTION: Exhaust this card and draw the top or bottom card of the Agenda deck. Players immediately vote on this agenda as if you were the speaker; you can spend trade goods and resources on this agenda as if they were votes."
   },
   "tech_proxima": {
@@ -3015,6 +3066,7 @@
    "type": "warfare",
    "requirements": "R",
    "faction": "Last Bastion",
+   "factionId": "bastion",
    "text": "Cancel 1 hit produced by BOMBARDMENT rolls made against your ground forces for each of your galvanized units present. \nAt the start of a round of ground combat, you may resolve BOMBARDMENT 8 (x3) against your opponent's ground forces; if you do, make an identical roll against your ground forces."
   },
   "tech_helios2": {
@@ -3023,6 +3075,7 @@
    "type": "unit",
    "requirements": "YY",
    "faction": "Last Bastion",
+   "factionId": "bastion",
    "text": "This unit's PRODUCTION value is equal to 4 more than the resource value of this planet.\nThe resource value of this planet is increased by 2. \nUp to 3 fighters in this system do not count against your ships' capacity."
   },
   "tech_hydrothermal": {
@@ -3031,6 +3084,7 @@
    "type": "biotic",
    "requirements": "G",
    "faction": "The Deepwrought Scholarate",
+   "factionId": "deepwrought",
    "text": "At the start of the status phase, gain 1 trade good for each ocean card in play."
   },
   "tech_radical": {
@@ -3039,6 +3093,7 @@
    "type": "biotic",
    "requirements": "G",
    "faction": "The Deepwrought Scholarate",
+   "factionId": "deepwrought",
    "text": "At the start of the status phase, you may replace one of your non-unit upgrade technologies with a technology of the same color that has exactly 1 more prerequisite."
   },
   "tech_subatomic": {
@@ -3047,6 +3102,7 @@
    "type": "cybernetic",
    "requirements": "Y",
    "faction": "The Crimson Rebellion",
+   "factionId": "crimson",
    "text": "When one of your ships is destroyed, you may produce a ship of the same type at a space dock in your home system."
   },
   "tech_exile2": {
@@ -3055,6 +3111,7 @@
    "type": "unit",
    "requirements": "RR",
    "faction": "The Crimson Rebellion",
+   "factionId": "crimson",
    "text": "Cost 1, Combat 7, Move 2, ANTI-FIGHTER BARRAGE 6 (x3). At the end of any players' combat in this unit's system or up to 2 systems away, you may place 1 active or inactive breach in that system."
   },
   "tech_nanomachines": {
@@ -3063,6 +3120,7 @@
    "type": "warfare",
    "requirements": "R",
    "faction": "The Ral Nel Consortium",
+   "factionId": "ralnel",
    "text": "ACTION: Exhaust this card to place 1 PDS on a planet you control.\nACTION: Exhaust this card to repair all of your damaged units.\nACTION: Exhaust this card and discard 1 action card to draw 1 action card."
   },
   "tech_linkship2": {
@@ -3071,6 +3129,7 @@
    "type": "unit",
    "requirements": "RR",
    "faction": "The Ral Nel Consortium",
+   "factionId": "ralnel",
    "text": "Cost 1, Combat 8, Move 4, ANTI-FIGHTER BARRAGE 6 (x3). This unit can use the SPACE CANNON ability of one of your structures in its space area; each linkship can trigger the same structure."
   },
   "tech_planesplitter-firm": {
@@ -3079,6 +3138,7 @@
    "type": "cybernetic",
    "requirements": "YY",
    "faction": "The Firmament",
+   "factionId": "firmament",
    "text": "When you gain this card, put The Fracture into play.\nFlip this card if the Obsidian faction is in play."
   },
   "tech_parasite-firm": {
@@ -3087,6 +3147,7 @@
    "type": "biotic",
    "requirements": "GG",
    "faction": "The Firmament",
+   "factionId": "firmament",
    "text": "At the start of the status phase, you may place 1 infantry from your reinforcements on a planet you control in your home system.\nFlip this card if the Obsidian faction is in play."
   },
   "tech_planesplitter-obs": {
@@ -3095,6 +3156,7 @@
    "type": "cybernetic",
    "requirements": "null",
    "faction": "The Obsidian",
+   "factionId": "obsidian",
    "text": "When you perform a strategic action, you may move an ingress token into a system that contains or is adjacent to your units.\nThis technology cannot be researched."
   },
   "tech_parasite-obs": {
@@ -3103,6 +3165,7 @@
    "type": "biotic",
    "requirements": "null",
    "faction": "The Obsidian",
+   "factionId": "obsidian",
    "text": "At the start of your turn, destroy 1 of another player's infantry in or adjacent to a system that contains your infantry.\nThis technology cannot be researched."
   }
  },

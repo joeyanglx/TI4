@@ -128,6 +128,7 @@ for (const id of new Set([...decks.techs_base, ...decks.techs_pok, ...teTechs.ma
     /** One letter per prerequisite: G biotic, Y cybernetic, B propulsion, R warfare. */
     requirements: t.requirements ?? '',
     faction: t.faction ? factionNames[t.faction] : undefined,
+    factionId: t.faction,
     text: t.text,
   };
 }

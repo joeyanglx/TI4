@@ -1,6 +1,7 @@
 export * from './cards';
 export * from './hex';
 export * from './pieces';
+export * from './presets';
 export * from './players';
 export * from './state';
 export * from './protocol';
