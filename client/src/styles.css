@@ -1536,3 +1536,108 @@ button {
   font-size: 14px;
   cursor: pointer;
 }
+
+/* History tab */
+.history-panel section {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.history-panel h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.history-panel button {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.history-panel button.danger {
+  background: #7a2c2c;
+  border-color: #7a2c2c;
+}
+
+.history-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(42, 51, 80, 0.6);
+}
+
+.history-entry.rewind .history-text {
+  color: #f2c94c;
+}
+
+.history-seq {
+  min-width: 34px;
+  color: var(--muted);
+  font-size: 11px;
+  padding-top: 2px;
+}
+
+.history-text {
+  flex: 1;
+  line-height: 1.35;
+}
+
+.history-time {
+  font-size: 11px;
+}
+
+/* Faint until hovered, but still visible (and tappable) on touch screens. */
+.history-entry > button {
+  opacity: 0.35;
+}
+
+.history-entry:hover > button {
+  opacity: 1;
+}
+
+.history-confirm {
+  display: flex;
+  gap: 4px;
+}
+
+.history-warning {
+  margin: 4px 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(122, 44, 44, 0.35);
+  border: 1px solid #7a2c2c;
+}
+
+.history-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-panel .history-group-toggle {
+  align-self: stretch;
+  text-align: left;
+  border: 0;
+  background: none;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.history-group .history-entry {
+  padding-left: 12px;
+}
+
+.history-panel .history-start {
+  align-self: flex-start;
+  margin-top: 8px;
+}

@@ -38,7 +38,7 @@ export function App() {
 }
 
 function Table({ room, name }: Session) {
-  const { state, players, status, dispatch } = useGame(room, name);
+  const { state, players, status, history, dispatch, rewind } = useGame(room, name);
   const [color, setColor] = useState<PlayerColor>(
     () => (safeGet('ti4.color') as PlayerColor | null) ?? 'red',
   );
@@ -88,7 +88,15 @@ function Table({ room, name }: Session) {
         dispatch={dispatch}
       />
       <Board state={state} color={color} mode={mode} dispatch={dispatch} />
-      <RightPanel state={state} room={room} online={players} me={name} dispatch={dispatch} />
+      <RightPanel
+        state={state}
+        room={room}
+        online={players}
+        me={name}
+        history={history}
+        dispatch={dispatch}
+        onRewind={rewind}
+      />
       <RollToast state={state} me={name} online={status === 'online'} />
     </div>
   );

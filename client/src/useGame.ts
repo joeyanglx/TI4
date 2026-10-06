@@ -7,6 +7,7 @@ import {
   type Action,
   type ClientMessage,
   type GameState,
+  type HistoryEntry,
   type ServerMessage,
 } from '@ti4/shared';
 
@@ -18,6 +19,7 @@ export type ConnectionStatus = 'connecting' | 'online' | 'offline';
 export function useGame(room: string, name: string) {
   const [state, setState] = useState<GameState>(emptyState);
   const [players, setPlayers] = useState<string[]>([]);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [status, setStatus] = useState<ConnectionStatus>('connecting');
   const socketRef = useRef<WebSocket | null>(null);
 
@@ -40,6 +42,10 @@ export function useGame(room: string, name: string) {
             setStatus('online');
             setState(message.state);
             setPlayers(message.players);
+            setHistory(message.history);
+            break;
+          case 'history':
+            setHistory((h) => [...h, message.entry]);
             break;
           case 'action':
             setState((s) => applyAction(s, message.action));
@@ -70,7 +76,13 @@ export function useGame(room: string, name: string) {
     if (socket) send(socket, { type: 'action', action });
   }, []);
 
-  return { state, players, status, dispatch };
+  /** Put the whole table back to just after history entry `seq`; the server sends everyone the result. */
+  const rewind = useCallback((seq: number) => {
+    const socket = socketRef.current;
+    if (socket) send(socket, { type: 'rewind', seq });
+  }, []);
+
+  return { state, players, status, history, dispatch, rewind };
 }
 
 function send(socket: WebSocket, message: ClientMessage) {

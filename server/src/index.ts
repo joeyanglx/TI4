@@ -59,6 +59,9 @@ wss.on('connection', (socket) => {
       console.log(`${client.name} joined ${room.id}`);
     } else if (message.type === 'action' && room && client) {
       room.apply(message.action, client);
+    } else if (message.type === 'rewind' && room && client) {
+      room.rewind(message.seq, client);
+      console.log(`${client.name} rewound ${room.id} to #${message.seq}`);
     }
   });
 

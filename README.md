@@ -27,6 +27,7 @@ Open http://localhost:5173, enter a name and a room. Anyone who joins the same r
   - The overview is display only. Tokens are moved in the **Command tokens** section of your own player board: drag a command token from a pool (tactic, fleet, strategy or reinforcements) onto the map to place it in your colour, or onto another pool to redistribute; drag a command token on the map back onto a pool to pick it up (onto reinforcements to just remove it).
   - The speaker token shows in that section while you hold it (or nobody does): drag it onto the map, drag it off the map onto your section to take it, or use *Give speaker to…*.
 - **Dice** tab: combat dice. Pick space combat, ground combat, anti-fighter barrage, space cannon or bombardment; the unit list comes from your faction's units, upgraded where you've researched the upgrade, and hit values can be overridden. *Count my units in a system* fills in the counts from your stacks on the map. Add a modifier (e.g. +1 from Morale Boost) and roll; everyone sees each roll in the shared log (last 30), hits highlighted, and other players' rolls pop up over the board. *Re-roll misses* on your latest roll covers re-roll effects. Dice are rolled in the roller's browser, so this runs on trust like hidden hands.
+- **History** tab: a shared log of everything anyone does, newest first, in plain English (it never names a card someone drew in secret). Consecutive moves by one player collapse into one line. *Rewind to here* (with a confirmation) puts the whole table, cards and hands included, back to just after that entry for everyone; the rewind is logged too, so it can be undone by rewinding again.
 - Drag empty space to pan, scroll to zoom.
 
 ## Hosting a game
@@ -36,7 +37,7 @@ npm run build   # build the client into client/dist
 npm start       # serves the client and the websocket on port 3001 (set PORT to change)
 ```
 
-Rooms are saved to `server/data/<room>.json` and restored when the server restarts.
+Rooms are saved to `server/data/<room>.json`, with their history in `<room>.history.json`, and restored when the server restarts.
 
 ### Playing over the internet
 

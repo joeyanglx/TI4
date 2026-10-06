@@ -20,6 +20,7 @@ npm workspaces, all TypeScript (ESM, strict):
 
 - **Every board change is an `Action`** handled in `applyAction` (`shared/src/state.ts`), which must stay pure. The client applies actions optimistically, the server applies the same function and relays to the other clients. Never mutate state outside it.
 - **Card, strategy, seat and planet actions are server-ordered** (`isServerOrdered`): clients don't apply them optimistically, the server echoes them to everyone including the sender, so concurrent draws and clamped counters can't diverge. Player economy, planet cards and promissory notes live in `shared/src/players.ts` (a note is only recorded in `state.promissory` once it leaves its owner's hand), command/speaker token moves between panel and map in `shared/src/tokens.ts`, dice rolls (a shared log; results are rolled client-side and carried in the action) in `shared/src/dice.ts` (the speaker is either `state.speaker` or a single `speaker` piece on the map); read seats through `seatOf` so older seats get defaults. Randomness goes in the action as a `seed` (`seededRandom`), never `Math.random` inside `applyAction`.
+- **History and rewind** (`shared/src/history.ts`, `server/src/rooms.ts`): the server records every action with a description from `describeAction` (written from the state before the action; keep hidden cards out of it) and replays from the history's base state to rewind. That only works because actions are deterministic: never read the clock or `Math.random` in `applyAction`; put seeds, dice results and new ids in the action. A new action type needs a `describeAction` case.
 - Hands (`state.cards.hands`) are keyed by player name and sent to everyone; the UI just hides other players' cards. `withDefaults` (`shared/src/setup.ts`) fills in fields missing from older saved rooms — extend it when adding top-level state.
 - New features usually mean: add an `Action` variant → handle it in `applyAction` → dispatch it from the UI. The server needs no change.
 - Board coordinates are in "board pixels" (`HEX_SIZE` = 100, hex centre to corner). Tiles are keyed by `hexKey(q, r)`; pieces have free x/y.
@@ -32,4 +33,4 @@ npm workspaces, all TypeScript (ESM, strict):
 
 ## Ideas not yet built
 
-faction rules (commodity limits, leaders, tech prerequisites; a faction sets an icon and starting techs, and its sheet is shown read-only), planet attachments, exploration decks and relic fragments, truly secret hands (server-side filtering), undo, auth for public hosting.
+faction rules (commodity limits, leaders, tech prerequisites; a faction sets an icon and starting techs, and its sheet is shown read-only), planet attachments, exploration decks and relic fragments, truly secret hands (server-side filtering), auth for public hosting.
