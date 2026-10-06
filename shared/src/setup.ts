@@ -24,6 +24,7 @@ export function withDefaults(saved: Partial<GameState>): GameState {
     seats: saved.seats ?? fresh.seats,
     planets: saved.planets ?? fresh.planets,
     promissory: saved.promissory ?? fresh.promissory,
+    rolls: saved.rolls ?? fresh.rolls,
     speaker: saved.speaker,
   };
 }

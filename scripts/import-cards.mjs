@@ -185,6 +185,8 @@ const addUnit = (id) => {
     production: u.productionValue === undefined ? undefined : u.basicProduction === 'res' ? `resources ${u.productionValue}` : String(u.productionValue),
     ability: u.ability,
     upgrade: u.upgradesToUnitId,
+    // Researching this technology turns the base unit into this one.
+    requiredTech: u.requiredTechId && u.upgradesFromUnitId ? TECH + u.requiredTechId : undefined,
   };
   addUnit(u.upgradesToUnitId);
 };

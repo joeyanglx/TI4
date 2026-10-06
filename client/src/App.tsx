@@ -5,6 +5,7 @@ import { FactionIcon } from './components/cardParts';
 import { EditionToggle } from './components/EditionToggle';
 import { Lobby } from './components/Lobby';
 import { RightPanel } from './components/RightPanel';
+import { RollToast } from './components/RollToast';
 import { Sidebar } from './components/Sidebar';
 import { useGame } from './useGame';
 
@@ -88,6 +89,7 @@ function Table({ room, name }: Session) {
       />
       <Board state={state} color={color} mode={mode} dispatch={dispatch} />
       <RightPanel state={state} room={room} online={players} me={name} dispatch={dispatch} />
+      <RollToast state={state} me={name} online={status === 'online'} />
     </div>
   );
 }

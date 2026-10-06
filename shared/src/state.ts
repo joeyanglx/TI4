@@ -1,4 +1,5 @@
 import { applyCardAction, emptyCards, type CardAction, type CardsState } from './cards';
+import { applyDiceAction, type DiceAction, type Roll } from './dice';
 import { hexKey, type Hex } from './hex';
 import type { PieceKind, PlayerColor } from './pieces';
 import { applyPlayerAction, type PlanetState, type PlayerAction, type PromissoryState, type Seat } from './players';
@@ -37,6 +38,8 @@ export interface GameState {
   planets: Record<string, PlanetState>;
   /** Promissory notes that have left their owner's hand, keyed by promissoryKey. */
   promissory: Record<string, PromissoryState>;
+  /** Shared dice log, oldest first. */
+  rolls: Roll[];
   /** Player holding the speaker token. Undefined while it's on the map (as a "speaker" piece) or unassigned. */
   speaker?: string;
 }
@@ -61,7 +64,8 @@ export type Action =
   | { type: 'game/reset'; state: GameState }
   | CardAction
   | PlayerAction
-  | TokenAction;
+  | TokenAction
+  | DiceAction;
 
 /**
  * Card, seat and planet actions depend on order (two players drawing at once must get different cards,
@@ -70,7 +74,7 @@ export type Action =
  */
 export function isServerOrdered(action: Action): boolean {
   return (
-    /^(cards?|strategy|seat|planet|tech|token|speaker|promissory)\//.test(action.type) ||
+    /^(cards?|strategy|seat|planet|tech|token|speaker|promissory|dice)\//.test(action.type) ||
     // Stack edits depend on the current count; moving pieces stays instant.
     /^piece\/(count|damage|merge|split)$/.test(action.type)
   );
@@ -166,6 +170,8 @@ export function applyAction(state: GameState, action: Action): GameState {
       if (!card?.tradeGoods || !action.player) return picked;
       return applyPlayerAction(picked, { type: 'seat/tradeGoods', player: action.player, amount: card.tradeGoods });
     }
+    case 'dice/roll':
+      return { ...state, rolls: applyDiceAction(state.rolls, action) };
     default:
       if (/^(token|speaker)\//.test(action.type)) return applyTokenAction(state, action as TokenAction);
       if (/^(seat|planet|tech|promissory)\//.test(action.type)) {
@@ -184,5 +190,5 @@ export function makeTile(hex: Hex, system: string, rotation = 0): Tile {
 }
 
 export function emptyState(): GameState {
-  return { tiles: {}, pieces: {}, cards: emptyCards(), seats: {}, planets: {}, promissory: {} };
+  return { tiles: {}, pieces: {}, cards: emptyCards(), seats: {}, planets: {}, promissory: {}, rolls: [] };
 }

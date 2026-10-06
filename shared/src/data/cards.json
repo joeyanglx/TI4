@@ -4510,7 +4510,8 @@
     "hitsOn": 5,
     "dice": 1
    },
-   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards."
+   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards.",
+   "requiredTech": "tech_dn2"
   },
   "carrier": {
    "name": "Carrier I",
@@ -4536,7 +4537,8 @@
     "dice": 1
    },
    "move": 2,
-   "capacity": 6
+   "capacity": 6,
+   "requiredTech": "tech_cv2"
   },
   "cruiser": {
    "name": "Cruiser I",
@@ -4561,7 +4563,8 @@
     "dice": 1
    },
    "move": 3,
-   "capacity": 1
+   "capacity": 1,
+   "requiredTech": "tech_cr2"
   },
   "destroyer": {
    "name": "Destroyer I",
@@ -4593,7 +4596,8 @@
    "antiFighterBarrage": {
     "hitsOn": 6,
     "dice": 3
-   }
+   },
+   "requiredTech": "tech_dd2"
   },
   "fighter": {
    "name": "Fighter I",
@@ -4617,7 +4621,8 @@
     "dice": 1
    },
    "move": 2,
-   "ability": "This unit may move without being transported.\nFighters in excess of your ships' capacity count against your fleet pool."
+   "ability": "This unit may move without being transported.\nFighters in excess of your ships' capacity count against your fleet pool.",
+   "requiredTech": "tech_ff2"
   },
   "arborec_mech": {
    "name": "Letani Behemoth",
@@ -4655,7 +4660,8 @@
     "dice": 1
    },
    "production": "2",
-   "ability": "After this unit is destroyed, roll 1 die. If the result is 6 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
+   "ability": "After this unit is destroyed, roll 1 die. If the result is 6 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system.",
+   "requiredTech": "tech_lw2"
   },
   "pds": {
    "name": "PDS I",
@@ -4679,7 +4685,8 @@
     "deepSpace": true
    },
    "planetaryShield": true,
-   "ability": "You may use this unit's SPACE CANNON against ships that are in adjacent systems."
+   "ability": "You may use this unit's SPACE CANNON against ships that are in adjacent systems.",
+   "requiredTech": "tech_pds2"
   },
   "spacedock": {
    "name": "Space Dock I",
@@ -4697,7 +4704,8 @@
    "expansion": "base",
    "capacity": 3,
    "production": "resources +4",
-   "ability": "This unit's PRODUCTION value is equal to 4 more than the resource value of this planet.\nUp to 3 fighters in this system do not count against your ships' capacity."
+   "ability": "This unit's PRODUCTION value is equal to 4 more than the resource value of this planet.\nUp to 3 fighters in this system do not count against your ships' capacity.",
+   "requiredTech": "tech_sd2"
   },
   "ghost_flagship": {
    "name": "Hil Colish",
@@ -4746,7 +4754,8 @@
     "hitsOn": 7,
     "dice": 1
    },
-   "ability": "After this unit is destroyed, roll 1 die. If the result is 6 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home."
+   "ability": "After this unit is destroyed, roll 1 die. If the result is 6 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home.",
+   "requiredTech": "tech_inf2"
   },
   "hacan_flagship": {
    "name": "Wrath of Kenara",
@@ -4848,7 +4857,8 @@
     "hitsOn": 4,
     "dice": 1
    },
-   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards."
+   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards.",
+   "requiredTech": "tech_sdn2"
   },
   "l1z1x_mech": {
    "name": "Annihilator",
@@ -4971,7 +4981,8 @@
     "hitsOn": 3,
     "dice": 3
    },
-   "ability": "Other players' units in this system lose the PLANETARY SHIELD ability."
+   "ability": "Other players' units in this system lose the PLANETARY SHIELD ability.",
+   "requiredTech": "tech_pws2"
   },
   "muaat_mech": {
    "name": "Ember Colossus",
@@ -5020,7 +5031,8 @@
     "dice": 1
    },
    "move": 2,
-   "ability": "This unit may move without being transported.\nEach fighter in excess of your ships' capacity counts as 1/2 of a ship against your fleet pool."
+   "ability": "This unit may move without being transported.\nEach fighter in excess of your ships' capacity counts as 1/2 of a ship against your fleet pool.",
+   "requiredTech": "tech_hcf2"
   },
   "naalu_mech_te": {
    "name": "Iconoclast TE",
@@ -5106,7 +5118,8 @@
    "move": 2,
    "capacity": 5,
    "production": "7",
-   "ability": "This unit is placed in the space area instead of on a planet.\nThis unit can move and retreat as if it were a ship.\nIf this unit is blockaded, it is destroyed."
+   "ability": "This unit is placed in the space area instead of on a planet.\nThis unit can move and retreat as if it were a ship.\nIf this unit is blockaded, it is destroyed.",
+   "requiredTech": "tech_ffac2"
   },
   "sardakk_flagship": {
    "name": "C'morran N'orr",
@@ -5156,7 +5169,8 @@
     "hitsOn": 4,
     "dice": 2
    },
-   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards.\nAfter a round of space combat, you may destroy this unit to destroy up to 2 ships in the system."
+   "ability": "This unit cannot be destroyed by \"Direct Hit\" action cards.\nAfter a round of space combat, you may destroy this unit to destroy up to 2 ships in the system.",
+   "requiredTech": "tech_exo2"
   },
   "sardakk_mech": {
    "name": "Valkyrie Exoskeleton",
@@ -5208,7 +5222,8 @@
    },
    "move": 2,
    "capacity": 8,
-   "sustainDamage": true
+   "sustainDamage": true,
+   "requiredTech": "tech_ac2"
   },
   "sol_mech": {
    "name": "ZS Thunderbolt M2",
@@ -5242,7 +5257,8 @@
     "hitsOn": 6,
     "dice": 1
    },
-   "ability": "After this unit is destroyed, roll 1 die. If the result is 5 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
+   "ability": "After this unit is destroyed, roll 1 die. If the result is 5 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system.",
+   "requiredTech": "tech_so2"
   },
   "winnu_flagship": {
    "name": "Salai Sai Corian",
@@ -5404,7 +5420,8 @@
     "hitsOn": 6,
     "dice": 3
    },
-   "ability": "When this unit uses ANTI-FIGHTER BARRAGE, each result of 9 or 10 also destroys 1 of your opponent's infantry in the space area of the active system."
+   "ability": "When this unit uses ANTI-FIGHTER BARRAGE, each result of 9 or 10 also destroys 1 of your opponent's infantry in the space area of the active system.",
+   "requiredTech": "tech_swa2"
   },
   "argent_mech": {
    "name": "Aerie Sentinel",
@@ -5461,7 +5478,8 @@
    "type": "spacedock",
    "expansion": "pok",
    "production": "7",
-   "ability": "This system is a gravity rift; your ships do not roll for this gravity rift. Place a dimensional tear token beneath this unit as a reminder.\nUp to 12 fighters in this system do not count against your ships' capacity."
+   "ability": "This system is a gravity rift; your ships do not roll for this gravity rift. Place a dimensional tear token beneath this unit as a reminder.\nUp to 12 fighters in this system do not count against your ships' capacity.",
+   "requiredTech": "tech_dt2"
   },
   "empyrean_flagship": {
    "name": "Dynamo",
@@ -5536,7 +5554,8 @@
     "hitsOn": 7,
     "dice": 1
    },
-   "ability": "After this unit is destroyed, gain 1 commodity or convert 1 of your commodities to a trade good. Then, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system."
+   "ability": "After this unit is destroyed, gain 1 commodity or convert 1 of your commodities to a trade good. Then, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system.",
+   "requiredTech": "tech_cl2"
   },
   "nomad_flagship": {
    "name": "Memoria I",
@@ -5633,7 +5652,8 @@
    },
    "move": 3,
    "capacity": 2,
-   "sustainDamage": true
+   "sustainDamage": true,
+   "requiredTech": "tech_se2"
   },
   "titans_mech": {
    "name": "Hecatoncheires",
@@ -5681,7 +5701,8 @@
    },
    "planetaryShield": true,
    "production": "1",
-   "ability": "This unit is treated as both a structure and a ground force. It cannot be transported.\nYou may use this unit's SPACE CANNON against ships that are adjacent to this unit's systems."
+   "ability": "This unit is treated as both a structure and a ground force. It cannot be transported.\nYou may use this unit's SPACE CANNON against ships that are adjacent to this unit's systems.",
+   "requiredTech": "tech_ht2"
   },
   "keleres_flagship": {
    "name": "Artemiris",
@@ -5751,7 +5772,8 @@
    "expansion": "te",
    "capacity": 3,
    "production": "resources +4",
-   "ability": "The resource value of this planet is increased by 2. This unit's PRODUCTION value is equal to 4 more than the resource value of this planet.\nUp to 3 fighters in this system do not count against your ships' capacity"
+   "ability": "The resource value of this planet is increased by 2. This unit's PRODUCTION value is equal to 4 more than the resource value of this planet.\nUp to 3 fighters in this system do not count against your ships' capacity",
+   "requiredTech": "tech_helios2"
   },
   "crimson_flagship": {
    "name": "Quietus",
@@ -5798,7 +5820,8 @@
     "hitsOn": 6,
     "dice": 3
    },
-   "ability": "At the end of any players' combat in this unit's system or up to 2 systems away, you may place 1 active or inactive breach in that system."
+   "ability": "At the end of any players' combat in this unit's system or up to 2 systems away, you may place 1 active or inactive breach in that system.",
+   "requiredTech": "tech_exile2"
   },
   "crimson_mech": {
    "name": "Revenant",
@@ -5910,7 +5933,8 @@
     "hitsOn": 6,
     "dice": 3
    },
-   "ability": "This unit can use the SPACE CANNON ability of one of your structures in its space area; each linkship can trigger the same structure."
+   "ability": "This unit can use the SPACE CANNON ability of one of your structures in its space area; each linkship can trigger the same structure.",
+   "requiredTech": "tech_linkship2"
   },
   "ralnel_mech": {
    "name": "Alarum",

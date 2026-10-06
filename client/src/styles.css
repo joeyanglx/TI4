@@ -1351,3 +1351,188 @@ button {
 .piece-menu button.danger {
   color: #ff6b6b;
 }
+
+/* Dice tab */
+.dice-panel {
+  font-size: 13px;
+}
+
+.dice-panel section {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dice-panel h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.dice-panel select,
+.dice-panel button,
+.dice-panel input {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.dice-panel button {
+  cursor: pointer;
+}
+
+.dice-panel button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.dice-panel .chip.selected,
+.dice-panel button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.dice-panel button.primary {
+  flex: 2;
+  font-weight: 600;
+}
+
+.dice-panel button.link {
+  align-self: flex-start;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.dice-panel .row {
+  display: flex;
+  gap: 6px;
+}
+
+.dice-panel .row button {
+  flex: 1;
+}
+
+.dice-units {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dice-units th,
+.dice-units td {
+  padding: 3px 4px;
+  text-align: left;
+}
+
+.dice-units th {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.dice-units tr.active td:first-child {
+  font-weight: 700;
+}
+
+.dice-units input {
+  width: 44px;
+  padding: 2px 4px;
+}
+
+.dice-units .stepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dice-units .stepper b {
+  min-width: 16px;
+  text-align: center;
+}
+
+.dice-units .stepper button {
+  padding: 0 7px;
+}
+
+.roll-entry {
+  padding: 8px;
+  background: var(--bg);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.roll-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roll-hits {
+  margin-left: auto;
+  font-weight: 800;
+  color: #6cd38a;
+}
+
+.roll-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.roll-unit {
+  min-width: 110px;
+}
+
+.dice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.die {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.die.hit {
+  background: #2c6e3f;
+  color: #fff;
+  box-shadow: 0 0 0 1px #6cd38a;
+}
+
+.die.miss {
+  background: #2a3350;
+  color: var(--muted);
+}
+
+.roll-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 25;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  cursor: pointer;
+}

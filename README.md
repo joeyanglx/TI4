@@ -26,6 +26,7 @@ Open http://localhost:5173, enter a name and a room. Anyone who joins the same r
   - Click the **i** next to a player's faction for its faction sheet: abilities, faction technologies, flagship, promissory note and every unit's stats (with upgrades).
   - The overview is display only. Tokens are moved in the **Command tokens** section of your own player board: drag a command token from a pool (tactic, fleet, strategy or reinforcements) onto the map to place it in your colour, or onto another pool to redistribute; drag a command token on the map back onto a pool to pick it up (onto reinforcements to just remove it).
   - The speaker token shows in that section while you hold it (or nobody does): drag it onto the map, drag it off the map onto your section to take it, or use *Give speaker to…*.
+- **Dice** tab: combat dice. Pick space combat, ground combat, anti-fighter barrage, space cannon or bombardment; the unit list comes from your faction's units, upgraded where you've researched the upgrade, and hit values can be overridden. *Count my units in a system* fills in the counts from your stacks on the map. Add a modifier (e.g. +1 from Morale Boost) and roll; everyone sees each roll in the shared log (last 30), hits highlighted, and other players' rolls pop up over the board. *Re-roll misses* on your latest roll covers re-roll effects. Dice are rolled in the roller's browser, so this runs on trust like hidden hands.
 - Drag empty space to pan, scroll to zoom.
 
 ## Hosting a game

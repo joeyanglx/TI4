@@ -136,6 +136,8 @@ export interface UnitInfo {
   ability?: string;
   /** Unit id of the upgraded version. */
   upgrade?: string;
+  /** For upgraded units: the technology that unlocks them. */
+  requiredTech?: string;
 }
 
 export interface StrategyCardInfo {

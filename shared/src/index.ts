@@ -1,4 +1,5 @@
 export * from './cards';
+export * from './dice';
 export * from './hex';
 export * from './pieces';
 export * from './presets';
