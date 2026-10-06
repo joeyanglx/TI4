@@ -640,3 +640,78 @@ button {
   background: var(--bg);
   color: var(--text);
 }
+
+.panel-tabs {
+  margin: 10px 12px 0;
+}
+
+.counter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.counter-row > span:first-child {
+  flex: 1;
+}
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.counter b {
+  min-width: 24px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.counter input {
+  width: 34px;
+  font: inherit;
+  font-size: 13px;
+  padding: 0 2px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.planet-totals {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.planet-totals .res,
+.planet-totals .inf,
+.cards-panel .ri .res,
+.cards-panel .ri .inf {
+  display: inline-block;
+  padding: 0 4px;
+  color: #fff;
+}
+
+.cards-panel .ri {
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.cards-panel .row select {
+  flex: 1;
+  min-width: 0;
+}
+
+.planet-owner summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.planet-owner-tag {
+  font-size: 12px;
+  color: var(--muted);
+}

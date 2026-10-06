@@ -121,7 +121,7 @@ export function Board({ state, color, mode, dispatch }: Props) {
           ))}
         </Layer>
       </Stage>
-      {hovered && <SystemCard system={hovered} />}
+      {hovered && <SystemCard system={hovered} state={state} />}
     </div>
   );
 }

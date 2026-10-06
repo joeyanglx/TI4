@@ -30,3 +30,14 @@ export interface SystemInfo {
 export const SYSTEMS = systemsJson as unknown as Record<string, SystemInfo>;
 
 export const MECATOL_REX = '18';
+
+export interface PlanetInfo extends Planet {
+  /** The (first) system tile the planet is on. */
+  system: string;
+}
+
+/** Every planet card, keyed by name. Alternate tiles of the same planet share one card. */
+export const PLANETS: Record<string, PlanetInfo> = {};
+for (const system of Object.values(SYSTEMS)) {
+  for (const planet of system.planets) PLANETS[planet.name] ??= { ...planet, system: system.id };
+}

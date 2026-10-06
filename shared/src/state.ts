@@ -1,6 +1,7 @@
 import { applyCardAction, emptyCards, type CardAction, type CardsState } from './cards';
 import { hexKey, type Hex } from './hex';
 import type { PieceKind, PlayerColor } from './pieces';
+import { applyPlayerAction, type PlanetState, type PlayerAction, type Seat } from './players';
 
 export interface Tile extends Hex {
   id: string;
@@ -19,18 +20,12 @@ export interface Piece {
   y: number;
 }
 
-/** Per-player info everyone can see, keyed by player name. */
-export interface Seat {
-  color?: PlayerColor;
-  /** Victory points from anything other than objectives: custodians, agendas, relics, Imperial. */
-  bonusVp: number;
-}
-
 export interface GameState {
   tiles: Record<string, Tile>;
   pieces: Record<string, Piece>;
   cards: CardsState;
   seats: Record<string, Seat>;
+  planets: Record<string, PlanetState>;
 }
 
 export type Action =
@@ -42,17 +37,17 @@ export type Action =
   | { type: 'tile/rotate'; id: string }
   | { type: 'tile/move'; from: Hex; to: Hex }
   | { type: 'map/set'; tiles: Record<string, Tile> }
-  | { type: 'seat/color'; player: string; color: PlayerColor }
-  | { type: 'seat/bonusVp'; player: string; amount: number }
   | { type: 'game/reset'; state: GameState }
-  | CardAction;
+  | CardAction
+  | PlayerAction;
 
 /**
- * Card actions depend on order (two players drawing at once must get different cards), so clients
- * don't apply them optimistically: the server applies them first and sends them to everyone.
+ * Card, seat and planet actions depend on order (two players drawing at once must get different cards,
+ * and counters clamp at zero), so clients don't apply them optimistically: the server applies them first
+ * and sends them to everyone.
  */
 export function isServerOrdered(action: Action): boolean {
-  return /^(cards?|strategy)\//.test(action.type);
+  return /^(cards?|strategy|seat|planet)\//.test(action.type);
 }
 
 /**
@@ -102,24 +97,21 @@ export function applyAction(state: GameState, action: Action): GameState {
     }
     case 'map/set':
       return { ...state, tiles: action.tiles };
-    case 'seat/color':
-      return { ...state, seats: { ...state.seats, [action.player]: { ...seat(state, action.player), color: action.color } } };
-    case 'seat/bonusVp': {
-      const current = seat(state, action.player);
-      return {
-        ...state,
-        seats: { ...state.seats, [action.player]: { ...current, bonusVp: Math.max(0, current.bonusVp + action.amount) } },
-      };
-    }
     case 'game/reset':
       return action.state;
+    case 'strategy/pick': {
+      // Whoever picks a strategy card takes the trade goods piled on it.
+      const card = state.cards.strategy.find((s) => s.id === action.id);
+      const picked = { ...state, cards: applyCardAction(state.cards, action) };
+      if (!card?.tradeGoods || !action.player) return picked;
+      return applyPlayerAction(picked, { type: 'seat/tradeGoods', player: action.player, amount: card.tradeGoods });
+    }
     default:
-      return { ...state, cards: applyCardAction(state.cards, action) };
+      if (action.type.startsWith('seat/') || action.type.startsWith('planet/')) {
+        return applyPlayerAction(state, action as PlayerAction);
+      }
+      return { ...state, cards: applyCardAction(state.cards, action as CardAction) };
   }
-}
-
-function seat(state: GameState, player: string): Seat {
-  return state.seats[player] ?? { bonusVp: 0 };
 }
 
 export function makeTile(hex: Hex, system: string, rotation = 0): Tile {
@@ -127,5 +119,5 @@ export function makeTile(hex: Hex, system: string, rotation = 0): Tile {
 }
 
 export function emptyState(): GameState {
-  return { tiles: {}, pieces: {}, cards: emptyCards(), seats: {} };
+  return { tiles: {}, pieces: {}, cards: emptyCards(), seats: {}, planets: {} };
 }

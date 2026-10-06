@@ -1,9 +1,10 @@
-import { SYSTEMS } from '@ti4/shared';
+import { SYSTEMS, type GameState } from '@ti4/shared';
+import { PlayerTag } from './cardParts';
 
 const EXPANSION_NAMES = { base: 'Base game', pok: 'Prophecy of Kings', te: "Thunder's Edge" };
 
 /** Info panel for the system under the mouse. */
-export function SystemCard({ system }: { system: string }) {
+export function SystemCard({ system, state }: { system: string; state: GameState }) {
   const info = SYSTEMS[system];
   if (!info) return null;
   const extras = [...info.anomalies, ...info.wormholes.map((w) => `${w} wormhole`)];
@@ -18,6 +19,12 @@ export function SystemCard({ system }: { system: string }) {
         <div key={p.name} className="planet">
           <div className="planet-row">
             <strong>{p.name}</strong>
+            {state.planets[p.name]?.owner && (
+              <span className="planet-owner-tag">
+                <PlayerTag player={state.planets[p.name].owner!} state={state} />
+                {state.planets[p.name].exhausted && ' (exhausted)'}
+              </span>
+            )}
             <span className="ri">
               <span className="res">{p.resources}</span>
               <span className="inf">{p.influence}</span>

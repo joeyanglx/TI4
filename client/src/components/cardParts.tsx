@@ -20,16 +20,18 @@ export function GiveSelect({
   players,
   exclude,
   onGive,
+  label = 'Give…',
 }: {
   players: string[];
   exclude: string;
   onGive: (player: string) => void;
+  label?: string;
 }) {
   const others = players.filter((p) => p !== exclude);
   if (!others.length) return null;
   return (
     <select value="" onChange={(e) => e.target.value && onGive(e.target.value)} title="Give to another player">
-      <option value="">Give…</option>
+      <option value="">{label}</option>
       {others.map((p) => (
         <option key={p} value={p}>
           {p}
