@@ -15,6 +15,27 @@ export const EDITION_NAMES: Record<Edition, string> = {
   te: "Prophecy of Kings + Thunder's Edge",
 };
 
+/** Whether content from an expansion is in play: PoK needs PoK or PoK + TE, Thunder's Edge needs PoK + TE. */
+export function inEdition(expansion: CardExpansion, edition: Edition): boolean {
+  return expansion === 'base' || (expansion === 'pok' && edition !== 'base') || edition === 'te';
+}
+
+/** True once a game's cards have moved from a fresh setup, so switching edition would throw something away. */
+export function cardsInUse(cards: CardsState): boolean {
+  return (
+    Object.values(cards.hands).some((hand) => hand.length > 0) ||
+    Object.values(cards.relics).some((relics) => relics.length > 0) ||
+    cards.discard.length > 0 ||
+    cards.voting.length > 0 ||
+    cards.laws.length > 0 ||
+    cards.agendaDiscard.length > 0 ||
+    cards.purged.length > 0 ||
+    cards.revealed.length > 2 ||
+    Object.values(cards.scored).some((players) => players.length > 0) ||
+    cards.strategy.some((s) => s.holder || s.tradeGoods > 0)
+  );
+}
+
 export interface ActionCardInfo {
   name: string;
   expansion: CardExpansion;

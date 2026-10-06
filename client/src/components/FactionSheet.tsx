@@ -5,6 +5,7 @@ import {
   TECHNOLOGIES,
   UNITS,
   factionTechnologies,
+  inEdition,
   type DiceRoll,
   type Edition,
   type UnitInfo,
@@ -30,9 +31,7 @@ export function FactionSheet({ faction, edition, onClose }: Props) {
 
   if (!info) return null;
   // Mechs (PoK) and other expansion units don't exist in a base game.
-  const inEdition = (unit: UnitInfo) =>
-    unit.expansion === 'base' || (unit.expansion === 'pok' && edition !== 'base') || edition === 'te';
-  const units = info.units.map((id) => UNITS[id]).filter((u) => u && inEdition(u));
+  const units = info.units.map((id) => UNITS[id]).filter((u) => u && inEdition(u.expansion, edition));
   const flagship = units.find((u) => u.type === 'flagship');
   const techs = factionTechnologies(edition, faction);
 

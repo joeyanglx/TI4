@@ -1,12 +1,23 @@
-import { PIECE_STYLE, PLAYER_COLORS, TOKEN_KINDS, UNIT_KINDS, type PieceKind, type PlayerColor } from '@ti4/shared';
+import {
+  PIECE_STYLE,
+  PLAYER_COLORS,
+  TOKEN_KINDS,
+  UNIT_KINDS,
+  type Edition,
+  type PieceKind,
+  type PlayerColor,
+} from '@ti4/shared';
 import { PIECE_MIME } from '../dnd';
 
 interface Props {
   color: PlayerColor;
   onColorChange: (color: PlayerColor) => void;
+  edition: Edition;
 }
 
-export function PiecePalette({ color, onColorChange }: Props) {
+export function PiecePalette({ color, onColorChange, edition }: Props) {
+  // Mechs arrived with Prophecy of Kings.
+  const units = UNIT_KINDS.filter((kind) => kind !== 'mech' || edition !== 'base');
   return (
     <>
       <h2>Colour</h2>
@@ -22,7 +33,7 @@ export function PiecePalette({ color, onColorChange }: Props) {
         ))}
       </div>
       <h2>Units</h2>
-      <PieceList kinds={UNIT_KINDS} color={color} />
+      <PieceList kinds={units} color={color} />
       <h2>Tokens</h2>
       <PieceList kinds={TOKEN_KINDS} color={color} />
       <p className="hint">

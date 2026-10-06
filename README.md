@@ -15,6 +15,7 @@ Open http://localhost:5173, enter a name and a room. Anyone who joins the same r
 
 ## Using the table
 
+- **Game version** (top bar): Base, PoK or PoK + TE, for everyone at the table. It decides the card decks (action cards, objectives, agendas, relics, strategy cards) and which factions, technologies, promissory notes, systems and units are offered. Switching rebuilds the decks, so once cards are in play it asks first.
 - **Pieces tab**: pick your colour, drag units and tokens onto the board. Right-click a piece to remove it.
 - **Systems tab**: *Load balanced map* puts down a ready-made map in one click (saved from game-2; presets live in `shared/src/presets.ts`). Search or filter the system tiles and drag them onto a hex. Paste a map string (TTS / map generator format, e.g. `{18} 26 41 ... 84A3`) under *Map string* to load a whole map, or use *Show current* to copy yours out.
 - **Edit map mode** (top bar): drag tiles to move or swap them, double-click to rotate (for hyperlanes), right-click to remove. Pieces are dimmed and locked while editing.

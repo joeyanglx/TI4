@@ -3,10 +3,12 @@ import {
   MAP_PRESETS,
   SYSTEMS,
   defaultBoard,
+  inEdition,
   presetTiles,
   parseMapString,
   toMapString,
   type Action,
+  type Edition,
   type SystemInfo,
   type SystemType,
   type Tile,
@@ -26,10 +28,12 @@ const ALL_SYSTEMS = Object.values(SYSTEMS);
 
 interface Props {
   tiles: Record<string, Tile>;
+  /** Systems from expansions not in the game are hidden. */
+  edition: Edition;
   dispatch: (action: Action) => void;
 }
 
-export function SystemPalette({ tiles, dispatch }: Props) {
+export function SystemPalette({ tiles, edition, dispatch }: Props) {
   const [filter, setFilter] = useState<SystemType | 'all'>('all');
   const [search, setSearch] = useState('');
   const [hideUsed, setHideUsed] = useState(true);
@@ -37,6 +41,7 @@ export function SystemPalette({ tiles, dispatch }: Props) {
   const used = useMemo(() => new Set(Object.values(tiles).map((t) => t.system)), [tiles]);
   const visible = ALL_SYSTEMS.filter(
     (s) =>
+      inEdition(s.expansion, edition) &&
       (filter === 'all' || s.type === filter) &&
       !(hideUsed && used.has(s.id)) &&
       matches(s, search.trim().toLowerCase()),
@@ -98,7 +103,7 @@ export function SystemPalette({ tiles, dispatch }: Props) {
   );
 }
 
-function MapStringTools({ tiles, dispatch }: Props) {
+function MapStringTools({ tiles, dispatch }: Pick<Props, 'tiles' | 'dispatch'>) {
   const [text, setText] = useState('');
   return (
     <details className="map-tools">

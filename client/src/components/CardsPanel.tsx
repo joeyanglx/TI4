@@ -295,29 +295,13 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
 }
 
 function CardSetup({ edition, dispatch }: { edition: Edition; dispatch: Props['dispatch'] }) {
-  const [baseOnly, setBaseOnly] = useState(edition === 'base');
-  const [thundersEdge, setThundersEdge] = useState(edition !== 'pok');
   const [confirming, setConfirming] = useState(false);
-  const chosen: Edition = baseOnly ? 'base' : thundersEdge ? 'te' : 'pok';
   return (
     <details className="card-setup">
       <summary>Card setup · {EDITION_NAMES[edition]}</summary>
-      <label className="checkbox">
-        <input type="checkbox" checked={baseOnly} onChange={(e) => setBaseOnly(e.target.checked)} />
-        Base game only (no Prophecy of Kings or Thunder's Edge cards, no relics)
-      </label>
-      <label className="checkbox">
-        <input
-          type="checkbox"
-          checked={thundersEdge && !baseOnly}
-          disabled={baseOnly}
-          onChange={(e) => setThundersEdge(e.target.checked)}
-        />
-        Include Thunder's Edge cards
-      </label>
       <p className="hint">
-        Starts the game's cards over with {EDITION_NAMES[chosen]}: reshuffles every deck, empties all hands, clears
-        laws and relics, and reveals two new stage I objectives.
+        Starts the cards over: reshuffles every deck, empties all hands, clears laws and relics, and reveals two new
+        stage I objectives. Change the game version with the switch in the top bar.
       </p>
       <div className="row">
         {confirming ? (
@@ -325,7 +309,7 @@ function CardSetup({ edition, dispatch }: { edition: Edition; dispatch: Props['d
             <button
               className="danger"
               onClick={() => {
-                dispatch({ type: 'cards/setup', options: { seed: randomSeed(), edition: chosen } });
+                dispatch({ type: 'cards/setup', options: { seed: randomSeed(), edition } });
                 setConfirming(false);
               }}
             >

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { PlayerColor } from '@ti4/shared';
 import { Board, type BoardMode } from './components/Board';
 import { FactionIcon } from './components/cardParts';
+import { EditionToggle } from './components/EditionToggle';
 import { Lobby } from './components/Lobby';
 import { RightPanel } from './components/RightPanel';
 import { Sidebar } from './components/Sidebar';
@@ -54,6 +55,7 @@ function Table({ room, name }: Session) {
         <strong>TI4 Table</strong>
         <span>Room: {room}</span>
         <span className={`status status-${status}`}>{status}</span>
+        <EditionToggle state={state} dispatch={dispatch} />
         <div className="mode-toggle">
           <button className={mode === 'play' ? 'selected' : ''} onClick={() => setMode('play')}>
             Play
@@ -81,6 +83,7 @@ function Table({ room, name }: Session) {
           setColor(c);
         }}
         tiles={state.tiles}
+        edition={state.cards.edition}
         dispatch={dispatch}
       />
       <Board state={state} color={color} mode={mode} dispatch={dispatch} />

@@ -1280,3 +1280,24 @@ button {
 .po-icon.promissory-card {
   background: #4f5d75;
 }
+
+/* Game version switch in the top bar */
+.edition-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.edition-confirm button {
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.edition-confirm button.danger {
+  background: #7a2c2c;
+  border-color: #7a2c2c;
+}

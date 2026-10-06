@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Action, PlayerColor, Tile } from '@ti4/shared';
+import type { Action, Edition, PlayerColor, Tile } from '@ti4/shared';
 import { PiecePalette } from './PiecePalette';
 import { SystemPalette } from './SystemPalette';
 
@@ -9,10 +9,11 @@ interface Props {
   color: PlayerColor;
   onColorChange: (color: PlayerColor) => void;
   tiles: Record<string, Tile>;
+  edition: Edition;
   dispatch: (action: Action) => void;
 }
 
-export function Sidebar({ color, onColorChange, tiles, dispatch }: Props) {
+export function Sidebar({ color, onColorChange, tiles, edition, dispatch }: Props) {
   const [tab, setTab] = useState<Tab>('pieces');
   return (
     <aside className="sidebar">
@@ -26,9 +27,9 @@ export function Sidebar({ color, onColorChange, tiles, dispatch }: Props) {
       </div>
       <div className="sidebar-body">
         {tab === 'pieces' ? (
-          <PiecePalette color={color} onColorChange={onColorChange} />
+          <PiecePalette color={color} onColorChange={onColorChange} edition={edition} />
         ) : (
-          <SystemPalette tiles={tiles} dispatch={dispatch} />
+          <SystemPalette tiles={tiles} edition={edition} dispatch={dispatch} />
         )}
       </div>
     </aside>
