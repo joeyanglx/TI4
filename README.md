@@ -13,6 +13,14 @@ npm run dev
 
 Open http://localhost:5173, enter a name and a room. Anyone who joins the same room shares the board. Friends on the same network can use the "Network" URL Vite prints.
 
+## Using the table
+
+- **Pieces tab**: pick your colour, drag units and tokens onto the board. Right-click a piece to remove it.
+- **Systems tab**: search or filter the system tiles and drag them onto a hex. Paste a map string (TTS / map generator format, e.g. `{18} 26 41 ... 84A3`) under *Map string* to load a whole map, or use *Show current* to copy yours out.
+- **Edit map mode** (top bar): drag tiles to move or swap them, double-click to rotate (for hyperlanes), right-click to remove. Pieces are dimmed and locked while editing.
+- Hover any system to see its planets, resources/influence, traits, anomalies and wormholes.
+- Drag empty space to pan, scroll to zoom.
+
 ## Hosting a game
 
 ```sh
@@ -22,13 +30,29 @@ npm start       # serves the client and the websocket on port 3001 (set PORT to 
 
 Rooms are saved to `server/data/<room>.json` and restored when the server restarts.
 
+### Playing over the internet
+
+Friends on the same Wi-Fi can just use `http://<your-LAN-IP>:3001`. For friends elsewhere, put a temporary tunnel in front of the production server. Cloudflare's quick tunnel needs no account:
+
+```sh
+brew install cloudflared
+npm run build && npm start
+cloudflared tunnel --url http://localhost:3001   # prints a https://….trycloudflare.com link to share
+```
+
+Stop the tunnel (Ctrl+C) after the game. There's no login yet: anyone with the link can join any room and change the board. Tunnel the production server (3001) rather than the Vite dev server: it's faster, won't hot-reload mid-game, and Vite rejects unknown hostnames by default.
+
 ## Project layout
 
 | Package | What it is |
 |---|---|
 | `shared/` | Game model used by both sides: hex math, piece types, `GameState`, `applyAction`, and the websocket message types |
 | `server/` | Node + `ws` server. Keeps each room's state, relays actions to other players, saves rooms to disk |
-| `client/` | Vite + React + `react-konva` board: pan/zoom hex map, draggable pieces, palette |
+| `client/` | Vite + React + `react-konva` board: pan/zoom hex map, system tiles, draggable pieces, sidebar palettes |
+
+## Tile data and images
+
+`shared/src/data/systems.json` and `client/public/tiles/` come from the [KeeganW/ti4](https://github.com/KeeganW/ti4) map generator, filtered to official tiles: base game (1–50), Prophecy of Kings (51–91, including hyperlanes 83A–91B) and Thunder's Edge (92–118). For private use with friends.
 
 ## How syncing works
 

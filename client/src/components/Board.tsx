@@ -5,18 +5,27 @@ import {
   PIECE_STYLE,
   PLAYER_COLORS,
   hexCorners,
+  hexKey,
   hexToPixel,
+  hexesInRadius,
+  makeTile,
+  pixelToHex,
   type Action,
   type GameState,
   type Piece,
   type PieceKind,
   type PlayerColor,
-  type Tile,
 } from '@ti4/shared';
+import { PIECE_MIME, SYSTEM_MIME } from '../dnd';
 import { newId } from '../id';
-import { DRAG_MIME } from './Palette';
+import { SystemCard } from './SystemCard';
+import { TileShape } from './TileShape';
+
+export type BoardMode = 'play' | 'edit';
 
 const HEX_POINTS = hexCorners();
+/** Faint outlines shown where systems can go (radius 4 fits an 8-player map). */
+const GUIDE_HEXES = hexesInRadius(4);
 const ZOOM_STEP = 1.1;
 const MIN_ZOOM = 0.2;
 const MAX_ZOOM = 4;
@@ -24,13 +33,16 @@ const MAX_ZOOM = 4;
 interface Props {
   state: GameState;
   color: PlayerColor;
+  mode: BoardMode;
   dispatch: (action: Action) => void;
 }
 
-export function Board({ state, color, dispatch }: Props) {
+export function Board({ state, color, mode, dispatch }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const size = useElementSize(containerRef);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const editing = mode === 'edit';
 
   function handleWheel(e: Konva.KonvaEventObject<WheelEvent>) {
     e.evt.preventDefault();
@@ -45,19 +57,25 @@ export function Board({ state, color, dispatch }: Props) {
   }
 
   function handleDrop(e: DragEvent) {
-    const kind = e.dataTransfer.getData(DRAG_MIME) as PieceKind;
     const stage = stageRef.current;
-    if (!kind || !stage) return;
+    if (!stage) return;
     e.preventDefault();
     stage.setPointersPositions(e);
     const pos = stage.getRelativePointerPosition();
     if (!pos) return;
-    dispatch({ type: 'piece/add', piece: { id: newId(), kind, color, x: pos.x, y: pos.y } });
+
+    const kind = e.dataTransfer.getData(PIECE_MIME) as PieceKind;
+    if (kind) {
+      dispatch({ type: 'piece/add', piece: { id: newId(), kind, color, x: pos.x, y: pos.y } });
+      return;
+    }
+    const system = e.dataTransfer.getData(SYSTEM_MIME);
+    if (system) dispatch({ type: 'tile/place', tile: makeTile(pixelToHex(pos), system) });
   }
 
   return (
     <div
-      className="board"
+      className={`board ${editing ? 'editing' : ''}`}
       ref={containerRef}
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleDrop}
@@ -75,29 +93,36 @@ export function Board({ state, color, dispatch }: Props) {
         onWheel={handleWheel}
       >
         <Layer listening={false}>
-          {Object.values(state.tiles).map((tile) => (
-            <TileShape key={tile.id} tile={tile} />
-          ))}
+          {GUIDE_HEXES.filter((hex) => !state.tiles[hexKey(hex)]).map((hex) => {
+            const { x, y } = hexToPixel(hex);
+            return (
+              <Line
+                key={hexKey(hex)}
+                x={x}
+                y={y}
+                points={HEX_POINTS}
+                closed
+                stroke="#2a3350"
+                strokeWidth={2}
+                dash={[8, 6]}
+              />
+            );
+          })}
         </Layer>
         <Layer>
+          {Object.values(state.tiles).map((tile) => (
+            <TileShape key={tile.id} tile={tile} editable={editing} dispatch={dispatch} onHover={setHovered} />
+          ))}
+        </Layer>
+        {/* Pieces sit above tiles; in edit mode they're dimmed and ignore the mouse so tiles can be grabbed. */}
+        <Layer listening={!editing} opacity={editing ? 0.4 : 1}>
           {Object.values(state.pieces).map((piece) => (
             <PieceShape key={piece.id} piece={piece} dispatch={dispatch} />
           ))}
         </Layer>
       </Stage>
+      {hovered && <SystemCard system={hovered} />}
     </div>
-  );
-}
-
-function TileShape({ tile }: { tile: Tile }) {
-  const { x, y } = hexToPixel(tile);
-  return (
-    <Group x={x} y={y}>
-      <Line points={HEX_POINTS} closed fill="#1b2235" stroke="#4a5577" strokeWidth={2} />
-      {tile.system && (
-        <Text text={tile.system} fontSize={22} fill="#8f9bbd" x={-40} y={-80} width={80} align="center" />
-      )}
-    </Group>
   );
 }
 

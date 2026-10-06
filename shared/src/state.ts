@@ -1,10 +1,12 @@
-import type { Hex } from './hex';
+import { hexKey, type Hex } from './hex';
 import type { PieceKind, PlayerColor } from './pieces';
 
 export interface Tile extends Hex {
   id: string;
   /** System tile number, e.g. "18" for Mecatol Rex. */
   system: string;
+  /** Clockwise rotation in 60° steps (0–5). Matters for hyperlanes. */
+  rotation?: number;
 }
 
 export interface Piece {
@@ -27,6 +29,9 @@ export type Action =
   | { type: 'piece/remove'; id: string }
   | { type: 'tile/place'; tile: Tile }
   | { type: 'tile/remove'; id: string }
+  | { type: 'tile/rotate'; id: string }
+  | { type: 'tile/move'; from: Hex; to: Hex }
+  | { type: 'map/set'; tiles: Record<string, Tile> }
   | { type: 'game/reset'; state: GameState };
 
 /**
@@ -55,9 +60,34 @@ export function applyAction(state: GameState, action: Action): GameState {
       const { [action.id]: _removed, ...tiles } = state.tiles;
       return { ...state, tiles };
     }
+    case 'tile/rotate': {
+      const tile = state.tiles[action.id];
+      if (!tile) return state;
+      const rotation = ((tile.rotation ?? 0) + 1) % 6;
+      return { ...state, tiles: { ...state.tiles, [action.id]: { ...tile, rotation } } };
+    }
+    case 'tile/move': {
+      // Moving onto an occupied hex swaps the two tiles.
+      const fromId = hexKey(action.from);
+      const toId = hexKey(action.to);
+      const moving = state.tiles[fromId];
+      if (!moving || fromId === toId) return state;
+      const tiles = { ...state.tiles };
+      const displaced = tiles[toId];
+      delete tiles[fromId];
+      if (displaced) tiles[fromId] = { ...displaced, id: fromId, ...action.from };
+      tiles[toId] = { ...moving, id: toId, ...action.to };
+      return { ...state, tiles };
+    }
+    case 'map/set':
+      return { ...state, tiles: action.tiles };
     case 'game/reset':
       return action.state;
   }
+}
+
+export function makeTile(hex: Hex, system: string, rotation = 0): Tile {
+  return { id: hexKey(hex), q: hex.q, r: hex.r, system, rotation };
 }
 
 export function emptyState(): GameState {

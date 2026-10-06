@@ -72,6 +72,32 @@ export function hexesInRadius(radius: number): Hex[] {
   return result;
 }
 
+/**
+ * Hexes in one ring, in map-string order: starting directly above the centre
+ * and going clockwise. This matches the TTS / map generator map string layout.
+ */
+export function hexRing(radius: number): Hex[] {
+  if (radius === 0) return [{ q: 0, r: 0 }];
+  const result: Hex[] = [];
+  let hex: Hex = { q: 0, r: -radius };
+  // Walk directions clockwise starting from the top hex: SE, S, SW, NW... in flat-top axial terms.
+  const walk: Hex[] = [
+    { q: 1, r: 0 },
+    { q: 0, r: 1 },
+    { q: -1, r: 1 },
+    { q: -1, r: 0 },
+    { q: 0, r: -1 },
+    { q: 1, r: -1 },
+  ];
+  for (const dir of walk) {
+    for (let i = 0; i < radius; i++) {
+      result.push(hex);
+      hex = { q: hex.q + dir.q, r: hex.r + dir.r };
+    }
+  }
+  return result;
+}
+
 export function hexNeighbors(hex: Hex): Hex[] {
   return DIRECTIONS.map((d) => ({ q: hex.q + d.q, r: hex.r + d.r }));
 }

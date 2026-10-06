@@ -1,13 +1,10 @@
-import { hexesInRadius, hexKey } from './hex';
-import { emptyState, type GameState } from './state';
+import { emptyState, makeTile, type GameState } from './state';
+import { MECATOL_REX } from './systems';
 
-/** A blank 6-player board: Mecatol Rex in the centre and three empty rings. */
+/** A fresh table: just Mecatol Rex in the centre, ready for systems to be placed. */
 export function defaultBoard(): GameState {
   const state = emptyState();
-  for (const hex of hexesInRadius(3)) {
-    const id = hexKey(hex);
-    const isCenter = hex.q === 0 && hex.r === 0;
-    state.tiles[id] = { id, ...hex, system: isCenter ? '18' : '' };
-  }
+  const mecatol = makeTile({ q: 0, r: 0 }, MECATOL_REX);
+  state.tiles[mecatol.id] = mecatol;
   return state;
 }

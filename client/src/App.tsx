@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import type { PlayerColor } from '@ti4/shared';
-import { Board } from './components/Board';
+import { Board, type BoardMode } from './components/Board';
 import { Lobby } from './components/Lobby';
-import { Palette } from './components/Palette';
+import { Sidebar } from './components/Sidebar';
 import { useGame } from './useGame';
 
 interface Session {
@@ -38,6 +38,7 @@ function Table({ room, name }: Session) {
   const [color, setColor] = useState<PlayerColor>(
     () => (safeGet('ti4.color') as PlayerColor | null) ?? 'red',
   );
+  const [mode, setMode] = useState<BoardMode>('play');
 
   return (
     <div className="table">
@@ -45,16 +46,26 @@ function Table({ room, name }: Session) {
         <strong>TI4 Table</strong>
         <span>Room: {room}</span>
         <span className={`status status-${status}`}>{status}</span>
+        <div className="mode-toggle">
+          <button className={mode === 'play' ? 'selected' : ''} onClick={() => setMode('play')}>
+            Play
+          </button>
+          <button className={mode === 'edit' ? 'selected' : ''} onClick={() => setMode('edit')}>
+            Edit map
+          </button>
+        </div>
         <span className="players">{players.join(', ')}</span>
       </header>
-      <Palette
+      <Sidebar
         color={color}
         onColorChange={(c) => {
           safeSet('ti4.color', c);
           setColor(c);
         }}
+        tiles={state.tiles}
+        dispatch={dispatch}
       />
-      <Board state={state} color={color} dispatch={dispatch} />
+      <Board state={state} color={color} mode={mode} dispatch={dispatch} />
     </div>
   );
 }
