@@ -7,7 +7,7 @@ export function defaultBoard(): GameState {
   const state = emptyState();
   const mecatol = makeTile({ q: 0, r: 0 }, MECATOL_REX);
   state.tiles[mecatol.id] = mecatol;
-  state.cards = setupCards({ seed: randomSeed(), thundersEdge: true });
+  state.cards = setupCards({ seed: randomSeed(), edition: 'te' });
   return state;
 }
 
@@ -17,7 +17,10 @@ export function withDefaults(saved: Partial<GameState>): GameState {
   return {
     tiles: saved.tiles ?? fresh.tiles,
     pieces: saved.pieces ?? fresh.pieces,
-    cards: saved.cards ?? fresh.cards,
+    // Rooms from before agendas and relics existed get those decks freshly shuffled.
+    cards: saved.cards
+      ? { ...fresh.cards, ...saved.cards, decks: { ...fresh.cards.decks, ...saved.cards.decks } }
+      : fresh.cards,
     seats: saved.seats ?? fresh.seats,
   };
 }

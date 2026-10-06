@@ -1,10 +1,19 @@
 import cardsJson from './data/cards.json';
 
 // Card data comes from the AsyncTI4 bot (official cards only), see scripts/import-cards.mjs.
-// Card ids are unique per physical copy, e.g. "sabo1".."sabo4".
+// Card ids are unique per physical copy, e.g. "sabo1".."sabo4". Agendas and relics are prefixed
+// ("agenda_", "relic_") because their AsyncTI4 aliases can clash with action cards.
 
 export type CardExpansion = 'base' | 'pok' | 'te';
 export type ObjectiveType = 'stage1' | 'stage2' | 'secret';
+
+/** Which box(es) the game is played with, chosen at card setup. */
+export type Edition = 'base' | 'pok' | 'te';
+export const EDITION_NAMES: Record<Edition, string> = {
+  base: 'Base game',
+  pok: 'Prophecy of Kings',
+  te: "Prophecy of Kings + Thunder's Edge",
+};
 
 export interface ActionCardInfo {
   name: string;
@@ -23,6 +32,23 @@ export interface ObjectiveInfo {
   text: string;
 }
 
+export interface AgendaInfo {
+  name: string;
+  expansion: CardExpansion;
+  type: 'law' | 'directive';
+  /** "For/Against", "Elect Player", "Elect Planet", ... sometimes with a reveal rule in brackets. */
+  target: string;
+  /** Outcome if "For" wins, or for the elected player/planet. */
+  for: string;
+  against?: string;
+}
+
+export interface RelicInfo {
+  name: string;
+  expansion: CardExpansion;
+  text: string;
+}
+
 export interface StrategyCardInfo {
   name: string;
   initiative: number;
@@ -34,10 +60,15 @@ export interface StrategyCardInfo {
 
 export const ACTION_CARDS = cardsJson.actionCards as Record<string, ActionCardInfo>;
 export const OBJECTIVES = cardsJson.objectives as Record<string, ObjectiveInfo>;
+export const AGENDAS = cardsJson.agendas as Record<string, AgendaInfo>;
+export const RELICS = cardsJson.relics as Record<string, RelicInfo>;
 export const STRATEGY_CARDS = cardsJson.strategyCards as Record<string, StrategyCardInfo>;
 
-export type DeckId = 'action' | ObjectiveType;
-export const DECK_IDS: DeckId[] = ['action', 'secret', 'stage1', 'stage2'];
+export type DeckId = 'action' | ObjectiveType | 'agenda' | 'relic';
+export const DECK_IDS: DeckId[] = ['action', 'secret', 'stage1', 'stage2', 'agenda', 'relic'];
+
+/** The cards in each edition's decks, straight from AsyncTI4's deck lists. */
+const EDITION_DECKS = cardsJson.editions as Record<Edition, Record<DeckId | 'strategy', string[]>>;
 
 export interface StrategyCardState {
   id: string;
@@ -48,7 +79,14 @@ export interface StrategyCardState {
   tradeGoods: number;
 }
 
+export interface Law {
+  id: string;
+  /** The elected player or planet, for "Elect ..." laws. */
+  elected?: string;
+}
+
 export interface CardsState {
+  edition: Edition;
   /** Draw piles, top card last. */
   decks: Record<DeckId, string[]>;
   /** Action card discard pile, most recent last. */
@@ -64,27 +102,48 @@ export interface CardsState {
   hands: Record<string, string[]>;
   /** In initiative order. */
   strategy: StrategyCardState[];
+  /** Agendas revealed this agenda phase, waiting on the vote. */
+  voting: string[];
+  laws: Law[];
+  /** Resolved directives and repealed laws, most recent last. */
+  agendaDiscard: string[];
+  /** Player name -> relics in their play area (face up). */
+  relics: Record<string, string[]>;
+  exhaustedRelics: string[];
+  /** Removed from the game. */
+  purged: string[];
 }
 
 export interface CardSetupOptions {
   /** Shuffle seed, so every client builds the same decks. */
   seed: number;
-  thundersEdge: boolean;
+  edition: Edition;
 }
 
 export type CardAction =
   | { type: 'cards/setup'; options: CardSetupOptions }
-  /** Objective decks reveal face up; action and secret decks draw into the player's hand. */
+  /**
+   * Objective and agenda decks reveal face up, the relic deck goes to the player's play area,
+   * and action and secret decks draw into the player's hand.
+   */
   | { type: 'cards/draw'; deck: DeckId; player: string }
   /** Shuffle the action discard pile back into the action deck. */
   | { type: 'cards/reshuffle'; seed: number }
-  /** Play or discard an action card. */
+  /** Play or discard an action card; discard a resolved directive or repeal a law. */
   | { type: 'card/discard'; card: string }
-  /** Move a card into a player's hand, e.g. a transaction or taking one back from the discard pile. */
+  /** Move a card to a player: action cards and secrets into their hand, relics into their play area. */
   | { type: 'card/give'; card: string; player: string }
-  /** Shuffle a card back into its own deck (a discarded secret, or an objective revealed by mistake). */
-  | { type: 'card/return'; card: string; seed: number }
+  /**
+   * Put a card back into its own deck: shuffled in (a discarded secret, an objective revealed by mistake),
+   * or on top or bottom (agendas, after the Politics card's look at the top two).
+   */
+  | { type: 'card/return'; card: string; seed: number; position?: 'top' | 'bottom' }
   | { type: 'card/score'; card: string; player: string; scored: boolean }
+  | { type: 'card/purge'; card: string }
+  | { type: 'relic/exhaust'; card: string; exhausted: boolean }
+  /** A law passes: it stays in play. */
+  | { type: 'agenda/enact'; card: string }
+  | { type: 'agenda/elect'; card: string; elected?: string }
   | { type: 'strategy/pick'; id: string; player?: string }
   | { type: 'strategy/exhaust'; id: string; exhausted: boolean }
   | { type: 'strategy/tradeGoods'; id: string; amount: number }
@@ -93,47 +152,48 @@ export type CardAction =
 
 export function emptyCards(): CardsState {
   return {
-    decks: { action: [], secret: [], stage1: [], stage2: [] },
+    edition: 'te',
+    decks: { action: [], secret: [], stage1: [], stage2: [], agenda: [], relic: [] },
     discard: [],
     revealed: [],
     scored: {},
     hands: {},
     strategy: [],
+    voting: [],
+    laws: [],
+    agendaDiscard: [],
+    relics: {},
+    exhaustedRelics: [],
+    purged: [],
   };
 }
 
 /** Fresh, shuffled decks with the first two stage I objectives revealed, as in game setup. */
-export function setupCards({ seed, thundersEdge }: CardSetupOptions): CardsState {
+export function setupCards({ seed, edition }: CardSetupOptions): CardsState {
   const random = seededRandom(seed);
-  const actions = Object.keys(ACTION_CARDS).filter((id) => thundersEdge || ACTION_CARDS[id].expansion !== 'te');
-  const objectives = (type: ObjectiveType) => Object.keys(OBJECTIVES).filter((id) => OBJECTIVES[id].type === type);
-  const decks: Record<DeckId, string[]> = {
-    action: shuffle(actions, random),
-    secret: shuffle(objectives('secret'), random),
-    stage1: shuffle(objectives('stage1'), random),
-    stage2: shuffle(objectives('stage2'), random),
-  };
+  const editionDecks = EDITION_DECKS[edition];
+  const decks = Object.fromEntries(DECK_IDS.map((d) => [d, shuffle(editionDecks[d], random)])) as Record<
+    DeckId,
+    string[]
+  >;
   const revealed = decks.stage1.splice(-2).reverse();
-
-  // Thunder's Edge replaces Construction and Warfare.
-  const byInitiative = new Map<number, string>();
-  for (const [id, info] of Object.entries(STRATEGY_CARDS)) {
-    if (info.expansion === 'te' && !thundersEdge) continue;
-    if (info.expansion === 'te' || !byInitiative.has(info.initiative)) byInitiative.set(info.initiative, id);
-  }
-  const strategy = [...byInitiative.entries()]
-    .sort(([a], [b]) => a - b)
-    .map(([, id]) => ({ id, exhausted: false, tradeGoods: 0 }));
-
-  return { ...emptyCards(), decks, revealed, strategy };
+  const strategy = editionDecks.strategy.map((id) => ({ id, exhausted: false, tradeGoods: 0 }));
+  return { ...emptyCards(), edition, decks, revealed, strategy };
 }
 
 export function isActionCard(id: string) {
   return id in ACTION_CARDS;
 }
 
+export function deckOf(id: string): DeckId | undefined {
+  if (id in ACTION_CARDS) return 'action';
+  if (id in AGENDAS) return 'agenda';
+  if (id in RELICS) return 'relic';
+  return OBJECTIVES[id]?.type;
+}
+
 export function cardName(id: string) {
-  return ACTION_CARDS[id]?.name ?? OBJECTIVES[id]?.name ?? id;
+  return ACTION_CARDS[id]?.name ?? OBJECTIVES[id]?.name ?? AGENDAS[id]?.name ?? RELICS[id]?.name ?? id;
 }
 
 export function applyCardAction(cards: CardsState, action: CardAction): CardsState {
@@ -145,26 +205,54 @@ export function applyCardAction(cards: CardsState, action: CardAction): CardsSta
       const card = deck.at(-1);
       if (!card) return cards;
       const next = { ...cards, decks: { ...cards.decks, [action.deck]: deck.slice(0, -1) } };
-      if (action.deck === 'stage1' || action.deck === 'stage2') return { ...next, revealed: [...next.revealed, card] };
-      return addToHand(next, action.player, card);
+      switch (action.deck) {
+        case 'stage1':
+        case 'stage2':
+          return { ...next, revealed: [...next.revealed, card] };
+        case 'agenda':
+          return { ...next, voting: [...next.voting, card] };
+        case 'relic':
+          return addTo(next, 'relics', action.player, card);
+        default:
+          return addTo(next, 'hands', action.player, card);
+      }
     }
     case 'cards/reshuffle': {
       const pile = shuffle([...cards.decks.action, ...cards.discard], seededRandom(action.seed));
       return { ...cards, decks: { ...cards.decks, action: pile }, discard: [] };
     }
     case 'card/discard': {
-      if (!isActionCard(action.card)) return cards;
-      const next = removeCard(cards, action.card);
-      return { ...next, discard: [...next.discard, action.card] };
+      const deck = deckOf(action.card);
+      if (deck === 'action') {
+        const next = removeCard(cards, action.card);
+        return { ...next, discard: [...next.discard, action.card] };
+      }
+      if (deck === 'agenda') {
+        const next = removeCard(cards, action.card);
+        return { ...next, agendaDiscard: [...next.agendaDiscard, action.card] };
+      }
+      return cards;
     }
-    case 'card/give':
-      return addToHand(removeCard(cards, action.card), action.player, action.card);
+    case 'card/give': {
+      const deck = deckOf(action.card);
+      if (deck === 'relic') return addTo(removeCard(cards, action.card), 'relics', action.player, action.card);
+      if (deck === 'action' || deck === 'secret') {
+        return addTo(removeCard(cards, action.card), 'hands', action.player, action.card);
+      }
+      return cards;
+    }
     case 'card/return': {
-      const deckId = isActionCard(action.card) ? 'action' : OBJECTIVES[action.card]?.type;
+      const deckId = deckOf(action.card);
       if (!deckId) return cards;
       const next = removeCard(cards, action.card);
       const deck = [...next.decks[deckId]];
-      deck.splice(Math.floor(seededRandom(action.seed)() * (deck.length + 1)), 0, action.card);
+      const index =
+        action.position === 'top'
+          ? deck.length
+          : action.position === 'bottom'
+            ? 0
+            : Math.floor(seededRandom(action.seed)() * (deck.length + 1));
+      deck.splice(index, 0, action.card);
       return { ...next, decks: { ...next.decks, [deckId]: deck } };
     }
     case 'card/score': {
@@ -173,13 +261,32 @@ export function applyCardAction(cards: CardsState, action: CardAction): CardsSta
       if (info.type === 'secret') {
         // A scored secret is shown to everyone and leaves its owner's hand; unscoring puts it back.
         const next = removeCard(cards, action.card);
-        if (!action.scored) return addToHand(next, action.player, action.card);
+        if (!action.scored) return addTo(next, 'hands', action.player, action.card);
         return { ...next, scored: { ...next.scored, [action.card]: [action.player] } };
       }
       const scorers = (cards.scored[action.card] ?? []).filter((p) => p !== action.player);
       if (action.scored) scorers.push(action.player);
       return { ...cards, scored: { ...cards.scored, [action.card]: scorers } };
     }
+    case 'card/purge': {
+      const next = removeCard(cards, action.card);
+      return { ...next, purged: [...next.purged, action.card] };
+    }
+    case 'relic/exhaust': {
+      const exhaustedRelics = cards.exhaustedRelics.filter((c) => c !== action.card);
+      if (action.exhausted) exhaustedRelics.push(action.card);
+      return { ...cards, exhaustedRelics };
+    }
+    case 'agenda/enact': {
+      if (AGENDAS[action.card]?.type !== 'law') return cards;
+      const next = removeCard(cards, action.card);
+      return { ...next, laws: [...next.laws, { id: action.card }] };
+    }
+    case 'agenda/elect':
+      return {
+        ...cards,
+        laws: cards.laws.map((law) => (law.id === action.card ? { ...law, elected: action.elected } : law)),
+      };
     case 'strategy/pick':
       // Whoever picks a card also takes the trade goods on it.
       return updateStrategy(cards, action.id, (s) => ({
@@ -196,13 +303,15 @@ export function applyCardAction(cards: CardsState, action: CardAction): CardsSta
   }
 }
 
-function addToHand(cards: CardsState, player: string, card: string): CardsState {
-  return { ...cards, hands: { ...cards.hands, [player]: [...(cards.hands[player] ?? []), card] } };
+function addTo(cards: CardsState, area: 'hands' | 'relics', player: string, card: string): CardsState {
+  return { ...cards, [area]: { ...cards[area], [player]: [...(cards[area][player] ?? []), card] } };
 }
 
-/** Take a card out of whichever pile, hand or objective row it's in. */
+/** Take a card out of whichever pile, hand or play area it's in. */
 function removeCard(cards: CardsState, card: string): CardsState {
   const without = (list: string[]) => list.filter((c) => c !== card);
+  const fromEach = (byPlayer: Record<string, string[]>) =>
+    Object.fromEntries(Object.entries(byPlayer).map(([p, list]) => [p, without(list)]));
   const scored = { ...cards.scored };
   if (OBJECTIVES[card]?.type === 'secret') delete scored[card];
   return {
@@ -211,7 +320,13 @@ function removeCard(cards: CardsState, card: string): CardsState {
     discard: without(cards.discard),
     revealed: without(cards.revealed),
     scored,
-    hands: Object.fromEntries(Object.entries(cards.hands).map(([p, hand]) => [p, without(hand)])),
+    hands: fromEach(cards.hands),
+    voting: without(cards.voting),
+    laws: cards.laws.filter((law) => law.id !== card),
+    agendaDiscard: without(cards.agendaDiscard),
+    relics: fromEach(cards.relics),
+    exhaustedRelics: without(cards.exhaustedRelics),
+    purged: without(cards.purged),
   };
 }
 

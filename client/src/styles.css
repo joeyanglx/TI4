@@ -615,3 +615,28 @@ button {
   padding-left: 18px;
   line-height: 1.4;
 }
+
+.points.law {
+  background: #4b5ea8;
+}
+
+.points.directive {
+  background: #5c6680;
+}
+
+.peek {
+  padding: 4px 8px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+
+.cards-panel input.elected {
+  width: 96px;
+  font: inherit;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}

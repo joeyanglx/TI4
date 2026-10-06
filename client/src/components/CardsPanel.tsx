@@ -1,14 +1,18 @@
-import { useState, type ReactNode } from 'react';
+import { useState } from 'react';
 import {
   ACTION_CARDS,
+  EDITION_NAMES,
   OBJECTIVES,
-  PLAYER_COLORS,
   STRATEGY_CARDS,
   isActionCard,
   randomSeed,
   type Action,
+  type Edition,
   type GameState,
 } from '@ti4/shared';
+import { AgendaSection } from './AgendaSection';
+import { CardDetails, GiveSelect, PlayerTag } from './cardParts';
+import { RelicSection } from './RelicSection';
 
 interface Props {
   state: GameState;
@@ -169,6 +173,9 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
         ))}
       </section>
 
+      <AgendaSection state={state} players={players} dispatch={dispatch} />
+      {cards.edition !== 'base' && <RelicSection state={state} players={players} me={me} dispatch={dispatch} />}
+
       <section>
         <h2>Your hand</h2>
         <p className="hint">Other players only see how many cards you hold.</p>
@@ -180,7 +187,7 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
               <p>{ACTION_CARDS[id].text}</p>
             </CardDetails>
             <div className="card-actions">
-              <GiveSelect players={players} me={me} onGive={(p) => dispatch({ type: 'card/give', card: id, player: p })} />
+              <GiveSelect players={players} exclude={me} onGive={(p) => dispatch({ type: 'card/give', card: id, player: p })} />
               <button onClick={() => dispatch({ type: 'card/discard', card: id })} title="Play or discard">
                 Play
               </button>
@@ -249,29 +256,43 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
         </div>
       </section>
 
-      <CardSetup dispatch={dispatch} />
+      <CardSetup key={cards.edition} edition={cards.edition} dispatch={dispatch} />
     </aside>
   );
 }
 
-function CardSetup({ dispatch }: { dispatch: Props['dispatch'] }) {
-  const [thundersEdge, setThundersEdge] = useState(true);
+function CardSetup({ edition, dispatch }: { edition: Edition; dispatch: Props['dispatch'] }) {
+  const [baseOnly, setBaseOnly] = useState(edition === 'base');
+  const [thundersEdge, setThundersEdge] = useState(edition !== 'pok');
   const [confirming, setConfirming] = useState(false);
+  const chosen: Edition = baseOnly ? 'base' : thundersEdge ? 'te' : 'pok';
   return (
     <details className="card-setup">
-      <summary>New card setup</summary>
+      <summary>Card setup · {EDITION_NAMES[edition]}</summary>
       <label className="checkbox">
-        <input type="checkbox" checked={thundersEdge} onChange={(e) => setThundersEdge(e.target.checked)} />
+        <input type="checkbox" checked={baseOnly} onChange={(e) => setBaseOnly(e.target.checked)} />
+        Base game only (no Prophecy of Kings or Thunder's Edge cards, no relics)
+      </label>
+      <label className="checkbox">
+        <input
+          type="checkbox"
+          checked={thundersEdge && !baseOnly}
+          disabled={baseOnly}
+          onChange={(e) => setThundersEdge(e.target.checked)}
+        />
         Include Thunder's Edge cards
       </label>
-      <p className="hint">Reshuffles every deck, empties all hands and reveals two new stage I objectives.</p>
+      <p className="hint">
+        Starts the game's cards over with {EDITION_NAMES[chosen]}: reshuffles every deck, empties all hands, clears
+        laws and relics, and reveals two new stage I objectives.
+      </p>
       <div className="row">
         {confirming ? (
           <>
             <button
               className="danger"
               onClick={() => {
-                dispatch({ type: 'cards/setup', options: { seed: randomSeed(), thundersEdge } });
+                dispatch({ type: 'cards/setup', options: { seed: randomSeed(), edition: chosen } });
                 setConfirming(false);
               }}
             >
@@ -283,18 +304,6 @@ function CardSetup({ dispatch }: { dispatch: Props['dispatch'] }) {
           <button onClick={() => setConfirming(true)}>Reset cards…</button>
         )}
       </div>
-    </details>
-  );
-}
-
-function CardDetails({ title, subtitle, children }: { title: string; subtitle?: ReactNode; children: ReactNode }) {
-  return (
-    <details className="card-details">
-      <summary>
-        <span className="card-name">{title}</span>
-        {subtitle && <span className="card-subtitle">{subtitle}</span>}
-      </summary>
-      <div className="card-text">{children}</div>
     </details>
   );
 }
@@ -314,31 +323,6 @@ function AbilitySteps({ label, steps }: { label: string; steps: string[] }) {
   );
 }
 
-function GiveSelect({ players, me, onGive }: { players: string[]; me: string; onGive: (player: string) => void }) {
-  const others = players.filter((p) => p !== me);
-  if (!others.length) return null;
-  return (
-    <select value="" onChange={(e) => e.target.value && onGive(e.target.value)} title="Give to another player">
-      <option value="">Give…</option>
-      {others.map((p) => (
-        <option key={p} value={p}>
-          {p}
-        </option>
-      ))}
-    </select>
-  );
-}
-
-function PlayerTag({ player, state }: { player: string; state: GameState }) {
-  const color = state.seats[player]?.color;
-  return (
-    <span className="player-tag">
-      <span className="player-dot" style={{ background: color ? PLAYER_COLORS[color] : 'var(--muted)' }} />
-      {player}
-    </span>
-  );
-}
-
 /** Everyone who's online or has left a mark on the game, you first. */
 function knownPlayers(state: GameState, online: string[], me: string): string[] {
   const { cards } = state;
@@ -346,6 +330,7 @@ function knownPlayers(state: GameState, online: string[], me: string): string[] 
   for (const [p, hand] of Object.entries(cards.hands)) if (hand.length) names.add(p);
   for (const s of cards.strategy) if (s.holder) names.add(s.holder);
   for (const scorers of Object.values(cards.scored)) scorers.forEach((p) => names.add(p));
+  for (const [p, relics] of Object.entries(cards.relics)) if (relics.length) names.add(p);
   return [...names];
 }
 

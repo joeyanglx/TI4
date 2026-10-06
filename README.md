@@ -19,7 +19,7 @@ Open http://localhost:5173, enter a name and a room. Anyone who joins the same r
 - **Systems tab**: search or filter the system tiles and drag them onto a hex. Paste a map string (TTS / map generator format, e.g. `{18} 26 41 ... 84A3`) under *Map string* to load a whole map, or use *Show current* to copy yours out.
 - **Edit map mode** (top bar): drag tiles to move or swap them, double-click to rotate (for hyperlanes), right-click to remove. Pieces are dimmed and locked while editing.
 - Hover any system to see its planets, resources/influence, traits, anomalies and wormholes.
-- **Cards panel** (top bar, right): strategy cards (pick, use/ready, trade goods), public objectives (reveal stage I/II, score), your hand of action cards and secret objectives (draw, play, give, score), the action discard pile, and a scoreboard. Click a card's name to read it. *New card setup* reshuffles everything, with or without Thunder's Edge cards. Other players only see how many cards you hold, but hands aren't secret from anyone reading the network traffic.
+- **Cards panel** (top bar, right): strategy cards (pick, use/ready, trade goods), public objectives (reveal stage I/II, score), agendas (reveal, enact or discard, elect, repeal laws, look at the top two for Politics), relics (gain, exhaust, give, purge), your hand of action cards and secret objectives (draw, play, give, score), the action discard pile, and a scoreboard. Click a card's name to read it. *Card setup* (bottom of the panel) starts the cards over for the base game only, Prophecy of Kings, or PoK + Thunder's Edge. Other players only see how many cards you hold, but hands aren't secret from anyone reading the network traffic.
 - Drag empty space to pan, scroll to zoom.
 
 ## Hosting a game
@@ -55,7 +55,7 @@ Stop the tunnel (Ctrl+C) after the game. There's no login yet: anyone with the l
 
 `shared/src/data/systems.json` and `client/public/tiles/` come from the [KeeganW/ti4](https://github.com/KeeganW/ti4) map generator, filtered to official tiles: base game (1–50), Prophecy of Kings (51–91, including hyperlanes 83A–91B) and Thunder's Edge (92–118). For private use with friends.
 
-`shared/src/data/cards.json` (action cards, objectives, strategy cards) comes from the [AsyncTI4 bot](https://github.com/AsyncTI4/TI4_map_generator_bot), official cards only: the 140-card PoK + Thunder's Edge action deck, PoK objectives, and the PoK strategy cards plus Thunder's Edge's Construction and Warfare. Regenerate it with `node scripts/import-cards.mjs <bot>/src/main/resources/data`.
+`shared/src/data/cards.json` (action cards, objectives, agendas, relics, strategy cards) comes from the [AsyncTI4 bot](https://github.com/AsyncTI4/TI4_map_generator_bot), official cards only. Each edition's decks follow AsyncTI4's deck lists: base game (80 action cards, base objectives and agendas, no relics, base Construction), PoK (120 action cards, PoK objectives and agendas, 16 relics) and PoK + Thunder's Edge (140 action cards, 23 relics, Thunder's Edge Construction and Warfare). Regenerate it with `node scripts/import-cards.mjs <bot>/src/main/resources/data`.
 
 ## How syncing works
 
