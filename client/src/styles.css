@@ -932,3 +932,31 @@ button {
 .po-names .used {
   color: var(--muted);
 }
+
+/* Factions */
+.faction-icon {
+  flex-shrink: 0;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.faction-row {
+  align-items: center;
+}
+
+.tech-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.players {
+  display: flex;
+  gap: 12px;
+}
+
+.topbar-player {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}

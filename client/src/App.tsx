@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { PlayerColor } from '@ti4/shared';
 import { Board, type BoardMode } from './components/Board';
 import { CardsPanel } from './components/CardsPanel';
+import { FactionIcon } from './components/cardParts';
 import { Lobby } from './components/Lobby';
 import { Overview } from './components/Overview';
 import { Sidebar } from './components/Sidebar';
@@ -64,7 +65,17 @@ function Table({ room, name }: Session) {
             Edit map
           </button>
         </div>
-        <span className="players">{players.join(', ')}</span>
+        <span className="players">
+          {players.map((p) => {
+            const faction = state.seats[p]?.faction;
+            return (
+              <span key={p} className="topbar-player">
+                {faction && <FactionIcon faction={faction} />}
+                {p}
+              </span>
+            );
+          })}
+        </span>
         <button
           className={`toggle ${showCards ? 'selected' : ''}`}
           onClick={() => {

@@ -62,6 +62,15 @@ export interface TechnologyInfo {
   text: string;
 }
 
+export interface FactionInfo {
+  name: string;
+  expansion: CardExpansion;
+  /** Technologies the faction starts with. */
+  startingTech: string[];
+  /** Factions that pick their starting techs instead; no options means any technology. */
+  choose?: { count: number; options: string[] };
+}
+
 export interface StrategyCardInfo {
   name: string;
   initiative: number;
@@ -77,12 +86,22 @@ export const AGENDAS = cardsJson.agendas as Record<string, AgendaInfo>;
 export const RELICS = cardsJson.relics as Record<string, RelicInfo>;
 export const STRATEGY_CARDS = cardsJson.strategyCards as Record<string, StrategyCardInfo>;
 export const TECHNOLOGIES = cardsJson.technologies as Record<string, TechnologyInfo>;
+/** Keyed by AsyncTI4 faction alias, e.g. "hacan". */
+export const FACTIONS = cardsJson.factions as Record<string, FactionInfo>;
 
 export type DeckId = 'action' | ObjectiveType | 'agenda' | 'relic';
 export const DECK_IDS: DeckId[] = ['action', 'secret', 'stage1', 'stage2', 'agenda', 'relic'];
 
 /** The cards in each edition's decks, straight from AsyncTI4's deck lists. */
-const EDITION_DECKS = cardsJson.editions as Record<Edition, Record<DeckId | 'strategy' | 'technology', string[]>>;
+const EDITION_DECKS = cardsJson.editions as Record<
+  Edition,
+  Record<DeckId | 'strategy' | 'technology' | 'faction', string[]>
+>;
+
+/** Factions playable in an edition. */
+export function editionFactions(edition: Edition): string[] {
+  return EDITION_DECKS[edition].faction;
+}
 
 /** Technologies available in an edition: generic ones plus every faction's. */
 export function editionTechnologies(edition: Edition): string[] {

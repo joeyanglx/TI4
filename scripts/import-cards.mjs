@@ -19,7 +19,7 @@ const decks = Object.fromEntries(
 );
 
 // AsyncTI4 tags half of PoK's action cards as "codex1", and some relics as later Codices; all are in a PoK game.
-const EXPANSION = { base: 'base', pok: 'pok', codex1: 'pok', codex2: 'pok', codex4: 'pok', thunders_edge: 'te' };
+const EXPANSION = { base: 'base', pok: 'pok', codex1: 'pok', codex2: 'pok', codex3: 'pok', codex4: 'pok', thunders_edge: 'te' };
 const isTe = (card) => card.source === 'thunders_edge';
 const expansion = (source) => {
   const e = EXPANSION[source];
@@ -132,6 +132,37 @@ for (const id of new Set([...decks.techs_base, ...decks.techs_pok, ...teTechs.ma
   };
 }
 
+// Factions: name and starting technologies. Icons come from scripts/import-faction-icons.py.
+// The Firmament flips into the Obsidian during the game, so only the Firmament is listed; the three
+// Council Keleres variants differ only in home system, so they're one faction here.
+const factionSource = byAlias([
+  ...read('factions/base.json'),
+  ...read('factions/pok.json'),
+  ...read('factions/te_factions.json'),
+  ...read('factions/keleres.json'),
+]);
+const FACTION_SETS = {
+  base: read('factions/base.json').map((f) => f.alias),
+  pok: [...read('factions/pok.json').map((f) => f.alias), 'keleres'],
+  te: ['bastion', 'crimson', 'deepwrought', 'firmament', 'ralnel'],
+};
+const factions = {};
+for (const alias of Object.values(FACTION_SETS).flat()) {
+  const f = factionSource[alias === 'keleres' ? 'keleresm' : alias];
+  const known = (ids) => ids.map((id) => TECH + id).filter((id) => technologies[id] || console.warn(`No tech ${id}`));
+  factions[alias] = {
+    name: alias === 'keleres' ? 'The Council Keleres' : f.factionName,
+    expansion: expansion(f.source),
+    startingTech: known(f.startingTech ?? []),
+    // Some factions choose their starting techs; an empty option list means "any".
+    choose: f.startingTechAmount
+      ? { count: f.startingTechAmount, options: known(f.startingTechOptions ?? []) }
+      : alias === 'keleres'
+        ? { count: 2, options: [] }
+        : undefined,
+  };
+}
+
 const editions = {
   base: {
     action: decks.action_cards_basegame,
@@ -142,6 +173,7 @@ const editions = {
     relic: [],
     strategy: STRATEGY_SETS.base,
     technology: decks.techs_base.map((id) => TECH + id),
+    faction: FACTION_SETS.base,
   },
   pok: {
     action: decks.action_cards_pok,
@@ -152,6 +184,7 @@ const editions = {
     relic: decks.relics_pok.map((id) => RELIC + id),
     strategy: STRATEGY_SETS.pok,
     technology: pokTechs.map((id) => TECH + id),
+    faction: [...FACTION_SETS.base, ...FACTION_SETS.pok],
   },
   te: {
     action: decks.action_cards_te,
@@ -162,11 +195,12 @@ const editions = {
     relic: decks.relics_pok_te.map((id) => RELIC + id),
     strategy: STRATEGY_SETS.te,
     technology: [...decks.techs_pok, ...teTechs.map((t) => t.alias)].map((id) => TECH + id),
+    faction: Object.values(FACTION_SETS).flat(),
   },
 };
 
 const out = path.resolve(import.meta.dirname, '../shared/src/data/cards.json');
-writeFileSync(out, JSON.stringify({ actionCards, objectives, agendas, relics, strategyCards, technologies, editions }, null, 1) + '\n');
+writeFileSync(out, JSON.stringify({ actionCards, objectives, agendas, relics, strategyCards, technologies, factions, editions }, null, 1) + '\n');
 for (const [name, e] of Object.entries(editions)) {
   console.log(name, Object.fromEntries(Object.entries(e).map(([k, v]) => [k, v.length])));
 }

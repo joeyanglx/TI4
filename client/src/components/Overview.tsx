@@ -1,5 +1,6 @@
 import {
   EDITION_NAMES,
+  FACTIONS,
   PLANETS,
   PLAYER_COLORS,
   STRATEGY_CARDS,
@@ -10,6 +11,7 @@ import {
   type GameState,
 } from '@ti4/shared';
 import { knownPlayers, reinforcements, victoryPoints } from '../players';
+import { FactionIcon } from './cardParts';
 import { TECH_TYPES, techTooltip } from '../techs';
 
 /** Points needed to win in a standard game. */
@@ -61,10 +63,17 @@ function PlayerOverview({ state, player, online }: { state: GameState; player: s
   return (
     <article className="player-overview" style={{ borderLeftColor: color }}>
       <div className="po-header">
-        <span className="player-dot big" style={{ background: color }} />
+        {seat.faction ? (
+          <FactionIcon faction={seat.faction} size={34} />
+        ) : (
+          <span className="player-dot big" style={{ background: color }} />
+        )}
         <div className="po-name">
           <strong>{player}</strong>
-          <div className="muted">{online ? 'Online' : 'Offline'}</div>
+          <div className="muted">
+            {seat.faction && `${FACTIONS[seat.faction]?.name} · `}
+            {online ? 'Online' : 'Offline'}
+          </div>
         </div>
         <span className="po-vp" title="Victory points">
           {victoryPoints(state, player)} / {VP_TO_WIN}

@@ -3106,6 +3106,277 @@
    "text": "At the start of your turn, destroy 1 of another player's infantry in or adjacent to a system that contains your infantry.\nThis technology cannot be researched."
   }
  },
+ "factions": {
+  "arborec": {
+   "name": "The Arborec",
+   "expansion": "base",
+   "startingTech": [
+    "tech_md"
+   ]
+  },
+  "ghost": {
+   "name": "The Ghosts of Creuss",
+   "expansion": "base",
+   "startingTech": [
+    "tech_gd"
+   ]
+  },
+  "hacan": {
+   "name": "The Emirates of Hacan",
+   "expansion": "base",
+   "startingTech": [
+    "tech_st",
+    "tech_amd"
+   ]
+  },
+  "jolnar": {
+   "name": "The Universities of Jol-Nar",
+   "expansion": "base",
+   "startingTech": [
+    "tech_amd",
+    "tech_st",
+    "tech_nm",
+    "tech_ps"
+   ]
+  },
+  "l1z1x": {
+   "name": "The L1Z1X Mindnet",
+   "expansion": "base",
+   "startingTech": [
+    "tech_ps",
+    "tech_nm"
+   ]
+  },
+  "letnev": {
+   "name": "The Barony of Letnev",
+   "expansion": "base",
+   "startingTech": [
+    "tech_amd",
+    "tech_ps"
+   ]
+  },
+  "mentak": {
+   "name": "The Mentak Coalition",
+   "expansion": "base",
+   "startingTech": [
+    "tech_ps",
+    "tech_st"
+   ]
+  },
+  "muaat": {
+   "name": "The Embers of Muaat",
+   "expansion": "base",
+   "startingTech": [
+    "tech_ps"
+   ]
+  },
+  "naalu": {
+   "name": "The Naalu Collective",
+   "expansion": "base",
+   "startingTech": [
+    "tech_st",
+    "tech_nm"
+   ]
+  },
+  "nekro": {
+   "name": "The Nekro Virus",
+   "expansion": "base",
+   "startingTech": [
+    "tech_dxa"
+   ]
+  },
+  "saar": {
+   "name": "The Clan of Saar",
+   "expansion": "base",
+   "startingTech": [
+    "tech_amd"
+   ]
+  },
+  "sardakk": {
+   "name": "Sardakk Norr",
+   "expansion": "base",
+   "startingTech": []
+  },
+  "sol": {
+   "name": "The Federation of Sol",
+   "expansion": "base",
+   "startingTech": [
+    "tech_amd",
+    "tech_nm"
+   ]
+  },
+  "winnu": {
+   "name": "The Winnu",
+   "expansion": "base",
+   "startingTech": [],
+   "choose": {
+    "count": 1,
+    "options": [
+     "tech_amd",
+     "tech_det",
+     "tech_nm",
+     "tech_pa",
+     "tech_st",
+     "tech_sdn",
+     "tech_ps",
+     "tech_aida"
+    ]
+   }
+  },
+  "xxcha": {
+   "name": "The Xxcha Kingdom",
+   "expansion": "base",
+   "startingTech": [
+    "tech_gls"
+   ]
+  },
+  "yin": {
+   "name": "The Yin Brotherhood",
+   "expansion": "base",
+   "startingTech": [
+    "tech_st"
+   ]
+  },
+  "yssaril": {
+   "name": "The Yssaril Tribes",
+   "expansion": "base",
+   "startingTech": [
+    "tech_nm"
+   ]
+  },
+  "argent": {
+   "name": "The Argent Flight",
+   "expansion": "pok",
+   "startingTech": [],
+   "choose": {
+    "count": 2,
+    "options": [
+     "tech_nm",
+     "tech_st",
+     "tech_ps"
+    ]
+   }
+  },
+  "cabal": {
+   "name": "The Vuil'raith Cabal",
+   "expansion": "pok",
+   "startingTech": [
+    "tech_sar"
+   ]
+  },
+  "empyrean": {
+   "name": "The Empyrean",
+   "expansion": "pok",
+   "startingTech": [
+    "tech_det"
+   ]
+  },
+  "mahact": {
+   "name": "The Mahact Gene-Sorcerers",
+   "expansion": "pok",
+   "startingTech": [
+    "tech_pi",
+    "tech_bs"
+   ]
+  },
+  "nomad": {
+   "name": "The Nomad",
+   "expansion": "pok",
+   "startingTech": [
+    "tech_sr"
+   ]
+  },
+  "naaz": {
+   "name": "The Naaz-Rokha Alliance",
+   "expansion": "pok",
+   "startingTech": [
+    "tech_pa",
+    "tech_aida"
+   ]
+  },
+  "titans": {
+   "name": "The Titans of Ul",
+   "expansion": "pok",
+   "startingTech": [
+    "tech_amd",
+    "tech_sdn"
+   ]
+  },
+  "keleres": {
+   "name": "The Council Keleres",
+   "expansion": "pok",
+   "startingTech": [],
+   "choose": {
+    "count": 2,
+    "options": []
+   }
+  },
+  "bastion": {
+   "name": "Last Bastion",
+   "expansion": "te",
+   "startingTech": [],
+   "choose": {
+    "count": 1,
+    "options": [
+     "tech_amd",
+     "tech_det",
+     "tech_st",
+     "tech_sdn"
+    ]
+   }
+  },
+  "crimson": {
+   "name": "The Crimson Rebellion",
+   "expansion": "te",
+   "startingTech": [],
+   "choose": {
+    "count": 1,
+    "options": [
+     "tech_det",
+     "tech_amd",
+     "tech_ps",
+     "tech_aida"
+    ]
+   }
+  },
+  "deepwrought": {
+   "name": "The Deepwrought Scholarate",
+   "expansion": "te",
+   "startingTech": [],
+   "choose": {
+    "count": 2,
+    "options": []
+   }
+  },
+  "firmament": {
+   "name": "The Firmament",
+   "expansion": "te",
+   "startingTech": [],
+   "choose": {
+    "count": 1,
+    "options": [
+     "tech_nm",
+     "tech_pa",
+     "tech_st",
+     "tech_sdn"
+    ]
+   }
+  },
+  "ralnel": {
+   "name": "The Ral Nel Consortium",
+   "expansion": "te",
+   "startingTech": [],
+   "choose": {
+    "count": 1,
+    "options": [
+     "tech_nm",
+     "tech_pa",
+     "tech_ps",
+     "tech_aida"
+    ]
+   }
+  }
+ },
  "editions": {
   "base": {
    "action": [
@@ -3359,6 +3630,25 @@
     "tech_yso",
     "tech_ic",
     "tech_tp"
+   ],
+   "faction": [
+    "arborec",
+    "ghost",
+    "hacan",
+    "jolnar",
+    "l1z1x",
+    "letnev",
+    "mentak",
+    "muaat",
+    "naalu",
+    "nekro",
+    "saar",
+    "sardakk",
+    "sol",
+    "winnu",
+    "xxcha",
+    "yin",
+    "yssaril"
    ]
   },
   "pok": {
@@ -3736,6 +4026,33 @@
     "tech_vtx",
     "tech_iihq",
     "tech_asn"
+   ],
+   "faction": [
+    "arborec",
+    "ghost",
+    "hacan",
+    "jolnar",
+    "l1z1x",
+    "letnev",
+    "mentak",
+    "muaat",
+    "naalu",
+    "nekro",
+    "saar",
+    "sardakk",
+    "sol",
+    "winnu",
+    "xxcha",
+    "yin",
+    "yssaril",
+    "argent",
+    "cabal",
+    "empyrean",
+    "mahact",
+    "nomad",
+    "naaz",
+    "titans",
+    "keleres"
    ]
   },
   "te": {
@@ -4154,6 +4471,38 @@
     "tech_planesplitter-obs",
     "tech_parasite-obs",
     "tech_executiveorder"
+   ],
+   "faction": [
+    "arborec",
+    "ghost",
+    "hacan",
+    "jolnar",
+    "l1z1x",
+    "letnev",
+    "mentak",
+    "muaat",
+    "naalu",
+    "nekro",
+    "saar",
+    "sardakk",
+    "sol",
+    "winnu",
+    "xxcha",
+    "yin",
+    "yssaril",
+    "argent",
+    "cabal",
+    "empyrean",
+    "mahact",
+    "nomad",
+    "naaz",
+    "titans",
+    "keleres",
+    "bastion",
+    "crimson",
+    "deepwrought",
+    "firmament",
+    "ralnel"
    ]
   }
  }

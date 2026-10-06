@@ -1,8 +1,11 @@
+import { FACTIONS } from './cards';
 import type { PlayerColor } from './pieces';
 
 /** Per-player info everyone can see, keyed by player name. */
 export interface Seat {
   color?: PlayerColor;
+  /** Faction alias, e.g. "hacan" (see FACTIONS). Only shown as an icon and used for starting techs. */
+  faction?: string;
   /** Victory points from anything other than objectives: custodians, agendas, relics, Imperial. */
   bonusVp: number;
   tradeGoods: number;
@@ -31,6 +34,8 @@ export type Commodity = 'tradeGoods' | 'commodities';
 
 export type PlayerAction =
   | { type: 'seat/color'; player: string; color: PlayerColor }
+  /** Pick a faction at game start: swaps the old faction's starting techs for the new one's. */
+  | { type: 'seat/faction'; player: string; faction?: string }
   | { type: 'seat/bonusVp'; player: string; amount: number }
   | { type: 'seat/tradeGoods'; player: string; amount: number }
   | { type: 'seat/commodities'; player: string; amount: number }
@@ -82,6 +87,17 @@ export function applyPlayerAction<S extends PlayersState>(state: S, action: Play
   switch (action.type) {
     case 'seat/color':
       return update(action.player, () => ({ color: action.color }));
+    case 'seat/faction':
+      return update(action.player, (s) => {
+        const old = (s.faction && FACTIONS[s.faction]?.startingTech) || [];
+        const starting = (action.faction && FACTIONS[action.faction]?.startingTech) || [];
+        const kept = s.technologies.filter((t) => !old.includes(t));
+        return {
+          faction: action.faction,
+          technologies: [...kept, ...starting.filter((t) => !kept.includes(t))],
+          exhaustedTechnologies: s.exhaustedTechnologies.filter((t) => !old.includes(t)),
+        };
+      });
     case 'seat/bonusVp':
       return update(action.player, (s) => ({ bonusVp: add(s.bonusVp, action.amount) }));
     case 'seat/tradeGoods':

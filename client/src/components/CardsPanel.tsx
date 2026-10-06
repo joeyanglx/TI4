@@ -16,6 +16,7 @@ import { AgendaSection } from './AgendaSection';
 import { CardDetails, GiveSelect, PlayerTag } from './cardParts';
 import { TechSection, TokenSection } from './CommandSheet';
 import { EconomySection } from './EconomySection';
+import { FactionSection } from './FactionSection';
 import { AllPlanets, YourPlanets } from './PlanetSection';
 import { RelicSection } from './RelicSection';
 
@@ -53,6 +54,7 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
       </div>
       {tab === 'you' ? (
         <>
+          <FactionSection state={state} me={me} dispatch={dispatch} />
           <EconomySection state={state} players={players} me={me} dispatch={dispatch} />
           <section>
             <h2>Your hand</h2>

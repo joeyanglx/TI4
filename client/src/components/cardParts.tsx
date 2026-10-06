@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { PLAYER_COLORS, type GameState } from '@ti4/shared';
+import { FACTIONS, PLAYER_COLORS, type GameState } from '@ti4/shared';
 
 // Small pieces shared by the card panel sections.
 
@@ -43,10 +43,26 @@ export function GiveSelect({
 
 export function PlayerTag({ player, state }: { player: string; state: GameState }) {
   const color = state.seats[player]?.color;
+  const faction = state.seats[player]?.faction;
   return (
     <span className="player-tag">
       <span className="player-dot" style={{ background: color ? PLAYER_COLORS[color] : 'var(--muted)' }} />
+      {faction && <FactionIcon faction={faction} />}
       {player}
     </span>
+  );
+}
+
+export function FactionIcon({ faction, size = 18 }: { faction: string; size?: number }) {
+  const name = FACTIONS[faction]?.name ?? faction;
+  return (
+    <img
+      className="faction-icon"
+      src={`${import.meta.env.BASE_URL}factions/${faction}.webp`}
+      alt={name}
+      title={name}
+      width={size}
+      height={size}
+    />
   );
 }
