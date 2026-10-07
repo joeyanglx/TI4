@@ -13,6 +13,10 @@ export interface Planet {
   traits?: ('cultural' | 'hazardous' | 'industrial')[];
   specialties?: string[];
   ability?: string;
+  /** Planet circle on the tile, in board pixels from the tile centre (unrotated). From AsyncTI4's tile layouts. */
+  x?: number;
+  y?: number;
+  radius?: number;
 }
 
 export interface SystemInfo {

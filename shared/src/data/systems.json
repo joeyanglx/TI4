@@ -9,7 +9,10 @@
    {
     "name": "Jord",
     "resources": 4,
-    "influence": 2
+    "influence": 2,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Federation of Sol"
@@ -24,7 +27,10 @@
    {
     "name": "Moll Primus",
     "resources": 4,
-    "influence": 1
+    "influence": 1,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Mentak Coalition"
@@ -39,7 +45,10 @@
    {
     "name": "Darien",
     "resources": 4,
-    "influence": 4
+    "influence": 4,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Yin Brotherhood"
@@ -54,7 +63,10 @@
    {
     "name": "Muaat",
     "resources": 4,
-    "influence": 1
+    "influence": 1,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Embers of Muaat"
@@ -69,7 +81,10 @@
    {
     "name": "Nestphar",
     "resources": 3,
-    "influence": 2
+    "influence": 2,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Arborec"
@@ -84,7 +99,10 @@
    {
     "name": "[0.0.0]",
     "resources": 5,
-    "influence": 0
+    "influence": 0,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Lizix Mindnet"
@@ -99,7 +117,10 @@
    {
     "name": "Winnu",
     "resources": 3,
-    "influence": 4
+    "influence": 4,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Winnu"
@@ -114,7 +135,10 @@
    {
     "name": "Mordai II",
     "resources": 4,
-    "influence": 0
+    "influence": 0,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Nekro Virus"
@@ -129,12 +153,18 @@
    {
     "name": "Maaluuk",
     "resources": 2,
-    "influence": 0
+    "influence": 0,
+    "x": -22.3,
+    "y": -36.8,
+    "radius": 31.9
    },
    {
     "name": "Druaa",
     "resources": 3,
-    "influence": 1
+    "influence": 1,
+    "x": 31.0,
+    "y": 29.3,
+    "radius": 31.9
    }
   ],
   "faction": "The Naalu Collective"
@@ -149,12 +179,18 @@
    {
     "name": "Arc Prime",
     "resources": 4,
-    "influence": 0
+    "influence": 0,
+    "x": -22.3,
+    "y": -36.8,
+    "radius": 31.9
    },
    {
     "name": "Wren Terra",
     "resources": 2,
-    "influence": 1
+    "influence": 1,
+    "x": 31.0,
+    "y": 29.3,
+    "radius": 31.9
    }
   ],
   "faction": "The Barony of Letnev"
@@ -169,12 +205,18 @@
    {
     "name": "Lisis II",
     "resources": 1,
-    "influence": 0
+    "influence": 0,
+    "x": -21.2,
+    "y": -39.7,
+    "radius": 31.9
    },
    {
     "name": "Ragh",
     "resources": 2,
-    "influence": 1
+    "influence": 1,
+    "x": 28.7,
+    "y": 29.3,
+    "radius": 31.9
    }
   ],
   "faction": "The Clan of Saar"
@@ -189,12 +231,18 @@
    {
     "name": "Nar",
     "resources": 2,
-    "influence": 3
+    "influence": 3,
+    "x": -22.3,
+    "y": -37.4,
+    "radius": 31.9
    },
    {
     "name": "Jol",
     "resources": 1,
-    "influence": 2
+    "influence": 2,
+    "x": 31.0,
+    "y": 29.3,
+    "radius": 31.9
    }
   ],
   "faction": "The Universities of Jol-Nar"
@@ -209,12 +257,18 @@
    {
     "name": "Tren'lak",
     "resources": 1,
-    "influence": 0
+    "influence": 0,
+    "x": -24.6,
+    "y": -36.8,
+    "radius": 31.9
    },
    {
     "name": "Quinarra",
     "resources": 3,
-    "influence": 1
+    "influence": 1,
+    "x": 31.0,
+    "y": 29.3,
+    "radius": 31.9
    }
   ],
   "faction": "Sardakk N'orr"
@@ -229,12 +283,18 @@
    {
     "name": "Archon Ren",
     "resources": 2,
-    "influence": 3
+    "influence": 3,
+    "x": -22.3,
+    "y": -36.8,
+    "radius": 31.9
    },
    {
     "name": "Archon Tau",
     "resources": 1,
-    "influence": 1
+    "influence": 1,
+    "x": 31.0,
+    "y": 29.3,
+    "radius": 31.9
    }
   ],
   "faction": "The Xxcha Kingdom"
@@ -249,12 +309,18 @@
    {
     "name": "Retillion",
     "resources": 2,
-    "influence": 3
+    "influence": 3,
+    "x": -24.6,
+    "y": -37.4,
+    "radius": 31.9
    },
    {
     "name": "Shalloq",
     "resources": 1,
-    "influence": 2
+    "influence": 2,
+    "x": 29.3,
+    "y": 29.3,
+    "radius": 31.9
    }
   ],
   "faction": "The Yssaril Tribes"
@@ -269,17 +335,26 @@
    {
     "name": "Arretze",
     "resources": 2,
-    "influence": 0
+    "influence": 0,
+    "x": 21.2,
+    "y": -40.3,
+    "radius": 26.1
    },
    {
     "name": "Hercant",
     "resources": 1,
-    "influence": 1
+    "influence": 1,
+    "x": -49.6,
+    "y": -7.8,
+    "radius": 26.1
    },
    {
     "name": "Kamdorn",
     "resources": 0,
-    "influence": 1
+    "influence": 1,
+    "x": 32.2,
+    "y": 42.0,
+    "radius": 26.1
    }
   ],
   "faction": "The Emirates of Hacan"
@@ -305,7 +380,10 @@
    {
     "name": "Mecatol Rex",
     "resources": 1,
-    "influence": 6
+    "influence": 6,
+    "x": 0.0,
+    "y": -1.4,
+    "radius": 64.8
    }
   ]
  },
@@ -325,7 +403,10 @@
     ],
     "specialties": [
      "cybernetic"
-    ]
+    ],
+    "x": -1.4,
+    "y": 0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -342,7 +423,10 @@
     "influence": 2,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -1.4,
+    "y": 0.3,
+    "radius": 43.5
    }
   ]
  },
@@ -362,7 +446,10 @@
     ],
     "specialties": [
      "propulsion"
-    ]
+    ],
+    "x": -0.3,
+    "y": -0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -382,7 +469,10 @@
     ],
     "specialties": [
      "biotic"
-    ]
+    ],
+    "x": -0.3,
+    "y": 1.4,
+    "radius": 43.5
    }
   ]
  },
@@ -399,7 +489,10 @@
     "influence": 2,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -0.3,
+    "y": -0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -419,7 +512,10 @@
     ],
     "specialties": [
      "warfare"
-    ]
+    ],
+    "x": -0.3,
+    "y": 0.3,
+    "radius": 43.5
    }
   ]
  },
@@ -438,7 +534,10 @@
     "influence": 1,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -20.6,
+    "y": -35.6,
+    "radius": 43.5
    }
   ]
  },
@@ -457,7 +556,10 @@
     "influence": 1,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -20.6,
+    "y": -35.6,
+    "radius": 43.5
    }
   ]
  },
@@ -477,7 +579,10 @@
     ],
     "specialties": [
      "biotic"
-    ]
+    ],
+    "x": -21.7,
+    "y": -35.6,
+    "radius": 31.9
    },
    {
     "name": "Starpoint",
@@ -485,7 +590,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 17.1,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -502,7 +610,10 @@
     "influence": 0,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -20.6,
+    "y": -35.6,
+    "radius": 31.9
    },
    {
     "name": "Torkan",
@@ -510,7 +621,10 @@
     "influence": 3,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": 17.7,
+    "y": 33.9,
+    "radius": 31.9
    }
   ]
  },
@@ -527,7 +641,10 @@
     "influence": 2,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -21.2,
+    "y": -35.6,
+    "radius": 31.9
    },
    {
     "name": "Rarron",
@@ -535,7 +652,10 @@
     "influence": 3,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": 17.1,
+    "y": 32.7,
+    "radius": 31.9
    }
   ]
  },
@@ -552,7 +672,10 @@
     "influence": 2,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -20.6,
+    "y": -35.6,
+    "radius": 31.9
    },
    {
     "name": "Zohbat",
@@ -560,7 +683,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 18.8,
+    "y": 39.1,
+    "radius": 31.9
    }
   ]
  },
@@ -580,7 +706,10 @@
     ],
     "specialties": [
      "cybernetic"
-    ]
+    ],
+    "x": -21.2,
+    "y": -33.9,
+    "radius": 31.9
    },
    {
     "name": "Sakulag",
@@ -588,7 +717,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 17.7,
+    "y": 33.9,
+    "radius": 31.9
    }
   ]
  },
@@ -605,7 +737,10 @@
     "influence": 2,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -20.6,
+    "y": -34.5,
+    "radius": 31.9
    },
    {
     "name": "Xxehan",
@@ -613,7 +748,10 @@
     "influence": 1,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": 17.1,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -630,15 +768,21 @@
     "influence": 2,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -20.6,
+    "y": -35.6,
+    "radius": 31.9
    },
    {
-    "name": "Resulon",
+    "name": "Resculon",
     "resources": 2,
     "influence": 0,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": 17.7,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -655,7 +799,10 @@
     "influence": 3,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -19.4,
+    "y": -35.0,
+    "radius": 31.9
    },
    {
     "name": "Gral",
@@ -666,7 +813,10 @@
     ],
     "specialties": [
      "propulsion"
-    ]
+    ],
+    "x": 18.3,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -683,7 +833,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -20.0,
+    "y": -34.5,
+    "radius": 31.9
    },
    {
     "name": "Lirta IV",
@@ -691,7 +844,10 @@
     "influence": 3,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 18.8,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -708,7 +864,10 @@
     "influence": 1,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -20.0,
+    "y": -33.9,
+    "radius": 31.9
    },
    {
     "name": "Lor",
@@ -716,7 +875,10 @@
     "influence": 2,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": 17.7,
+    "y": 33.9,
+    "radius": 31.9
    }
   ]
  },
@@ -733,7 +895,10 @@
     "influence": 2,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -20.6,
+    "y": -35.6,
+    "radius": 31.9
    },
    {
     "name": "Meer",
@@ -744,7 +909,10 @@
     ],
     "specialties": [
      "warfare"
-    ]
+    ],
+    "x": 16.5,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -761,7 +929,10 @@
     "influence": 0,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -21.2,
+    "y": -33.9,
+    "radius": 31.9
    },
    {
     "name": "Fria",
@@ -769,7 +940,10 @@
     "influence": 0,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 17.1,
+    "y": 33.9,
+    "radius": 31.9
    }
   ]
  },
@@ -895,7 +1069,10 @@
    {
     "name": "Creuss",
     "resources": 4,
-    "influence": 2
+    "influence": 2,
+    "x": 19.4,
+    "y": 6.7,
+    "radius": 43.5
    }
   ],
   "faction": "The Ghosts of Creuss"
@@ -910,7 +1087,10 @@
    {
     "name": "Ixth",
     "resources": 3,
-    "influence": 5
+    "influence": 5,
+    "x": -0.9,
+    "y": -11.3,
+    "radius": 43.5
    }
   ],
   "faction": "The Mahact Gene-sorcerers"
@@ -925,7 +1105,10 @@
    {
     "name": "Arcturus",
     "resources": 4,
-    "influence": 4
+    "influence": 4,
+    "x": -1.4,
+    "y": -11.3,
+    "radius": 43.5
    }
   ],
   "faction": "The Nomad"
@@ -940,7 +1123,10 @@
    {
     "name": "Acheron",
     "resources": 4,
-    "influence": 0
+    "influence": 0,
+    "x": -1.4,
+    "y": -11.3,
+    "radius": 43.5
    }
   ],
   "faction": "The Vuil'raith Cabal"
@@ -955,7 +1141,10 @@
    {
     "name": "Elysium",
     "resources": 4,
-    "influence": 1
+    "influence": 1,
+    "x": -1.4,
+    "y": -12.5,
+    "radius": 43.5
    }
   ],
   "faction": "The Titans of Ul"
@@ -972,7 +1161,10 @@
    {
     "name": "The Dark",
     "resources": 3,
-    "influence": 4
+    "influence": 4,
+    "x": 0.3,
+    "y": -8.4,
+    "radius": 43.5
    }
   ],
   "faction": "The Empyrean"
@@ -987,12 +1179,18 @@
    {
     "name": "Naazir",
     "resources": 2,
-    "influence": 1
+    "influence": 1,
+    "x": -22.3,
+    "y": -37.4,
+    "radius": 31.9
    },
    {
     "name": "Rokha",
     "resources": 1,
-    "influence": 2
+    "influence": 2,
+    "x": 31.0,
+    "y": 29.8,
+    "radius": 31.9
    }
   ],
   "faction": "The Naaz-Rokha Alliance"
@@ -1007,17 +1205,26 @@
    {
     "name": "Valk",
     "resources": 2,
-    "influence": 0
+    "influence": 0,
+    "x": -50.1,
+    "y": -6.7,
+    "radius": 26.1
    },
    {
     "name": "Avar",
     "resources": 1,
-    "influence": 1
+    "influence": 1,
+    "x": 29.9,
+    "y": 43.2,
+    "radius": 26.1
    },
    {
     "name": "Ylir",
     "resources": 0,
-    "influence": 2
+    "influence": 2,
+    "x": 21.7,
+    "y": -39.7,
+    "radius": 26.1
    }
   ],
   "faction": "The Argent Flight"
@@ -1038,7 +1245,10 @@
     ],
     "specialties": [
      "propulsion"
-    ]
+    ],
+    "x": -2.6,
+    "y": 1.4,
+    "radius": 43.5
    }
   ]
  },
@@ -1055,7 +1265,10 @@
     "influence": 1,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -2.6,
+    "y": 1.4,
+    "radius": 43.5
    }
   ]
  },
@@ -1075,7 +1288,10 @@
     ],
     "specialties": [
      "warfare"
-    ]
+    ],
+    "x": -0.3,
+    "y": -0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -1095,7 +1311,10 @@
     ],
     "specialties": [
      "cybernetic"
-    ]
+    ],
+    "x": -2.0,
+    "y": -0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -1115,7 +1334,10 @@
     ],
     "specialties": [
      "biotic"
-    ]
+    ],
+    "x": -1.4,
+    "y": 0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -1134,7 +1356,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -21.7,
+    "y": -34.5,
+    "radius": 43.5
    }
   ]
  },
@@ -1155,7 +1380,10 @@
     "specialties": [
      "legendary"
     ],
-    "ability": "The Atrament - You may exhaust this card at the end of your turn to place up to 2 infantry from your reinforcements on any planet you control."
+    "ability": "The Atrament - You may exhaust this card at the end of your turn to place up to 2 infantry from your reinforcements on any planet you control.",
+    "x": -0.3,
+    "y": -0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -1176,7 +1404,10 @@
     "specialties": [
      "legendary"
     ],
-    "ability": "Imperial Arms Vault - You may exhaust this card at the end of your turn to place 1 mech from your reinforcements on any planet you control, or draw 1 action card."
+    "ability": "Imperial Arms Vault - You may exhaust this card at the end of your turn to place 1 mech from your reinforcements on any planet you control, or draw 1 action card.",
+    "x": -2.0,
+    "y": 0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -1195,7 +1426,10 @@
     "influence": 0,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -22.3,
+    "y": -11.9,
+    "radius": 43.5
    }
   ]
  },
@@ -1214,7 +1448,10 @@
     "influence": 1,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -18.3,
+    "y": -13.0,
+    "radius": 43.5
    }
   ]
  },
@@ -1231,7 +1468,10 @@
     "influence": 3,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -22.3,
+    "y": -36.8,
+    "radius": 31.9
    },
    {
     "name": "Jeol Ir",
@@ -1239,7 +1479,10 @@
     "influence": 3,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": 17.1,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -1256,7 +1499,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -20.6,
+    "y": -35.6,
+    "radius": 31.9
    },
    {
     "name": "Siig",
@@ -1264,7 +1510,10 @@
     "influence": 2,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 16.5,
+    "y": 32.7,
+    "radius": 31.9
    }
   ]
  },
@@ -1281,7 +1530,10 @@
     "influence": 2,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -21.2,
+    "y": -34.5,
+    "radius": 31.9
    },
    {
     "name": "Alio Prima",
@@ -1289,7 +1541,10 @@
     "influence": 1,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": 17.1,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -1306,7 +1561,10 @@
     "influence": 2,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -22.3,
+    "y": -36.2,
+    "radius": 31.9
    },
    {
     "name": "Velnor",
@@ -1317,7 +1575,10 @@
     ],
     "specialties": [
      "warfare"
-    ]
+    ],
+    "x": 17.1,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -1329,7 +1590,7 @@
   "anomalies": [],
   "planets": [
    {
-    "name": "Lisis",
+    "name": "Cealdri",
     "resources": 0,
     "influence": 2,
     "traits": [
@@ -1337,7 +1598,10 @@
     ],
     "specialties": [
      "cybernetic"
-    ]
+    ],
+    "x": -20.6,
+    "y": -35.6,
+    "radius": 31.9
    },
    {
     "name": "Xanhact",
@@ -1345,7 +1609,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 18.3,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -1362,7 +1629,10 @@
     "influence": 1,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -22.3,
+    "y": -33.9,
+    "radius": 31.9
    },
    {
     "name": "Vega Minor",
@@ -1373,7 +1643,10 @@
     ],
     "specialties": [
      "propulsion"
-    ]
+    ],
+    "x": 17.1,
+    "y": 33.3,
+    "radius": 31.9
    }
   ]
  },
@@ -1390,7 +1663,10 @@
     "influence": 2,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -51.9,
+    "y": -6.1,
+    "radius": 26.1
    },
    {
     "name": "Abaddon",
@@ -1398,7 +1674,10 @@
     "influence": 0,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": 24.1,
+    "y": -35.0,
+    "radius": 26.1
    },
    {
     "name": "Ashtroth",
@@ -1406,7 +1685,10 @@
     "influence": 0,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 28.1,
+    "y": 46.1,
+    "radius": 26.1
    }
   ]
  },
@@ -1423,7 +1705,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 28.1,
+    "y": 46.1,
+    "radius": 26.1
    },
    {
     "name": "Rigel II",
@@ -1431,7 +1716,10 @@
     "influence": 2,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": 24.1,
+    "y": -35.0,
+    "radius": 26.1
    },
    {
     "name": "Rigel III",
@@ -1442,7 +1730,10 @@
     ],
     "specialties": [
      "biotic"
-    ]
+    ],
+    "x": -51.9,
+    "y": -6.1,
+    "radius": 26.1
    }
   ]
  },
@@ -1515,7 +1806,10 @@
     "specialties": [
      "legendary"
     ],
-    "ability": "Exterrix Headquarters - You may exhaust this card at the end of your turn to gain 2 trade goods or convert all of your commodities into trade goods."
+    "ability": "Exterrix Headquarters - You may exhaust this card at the end of your turn to gain 2 trade goods or convert all of your commodities into trade goods.",
+    "x": 15.4,
+    "y": -9.6,
+    "radius": 27.5
    }
   ]
  },
@@ -1535,7 +1829,10 @@
     "specialties": [
      "legendary"
     ],
-    "ability": "4X4ID \"Hyperion\" VI - You may exhaust this card when you pass to draw 1 action card and gain 1 command token."
+    "ability": "4X4ID \"Hyperion\" VI - You may exhaust this card when you pass to draw 1 action card and gain 1 command token.",
+    "x": -21.7,
+    "y": -32.2,
+    "radius": 31.9
    },
    {
     "name": "Revelation",
@@ -1543,7 +1840,10 @@
     "influence": 2,
     "specialties": [
      "space-station"
-    ]
+    ],
+    "x": 30.4,
+    "y": 32.2,
+    "radius": 31.9
    }
   ]
  },
@@ -1557,12 +1857,18 @@
    {
     "name": "Mez Lo Orz Fei Zsha",
     "resources": 2,
-    "influence": 1
+    "influence": 1,
+    "x": -22.3,
+    "y": -37.4,
+    "radius": 31.9
    },
    {
     "name": "Rep Lo Orz Qet",
     "resources": 1,
-    "influence": 3
+    "influence": 3,
+    "x": 31.0,
+    "y": 31.0,
+    "radius": 31.9
    }
   ]
  },
@@ -1586,7 +1892,10 @@
    {
     "name": "Ikatena",
     "resources": 4,
-    "influence": 4
+    "influence": 4,
+    "x": -0.9,
+    "y": -10.7,
+    "radius": 43.5
    }
   ]
  },
@@ -1600,12 +1909,18 @@
    {
     "name": "Cronos",
     "resources": 2,
-    "influence": 1
+    "influence": 1,
+    "x": -22.3,
+    "y": -38.5,
+    "radius": 31.9
    },
    {
     "name": "Tallin",
     "resources": 1,
-    "influence": 2
+    "influence": 2,
+    "x": 31.6,
+    "y": 29.8,
+    "radius": 31.9
    }
   ]
  },
@@ -1627,7 +1942,10 @@
      "biotic",
      "legendary"
     ],
-    "ability": "Maxis Central Control - You may exhaust this card when you pass to gain control of a non-home, non-legendary planet that contains no units and has no attachments."
+    "ability": "Maxis Central Control - You may exhaust this card when you pass to gain control of a non-home, non-legendary planet that contains no units and has no attachments.",
+    "x": -0.3,
+    "y": -1.4,
+    "radius": 55.1
    }
   ]
  },
@@ -1648,7 +1966,10 @@
     "specialties": [
      "legendary"
     ],
-    "ability": "Dok 'N Pic's Salvage Yard - You may exhaust this card when you pass to place 1 action card from the discard pile faceup on this card; you can purge cards on this card to play them as if they were in your hand."
+    "ability": "Dok 'N Pic's Salvage Yard - You may exhaust this card when you pass to place 1 action card from the discard pile faceup on this card; you can purge cards on this card to play them as if they were in your hand.",
+    "x": -0.9,
+    "y": 0.3,
+    "radius": 55.1
    }
   ]
  },
@@ -1669,7 +1990,10 @@
     "specialties": [
      "legendary"
     ],
-    "ability": "The Acropolis - You may exhaust this card at the end of your turn to ready another component that isn't a strategy card."
+    "ability": "The Acropolis - You may exhaust this card at the end of your turn to ready another component that isn't a strategy card.",
+    "x": -0.9,
+    "y": -2.0,
+    "radius": 55.1
    }
   ]
  },
@@ -1691,7 +2015,10 @@
      "propulsion",
      "legendary"
     ],
-    "ability": "Ionian Fuel Refinery - You may exhaust this card after you activate a system to apply +1 to the move value of 1 of your ships during this tactical action."
+    "ability": "Ionian Fuel Refinery - You may exhaust this card after you activate a system to apply +1 to the move value of 1 of your ships during this tactical action.",
+    "x": -0.9,
+    "y": -2.0,
+    "radius": 43.5
    }
   ]
  },
@@ -1713,7 +2040,10 @@
     "specialties": [
      "cybernetic",
      "warfare"
-    ]
+    ],
+    "x": -0.3,
+    "y": 0.3,
+    "radius": 43.5
    }
   ]
  },
@@ -1735,7 +2065,10 @@
     ],
     "specialties": [
      "propulsion"
-    ]
+    ],
+    "x": -21.2,
+    "y": -35.0,
+    "radius": 43.5
    }
   ]
  },
@@ -1753,7 +2086,10 @@
     "traits": [
      "cultural",
      "hazardous"
-    ]
+    ],
+    "x": 0.3,
+    "y": -0.3,
+    "radius": 43.5
    }
   ]
  },
@@ -1771,7 +2107,10 @@
     "traits": [
      "hazardous",
      "industrial"
-    ]
+    ],
+    "x": 0.3,
+    "y": -0.9,
+    "radius": 43.5
    }
   ]
  },
@@ -1791,7 +2130,10 @@
     ],
     "specialties": [
      "biotic"
-    ]
+    ],
+    "x": -19.4,
+    "y": -33.9,
+    "radius": 31.9
    },
    {
     "name": "Tinnes",
@@ -1803,7 +2145,10 @@
     ],
     "specialties": [
      "biotic"
-    ]
+    ],
+    "x": 18.3,
+    "y": 35.0,
+    "radius": 31.9
    }
   ]
  },
@@ -1820,7 +2165,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -21.2,
+    "y": -36.2,
+    "radius": 31.9
    },
    {
     "name": "Lazul Rex",
@@ -1829,7 +2177,10 @@
     "traits": [
      "industrial",
      "cultural"
-    ]
+    ],
+    "x": 17.7,
+    "y": 33.9,
+    "radius": 31.9
    }
   ]
  },
@@ -1850,7 +2201,10 @@
     "specialties": [
      "cybernetic",
      "cybernetic"
-    ]
+    ],
+    "x": -21.2,
+    "y": -35.0,
+    "radius": 31.9
    },
    {
     "name": "Hercalor",
@@ -1858,7 +2212,10 @@
     "influence": 0,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": 18.3,
+    "y": 33.9,
+    "radius": 31.9
    }
   ]
  },
@@ -1875,7 +2232,10 @@
     "influence": 1,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -21.2,
+    "y": -34.5,
+    "radius": 31.9
    },
    {
     "name": "Capha",
@@ -1883,7 +2243,10 @@
     "influence": 0,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 17.7,
+    "y": 35.0,
+    "radius": 31.9
    }
   ]
  },
@@ -1900,7 +2263,10 @@
     "influence": 2,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": -19.4,
+    "y": -33.3,
+    "radius": 31.9
    },
    {
     "name": "Tsion Station",
@@ -1908,7 +2274,10 @@
     "influence": 1,
     "specialties": [
      "space-station"
-    ]
+    ],
+    "x": 15.9,
+    "y": 35.0,
+    "radius": 31.9
    }
   ]
  },
@@ -1925,7 +2294,10 @@
     "influence": 2,
     "traits": [
      "cultural"
-    ]
+    ],
+    "x": 25.2,
+    "y": -33.9,
+    "radius": 26.1
    },
    {
     "name": "El'Nath",
@@ -1933,7 +2305,10 @@
     "influence": 0,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": -49.6,
+    "y": -6.7,
+    "radius": 26.1
    },
    {
     "name": "Luthien VI",
@@ -1941,7 +2316,10 @@
     "influence": 1,
     "traits": [
      "hazardous"
-    ]
+    ],
+    "x": 29.9,
+    "y": 47.2,
+    "radius": 26.1
    }
   ]
  },
@@ -1959,7 +2337,10 @@
     "traits": [
      "industrial",
      "cultural"
-    ]
+    ],
+    "x": -20.6,
+    "y": -34.5,
+    "radius": 31.9
    },
    {
     "name": "Oluz Station",
@@ -1967,7 +2348,10 @@
     "influence": 1,
     "specialties": [
      "space-station"
-    ]
+    ],
+    "x": 15.9,
+    "y": 35.0,
+    "radius": 31.9
    }
   ]
  },
@@ -1985,7 +2369,10 @@
     "specialties": [
      "legendary"
     ],
-    "ability": "The Galactic Council - You may exhaust this card and discard 1 secret objective at the end of your turn to draw 1 secret objective."
+    "ability": "The Galactic Council - You may exhaust this card and discard 1 secret objective at the end of your turn to draw 1 secret objective.",
+    "x": -1.4,
+    "y": -0.9,
+    "radius": 66.1
    }
   ]
  },
@@ -2031,7 +2418,10 @@
      "warfare",
      "legendary"
     ],
-    "ability": "Aeurex Mechanica - You may exhaust this card when you pass to place 1 ship that matches a unit upgrade technology you own from your reinforcements into a system that contains your ships."
+    "ability": "Aeurex Mechanica - You may exhaust this card when you pass to place 1 ship that matches a unit upgrade technology you own from your reinforcements into a system that contains your ships.",
+    "x": -0.9,
+    "y": 0.3,
+    "radius": 31.9
    }
   ]
  },
@@ -2050,7 +2440,10 @@
     "influence": 3,
     "traits": [
      "industrial"
-    ]
+    ],
+    "x": -0.9,
+    "y": 0.3,
+    "radius": 43.5
    }
   ]
  },
@@ -2070,7 +2463,10 @@
     "influence": 1,
     "specialties": [
      "space-station"
-    ]
+    ],
+    "x": 15.9,
+    "y": 35.0,
+    "radius": 43.5
    }
   ]
  },
@@ -2086,7 +2482,10 @@
    {
     "name": "Ahk Creuxx",
     "resources": 4,
-    "influence": 2
+    "influence": 2,
+    "x": 20.6,
+    "y": 9.6,
+    "radius": 43.5
    }
   ]
  },

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { SYSTEMS, type GameState } from '@ti4/shared';
 
 export function systemImageUrl(system: string): string {
   return `${import.meta.env.BASE_URL}tiles/ST_${system}.webp`;
@@ -32,4 +33,12 @@ export function useImage(src: string): HTMLImageElement | undefined {
 
 function loaded(img: HTMLImageElement | undefined) {
   return img?.complete && img.naturalWidth > 0 ? img : undefined;
+}
+
+/** "Mecatol Rex (18)", "system 41" or "empty space" for a hexKey. */
+export function systemName(state: GameState, key: string): string {
+  const system = state.tiles[key]?.system;
+  if (!system) return 'empty space';
+  const planets = SYSTEMS[system]?.planets.map((p) => p.name) ?? [];
+  return planets.length ? `${planets.join(' / ')} (${system})` : `system ${system}`;
 }

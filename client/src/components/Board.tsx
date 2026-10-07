@@ -11,6 +11,7 @@ import {
   hexesInRadius,
   makeTile,
   pixelToHex,
+  planetAt,
   stackSize,
   type Action,
   type GameState,
@@ -18,10 +19,13 @@ import {
   type PieceShapeKind,
   type PieceKind,
   type PlayerColor,
+  type Tile,
 } from '@ti4/shared';
 import { PIECE_MIME, SYSTEM_MIME, TOKEN_MIME, tokenDropTarget, type TokenDrag } from '../dnd';
 import { newId } from '../id';
 import { PieceMenu } from './PieceMenu';
+import { SpaceCannonDialog } from './SpaceCannonDialog';
+import { SystemMenu } from './SystemMenu';
 import { SystemCard } from './SystemCard';
 import { UnitCard } from './UnitCard';
 import { TileShape } from './TileShape';
@@ -37,18 +41,21 @@ const MAX_ZOOM = 4;
 
 interface Props {
   state: GameState;
+  me: string;
   color: PlayerColor;
   mode: BoardMode;
   dispatch: (action: Action) => void;
 }
 
-export function Board({ state, color, mode, dispatch }: Props) {
+export function Board({ state, me, color, mode, dispatch }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const size = useElementSize(containerRef);
   const [hovered, setHovered] = useState<string | null>(null);
   const [hoveredPiece, setHoveredPiece] = useState<string | null>(null);
   const [menu, setMenu] = useState<{ piece: string; x: number; y: number } | null>(null);
+  const [systemMenu, setSystemMenu] = useState<{ system: string; planet?: string; x: number; y: number } | null>(null);
+  const [cannon, setCannon] = useState<{ system: string; color: PlayerColor } | null>(null);
   const editing = mode === 'edit';
 
   /** A unit of the same kind and colour under this point, to stack onto. */
@@ -63,6 +70,14 @@ export function Board({ state, color, mode, dispatch }: Props) {
   function openMenu(piece: Piece, clientX: number, clientY: number) {
     const rect = containerRef.current?.getBoundingClientRect();
     if (rect) setMenu({ piece: piece.id, x: clientX - rect.left, y: clientY - rect.top });
+  }
+
+  function openSystemMenu(tile: Tile, clientX: number, clientY: number) {
+    const rect = containerRef.current?.getBoundingClientRect();
+    // Right-clicking inside a planet's circle offers ground combat on that planet.
+    const point = stageRef.current?.getRelativePointerPosition();
+    const planet = point ? planetAt(state, point)?.planet.name : undefined;
+    if (rect) setSystemMenu({ system: tile.id, planet, x: clientX - rect.left, y: clientY - rect.top });
   }
 
   function handleWheel(e: Konva.KonvaEventObject<WheelEvent>) {
@@ -123,7 +138,10 @@ export function Board({ state, color, mode, dispatch }: Props) {
         scaleY={0.6}
         draggable
         onWheel={handleWheel}
-        onDragStart={() => setMenu(null)}
+        onDragStart={() => {
+          setMenu(null);
+          setSystemMenu(null);
+        }}
       >
         <Layer listening={false}>
           {GUIDE_HEXES.filter((hex) => !state.tiles[hexKey(hex)]).map((hex) => {
@@ -144,8 +162,27 @@ export function Board({ state, color, mode, dispatch }: Props) {
         </Layer>
         <Layer>
           {Object.values(state.tiles).map((tile) => (
-            <TileShape key={tile.id} tile={tile} editable={editing} dispatch={dispatch} onHover={setHovered} />
+            <TileShape
+              key={tile.id}
+              tile={tile}
+              editable={editing}
+              dispatch={dispatch}
+              onHover={setHovered}
+              onMenu={openSystemMenu}
+            />
           ))}
+          {state.battle && state.tiles[state.battle.system] && (
+            // Mark the system being fought over.
+            <Line
+              {...hexToPixel(state.tiles[state.battle.system])}
+              points={HEX_POINTS}
+              closed
+              stroke="#ff3b3b"
+              strokeWidth={6}
+              dash={[14, 8]}
+              listening={false}
+            />
+          )}
         </Layer>
         {/* Pieces sit above tiles; in edit mode they're dimmed and ignore the mouse so tiles can be grabbed. */}
         <Layer listening={!editing} opacity={editing ? 0.4 : 1}>
@@ -166,6 +203,29 @@ export function Board({ state, color, mode, dispatch }: Props) {
         <UnitCard piece={state.pieces[hoveredPiece]} state={state} />
       ) : (
         hovered && <SystemCard system={hovered} state={state} />
+      )}
+      {systemMenu && (
+        <SystemMenu
+          state={state}
+          system={systemMenu.system}
+          planet={systemMenu.planet}
+          me={me}
+          x={systemMenu.x}
+          y={systemMenu.y}
+          dispatch={dispatch}
+          onClose={() => setSystemMenu(null)}
+          onSpaceCannon={(cannonColor) => setCannon({ system: systemMenu.system, color: cannonColor })}
+        />
+      )}
+      {cannon && (
+        <SpaceCannonDialog
+          state={state}
+          me={me}
+          system={cannon.system}
+          color={cannon.color}
+          dispatch={dispatch}
+          onClose={() => setCannon(null)}
+        />
       )}
       {menu && state.pieces[menu.piece] && (
         <PieceMenu

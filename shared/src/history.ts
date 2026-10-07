@@ -9,8 +9,9 @@ import {
   cardName,
   promissoryNote,
 } from './cards';
+import { sideHits } from './battle';
 import { ROLL_KINDS, rollHits } from './dice';
-import { hexKey, pixelToHex } from './hex';
+import { hexKey, hexToPixel, pixelToHex } from './hex';
 import { applyAction, stackSize, type Action, type GameState, type Piece } from './state';
 import { SYSTEMS } from './systems';
 
@@ -74,6 +75,13 @@ function placeName(state: GameState, x: number, y: number): string {
   if (!tile) return 'empty space';
   const planets = SYSTEMS[tile.system]?.planets.map((p) => p.name) ?? [];
   return planets.length ? `${planets.join(' / ')} (${tile.system})` : `system ${tile.system}`;
+}
+
+/** Centre of a system in board pixels, for placeName. */
+function pointOf(state: GameState, system: string): [number, number] {
+  const tile = state.tiles[system];
+  const { x, y } = hexToPixel(tile ?? { q: 0, r: 0 });
+  return [x, y];
 }
 
 const DECK_NAMES = { action: 'an action card', secret: 'a secret objective' } as const;
@@ -216,11 +224,39 @@ export function describeAction(state: GameState, action: Action): string {
       return piece?.kind === 'speaker' ? `gave the speaker token to ${action.player}` : `picked up a command token into ${action.to}`;
     case 'speaker/set':
       return action.player ? `made ${action.player} the speaker` : 'cleared the speaker';
+    case 'battle/start': {
+      const { attacker, defender, kind, system, planet } = action.battle;
+      const where = planet ?? (state.tiles[system] ? placeName(state, ...pointOf(state, system)) : 'empty space');
+      return `started ${kind} combat ${planet ? 'on' : 'in'} ${where}: ${attacker.color} attacking ${defender.color}`;
+    }
+    case 'battle/swap':
+      return 'swapped attacker and defender';
+    case 'battle/roll': {
+      const hits = rollHits(action.roll);
+      const kind = ROLL_KINDS.find((k) => k.kind === action.roll.kind)?.label.toLowerCase();
+      const color = state.battle?.[action.side].color;
+      return `rolled ${kind} for ${color ?? action.side}${action.roll.rerollOf ? ' (re-roll)' : ''}: ${hits} hit${hits === 1 ? '' : 's'}`;
+    }
+    case 'battle/hit': {
+      const unit = state.battle?.[action.side].units.find((u) => u.piece === action.piece);
+      const name = unit ? (PIECE_NAMES[unit.kind] ?? unit.kind) : 'unit';
+      const color = state.battle?.[action.side].color ?? '';
+      return action.hit === 'sustain' ? `had a ${color} ${name} sustain damage` : `destroyed a ${color} ${name}`;
+    }
+    case 'battle/undoHits':
+      return `undid ${state.battle?.[action.side].color ?? action.side}'s hit assignments`;
+    case 'battle/nextRound': {
+      const b = state.battle;
+      return b ? `ended combat round ${b.round} (${sideHits(b.attacker)} hits vs ${sideHits(b.defender)})` : 'ended a combat round';
+    }
+    case 'battle/end':
+      return action.apply ? 'ended the battle and applied the results' : 'cancelled the battle';
     case 'dice/roll': {
       const hits = rollHits(action.roll);
       const dice = action.roll.groups.reduce((n, g) => n + g.results.length, 0);
       const kind = ROLL_KINDS.find((k) => k.kind === action.roll.kind)?.label.toLowerCase();
-      return `rolled ${kind}${action.roll.rerollOf ? ' (re-roll)' : ''}: ${hits} hit${hits === 1 ? '' : 's'} from ${dice} ${dice === 1 ? 'die' : 'dice'}`;
+      const at = action.roll.target ? ` at ${action.roll.target}` : '';
+      return `rolled ${kind}${at}${action.roll.rerollOf ? ' (re-roll)' : ''}: ${hits} hit${hits === 1 ? '' : 's'} from ${dice} ${dice === 1 ? 'die' : 'dice'}`;
     }
   }
 }

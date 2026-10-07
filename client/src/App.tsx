@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { PlayerColor } from '@ti4/shared';
+import { BattlePanel } from './components/BattlePanel';
 import { Board, type BoardMode } from './components/Board';
 import { FactionIcon } from './components/cardParts';
 import { EditionToggle } from './components/EditionToggle';
@@ -87,7 +88,7 @@ function Table({ room, name }: Session) {
         edition={state.cards.edition}
         dispatch={dispatch}
       />
-      <Board state={state} color={color} mode={mode} dispatch={dispatch} />
+      <Board state={state} me={name} color={color} mode={mode} dispatch={dispatch} />
       <RightPanel
         state={state}
         room={room}
@@ -98,6 +99,7 @@ function Table({ room, name }: Session) {
         onRewind={rewind}
       />
       <RollToast state={state} me={name} online={status === 'online'} />
+      {state.battle && <BattlePanel state={state} me={name} dispatch={dispatch} />}
     </div>
   );
 }

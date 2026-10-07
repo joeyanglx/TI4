@@ -30,6 +30,7 @@ export function RollToast({ state, me, online }: { state: GameState; me: string;
   return (
     <div className="roll-toast" onClick={() => setShown(null)}>
       <b>{shown.player}</b> rolled {ROLL_KINDS.find((k) => k.kind === shown.kind)?.label.toLowerCase()}
+      {shown.target && ` at ${shown.target}`}
       {shown.rerollOf ? ' (re-roll)' : ''}: <b className="roll-hits">{hits} {hits === 1 ? 'hit' : 'hits'}</b> from {dice}{' '}
       {dice === 1 ? 'die' : 'dice'}
     </div>

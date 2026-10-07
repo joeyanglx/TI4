@@ -1,3 +1,4 @@
+import { applyBattleAction, type Battle, type BattleAction } from './battle';
 import { applyCardAction, emptyCards, type CardAction, type CardsState } from './cards';
 import { applyDiceAction, type DiceAction, type Roll } from './dice';
 import { hexKey, type Hex } from './hex';
@@ -42,6 +43,8 @@ export interface GameState {
   rolls: Roll[];
   /** Player holding the speaker token. Undefined while it's on the map (as a "speaker" piece) or unassigned. */
   speaker?: string;
+  /** The battle being resolved, shown to everyone; at most one at a time. */
+  battle?: Battle;
 }
 
 export type Action =
@@ -65,7 +68,8 @@ export type Action =
   | CardAction
   | PlayerAction
   | TokenAction
-  | DiceAction;
+  | DiceAction
+  | BattleAction;
 
 /**
  * Card, seat and planet actions depend on order (two players drawing at once must get different cards,
@@ -74,7 +78,7 @@ export type Action =
  */
 export function isServerOrdered(action: Action): boolean {
   return (
-    /^(cards?|strategy|seat|planet|tech|token|speaker|promissory|dice)\//.test(action.type) ||
+    /^(cards?|strategy|seat|planet|tech|token|speaker|promissory|dice|battle)\//.test(action.type) ||
     // Stack edits depend on the current count; moving pieces stays instant.
     /^piece\/(count|damage|merge|split)$/.test(action.type)
   );
@@ -173,6 +177,7 @@ export function applyAction(state: GameState, action: Action): GameState {
     case 'dice/roll':
       return { ...state, rolls: applyDiceAction(state.rolls, action) };
     default:
+      if (action.type.startsWith('battle/')) return applyBattleAction(state, action as BattleAction);
       if (/^(token|speaker)\//.test(action.type)) return applyTokenAction(state, action as TokenAction);
       if (/^(seat|planet|tech|promissory)\//.test(action.type)) {
         return applyPlayerAction(state, action as PlayerAction);

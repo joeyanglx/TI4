@@ -28,6 +28,8 @@ export interface Roll {
   groups: RollGroup[];
   /** Set when this re-rolls the misses of an earlier roll. */
   rerollOf?: string;
+  /** What the roll was aimed at, e.g. "Mecatol Rex (18)" for space cannon offense outside a battle. */
+  target?: string;
   /** Always-on faction ability already folded into each group's hitsOn, shown in the log (e.g. Unrelenting +1). */
   ability?: { source: string; amount: number };
 }
