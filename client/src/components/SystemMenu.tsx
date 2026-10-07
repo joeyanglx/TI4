@@ -54,9 +54,36 @@ export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose 
     })),
   );
 
+  const owner = planet ? state.planets[planet]?.owner : undefined;
+
   return (
     <div className="piece-menu" ref={ref} style={{ left: x, top: y }} onContextMenu={(e) => e.preventDefault()}>
-      <div className="piece-menu-title">Initiate battle</div>
+      {planet && (
+        <>
+          <div className="piece-menu-title">{planet}</div>
+          {owner && owner !== me && <div className="piece-menu-note">Controlled by {owner}.</div>}
+          {owner === me ? (
+            <button
+              onClick={() => {
+                dispatch({ type: 'planet/control', planet });
+                onClose();
+              }}
+            >
+              Give up control of {planet}
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                dispatch({ type: 'planet/control', planet, player: me });
+                onClose();
+              }}
+            >
+              Take control of {planet}
+            </button>
+          )}
+        </>
+      )}
+      <div className={`piece-menu-title ${planet ? 'piece-menu-section' : ''}`}>Initiate battle</div>
       {state.battle && <div className="piece-menu-note">A battle is already in progress.</div>}
       {!state.battle && options.length === 0 && (
         <div className="piece-menu-note">
