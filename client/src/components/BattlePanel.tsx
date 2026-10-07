@@ -3,6 +3,7 @@ import {
   BATTLE_ROLLS,
   BATTLE_SIDES,
   ROLL_KINDS,
+  canSustainDamage,
   effectiveHitsOn,
   fightsIn,
   hasRolled,
@@ -207,7 +208,8 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
             .filter(({ unit, stats }) => fightsIn(unit.kind, battle.kind) || (stats && available.some((k) => unitRoll(stats.unit, k))))
             .map(({ unit, stats }) => {
               const fights = fightsIn(unit.kind, battle.kind);
-              const canSustain = !!stats?.unit.sustainDamage && unit.damaged < unit.count;
+              const sustains = canSustainDamage(unit.kind, stats);
+              const canSustain = sustains && unit.damaged < unit.count;
               const stat = stats && unitRoll(stats.unit, kind);
               return (
                 <tr key={unit.piece} className={unit.count === 0 ? 'destroyed' : fights ? '' : 'support'}>
@@ -242,7 +244,7 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
                       <>
                         <button
                           disabled={!toAssign || !canSustain}
-                          title={stats?.unit.sustainDamage ? 'Sustain damage' : 'This unit cannot sustain damage'}
+                          title={sustains ? 'Sustain damage' : 'This unit cannot sustain damage'}
                           onClick={() => dispatch({ type: 'battle/hit', side, piece: unit.piece, hit: 'sustain' })}
                         >
                           Sustain

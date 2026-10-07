@@ -1,5 +1,6 @@
 import { TECHNOLOGIES, type UnitInfo } from './cards';
 import { playerUnits } from './dice';
+import type { PieceKind } from './pieces';
 import type { Piece, GameState } from './state';
 
 /**
@@ -32,7 +33,10 @@ export interface UnitStats {
 
 /** The unit a piece stands for, given its owner's faction, technologies and the game's edition. */
 export function pieceUnitStats(state: GameState, piece: Piece): UnitStats | undefined {
-  const [owner, seat] = Object.entries(state.seats).find(([, s]) => s.color === piece.color) ?? [];
+  // Several names can share a colour (rejoining under another name, everyone defaulting to red);
+  // the one that picked a faction is the real player.
+  const seats = Object.entries(state.seats).filter(([, s]) => s.color === piece.color);
+  const [owner, seat] = seats.find(([, s]) => s.faction) ?? seats[0] ?? [];
   const unit = playerUnits(seat?.faction, seat?.technologies ?? [], state.cards.edition).find(
     (u) => u.type === piece.kind,
   );
@@ -44,6 +48,13 @@ export function pieceUnitStats(state: GameState, piece: Piece): UnitStats | unde
     upgradedBy: unit.requiredTech ? TECHNOLOGIES[unit.requiredTech]?.name : undefined,
     combatModifier: factionCombatModifier(seat?.faction),
   };
+}
+
+/** Every version of these units has SUSTAIN DAMAGE, so they keep it even without a faction to look up. */
+const ALWAYS_SUSTAIN: PieceKind[] = ['flagship', 'warsun', 'dreadnought', 'mech'];
+
+export function canSustainDamage(kind: PieceKind, stats: UnitStats | undefined): boolean {
+  return stats ? !!stats.unit.sustainDamage : ALWAYS_SUSTAIN.includes(kind);
 }
 
 /** The roll needed to hit after a modifier: +1 to rolls means hitting on one lower. */
