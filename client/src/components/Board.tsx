@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type DragEvent } from 'react';
 import { Circle, Group, Layer, Line, Rect, RegularPolygon, Stage, Text } from 'react-konva';
 import type Konva from 'konva';
 import {
+  NEUTRAL_PIECES,
   PIECE_STYLE,
   PLAYER_COLORS,
   UNIT_KINDS,
@@ -238,9 +239,9 @@ interface PieceProps {
 function PieceShape({ piece, dispatch, stackAt, onMenu, onHover }: PieceProps) {
   const style = PIECE_STYLE[piece.kind];
   const isToken = piece.kind === 'command' || piece.kind === 'control';
-  const isSpeaker = piece.kind === 'speaker';
+  const neutral = NEUTRAL_PIECES[piece.kind];
   // Command and speaker tokens can be dragged off the map onto a player's panel.
-  const returnable = piece.kind === 'command' || isSpeaker;
+  const returnable = piece.kind === 'command' || piece.kind === 'speaker';
   const count = stackSize(piece);
   const damaged = piece.damaged ?? 0;
   const badge = style.radius * 0.75;
@@ -276,9 +277,9 @@ function PieceShape({ piece, dispatch, stackAt, onMenu, onHover }: PieceProps) {
       <PieceBody
         shape={style.shape}
         radius={style.radius}
-        fill={isSpeaker ? '#8b1a1a' : PLAYER_COLORS[piece.color]}
-        stroke={isSpeaker ? '#f2c94c' : isToken ? '#fff' : '#111'}
-        strokeWidth={isToken || isSpeaker ? 3 : 2}
+        fill={neutral?.fill ?? PLAYER_COLORS[piece.color]}
+        stroke={neutral?.stroke ?? (isToken ? '#fff' : '#111')}
+        strokeWidth={isToken || neutral ? 3 : 2}
       />
       <Text
         text={style.label}

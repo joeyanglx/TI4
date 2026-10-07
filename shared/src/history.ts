@@ -62,6 +62,7 @@ const PIECE_NAMES: Partial<Record<Piece['kind'], string>> = {
   command: 'command token',
   control: 'control token',
   speaker: 'speaker token',
+  custodians: 'custodians token',
 };
 
 function pieceName(piece: Pick<Piece, 'kind' | 'count'>): string {
@@ -143,7 +144,7 @@ export function describeAction(state: GameState, action: Action): string {
     case 'tile/move':
       return `moved system ${state.tiles[hexKey(action.from)]?.system ?? ''}`.trim();
     case 'map/set':
-      return `loaded a map (${Object.keys(action.tiles).length} systems)`;
+      return `loaded a map (${Object.keys(action.tiles).length} systems)${action.custodians && !Object.values(state.pieces).some((p) => p.kind === 'custodians') ? ' with the custodians token on Mecatol Rex' : ''}`;
     case 'game/reset':
       return 'reset the game';
     case 'cards/setup':

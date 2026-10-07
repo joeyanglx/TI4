@@ -30,7 +30,13 @@ export const TOKEN_KINDS = ['command', 'control'] as const;
 export type UnitKind = (typeof UNIT_KINDS)[number];
 export type TokenKind = (typeof TOKEN_KINDS)[number];
 /** The speaker token is a piece only while it's on the map; there's just one, so it's not in the palette. */
-export type PieceKind = UnitKind | TokenKind | 'speaker';
+export type PieceKind = UnitKind | TokenKind | 'speaker' | 'custodians';
+
+/** Pieces that belong to nobody: drawn in their own colours, whatever `color` the piece has. */
+export const NEUTRAL_PIECES: Partial<Record<PieceKind, { fill: string; stroke: string }>> = {
+  speaker: { fill: '#8b1a1a', stroke: '#f2c94c' },
+  custodians: { fill: '#4f5d6b', stroke: '#d9dee4' },
+};
 
 export type PieceShapeKind = 'circle' | 'square' | 'hexagon' | 'triangle';
 
@@ -53,4 +59,5 @@ export const PIECE_STYLE: Record<PieceKind, { label: string; radius: number; sha
   command: { label: 'CT', radius: 16, shape: 'triangle' },
   control: { label: '⚑', radius: 14, shape: 'circle' },
   speaker: { label: 'SPEAKER', radius: 24, shape: 'circle' },
+  custodians: { label: 'CUSTODIANS', radius: 28, shape: 'circle' },
 };

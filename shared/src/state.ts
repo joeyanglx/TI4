@@ -1,9 +1,10 @@
 import { applyBattleAction, type Battle, type BattleAction } from './battle';
 import { applyCardAction, emptyCards, type CardAction, type CardsState } from './cards';
 import { applyDiceAction, type DiceAction, type Roll } from './dice';
-import { hexKey, type Hex } from './hex';
+import { hexKey, hexToPixel, type Hex } from './hex';
 import type { PieceKind, PlayerColor } from './pieces';
 import { applyPlayerAction, type PlanetState, type PlayerAction, type PromissoryState, type Seat } from './players';
+import { MECATOL_REX } from './systems';
 import { applyTokenAction, type TokenAction } from './tokens';
 
 export interface Tile extends Hex {
@@ -63,7 +64,8 @@ export type Action =
   | { type: 'tile/remove'; id: string }
   | { type: 'tile/rotate'; id: string }
   | { type: 'tile/move'; from: Hex; to: Hex }
-  | { type: 'map/set'; tiles: Record<string, Tile> }
+  /** Replace the map; with `custodians`, also put the custodians token on Mecatol Rex if it isn't on the board. */
+  | { type: 'map/set'; tiles: Record<string, Tile>; custodians?: { id: string } }
   | { type: 'game/reset'; state: GameState }
   | CardAction
   | PlayerAction
@@ -163,8 +165,10 @@ export function applyAction(state: GameState, action: Action): GameState {
       tiles[toId] = { ...moving, id: toId, ...action.to };
       return { ...state, tiles };
     }
-    case 'map/set':
-      return { ...state, tiles: action.tiles };
+    case 'map/set': {
+      const next = { ...state, tiles: action.tiles };
+      return action.custodians ? withCustodians(next, action.custodians.id) : next;
+    }
     case 'game/reset':
       return action.state;
     case 'strategy/pick': {
@@ -184,6 +188,14 @@ export function applyAction(state: GameState, action: Action): GameState {
       }
       return { ...state, cards: applyCardAction(state.cards, action as CardAction) };
   }
+}
+
+/** The custodians token on Mecatol Rex, unless it's already on the board or there's no Mecatol Rex. */
+export function withCustodians(state: GameState, id: string): GameState {
+  const mecatol = Object.values(state.tiles).find((t) => t.system === MECATOL_REX);
+  if (!mecatol || Object.values(state.pieces).some((p) => p.kind === 'custodians')) return state;
+  const { x, y } = hexToPixel(mecatol);
+  return withPiece(state, { id, kind: 'custodians', color: 'black', x, y });
 }
 
 function withPiece(state: GameState, piece: Piece): GameState {

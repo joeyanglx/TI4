@@ -1,14 +1,14 @@
 import { randomSeed, setupCards } from './cards';
-import { emptyState, makeTile, type GameState } from './state';
+import { emptyState, makeTile, withCustodians, type GameState } from './state';
 import { MECATOL_REX } from './systems';
 
-/** A fresh table: Mecatol Rex in the centre and shuffled card decks, ready for systems to be placed. */
+/** A fresh table: Mecatol Rex in the centre with the custodians token, and shuffled card decks. */
 export function defaultBoard(): GameState {
   const state = emptyState();
   const mecatol = makeTile({ q: 0, r: 0 }, MECATOL_REX);
   state.tiles[mecatol.id] = mecatol;
   state.cards = setupCards({ seed: randomSeed(), edition: 'te' });
-  return state;
+  return withCustodians(state, 'custodians');
 }
 
 /** Fill in parts of the state that rooms saved by older versions don't have. */

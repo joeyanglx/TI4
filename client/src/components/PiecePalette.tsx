@@ -1,4 +1,5 @@
 import {
+  NEUTRAL_PIECES,
   PIECE_STYLE,
   PLAYER_COLORS,
   TOKEN_KINDS,
@@ -35,7 +36,7 @@ export function PiecePalette({ color, onColorChange, edition }: Props) {
       <h2>Units</h2>
       <PieceList kinds={units} color={color} />
       <h2>Tokens</h2>
-      <PieceList kinds={TOKEN_KINDS} color={color} />
+      <PieceList kinds={[...TOKEN_KINDS, 'custodians']} color={color} />
       <p className="hint">
         Drag onto the board; drop a unit on a matching one to stack it. Right-click a piece to change the stack, split one off, mark sustained damage or remove it. Drag empty space to pan, scroll to zoom.
       </p>
@@ -53,8 +54,11 @@ function PieceList({ kinds, color }: { kinds: readonly PieceKind[]; color: Playe
           draggable
           onDragStart={(e) => e.dataTransfer.setData(PIECE_MIME, kind)}
         >
-          <span className={`dot dot-${PIECE_STYLE[kind].shape}`} style={{ background: PLAYER_COLORS[color] }}>
-            {PIECE_STYLE[kind].label}
+          <span
+            className={`dot dot-${PIECE_STYLE[kind].shape}`}
+            style={{ background: NEUTRAL_PIECES[kind]?.fill ?? PLAYER_COLORS[color] }}
+          >
+            {kind === 'custodians' ? 'C' : PIECE_STYLE[kind].label}
           </span>
           {kind}
         </div>

@@ -14,6 +14,7 @@ import {
   type Tile,
 } from '@ti4/shared';
 import { SYSTEM_MIME } from '../dnd';
+import { newId } from '../id';
 import { systemImageUrl } from '../tiles';
 
 const FILTERS: { label: string; type: SystemType | 'all' }[] = [
@@ -54,7 +55,7 @@ export function SystemPalette({ tiles, edition, dispatch }: Props) {
           <button
             key={preset.name}
             title={preset.description}
-            onClick={() => dispatch({ type: 'map/set', tiles: presetTiles(preset) })}
+            onClick={() => dispatch({ type: 'map/set', tiles: presetTiles(preset), custodians: { id: newId() } })}
           >
             Load {preset.name.toLowerCase()}
           </button>
@@ -115,11 +116,16 @@ function MapStringTools({ tiles, dispatch }: Pick<Props, 'tiles' | 'dispatch'>) 
         onChange={(e) => setText(e.target.value)}
       />
       <div className="row">
-        <button disabled={!text.trim()} onClick={() => dispatch({ type: 'map/set', tiles: parseMapString(text) })}>
+        <button
+          disabled={!text.trim()}
+          onClick={() => dispatch({ type: 'map/set', tiles: parseMapString(text), custodians: { id: newId() } })}
+        >
           Load
         </button>
         <button onClick={() => setText(toMapString(tiles))}>Show current</button>
-        <button onClick={() => dispatch({ type: 'map/set', tiles: defaultBoard().tiles })}>Clear</button>
+        <button onClick={() => dispatch({ type: 'map/set', tiles: defaultBoard().tiles, custodians: { id: newId() } })}>
+          Clear
+        </button>
       </div>
     </details>
   );
