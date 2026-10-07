@@ -13,9 +13,11 @@ interface Props {
 /** Agendas up for a vote, laws in play, and the Politics card's look at the top of the deck. */
 export function AgendaSection({ state, players, dispatch }: Props) {
   const { cards } = state;
-  const [peeking, setPeeking] = useState(false);
+  // The two cards you looked at, fixed when you looked: putting one on the bottom mustn't show you the next one.
+  const [peeked, setPeeked] = useState<string[] | null>(null);
   const deck = cards.decks.agenda;
-  const top = deck.slice(-2).reverse();
+  // A card someone has since revealed isn't yours to arrange any more.
+  const looking = peeked?.filter((id) => deck.includes(id));
 
   return (
     <section>
@@ -49,29 +51,33 @@ export function AgendaSection({ state, players, dispatch }: Props) {
         >
           Reveal agenda ({deck.length})
         </button>
-        <button className={peeking ? 'selected' : ''} disabled={!deck.length} onClick={() => setPeeking(!peeking)}>
-          {peeking ? 'Hide top 2' : 'Look at top 2'}
+        <button
+          className={peeked ? 'selected' : ''}
+          disabled={!peeked && !deck.length}
+          onClick={() => setPeeked(peeked ? null : deck.slice(-2).reverse())}
+        >
+          {peeked ? 'Done' : 'Look at top 2'}
         </button>
       </div>
-      {peeking && (
+      {looking && (
         <div className="peek">
-          <p className="hint">Only you see these. Top of the deck first.</p>
-          {top.map((id, i) => (
+          <p className="hint">Only you see these two. Put each on the top or bottom of the deck, then press Done.</p>
+          {looking.map((id) => (
             <div key={id} className="card-row">
               <AgendaBadge id={id} />
               <AgendaText id={id} />
               <div className="card-actions">
-                {i > 0 && (
-                  <button onClick={() => dispatch({ type: 'card/return', card: id, seed: 0, position: 'top' })}>
-                    Top
-                  </button>
-                )}
+                <span className="muted">{deckPosition(deck, id)}</span>
+                <button onClick={() => dispatch({ type: 'card/return', card: id, seed: 0, position: 'top' })}>
+                  Top
+                </button>
                 <button onClick={() => dispatch({ type: 'card/return', card: id, seed: 0, position: 'bottom' })}>
                   Bottom
                 </button>
               </div>
             </div>
           ))}
+          {looking.length === 0 && <p className="hint">Both have been revealed since you looked.</p>}
         </div>
       )}
 
@@ -115,6 +121,15 @@ export function AgendaSection({ state, players, dispatch }: Props) {
       </datalist>
     </section>
   );
+}
+
+/** Where a card sits in the deck (the last entry is the top). */
+function deckPosition(deck: string[], id: string): string {
+  const index = deck.indexOf(id);
+  if (index === deck.length - 1) return 'on top';
+  if (index === deck.length - 2) return '2nd from top';
+  if (index === 0) return 'on the bottom';
+  return `${deck.length - index}th from top`;
 }
 
 function AgendaBadge({ id }: { id: string }) {
