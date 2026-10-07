@@ -67,7 +67,7 @@ export type Action =
   /** Replace the map; with `custodians`, also put the custodians token on Mecatol Rex if it isn't on the board. */
   | { type: 'map/set'; tiles: Record<string, Tile>; custodians?: { id: string } }
   | { type: 'game/reset'; state: GameState }
-  /** Status phase in one go: ready every planet, take every command token off the board, return the strategy cards. */
+  /** Status phase in one go: ready every planet and technology, take every command token off the board, return the strategy cards. */
   | { type: 'round/end' }
   /** Put a player's starting units in their home system and give them its planets (see homeSetup). */
   | { type: 'seat/setupHome'; player: string; pieces: Piece[]; planets: string[] }
@@ -187,9 +187,10 @@ export function applyAction(state: GameState, action: Action): GameState {
       return returnStrategyCards(state);
     case 'round/end': {
       const planets = Object.fromEntries(Object.entries(state.planets).map(([name, p]) => [name, { ...p, exhausted: false }]));
+      const seats = Object.fromEntries(Object.entries(state.seats).map(([p, s]) => [p, { ...s, exhaustedTechnologies: [] }]));
       // Command tokens on the board go back to reinforcements, which are whatever isn't on a sheet or the board.
       const pieces = Object.fromEntries(Object.entries(state.pieces).filter(([, p]) => p.kind !== 'command'));
-      return returnStrategyCards({ ...state, planets, pieces });
+      return returnStrategyCards({ ...state, seats, planets, pieces });
     }
     case 'strategy/pick': {
       // Whoever picks a strategy card takes the trade goods piled on it.

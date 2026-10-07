@@ -309,7 +309,7 @@ function EndRound({ dispatch }: { dispatch: Props['dispatch'] }) {
     <div className="row end-round">
       {confirming ? (
         <>
-          <span className="muted">Ready all planets, remove all command tokens from the board, return strategy cards?</span>
+          <span className="muted">Ready all planets and technologies, remove all command tokens from the board, return strategy cards?</span>
           <button
             className="primary"
             onClick={() => {
@@ -323,7 +323,7 @@ function EndRound({ dispatch }: { dispatch: Props['dispatch'] }) {
         </>
       ) : (
         <button
-          title="Ready every controlled planet, take every command token off the board and return all strategy cards"
+          title="Ready every controlled planet and technology, take every command token off the board and return all strategy cards"
           onClick={() => setConfirming(true)}
         >
           End round…

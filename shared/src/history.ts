@@ -150,8 +150,9 @@ export function describeAction(state: GameState, action: Action): string {
     case 'round/end': {
       const planets = Object.values(state.planets).filter((p) => p.exhausted).length;
       const tokens = Object.values(state.pieces).filter((p) => p.kind === 'command').length;
+      const techs = Object.values(state.seats).reduce((n, s) => n + (s.exhaustedTechnologies?.length ?? 0), 0);
       const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
-      return `ended the round: readied ${plural(planets, 'planet')}, took ${plural(tokens, 'command token')} off the board and returned the strategy cards`;
+      return `ended the round: readied ${plural(planets, 'planet')} and ${techs === 1 ? '1 technology' : `${techs} technologies`}, took ${plural(tokens, 'command token')} off the board and returned the strategy cards`;
     }
     case 'seat/setupHome': {
       const units = action.pieces.map((p) => pieceName(p).replace(/^an? /, '1 × ')).join(', ');
