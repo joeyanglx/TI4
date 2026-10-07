@@ -225,8 +225,9 @@ export function describeAction(state: GameState, action: Action): string {
     case 'speaker/set':
       return action.player ? `made ${action.player} the speaker` : 'cleared the speaker';
     case 'battle/start': {
-      const { attacker, defender, kind, system, planet } = action.battle;
+      const { attacker, defender, kind, system, planet, cannonOnly } = action.battle;
       const where = planet ?? (state.tiles[system] ? placeName(state, ...pointOf(state, system)) : 'empty space');
+      if (cannonOnly) return `started space cannon offense at ${where}: ${attacker.color} firing at ${defender.color}`;
       return `started ${kind} combat ${planet ? 'on' : 'in'} ${where}: ${attacker.color} attacking ${defender.color}`;
     }
     case 'battle/swap':
@@ -255,8 +256,7 @@ export function describeAction(state: GameState, action: Action): string {
       const hits = rollHits(action.roll);
       const dice = action.roll.groups.reduce((n, g) => n + g.results.length, 0);
       const kind = ROLL_KINDS.find((k) => k.kind === action.roll.kind)?.label.toLowerCase();
-      const at = action.roll.target ? ` at ${action.roll.target}` : '';
-      return `rolled ${kind}${at}${action.roll.rerollOf ? ' (re-roll)' : ''}: ${hits} hit${hits === 1 ? '' : 's'} from ${dice} ${dice === 1 ? 'die' : 'dice'}`;
+      return `rolled ${kind}${action.roll.rerollOf ? ' (re-roll)' : ''}: ${hits} hit${hits === 1 ? '' : 's'} from ${dice} ${dice === 1 ? 'die' : 'dice'}`;
     }
   }
 }

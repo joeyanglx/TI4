@@ -2,11 +2,9 @@ import { useEffect, useRef } from 'react';
 import {
   createBattle,
   possibleBattles,
-  spaceCannonsAt,
   type Action,
   type BattleKind,
   type GameState,
-  type PlayerColor,
 } from '@ti4/shared';
 import { newId } from '../id';
 
@@ -22,8 +20,6 @@ interface Props {
   y: number;
   dispatch: (action: Action) => void;
   onClose: () => void;
-  /** Open the space cannon offense dialog for a colour firing at this system. */
-  onSpaceCannon: (color: PlayerColor) => void;
 }
 
 const KINDS: { kind: BattleKind; label: string }[] = [
@@ -31,8 +27,11 @@ const KINDS: { kind: BattleKind; label: string }[] = [
   { kind: 'ground', label: 'Ground combat' },
 ];
 
-/** Right-click menu for a system: start a battle between two colours that have units there. */
-export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose, onSpaceCannon }: Props) {
+/**
+ * Right-click menu for a system: start a battle between two colours that have units there, or space cannon
+ * offense from a colour with no ships here but SPACE CANNON in or next to the system (e.g. PDS II).
+ */
+export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,14 +45,12 @@ export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose,
     };
   }, [onClose]);
 
-  const cannons = [...spaceCannonsAt(state, system)];
   // Space combat is fought in the system; ground combat only on the planet that was right-clicked.
   const options = KINDS.flatMap(({ kind, label }) =>
-    possibleBattles(state, system, kind, planet).map(([attacker, defender]) => ({
+    possibleBattles(state, system, kind, planet).map((option) => ({
+      ...option,
       kind,
-      label: kind === 'ground' ? `${label} on ${planet}` : label,
-      attacker,
-      defender,
+      label: option.cannonOnly ? 'Space cannon offense' : kind === 'ground' ? `${label} on ${planet}` : label,
     })),
   );
 
@@ -64,8 +61,8 @@ export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose,
       {!state.battle && options.length === 0 && (
         <div className="piece-menu-note">
           {planet
-            ? `Two players need ships here, or ground forces on ${planet}.`
-            : 'Two players need ships here. For ground combat, right-click a planet.'}
+            ? `Two players need ships here (or one ships and the other space cannon in range), or ground forces on ${planet}.`
+            : 'Two players need ships here, or one ships and the other space cannon in range. For ground combat, right-click a planet.'}
         </div>
       )}
       {!state.battle &&
@@ -78,28 +75,9 @@ export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose,
               onClose();
             }}
           >
-            {o.label}: {o.attacker} vs {o.defender}
+            {o.label}: {o.attacker} {o.cannonOnly ? 'fires at' : 'vs'} {o.defender}
           </button>
         ))}
-      <div className="piece-menu-title piece-menu-section">Space cannon offense</div>
-      {cannons.length === 0 && <div className="piece-menu-note">No space cannon in or next to this system.</div>}
-      {cannons.map(([color, units]) => {
-        // Count units, not stacks: a stack of 2 PDS is 2 units.
-        const total = units.reduce((n, u) => n + (u.piece.count ?? 1), 0);
-        const adjacent = units.filter((u) => u.adjacent).reduce((n, u) => n + (u.piece.count ?? 1), 0);
-        return (
-          <button
-            key={color}
-            onClick={() => {
-              onSpaceCannon(color);
-              onClose();
-            }}
-          >
-            {color}: {total} unit{total === 1 ? '' : 's'}
-            {adjacent > 0 && <span className="muted"> ({adjacent} adjacent)</span>}
-          </button>
-        );
-      })}
     </div>
   );
 }

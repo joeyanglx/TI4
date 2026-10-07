@@ -24,7 +24,6 @@ import {
 import { PIECE_MIME, SYSTEM_MIME, TOKEN_MIME, tokenDropTarget, type TokenDrag } from '../dnd';
 import { newId } from '../id';
 import { PieceMenu } from './PieceMenu';
-import { SpaceCannonDialog } from './SpaceCannonDialog';
 import { SystemMenu } from './SystemMenu';
 import { SystemCard } from './SystemCard';
 import { UnitCard } from './UnitCard';
@@ -55,7 +54,6 @@ export function Board({ state, me, color, mode, dispatch }: Props) {
   const [hoveredPiece, setHoveredPiece] = useState<string | null>(null);
   const [menu, setMenu] = useState<{ piece: string; x: number; y: number } | null>(null);
   const [systemMenu, setSystemMenu] = useState<{ system: string; planet?: string; x: number; y: number } | null>(null);
-  const [cannon, setCannon] = useState<{ system: string; color: PlayerColor } | null>(null);
   const editing = mode === 'edit';
 
   /** A unit of the same kind and colour under this point, to stack onto. */
@@ -214,17 +212,6 @@ export function Board({ state, me, color, mode, dispatch }: Props) {
           y={systemMenu.y}
           dispatch={dispatch}
           onClose={() => setSystemMenu(null)}
-          onSpaceCannon={(cannonColor) => setCannon({ system: systemMenu.system, color: cannonColor })}
-        />
-      )}
-      {cannon && (
-        <SpaceCannonDialog
-          state={state}
-          me={me}
-          system={cannon.system}
-          color={cannon.color}
-          dispatch={dispatch}
-          onClose={() => setCannon(null)}
         />
       )}
       {menu && state.pieces[menu.piece] && (

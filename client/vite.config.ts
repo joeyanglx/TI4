@@ -8,6 +8,7 @@ export default defineConfig({
     host: true,
     proxy: {
       '/ws': { target: 'ws://localhost:3001', ws: true },
+      '/api': 'http://localhost:3001',
     },
   },
 });

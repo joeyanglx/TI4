@@ -4,6 +4,7 @@ import { BattlePanel } from './components/BattlePanel';
 import { Board, type BoardMode } from './components/Board';
 import { FactionIcon } from './components/cardParts';
 import { EditionToggle } from './components/EditionToggle';
+import { FeedbackButton } from './components/FeedbackPanel';
 import { Lobby } from './components/Lobby';
 import { RightPanel } from './components/RightPanel';
 import { RollToast } from './components/RollToast';
@@ -66,6 +67,7 @@ function Table({ room, name }: Session) {
             Edit map
           </button>
         </div>
+        <FeedbackButton me={name} room={room} />
         <span className="players">
           {players.map((p) => {
             const faction = state.seats[p]?.faction;

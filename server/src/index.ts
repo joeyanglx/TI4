@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { WebSocketServer } from 'ws';
 import { WS_PATH, type ClientMessage } from '@ti4/shared';
+import { handleFeedback } from './feedback';
 import { getRoom, type Room } from './rooms';
 
 const PORT = Number(process.env.PORT ?? 3001);
@@ -23,6 +24,7 @@ const MIME: Record<string, string> = {
 
 const server = createServer(async (req, res) => {
   const urlPath = decodeURIComponent(new URL(req.url ?? '/', 'http://localhost').pathname);
+  if (await handleFeedback(req, res, urlPath)) return;
   const file = path.join(CLIENT_DIR, urlPath === '/' ? 'index.html' : urlPath);
   if (!file.startsWith(CLIENT_DIR)) {
     res.writeHead(403).end();

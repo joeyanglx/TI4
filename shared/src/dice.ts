@@ -17,19 +17,17 @@ export interface RollGroup {
   hitsOn: number;
   /** One result (1-10) per die. */
   results: number[];
+  /** Added to each of this unit's dice, e.g. +1 from Morale Boost or −1 against Antimass Deflectors. */
+  modifier: number;
 }
 
 export interface Roll {
   id: string;
   player: string;
   kind: RollKind;
-  /** Added to every die, e.g. +1 from Morale Boost. */
-  modifier: number;
   groups: RollGroup[];
   /** Set when this re-rolls the misses of an earlier roll. */
   rerollOf?: string;
-  /** What the roll was aimed at, e.g. "Mecatol Rex (18)" for space cannon offense outside a battle. */
-  target?: string;
   /** Always-on faction ability already folded into each group's hitsOn, shown in the log (e.g. Unrelenting +1). */
   ability?: { source: string; amount: number };
 }
@@ -49,7 +47,7 @@ export function isHit(result: number, hitsOn: number, modifier: number): boolean
 
 export function rollHits(roll: Roll): number {
   return roll.groups.reduce(
-    (sum, g) => sum + g.results.filter((r) => isHit(r, g.hitsOn, roll.modifier)).length,
+    (sum, g) => sum + g.results.filter((r) => isHit(r, g.hitsOn, g.modifier)).length,
     0,
   );
 }

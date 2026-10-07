@@ -27,7 +27,7 @@ import { d10s } from '../dice';
 import { newId } from '../id';
 import { systemName } from '../tiles';
 import { PlayerTag } from './cardParts';
-import { RollEntry } from './RollEntry';
+import { RollEntry, formatModifier } from './RollEntry';
 
 interface Props {
   state: GameState;
@@ -42,33 +42,42 @@ interface Props {
 export function BattlePanel({ state, me, dispatch }: Props) {
   const battle = state.battle!;
   const [minimized, setMinimized] = useState(false);
-  const title =
-    battle.kind === 'space'
+  const title = battle.cannonOnly
+    ? `Space cannon offense · ${systemName(state, battle.system)}`
+    : battle.kind === 'space'
       ? `Space combat · ${systemName(state, battle.system)}`
       : `Ground combat · ${battle.planet ?? systemName(state, battle.system)}`;
 
   if (minimized) {
     return (
       <button className="battle-bar" onClick={() => setMinimized(false)}>
-        ⚔ {title} · round {battle.round} — open
+        ⚔ {title}
+        {!battle.cannonOnly && ` · round ${battle.round}`} — open
       </button>
     );
   }
 
   const anyRolls = battle.attacker.rolls.length > 0 || battle.defender.rolls.length > 0;
   const unassigned = BATTLE_SIDES.reduce((n, side) => n + hitsToAssign(battle, side), 0);
-  const eliminated = BATTLE_SIDES.filter((side) => !battle[side].units.some((u) => u.count > 0 && fightsIn(u.kind, battle.kind)));
+  // A space cannon offense attacker never had ships here, so it can't be eliminated.
+  const eliminated = BATTLE_SIDES.filter(
+    (side) =>
+      !(battle.cannonOnly && side === 'attacker') &&
+      !battle[side].units.some((u) => u.count > 0 && fightsIn(u.kind, battle.kind)),
+  );
 
   return (
     <div className="battle-overlay">
       <div className="battle-panel" role="dialog" aria-label={title}>
         <header className="battle-header">
           <h2>
-            ⚔ {title} <span className="muted">· round {battle.round}</span>
+            ⚔ {title} {!battle.cannonOnly && <span className="muted">· round {battle.round}</span>}
           </h2>
-          <button disabled={anyRolls} title="Only before anyone has rolled" onClick={() => dispatch({ type: 'battle/swap' })}>
-            Swap sides
-          </button>
+          {!battle.cannonOnly && (
+            <button disabled={anyRolls} title="Only before anyone has rolled" onClick={() => dispatch({ type: 'battle/swap' })}>
+              Swap sides
+            </button>
+          )}
           <button onClick={() => setMinimized(true)}>Minimize</button>
         </header>
 
@@ -94,9 +103,11 @@ export function BattlePanel({ state, me, dispatch }: Props) {
             {unassigned > 0 && <span className="warn">{unassigned} hit{unassigned === 1 ? '' : 's'} still to assign</span>}
           </div>
           <div className="row">
-            <button disabled={!anyRolls || unassigned > 0} onClick={() => dispatch({ type: 'battle/nextRound' })}>
-              Next round
-            </button>
+            {!battle.cannonOnly && (
+              <button disabled={!anyRolls || unassigned > 0} onClick={() => dispatch({ type: 'battle/nextRound' })}>
+                Next round
+              </button>
+            )}
             <button className="primary" onClick={() => dispatch({ type: 'battle/end', apply: true })}>
               End battle &amp; apply
             </button>
@@ -120,13 +131,24 @@ interface SideProps {
 
 function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
   const { color, units, rolls, hitsTaken } = battle[side];
-  const [kind, setKind] = useState<RollKind>(BATTLE_ROLLS[battle.kind][0]);
-  const [modifier, setModifier] = useState(0);
+  const [chosenKind, setKind] = useState<RollKind>(BATTLE_ROLLS[battle.kind][0]);
+  // Per unit type and roll type, so a +1 for dreadnoughts in combat doesn't carry over to their bombardment.
+  const [modifiers, setModifiers] = useState<Record<string, number>>({});
 
   const rows = units.map((unit) => ({ unit, stats: statsFor(state, unit, color) }));
   const owner = rows.find((r) => r.stats?.owner)?.stats?.owner;
   const mine = owner === me;
+  const adjacent = (spaceCannonsAt(state, battle.system).get(color) ?? []).filter((c) => c.adjacent);
+  // In space cannon offense only the attacker rolls, and only space cannon; the defender just takes hits.
+  const rollKinds = battle.cannonOnly ? (side === 'attacker' ? ['spaceCannon' as const] : []) : BATTLE_ROLLS[battle.kind];
+  const available = rollKinds.filter(
+    (k) => rows.some((r) => r.stats && unitRoll(r.stats.unit, k)) || (k === 'spaceCannon' && adjacent.length > 0),
+  );
+  const kind = available.includes(chosenKind) ? chosenKind : (available[0] ?? chosenKind);
   const ability = isCombatRoll(kind) ? rows.find((r) => r.stats?.combatModifier)?.stats?.combatModifier : undefined;
+  const modifierOf = (unit: string) => modifiers[`${kind}|${unit}`] ?? 0;
+  const changeModifier = (unit: string, amount: number) =>
+    setModifiers((m) => ({ ...m, [`${kind}|${unit}`]: (m[`${kind}|${unit}`] ?? 0) + amount }));
 
   // Who rolls for the chosen roll type, with faction combat modifiers folded into the hit value.
   const rollers = rows
@@ -136,7 +158,6 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
       return stat && { name: stats.unit.name, hitsOn: effectiveHitsOn(stat.hitsOn, ability?.amount), dice: unit.count * stat.dice };
     })
     .filter((r) => !!r);
-  const adjacent = (spaceCannonsAt(state, battle.system).get(color) ?? []).filter((c) => c.adjacent);
   if (kind === 'spaceCannon') {
     for (const { piece, stats } of adjacent) {
       const stat = stats.unit.spaceCannon!;
@@ -147,19 +168,16 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
   const rolled = hasRolled(battle[side], kind);
   const kindLabel = ROLL_KINDS.find((r) => r.kind === kind)?.label.toLowerCase();
   const toAssign = hitsToAssign(battle, side);
-  const available = BATTLE_ROLLS[battle.kind].filter(
-    (k) => rows.some((r) => r.stats && unitRoll(r.stats.unit, k)) || (k === 'spaceCannon' && adjacent.length > 0),
-  );
 
   function roll() {
-    const groups = rollers.map((r) => ({ unit: r.name, hitsOn: r.hitsOn, results: d10s(r.dice) }));
+    const groups = rollers.map((r) => ({ unit: r.name, hitsOn: r.hitsOn, modifier: modifierOf(r.name), results: d10s(r.dice) }));
     if (!groups.length) return;
-    dispatch({ type: 'battle/roll', side, roll: { id: newId(), player: me, kind, modifier, groups, ability } });
+    dispatch({ type: 'battle/roll', side, roll: { id: newId(), player: me, kind, groups, ability } });
   }
 
   function reroll(previous: Roll) {
     const groups = previous.groups
-      .map((g) => ({ ...g, results: d10s(g.results.filter((r) => !isHit(r, g.hitsOn, previous.modifier)).length) }))
+      .map((g) => ({ ...g, results: d10s(g.results.filter((r) => !isHit(r, g.hitsOn, g.modifier)).length) }))
       .filter((g) => g.results.length);
     dispatch({ type: 'battle/roll', side, roll: { ...previous, id: newId(), player: me, groups, rerollOf: previous.id } });
   }
@@ -178,7 +196,8 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
         <thead>
           <tr>
             <th>Unit</th>
-            <th title={`Hit value for ${kindLabel}`}>Hits on</th>
+            <th title={`Hit value for ${kindLabel}, after modifiers`}>Hits on</th>
+            <th title={`Added to each of this unit's ${kindLabel} dice`}>Mod</th>
             <th>Left</th>
             <th />
           </tr>
@@ -197,7 +216,14 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
                     {!fights && <span className="muted"> (support)</span>}
                   </td>
                   <td className="muted">
-                    {stat ? `${effectiveHitsOn(stat.hitsOn, ability?.amount)}+${stat.dice > 1 ? ` ×${stat.dice}` : ''}` : '–'}
+                    {stat
+                      ? hitValue(effectiveHitsOn(stat.hitsOn, (ability?.amount ?? 0) + modifierOf(stats.unit.name)), stat.dice)
+                      : '–'}
+                  </td>
+                  <td>
+                    {stat && unit.count > 0 && (
+                      <ModifierCounter value={modifierOf(stats.unit.name)} onChange={(n) => changeModifier(stats.unit.name, n)} />
+                    )}
                   </td>
                   <td>
                     {unit.count}
@@ -226,18 +252,23 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
               );
             })}
           {kind === 'spaceCannon' &&
-            adjacent.map(({ piece, stats }) => (
-            <tr key={piece.id} className="support">
-              <td>
-                {stats.unit.name} <span className="muted">(adjacent, deep space)</span>
-              </td>
-              <td className="muted">
-                {stats.unit.spaceCannon!.hitsOn}+{stats.unit.spaceCannon!.dice > 1 ? ` ×${stats.unit.spaceCannon!.dice}` : ''}
-              </td>
-              <td>{piece.count ?? 1}</td>
-              <td />
-            </tr>
-          ))}
+            adjacent.map(({ piece, stats }) => {
+              const name = `${stats.unit.name} (adjacent)`;
+              const cannon = stats.unit.spaceCannon!;
+              return (
+                <tr key={piece.id} className="support">
+                  <td>
+                    {stats.unit.name} <span className="muted">(adjacent, deep space)</span>
+                  </td>
+                  <td className="muted">{hitValue(effectiveHitsOn(cannon.hitsOn, modifierOf(name)), cannon.dice)}</td>
+                  <td>
+                    <ModifierCounter value={modifierOf(name)} onChange={(n) => changeModifier(name, n)} />
+                  </td>
+                  <td>{piece.count ?? 1}</td>
+                  <td />
+                </tr>
+              );
+            })}
         </tbody>
       </table>
 
@@ -254,40 +285,49 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
         )}
       </div>
 
-      <div className="filters">
-        {available.map((k) => (
-          <button key={k} className={`chip ${kind === k ? 'selected' : ''}`} onClick={() => setKind(k)}>
-            {ROLL_KINDS.find((r) => r.kind === k)?.label}
+      {available.length === 0 && (
+        <p className="hint">{battle.cannonOnly ? 'Only the attacker fires in space cannon offense.' : 'No units here can roll.'}</p>
+      )}
+      {available.length > 0 && (
+        <>
+          <div className="filters">
+            {available.map((k) => (
+              <button key={k} className={`chip ${kind === k ? 'selected' : ''}`} onClick={() => setKind(k)}>
+                {ROLL_KINDS.find((r) => r.kind === k)?.label}
+              </button>
+            ))}
+          </div>
+          <p className="hint">
+            Mod is added to that unit type's dice
+            {kind === 'spaceCannon' ? ' (e.g. −1 against Antimass Deflectors)' : ''}.
+            {ability && ` ${ability.source} ${formatModifier(ability.amount)} is already in the hit values.`}
+          </p>
+          <button className="primary" disabled={!totalDice || rolled} onClick={roll}>
+            {rolled
+              ? `Rolled ${kindLabel} this round`
+              : `Roll ${kindLabel} · ${totalDice} ${totalDice === 1 ? 'die' : 'dice'}`}
           </button>
-        ))}
-      </div>
-      <div className="counter-row">
-        <span>
-          Modifier to each die
-          {ability && (
-            <span className="muted">
-              {' '}
-              ({ability.source} {ability.amount > 0 ? '+' : '−'}
-              {Math.abs(ability.amount)} included)
-            </span>
-          )}
-        </span>
-        <span className="counter">
-          <button onClick={() => setModifier(modifier - 1)}>−</button>
-          <b>{modifier > 0 ? `+${modifier}` : modifier}</b>
-          <button onClick={() => setModifier(modifier + 1)}>+</button>
-        </span>
-      </div>
-      <button className="primary" disabled={!totalDice || rolled} onClick={roll}>
-        {rolled
-          ? `Rolled ${kindLabel} this round`
-          : `Roll ${kindLabel} · ${totalDice} ${totalDice === 1 ? 'die' : 'dice'}`}
-      </button>
+        </>
+      )}
 
       {[...rolls].reverse().map((r, i) => (
         <RollEntry key={r.id} roll={r} state={state} onRerollMisses={i === 0 ? () => reroll(r) : undefined} />
       ))}
     </section>
+  );
+}
+
+function hitValue(hitsOn: number, dice: number): string {
+  return `${hitsOn}+${dice > 1 ? ` ×${dice}` : ''}`;
+}
+
+function ModifierCounter({ value, onChange }: { value: number; onChange: (amount: number) => void }) {
+  return (
+    <span className="counter mod-counter">
+      <button onClick={() => onChange(-1)}>−</button>
+      <b className={value ? 'set' : ''}>{value ? formatModifier(value) : '0'}</b>
+      <button onClick={() => onChange(1)}>+</button>
+    </span>
   );
 }
 

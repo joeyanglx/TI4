@@ -26,5 +26,6 @@ export function withDefaults(saved: Partial<GameState>): GameState {
     promissory: saved.promissory ?? fresh.promissory,
     rolls: saved.rolls ?? fresh.rolls,
     speaker: saved.speaker,
+    battle: saved.battle,
   };
 }

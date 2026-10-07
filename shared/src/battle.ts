@@ -2,6 +2,7 @@ import { rollHits, type Roll, type RollKind } from './dice';
 import { hexKey, pixelToHex } from './hex';
 import { UNIT_KINDS, type PieceKind, type PlayerColor } from './pieces';
 import { planetAt } from './planets';
+import { spaceCannonsAt } from './spaceCannon';
 import type { GameState } from './state';
 
 export type BattleKind = 'space' | 'ground';
@@ -54,6 +55,18 @@ export interface Battle {
   defender: BattleSide;
   /** Hits each side scored in earlier rounds, oldest first. */
   pastRounds: Record<BattleSideId, number>[];
+  /**
+   * Space cannon offense: the attacker has no ships in the system and fires SPACE CANNON (from units there
+   * or deep-space units next to it, e.g. PDS II) at the defender's ships. One volley, no combat rounds.
+   */
+  cannonOnly?: boolean;
+}
+
+/** A battle that could be started in a system. */
+export interface BattleOption {
+  attacker: PlayerColor;
+  defender: PlayerColor;
+  cannonOnly?: boolean;
 }
 
 export type BattleAction =
@@ -106,24 +119,26 @@ export function unitsInSystem(state: GameState, system: string, planet?: string)
 }
 
 /**
- * Pairs of colours that could fight this kind of battle: both need units that fight in it. Ground combat
- * needs a planet, and only ground forces placed on that planet count.
+ * Battles that could be fought here: two colours that both have units that fight in it. Ground combat
+ * needs a planet, and only ground forces placed on that planet count. In space, a colour with no ships
+ * but SPACE CANNON in or next to the system can also fire at another colour's ships (cannon only).
  */
-export function possibleBattles(
-  state: GameState,
-  system: string,
-  kind: BattleKind,
-  planet?: string,
-): [PlayerColor, PlayerColor][] {
+export function possibleBattles(state: GameState, system: string, kind: BattleKind, planet?: string): BattleOption[] {
   if (kind === 'ground' && !planet) return [];
   const colors = [...unitsInSystem(state, system, kind === 'ground' ? planet : undefined)]
     .filter(([, units]) => units.some((u) => fightsIn(u.kind, kind)))
     .map(([color]) => color);
-  const pairs: [PlayerColor, PlayerColor][] = [];
+  const options: BattleOption[] = [];
   for (let i = 0; i < colors.length; i++) {
-    for (let j = i + 1; j < colors.length; j++) pairs.push([colors[i], colors[j]]);
+    for (let j = i + 1; j < colors.length; j++) options.push({ attacker: colors[i], defender: colors[j] });
   }
-  return pairs;
+  if (kind === 'space') {
+    for (const cannon of spaceCannonsAt(state, system).keys()) {
+      if (colors.includes(cannon)) continue;
+      for (const target of colors) options.push({ attacker: cannon, defender: target, cannonOnly: true });
+    }
+  }
+  return options;
 }
 
 export function createBattle(
@@ -135,6 +150,7 @@ export function createBattle(
     planet?: string;
     attacker: PlayerColor;
     defender: PlayerColor;
+    cannonOnly?: boolean;
     startedBy: string;
   },
 ): Battle {
@@ -154,6 +170,7 @@ export function createBattle(
     attacker: side(options.attacker),
     defender: side(options.defender),
     pastRounds: [],
+    ...(options.kind === 'space' && options.cannonOnly && { cannonOnly: true }),
   };
 }
 
@@ -164,11 +181,12 @@ export function applyBattleAction(state: GameState, action: BattleAction): GameS
 
   switch (action.type) {
     case 'battle/swap': {
-      if (battle.attacker.rolls.length || battle.defender.rolls.length) return state;
+      if (battle.cannonOnly || battle.attacker.rolls.length || battle.defender.rolls.length) return state;
       return { ...state, battle: { ...battle, attacker: battle.defender, defender: battle.attacker } };
     }
     case 'battle/roll': {
       const side = battle[action.side];
+      if (battle.cannonOnly && (action.side !== 'attacker' || action.roll.kind !== 'spaceCannon')) return state;
       if (!action.roll.rerollOf && hasRolled(side, action.roll.kind)) return state;
       return withSide(state, battle, action.side, { ...side, rolls: [...side.rolls, action.roll] });
     }
@@ -188,6 +206,7 @@ export function applyBattleAction(state: GameState, action: BattleAction): GameS
       return withSide(state, battle, action.side, { ...side, units: side.roundStart, hitsTaken: 0 });
     }
     case 'battle/nextRound': {
+      if (battle.cannonOnly) return state;
       const next = (side: BattleSide): BattleSide => ({ ...side, roundStart: side.units, rolls: [], hitsTaken: 0 });
       return {
         ...state,
