@@ -147,6 +147,12 @@ export function describeAction(state: GameState, action: Action): string {
       return `loaded a map (${Object.keys(action.tiles).length} systems)${action.custodians && !Object.values(state.pieces).some((p) => p.kind === 'custodians') ? ' with the custodians token on Mecatol Rex' : ''}`;
     case 'game/reset':
       return 'reset the game';
+    case 'round/end': {
+      const planets = Object.values(state.planets).filter((p) => p.exhausted).length;
+      const tokens = Object.values(state.pieces).filter((p) => p.kind === 'command').length;
+      const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
+      return `ended the round: readied ${plural(planets, 'planet')}, took ${plural(tokens, 'command token')} off the board and returned the strategy cards`;
+    }
     case 'seat/setupHome': {
       const units = action.pieces.map((p) => pieceName(p).replace(/^an? /, '1 × ')).join(', ');
       const planets = action.planets.length ? ` and took control of ${action.planets.join(', ')}` : '';

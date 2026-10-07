@@ -67,6 +67,8 @@ export type Action =
   /** Replace the map; with `custodians`, also put the custodians token on Mecatol Rex if it isn't on the board. */
   | { type: 'map/set'; tiles: Record<string, Tile>; custodians?: { id: string } }
   | { type: 'game/reset'; state: GameState }
+  /** Status phase in one go: ready every planet, take every command token off the board, return the strategy cards. */
+  | { type: 'round/end' }
   /** Put a player's starting units in their home system and give them its planets (see homeSetup). */
   | { type: 'seat/setupHome'; player: string; pieces: Piece[]; planets: string[] }
   | CardAction
@@ -82,7 +84,7 @@ export type Action =
  */
 export function isServerOrdered(action: Action): boolean {
   return (
-    /^(cards?|strategy|seat|planet|tech|token|speaker|promissory|dice|battle)\//.test(action.type) ||
+    /^(cards?|strategy|seat|planet|tech|token|speaker|promissory|dice|battle|round)\//.test(action.type) ||
     // Stack edits depend on the current count; moving pieces stays instant.
     /^piece\/(count|damage|merge|split)$/.test(action.type)
   );
@@ -181,10 +183,13 @@ export function applyAction(state: GameState, action: Action): GameState {
       for (const name of action.planets) planets[name] = { owner: action.player, exhausted: false };
       return { ...state, pieces, planets };
     }
-    case 'strategy/returnAll': {
-      // Returning the strategy cards ends the round, so nobody has passed any more.
-      const seats = Object.fromEntries(Object.entries(state.seats).map(([p, s]) => [p, { ...s, passed: false }]));
-      return { ...state, seats, cards: applyCardAction(state.cards, action) };
+    case 'strategy/returnAll':
+      return returnStrategyCards(state);
+    case 'round/end': {
+      const planets = Object.fromEntries(Object.entries(state.planets).map(([name, p]) => [name, { ...p, exhausted: false }]));
+      // Command tokens on the board go back to reinforcements, which are whatever isn't on a sheet or the board.
+      const pieces = Object.fromEntries(Object.entries(state.pieces).filter(([, p]) => p.kind !== 'command'));
+      return returnStrategyCards({ ...state, planets, pieces });
     }
     case 'strategy/pick': {
       // Whoever picks a strategy card takes the trade goods piled on it.
@@ -203,6 +208,12 @@ export function applyAction(state: GameState, action: Action): GameState {
       }
       return { ...state, cards: applyCardAction(state.cards, action as CardAction) };
   }
+}
+
+/** Every strategy card back in the pool, readied; that ends the round, so nobody has passed any more. */
+function returnStrategyCards(state: GameState): GameState {
+  const seats = Object.fromEntries(Object.entries(state.seats).map(([p, s]) => [p, { ...s, passed: false }]));
+  return { ...state, seats, cards: applyCardAction(state.cards, { type: 'strategy/returnAll' }) };
 }
 
 /** The custodians token on Mecatol Rex, unless it's already on the board or there's no Mecatol Rex. */

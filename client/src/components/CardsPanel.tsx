@@ -197,6 +197,7 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
               </button>
               <button onClick={() => dispatch({ type: 'strategy/returnAll' })}>Return all</button>
             </div>
+            <EndRound dispatch={dispatch} />
           </section>
 
           <section>
@@ -296,6 +297,37 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
 
           <CardSetup key={cards.edition} edition={cards.edition} dispatch={dispatch} />
         </>
+      )}
+    </div>
+  );
+}
+
+/** Status phase in one click, after a confirmation since it touches everyone's planets and tokens. */
+function EndRound({ dispatch }: { dispatch: Props['dispatch'] }) {
+  const [confirming, setConfirming] = useState(false);
+  return (
+    <div className="row end-round">
+      {confirming ? (
+        <>
+          <span className="muted">Ready all planets, remove all command tokens from the board, return strategy cards?</span>
+          <button
+            className="primary"
+            onClick={() => {
+              dispatch({ type: 'round/end' });
+              setConfirming(false);
+            }}
+          >
+            Yes, end the round
+          </button>
+          <button onClick={() => setConfirming(false)}>Cancel</button>
+        </>
+      ) : (
+        <button
+          title="Ready every controlled planet, take every command token off the board and return all strategy cards"
+          onClick={() => setConfirming(true)}
+        >
+          End round…
+        </button>
       )}
     </div>
   );
