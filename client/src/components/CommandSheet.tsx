@@ -48,6 +48,14 @@ export function TokenSection({ state, me, players, dispatch }: TokenProps) {
             {state.speaker ? `${state.speaker} is the speaker` : 'Speaker token is on the map'}
           </span>
         )}
+        {state.speaker !== me && (
+          <button
+            title={speakerOnMap ? 'Take it off the map' : state.speaker ? `Take it from ${state.speaker}` : undefined}
+            onClick={() => dispatch({ type: 'speaker/set', player: me })}
+          >
+            Take speaker token
+          </button>
+        )}
         <select
           value=""
           onChange={(e) => e.target.value && dispatch({ type: 'speaker/set', player: e.target.value })}
