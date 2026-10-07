@@ -49,6 +49,7 @@ function Table({ room, name }: Session) {
 
   // Share your colour so score markers and strategy card holders show it to everyone.
   const seatColor = state.seats[name]?.color;
+  const passed = !!state.seats[name]?.passed;
   useEffect(() => {
     if (status === 'online' && seatColor !== color) dispatch({ type: 'seat/color', player: name, color });
   }, [status, seatColor, color, name, dispatch]);
@@ -69,12 +70,19 @@ function Table({ room, name }: Session) {
           </button>
         </div>
         <DiceRoller state={state} me={name} dispatch={dispatch} />
+        <button
+          className={`pass-button ${passed ? 'selected' : ''}`}
+          title={passed ? 'You have passed; click to take it back' : 'Pass for the rest of this round'}
+          onClick={() => dispatch({ type: 'seat/pass', player: name, passed: !passed })}
+        >
+          {passed ? 'Passed ✓' : 'Pass'}
+        </button>
         <FeedbackButton me={name} room={room} />
         <span className="players">
           {players.map((p) => {
             const faction = state.seats[p]?.faction;
             return (
-              <span key={p} className="topbar-player">
+              <span key={p} className={`topbar-player ${state.seats[p]?.passed ? 'passed' : ''}`} title={state.seats[p]?.passed ? 'Passed' : undefined}>
                 {faction && <FactionIcon faction={faction} />}
                 {p}
               </span>

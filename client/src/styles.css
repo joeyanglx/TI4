@@ -1994,3 +1994,24 @@ button {
   font-size: 13px;
   white-space: nowrap;
 }
+
+.pass-button.selected {
+  background: #5a4a14;
+  border-color: #f2c94c;
+  color: #f2c94c;
+}
+
+.topbar-player.passed {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+
+.passed-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #f2c94c;
+  color: #f2c94c;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}

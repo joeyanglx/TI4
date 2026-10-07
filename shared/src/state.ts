@@ -181,6 +181,11 @@ export function applyAction(state: GameState, action: Action): GameState {
       for (const name of action.planets) planets[name] = { owner: action.player, exhausted: false };
       return { ...state, pieces, planets };
     }
+    case 'strategy/returnAll': {
+      // Returning the strategy cards ends the round, so nobody has passed any more.
+      const seats = Object.fromEntries(Object.entries(state.seats).map(([p, s]) => [p, { ...s, passed: false }]));
+      return { ...state, seats, cards: applyCardAction(state.cards, action) };
+    }
     case 'strategy/pick': {
       // Whoever picks a strategy card takes the trade goods piled on it.
       const card = state.cards.strategy.find((s) => s.id === action.id);

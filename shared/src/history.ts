@@ -206,7 +206,9 @@ export function describeAction(state: GameState, action: Action): string {
       return `removed all ${total} trade good${total === 1 ? '' : 's'} from the strategy cards`;
     }
     case 'strategy/returnAll':
-      return 'returned all strategy cards';
+      return Object.values(state.seats).some((s) => s.passed)
+        ? 'returned all strategy cards and cleared everyone\'s pass'
+        : 'returned all strategy cards';
     case 'seat/color':
       return `picked the colour ${action.color}`;
     case 'seat/faction':
@@ -227,6 +229,8 @@ export function describeAction(state: GameState, action: Action): string {
       return `gave ${action.amount} ${action.kind === 'tradeGoods' ? 'trade good' : 'commodit'}${action.kind === 'tradeGoods' ? (action.amount === 1 ? '' : 's') : action.amount === 1 ? 'y' : 'ies'} to ${action.to}`;
     case 'seat/tokens':
       return `${action.amount > 0 ? 'added' : 'removed'} a command token ${action.amount > 0 ? 'to' : 'from'} their ${action.pool} pool`;
+    case 'seat/pass':
+      return action.passed ? 'passed' : 'took back their pass';
     case 'seat/readyAll':
       return 'readied all planets and technologies';
     case 'tech/research':

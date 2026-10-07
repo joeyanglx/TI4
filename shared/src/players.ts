@@ -17,6 +17,8 @@ export interface Seat {
   /** Researched technology ids. */
   technologies: string[];
   exhaustedTechnologies: string[];
+  /** Passed for the rest of this action phase; cleared when the strategy cards are returned. */
+  passed?: boolean;
 }
 
 export type TokenPool = 'tactic' | 'fleet' | 'strategy';
@@ -49,6 +51,7 @@ export type PlayerAction =
   | { type: 'seat/tokens'; player: string; pool: TokenPool; amount: number }
   /** Status phase: ready every planet and technology a player has. */
   | { type: 'seat/readyAll'; player: string }
+  | { type: 'seat/pass'; player: string; passed: boolean }
   | { type: 'tech/research'; player: string; tech: string }
   | { type: 'tech/remove'; player: string; tech: string }
   | { type: 'tech/exhaust'; player: string; tech: string; exhausted: boolean }
@@ -152,6 +155,8 @@ export function applyPlayerAction<S extends PlayersState>(state: S, action: Play
       return update(action.player, (s) => ({
         tokens: { ...s.tokens, [action.pool]: add(s.tokens[action.pool], action.amount) },
       }));
+    case 'seat/pass':
+      return update(action.player, () => ({ passed: action.passed }));
     case 'seat/readyAll': {
       const readied = update(action.player, () => ({ exhaustedTechnologies: [] }));
       return {

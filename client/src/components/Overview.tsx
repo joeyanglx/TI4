@@ -104,6 +104,7 @@ function PlayerOverview({ state, player, players, online }: PlayerProps) {
             {online ? 'Online' : 'Offline'}
           </div>
         </div>
+        {seat.passed && <span className="passed-badge">PASSED</span>}
         {state.speaker === player && <SpeakerBadge player={player} />}
         <span className="po-vp" title="Victory points">
           {victoryPoints(state, player)} / {VP_TO_WIN}
