@@ -67,6 +67,8 @@ export type Action =
   /** Replace the map; with `custodians`, also put the custodians token on Mecatol Rex if it isn't on the board. */
   | { type: 'map/set'; tiles: Record<string, Tile>; custodians?: { id: string } }
   | { type: 'game/reset'; state: GameState }
+  /** Put a player's starting units in their home system and give them its planets (see homeSetup). */
+  | { type: 'seat/setupHome'; player: string; pieces: Piece[]; planets: string[] }
   | CardAction
   | PlayerAction
   | TokenAction
@@ -171,6 +173,14 @@ export function applyAction(state: GameState, action: Action): GameState {
     }
     case 'game/reset':
       return action.state;
+    case 'seat/setupHome': {
+      const pieces = { ...state.pieces };
+      for (const piece of action.pieces) pieces[piece.id] = piece;
+      const planets = { ...state.planets };
+      // Home planets start the game readied.
+      for (const name of action.planets) planets[name] = { owner: action.player, exhausted: false };
+      return { ...state, pieces, planets };
+    }
     case 'strategy/pick': {
       // Whoever picks a strategy card takes the trade goods piled on it.
       const card = state.cards.strategy.find((s) => s.id === action.id);

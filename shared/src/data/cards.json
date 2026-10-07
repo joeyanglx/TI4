@@ -3189,6 +3189,38 @@
     "arborec_infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 4,
+     "planet": "nestphar"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "nestphar"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "nestphar"
+    }
+   ],
+   "homeSystems": [
+    "5"
    ]
   },
   "ghost": {
@@ -3232,6 +3264,34 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "destroyer",
+     "count": 2
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 4,
+     "planet": "creuss"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "creuss"
+    }
+   ],
+   "homeSystems": [
+    "51",
+    "17"
    ]
   },
   "hacan": {
@@ -3277,6 +3337,43 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "hercant"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "arretze"
+    },
+    {
+     "unit": "infantry",
+     "count": 1,
+     "planet": "arretze"
+    },
+    {
+     "unit": "infantry",
+     "count": 1,
+     "planet": "kamdorn"
+    }
+   ],
+   "homeSystems": [
+    "16"
    ]
   },
   "jolnar": {
@@ -3323,6 +3420,43 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "fighter",
+     "count": 1
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "jol"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "nar"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "jol"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "nar"
+    }
+   ],
+   "homeSystems": [
+    "12"
    ]
   },
   "l1z1x": {
@@ -3363,6 +3497,38 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "infantry",
+     "count": 5,
+     "planet": "0.0.0"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "0.0.0"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "0.0.0"
+    }
+   ],
+   "homeSystems": [
+    "6"
    ]
   },
   "letnev": {
@@ -3403,6 +3569,37 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 1
+    },
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "wrenterra"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "arcprime"
+    }
+   ],
+   "homeSystems": [
+    "10"
    ]
   },
   "mentak": {
@@ -3444,6 +3641,38 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 2
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "infantry",
+     "count": 4,
+     "planet": "mollprimus"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "mollprimus"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "mollprimus"
+    }
+   ],
+   "homeSystems": [
+    "2"
    ]
   },
   "muaat": {
@@ -3483,6 +3712,29 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "warsun",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 4,
+     "planet": "muaat"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "muaat"
+    }
+   ],
+   "homeSystems": [
+    "4"
    ]
   },
   "naalu": {
@@ -3524,6 +3776,47 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "maaluuk"
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "druaa"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "maaluuk"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "druaa"
+    }
+   ],
+   "homeSystems": [
+    "9"
    ]
   },
   "nekro": {
@@ -3568,6 +3861,37 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "mordaiii"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "mordaiii"
+    }
+   ],
+   "homeSystems": [
+    "8"
    ]
   },
   "saar": {
@@ -3607,6 +3931,31 @@
     "infantry",
     "pds",
     "saar_spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 4
+    },
+    {
+     "unit": "spacedock",
+     "count": 1
+    }
+   ],
+   "homeSystems": [
+    "11"
    ]
   },
   "sardakk": {
@@ -3640,6 +3989,39 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "quinarra"
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "trenlak"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "quinarra"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "trenlak"
+    }
+   ],
+   "homeSystems": [
+    "13"
    ]
   },
   "sol": {
@@ -3680,6 +4062,33 @@
     "sol_infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "infantry",
+     "count": 5,
+     "planet": "jord"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "jord"
+    }
+   ],
+   "homeSystems": [
+    "1"
    ]
   },
   "winnu": {
@@ -3730,6 +4139,38 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "winnu"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "winnu"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "winnu"
+    }
+   ],
+   "homeSystems": [
+    "7"
    ]
   },
   "xxcha": {
@@ -3769,6 +4210,43 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 2
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "archontau"
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "archonren"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "archontau"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "archonren"
+    }
+   ],
+   "homeSystems": [
+    "14"
    ]
   },
   "yin": {
@@ -3808,6 +4286,33 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 4
+    },
+    {
+     "unit": "infantry",
+     "count": 4,
+     "planet": "darien"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "darien"
+    }
+   ],
+   "homeSystems": [
+    "3"
    ]
   },
   "yssaril": {
@@ -3851,6 +4356,43 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "shalloq"
+    },
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "retillion"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "shalloq"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "retillion"
+    }
+   ],
+   "homeSystems": [
+    "15"
    ]
   },
   "argent": {
@@ -3896,6 +4438,43 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "destroyer",
+     "count": 2
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "valk"
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "avar"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "ylir"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "valk"
+    }
+   ],
+   "homeSystems": [
+    "58"
    ]
   },
   "cabal": {
@@ -3939,6 +4518,37 @@
     "infantry",
     "pds",
     "cabal_spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "acheron"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "acheron"
+    }
+   ],
+   "homeSystems": [
+    "54"
    ]
   },
   "empyrean": {
@@ -3990,6 +4600,33 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 4,
+     "planet": "thedark"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "thedark"
+    }
+   ],
+   "homeSystems": [
+    "56"
    ]
   },
   "mahact": {
@@ -4034,6 +4671,37 @@
     "mahact_infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "ixth"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "ixth"
+    }
+   ],
+   "homeSystems": [
+    "52"
    ]
   },
   "nomad": {
@@ -4073,6 +4741,37 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "flagship",
+     "count": 1
+    },
+    {
+     "unit": "infantry",
+     "count": 4,
+     "planet": "arcturus"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "arcturus"
+    }
+   ],
+   "homeSystems": [
+    "53"
    ]
   },
   "naaz": {
@@ -4113,6 +4812,38 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "naazir"
+    },
+    {
+     "unit": "mech",
+     "count": 1,
+     "planet": "rokha"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "naazir"
+    }
+   ],
+   "homeSystems": [
+    "57"
    ]
   },
   "titans": {
@@ -4158,6 +4889,33 @@
     "infantry",
     "titans_pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 2
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "elysium"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "elysium"
+    }
+   ],
+   "homeSystems": [
+    "55"
    ]
   },
   "keleres": {
@@ -4203,6 +4961,34 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "infantry",
+     "count": 2
+    },
+    {
+     "unit": "carrier",
+     "count": 2
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "mollprimusk"
+    }
+   ],
+   "homeSystems": [
+    "2",
+    "14",
+    "58"
    ]
   },
   "bastion": {
@@ -4253,6 +5039,37 @@
     "infantry",
     "pds",
     "bastion_spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "ordinian"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "ordinian"
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    }
+   ],
+   "homeSystems": [
+    "92"
    ]
   },
   "crimson": {
@@ -4304,6 +5121,38 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "infantry",
+     "count": 4,
+     "planet": "ahkcreuxx"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "ahkcreuxx"
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "ahkcreuxx"
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "destroyer",
+     "count": 2
+    }
+   ],
+   "homeSystems": [
+    "94"
    ]
   },
   "deepwrought": {
@@ -4346,6 +5195,33 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "infantry",
+     "count": 3,
+     "planet": "ikatena"
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "ikatena"
+    },
+    {
+     "unit": "fighter",
+     "count": 4
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "dreadnought",
+     "count": 1
+    }
+   ],
+   "homeSystems": [
+    "95"
    ]
   },
   "firmament": {
@@ -4392,6 +5268,42 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "infantry",
+     "count": 1,
+     "planet": "cronos"
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "tallin"
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 3
+    },
+    {
+     "unit": "cruiser",
+     "count": 1
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "cronos"
+    }
+   ],
+   "homeSystems": [
+    "96"
    ]
   },
   "ralnel": {
@@ -4438,6 +5350,52 @@
     "infantry",
     "pds",
     "spacedock"
+   ],
+   "startingFleet": [
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "mez"
+    },
+    {
+     "unit": "infantry",
+     "count": 2,
+     "planet": "rep"
+    },
+    {
+     "unit": "carrier",
+     "count": 1
+    },
+    {
+     "unit": "fighter",
+     "count": 2
+    },
+    {
+     "unit": "dreadnought",
+     "count": 1
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "rep"
+    },
+    {
+     "unit": "pds",
+     "count": 1,
+     "planet": "mez"
+    },
+    {
+     "unit": "destroyer",
+     "count": 1
+    },
+    {
+     "unit": "spacedock",
+     "count": 1,
+     "planet": "mez"
+    }
+   ],
+   "homeSystems": [
+    "93"
    ]
   }
  },

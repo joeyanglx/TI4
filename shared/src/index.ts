@@ -4,6 +4,7 @@ export * from './cards';
 export * from './dice';
 export * from './feedback';
 export * from './hex';
+export * from './homeSetup';
 export * from './history';
 export * from './pieces';
 export * from './planets';

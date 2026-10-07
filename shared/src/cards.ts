@@ -1,4 +1,5 @@
 import cardsJson from './data/cards.json';
+import type { UnitKind } from './pieces';
 
 // Card data comes from the AsyncTI4 bot (official cards only), see scripts/import-cards.mjs.
 // Card ids are unique per physical copy, e.g. "sabo1".."sabo4". Agendas, relics and technologies are
@@ -97,6 +98,16 @@ export interface FactionInfo {
   promissoryNotes: PromissoryNoteInfo[];
   /** One unit id per unit type, with the faction's own units in place of the generic ones (see UNITS). */
   units: string[];
+  startingFleet?: StartingUnit[];
+  /** Home system tile ids, most likely first (Keleres can take any of three). */
+  homeSystems?: string[];
+}
+
+/** Units a faction starts with; `planet` is the start of a home planet's name, ground units and structures only. */
+export interface StartingUnit {
+  unit: UnitKind;
+  count: number;
+  planet?: string;
 }
 
 export interface PromissoryNoteInfo {

@@ -204,6 +204,37 @@ const genericPromissoryNotes = read('promissory_notes/color.json').map((n) =>
 );
 const abilityText = (a) => [a.permanentEffect, a.window && `${a.window}: ${a.windowEffect}`].filter(Boolean).join('\n');
 
+// Starting fleets are written like "2 cv,cr,2 ff,2 inf h,sd a": a count, a unit code and optionally the start
+// of a home planet's alias ("at" for Archon Tau: its letters in order). No planet means space or the first one.
+const FLEET_CODES = {
+  fs: 'flagship', ws: 'warsun', dn: 'dreadnought', cv: 'carrier', cr: 'cruiser', ca: 'cruiser', dd: 'destroyer',
+  ff: 'fighter', mech: 'mech', inf: 'infantry', pds: 'pds', sd: 'spacedock',
+};
+const inOrder = (letters, word) => {
+  let i = 0;
+  for (const c of word) if (c === letters[i]) i++;
+  return i === letters.length;
+};
+const startingFleet = (f) =>
+  f.startingFleet.split(',').map((t) => t.trim()).filter(Boolean).map((token) => {
+    const [, count, code, ref] = token.match(/^(\d+)?\s*([a-z]+)(?:\s+(\S+))?$/) ?? [];
+    const unit = FLEET_CODES[code];
+    if (!unit) throw new Error(`Unknown fleet code in ${f.alias}: ${token}`);
+    const planet = ref && (f.homePlanets.find((p) => p.startsWith(ref)) ?? f.homePlanets.find((p) => inOrder(ref, p)));
+    if (ref && !planet) throw new Error(`Unknown home planet in ${f.alias}: ${token}`);
+    return { unit, count: Number(count ?? 1), ...(planet && { planet }) };
+  });
+
+// Home system tile ids, most likely first. Keleres takes an unused Mentak, Xxcha or Argent home; the Ghosts' units
+// start on Creuss (51), not the Creuss Gate (17) that sits in their slot on the map.
+const homeId = (id) => id.replace(/^0+/, '').replace(/new$/, '').replace(/[ab]$/, '');
+const homeSystems = (alias, f) =>
+  alias === 'keleres'
+    ? ['mentak', 'xxcha', 'argent'].map((a) => homeId(factionSource[a].homeSystem))
+    : alias === 'ghost'
+      ? ['51', '17']
+      : [homeId(f.homeSystem)];
+
 const factions = {};
 for (const alias of Object.values(FACTION_SETS).flat()) {
   const f = factionSource[alias === 'keleres' ? 'keleresm' : alias];
@@ -225,6 +256,8 @@ for (const alias of Object.values(FACTION_SETS).flat()) {
     abilities: f.abilities.map((id) => ({ name: abilitySource[id].name, text: abilityText(abilitySource[id]) })),
     promissoryNotes: f.promissoryNotes.map((id) => promissoryNote(id, promissorySource[id])),
     units: factionUnits,
+    startingFleet: startingFleet(f),
+    homeSystems: homeSystems(alias, f),
   };
 }
 

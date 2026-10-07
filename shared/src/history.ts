@@ -147,6 +147,11 @@ export function describeAction(state: GameState, action: Action): string {
       return `loaded a map (${Object.keys(action.tiles).length} systems)${action.custodians && !Object.values(state.pieces).some((p) => p.kind === 'custodians') ? ' with the custodians token on Mecatol Rex' : ''}`;
     case 'game/reset':
       return 'reset the game';
+    case 'seat/setupHome': {
+      const units = action.pieces.map((p) => pieceName(p).replace(/^an? /, '1 × ')).join(', ');
+      const planets = action.planets.length ? ` and took control of ${action.planets.join(', ')}` : '';
+      return `set up their home system: ${units || 'no units'}${planets}`;
+    }
     case 'cards/setup':
       return `set up the cards for ${action.options.edition === 'base' ? 'the base game' : action.options.edition === 'pok' ? 'Prophecy of Kings' : "PoK + Thunder's Edge"}`;
     case 'cards/draw': {
