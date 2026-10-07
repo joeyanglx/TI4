@@ -1876,7 +1876,7 @@ button {
 }
 
 .feedback-panel {
-  width: min(640px, 100%);
+  width: min(760px, 100%);
 }
 
 .feedback-body {
@@ -1895,6 +1895,8 @@ button {
   border: 1px solid var(--border);
   background: var(--bg);
   color: var(--text);
+  min-height: 160px;
+  line-height: 1.4;
   resize: vertical;
 }
 

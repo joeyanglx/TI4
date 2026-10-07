@@ -112,7 +112,7 @@ function FeedbackPanel({ me, room, items, onSent, onClose }: PanelProps) {
           <textarea
             value={text}
             maxLength={4000}
-            rows={4}
+            rows={8}
             placeholder="e.g. Let me drag a whole stack of fighters into a carrier at once"
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {
