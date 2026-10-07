@@ -8,11 +8,13 @@ import {
   TECHNOLOGIES,
   isActionCard,
   seatOf,
+  type Action,
   type GameState,
 } from '@ti4/shared';
 import { allPromissoryNotes, knownPlayers, victoryPoints } from '../players';
 import { FactionIcon } from './cardParts';
 import { FactionSheet } from './FactionSheet';
+import { CardSetup, DiscardSection } from './TablePanels';
 import { SpeakerBadge, TokenPools } from './TokenPools';
 import { TECH_TYPES, techTooltip } from '../techs';
 
@@ -24,13 +26,14 @@ interface Props {
   room: string;
   online: string[];
   me: string;
+  dispatch: (action: Action) => void;
 }
 
 /**
- * Read-only summary of every player, in the style of Twilight Wars' info panel. Tokens are moved on
- * each player's own board; this shows everyone the result.
+ * Summary of every player, in the style of Twilight Wars' info panel, with the action card discard pile and card
+ * setup at the bottom. Tokens are moved on each player's own board; this shows everyone the result.
  */
-export function Overview({ state, room, online, me }: Props) {
+export function Overview({ state, room, online, me, dispatch }: Props) {
   const players = knownPlayers(state, online, me);
   const speakerOnMap = Object.values(state.pieces).some((p) => p.kind === 'speaker');
   return (
@@ -49,6 +52,10 @@ export function Overview({ state, room, online, me }: Props) {
       {players.map((p) => (
         <PlayerOverview key={p} state={state} player={p} players={players} online={online.includes(p)} />
       ))}
+      <div className="cards-panel">
+        <DiscardSection state={state} me={me} dispatch={dispatch} />
+        <CardSetup key={state.cards.edition} edition={state.cards.edition} dispatch={dispatch} />
+      </div>
     </div>
   );
 }

@@ -48,7 +48,7 @@ export function RelicSection({ state, players, me, dispatch }: Props) {
           Gain relic ({cards.decks.relic.length})
         </button>
       </div>
-      <p className="hint">Points from relics and agendas go in the scoreboard's +/−.</p>
+      <p className="hint">Points from relics and agendas: Victory points +/− on your player board.</p>
       {purgedRelics.length > 0 && (
         <details>
           <summary>Purged ({purgedRelics.length})</summary>

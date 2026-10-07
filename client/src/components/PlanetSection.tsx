@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { PLANETS, SYSTEMS, type Action, type GameState } from '@ti4/shared';
-import { CardDetails, GiveSelect, PlayerTag } from './cardParts';
+import { CardDetails, GiveSelect } from './cardParts';
 
 interface Props {
   state: GameState;
@@ -73,41 +73,6 @@ export function YourPlanets({ state, players, me, dispatch }: Props) {
         </button>
       </div>
       <p className="hint">Only planets on the map are listed. A newly gained planet comes in exhausted. Ready all also readies your technologies.</p>
-    </section>
-  );
-}
-
-/** Everyone's planets at a glance, on the Game tab. */
-export function AllPlanets({ state }: { state: GameState }) {
-  const owners = [...new Set(Object.values(state.planets).map((p) => p.owner).filter((o): o is string => !!o))];
-  if (!owners.length) return null;
-  return (
-    <section>
-      <h2>Planets</h2>
-      {owners.map((owner) => {
-        const names = ownedBy(state, owner);
-        const ready = totals(state, names, true);
-        const all = totals(state, names, false);
-        return (
-          <details key={owner} className="planet-owner">
-            <summary>
-              <PlayerTag player={owner} state={state} />
-              <span className="muted">
-                {names.length} planets · ready {ready.resources}/{all.resources} R, {ready.influence}/{all.influence} I
-              </span>
-            </summary>
-            {names.map((name) => (
-              <div key={name} className={`card-row ${state.planets[name].exhausted ? 'exhausted' : ''}`}>
-                <span className="ri">
-                  <span className="res">{PLANETS[name].resources}</span>
-                  <span className="inf">{PLANETS[name].influence}</span>
-                </span>
-                <PlanetText name={name} />
-              </div>
-            ))}
-          </details>
-        );
-      })}
     </section>
   );
 }

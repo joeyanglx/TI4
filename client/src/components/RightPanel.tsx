@@ -18,7 +18,8 @@ interface Props {
 }
 
 /**
- * Right-hand panel, tabbed like the left sidebar: the player board (cards, your stuff), the overview and history.
+ * Right-hand panel, tabbed like the left sidebar: your player board, the overview (with the discard pile) and history.
+ * Strategy cards, objectives and agendas are in the bar over the map.
  * Dice are rolled in battles, started by right-clicking a system.
  */
 export function RightPanel({ state, room, online, me, history, dispatch, onRewind }: Props) {
@@ -38,7 +39,7 @@ export function RightPanel({ state, room, online, me, history, dispatch, onRewin
       </div>
       <div className="right-panel-body">
         {tab === 'board' && <CardsPanel state={state} online={online} me={me} dispatch={dispatch} />}
-        {tab === 'overview' && <Overview state={state} room={room} online={online} me={me} />}
+        {tab === 'overview' && <Overview state={state} room={room} online={online} me={me} dispatch={dispatch} />}
         {tab === 'history' && <HistoryPanel state={state} history={history} onRewind={onRewind} />}
       </div>
     </aside>

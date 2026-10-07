@@ -10,6 +10,7 @@ import { Lobby } from './components/Lobby';
 import { RightPanel } from './components/RightPanel';
 import { RollToast } from './components/RollToast';
 import { Sidebar } from './components/Sidebar';
+import { TableBar } from './components/TableBar';
 import { useGame } from './useGame';
 
 interface Session {
@@ -100,7 +101,10 @@ function Table({ room, name }: Session) {
         edition={state.cards.edition}
         dispatch={dispatch}
       />
-      <Board state={state} me={name} color={color} mode={mode} dispatch={dispatch} />
+      <main className="center">
+        <TableBar state={state} online={players} me={name} dispatch={dispatch} />
+        <Board state={state} me={name} color={color} mode={mode} dispatch={dispatch} />
+      </main>
       <RightPanel
         state={state}
         room={room}
