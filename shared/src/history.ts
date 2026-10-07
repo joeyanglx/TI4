@@ -9,9 +9,10 @@ import {
   cardName,
   promissoryNote,
 } from './cards';
-import { hitsToAssign, sideHits } from './battle';
+import { fightsIn, hitsToAssign, sideHits } from './battle';
 import { ROLL_KINDS, rollHits } from './dice';
 import { hexKey, hexToPixel, pixelToHex } from './hex';
+import { planetAt } from './planets';
 import { applyAction, stackSize, type Action, type GameState, type Piece } from './state';
 import { SYSTEMS } from './systems';
 
@@ -66,7 +67,7 @@ const PIECE_NAMES: Partial<Record<Piece['kind'], string>> = {
 function pieceName(piece: Pick<Piece, 'kind' | 'count'>): string {
   const name = PIECE_NAMES[piece.kind] ?? piece.kind;
   const count = stackSize(piece as Piece);
-  return count > 1 ? `${count} × ${name}` : `a ${name}`;
+  return count > 1 ? `${count} × ${name}` : `${/^[aeiou]/i.test(name) ? 'an' : 'a'} ${name}`;
 }
 
 /** "Mecatol Rex (18)", "system 41" or "empty space" for a board position. */
@@ -75,6 +76,24 @@ function placeName(state: GameState, x: number, y: number): string {
   if (!tile) return 'empty space';
   const planets = SYSTEMS[tile.system]?.planets.map((p) => p.name) ?? [];
   return planets.length ? `${planets.join(' / ')} (${tile.system})` : `system ${tile.system}`;
+}
+
+/** Where a piece is, for moves: "Abyz (38)" on a planet, else the system. Ships are always in space. */
+function pieceWhere(state: GameState, kind: Piece['kind'], x: number, y: number): { label: string; planet?: string; number?: string } {
+  const tile = state.tiles[hexKey(pixelToHex({ x, y }))];
+  const planet = fightsIn(kind, 'space') ? undefined : planetAt(state, { x, y })?.planet.name;
+  return { label: planet && tile ? `${planet} (${tile.system})` : placeName(state, x, y), planet, number: tile?.system };
+}
+
+/** "from Jord (4) to Mecatol Rex (18)", "from space to Jord (4)", "within Mecatol Rex (18)". */
+function moveText(state: GameState, piece: Piece, x: number, y: number): string {
+  const from = pieceWhere(state, piece.kind, piece.x, piece.y);
+  const to = pieceWhere(state, piece.kind, x, y);
+  if (hexKey(pixelToHex(piece)) !== hexKey(pixelToHex({ x, y }))) return `from ${from.label} to ${to.label}`;
+  if (from.planet === to.planet) return `within ${placeName(state, x, y)}`;
+  if (!from.planet) return `from space to ${to.label}`;
+  if (!to.planet) return `from ${from.label} to space`;
+  return `from ${from.planet} to ${to.label}`;
 }
 
 /** Centre of a system in board pixels, for placeName. */
@@ -96,7 +115,7 @@ export function describeAction(state: GameState, action: Action): string {
     case 'piece/add':
       return `placed ${pieceName(action.piece)} in ${placeName(state, action.piece.x, action.piece.y)}`;
     case 'piece/move':
-      return piece ? `moved ${pieceName(piece)} to ${placeName(state, action.x, action.y)}` : 'moved a piece';
+      return piece ? `moved ${pieceName(piece)} ${moveText(state, piece, action.x, action.y)}` : 'moved a piece';
     case 'piece/remove':
       return piece ? `removed ${pieceName(piece)}` : 'removed a piece';
     case 'piece/count':
@@ -109,7 +128,9 @@ export function describeAction(state: GameState, action: Action): string {
         : 'marked damage';
     case 'piece/merge': {
       const from = state.pieces[action.from];
-      return from ? `stacked ${pieceName(from)}` : 'merged stacks';
+      const into = state.pieces[action.into];
+      if (!from || !into) return 'merged stacks';
+      return `moved ${pieceName(from)} ${moveText(state, from, into.x, into.y)}, stacking with ${stackSize(into)} more`;
     }
     case 'piece/split':
       return piece ? `split a ${PIECE_NAMES[piece.kind] ?? piece.kind} off a stack` : 'split a stack';
