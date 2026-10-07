@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   createBattle,
   possibleBattles,
@@ -7,6 +7,7 @@ import {
   type GameState,
 } from '@ti4/shared';
 import { newId } from '../id';
+import { SystemUnitsList, systemUnits } from './SystemUnits';
 
 interface Props {
   state: GameState;
@@ -33,6 +34,7 @@ const KINDS: { kind: BattleKind; label: string }[] = [
  */
 export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const [showUnits, setShowUnits] = useState(false);
 
   useEffect(() => {
     const onDown = (e: MouseEvent) => !ref.current?.contains(e.target as Node) && onClose();
@@ -55,12 +57,21 @@ export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose 
   );
 
   const owner = planet ? state.planets[planet]?.owner : undefined;
+  const units = systemUnits(state, system);
+  const unitCount = [...units.values()].reduce(
+    (n, { places }) => n + [...places.values()].reduce((m, lines) => m + [...lines.values()].reduce((k, l) => k + l.count, 0), 0),
+    0,
+  );
 
   return (
     <div className="piece-menu" ref={ref} style={{ left: x, top: y }} onContextMenu={(e) => e.preventDefault()}>
+      <button onClick={() => setShowUnits(!showUnits)}>
+        {showUnits ? '▾' : '▸'} {showUnits ? 'Hide' : 'Show'} units in this system ({unitCount})
+      </button>
+      {showUnits && <SystemUnitsList units={units} />}
       {planet && (
         <>
-          <div className="piece-menu-title">{planet}</div>
+          <div className="piece-menu-title piece-menu-section">{planet}</div>
           {owner && owner !== me && <div className="piece-menu-note">Controlled by {owner}.</div>}
           {owner === me ? (
             <button

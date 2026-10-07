@@ -1955,3 +1955,23 @@ button {
   border-left: 2px solid var(--accent);
   color: var(--muted);
 }
+
+.system-units {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 340px;
+  padding: 4px 8px 6px;
+  font-size: 12px;
+}
+
+.system-units-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.system-units-place {
+  padding-left: 16px;
+  line-height: 1.4;
+}
