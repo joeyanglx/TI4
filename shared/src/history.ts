@@ -9,7 +9,7 @@ import {
   cardName,
   promissoryNote,
 } from './cards';
-import { sideHits } from './battle';
+import { hitsToAssign, sideHits } from './battle';
 import { ROLL_KINDS, rollHits } from './dice';
 import { hexKey, hexToPixel, pixelToHex } from './hex';
 import { applyAction, stackSize, type Action, type GameState, type Piece } from './state';
@@ -244,8 +244,18 @@ export function describeAction(state: GameState, action: Action): string {
       const color = state.battle?.[action.side].color ?? '';
       return action.hit === 'sustain' ? `had a ${color} ${name} sustain damage` : `destroyed a ${color} ${name}`;
     }
+    case 'battle/skipHits': {
+      const b = state.battle;
+      const skipped = b ? hitsToAssign(b, action.side) : 0;
+      return `left ${skipped} hit${skipped === 1 ? '' : 's'} on ${b?.[action.side].color ?? action.side} unassigned`;
+    }
+    case 'battle/repair': {
+      const unit = state.battle?.[action.side].units.find((u) => u.piece === action.piece);
+      const name = unit ? (PIECE_NAMES[unit.kind] ?? unit.kind) : 'unit';
+      return `repaired a ${state.battle?.[action.side].color ?? ''} ${name}`;
+    }
     case 'battle/undoHits':
-      return `undid ${state.battle?.[action.side].color ?? action.side}'s hit assignments`;
+      return `undid ${state.battle?.[action.side].color ?? action.side}'s hits and repairs this round`;
     case 'battle/nextRound': {
       const b = state.battle;
       return b ? `ended combat round ${b.round} (${sideHits(b.attacker)} hits vs ${sideHits(b.defender)})` : 'ended a combat round';

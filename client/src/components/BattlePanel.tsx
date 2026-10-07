@@ -130,7 +130,7 @@ interface SideProps {
 }
 
 function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
-  const { color, units, rolls, hitsTaken } = battle[side];
+  const { color, units, rolls, hitsTaken, hitsSkipped = 0 } = battle[side];
   const [chosenKind, setKind] = useState<RollKind>(BATTLE_ROLLS[battle.kind][0]);
   // Per unit type and roll type, so a +1 for dreadnoughts in combat doesn't carry over to their bombardment.
   const [modifiers, setModifiers] = useState<Record<string, number>>({});
@@ -230,6 +230,14 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
                     {unit.damaged > 0 && <span className="damaged"> · {unit.damaged} damaged</span>}
                   </td>
                   <td className="hit-buttons">
+                    {unit.damaged > 0 && unit.count > 0 && (
+                      <button
+                        title="Repair one damaged unit (e.g. Duranium Armor)"
+                        onClick={() => dispatch({ type: 'battle/repair', side, piece: unit.piece })}
+                      >
+                        Repair
+                      </button>
+                    )}
                     {fights && unit.count > 0 && (
                       <>
                         <button
@@ -276,10 +284,23 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
         {toAssign > 0
           ? `Assign ${toAssign} hit${toAssign === 1 ? '' : 's'} from the ${side === 'attacker' ? 'defender' : 'attacker'}`
           : hitsTaken > 0
-            ? `${hitsTaken} hit${hitsTaken === 1 ? '' : 's'} assigned`
+            ? `${hitsTaken} hit${hitsTaken === 1 ? '' : 's'} assigned${hitsSkipped ? ` (${hitsSkipped} skipped)` : ''}`
             : 'No hits to assign'}
-        {hitsTaken > 0 && (
-          <button className="link" onClick={() => dispatch({ type: 'battle/undoHits', side })}>
+        {toAssign > 0 && (
+          <button
+            className="link"
+            title="Leave the remaining hits unassigned, e.g. cancelled by an ability or no valid target"
+            onClick={() => dispatch({ type: 'battle/skipHits', side })}
+          >
+            Skip
+          </button>
+        )}
+        {(hitsTaken > 0 || unitsChanged(units, battle[side].roundStart)) && (
+          <button
+            className="link"
+            title="Undo this round's hits, skips and repairs on this side"
+            onClick={() => dispatch({ type: 'battle/undoHits', side })}
+          >
             Undo
           </button>
         )}
@@ -315,6 +336,11 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
       ))}
     </section>
   );
+}
+
+/** Whether hits or repairs have changed a side's units since the round started. */
+function unitsChanged(units: BattleUnit[], roundStart: BattleUnit[]): boolean {
+  return units.some((u, i) => u.count !== roundStart[i]?.count || u.damaged !== roundStart[i]?.damaged);
 }
 
 function hitValue(hitsOn: number, dice: number): string {

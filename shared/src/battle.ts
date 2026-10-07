@@ -38,8 +38,10 @@ export interface BattleSide {
   roundStart: BattleUnit[];
   /** This side's rolls this round, re-rolls included. */
   rolls: Roll[];
-  /** Hits this side has assigned to its own units this round. */
+  /** Hits this side has assigned to its own units this round, skipped ones included. */
   hitsTaken: number;
+  /** Hits this side chose not to assign this round (cancelled by an ability, no valid target, ...). */
+  hitsSkipped?: number;
 }
 
 export interface Battle {
@@ -77,6 +79,11 @@ export type BattleAction =
   | { type: 'battle/roll'; side: BattleSideId; roll: Roll }
   /** Assign one hit to a unit on `side`: it sustains damage or one unit in the stack is destroyed. */
   | { type: 'battle/hit'; side: BattleSideId; piece: string; hit: 'sustain' | 'destroy' }
+  /** Leave the rest of the hits scored against `side` unassigned this round. */
+  | { type: 'battle/skipHits'; side: BattleSideId }
+  /** Repair one damaged unit in a stack mid-battle, e.g. with Duranium Armor. */
+  | { type: 'battle/repair'; side: BattleSideId; piece: string }
+  /** Put `side`'s units back as they were at the start of the round: hits, skips and repairs. */
   | { type: 'battle/undoHits'; side: BattleSideId }
   | { type: 'battle/nextRound' }
   /** Finish the battle; `apply` writes losses and damage back to the board, otherwise nothing changes. */
@@ -201,13 +208,30 @@ export function applyBattleAction(state: GameState, action: BattleAction): GameS
       });
       return withSide(state, battle, action.side, { ...side, units, hitsTaken: side.hitsTaken + 1 });
     }
+    case 'battle/skipHits': {
+      const side = battle[action.side];
+      const skipped = hitsToAssign(battle, action.side);
+      if (skipped <= 0) return state;
+      return withSide(state, battle, action.side, {
+        ...side,
+        hitsTaken: side.hitsTaken + skipped,
+        hitsSkipped: (side.hitsSkipped ?? 0) + skipped,
+      });
+    }
+    case 'battle/repair': {
+      const side = battle[action.side];
+      const units = side.units.map((u) =>
+        u.piece === action.piece && u.count > 0 && u.damaged > 0 ? { ...u, damaged: u.damaged - 1 } : u,
+      );
+      return withSide(state, battle, action.side, { ...side, units });
+    }
     case 'battle/undoHits': {
       const side = battle[action.side];
-      return withSide(state, battle, action.side, { ...side, units: side.roundStart, hitsTaken: 0 });
+      return withSide(state, battle, action.side, { ...side, units: side.roundStart, hitsTaken: 0, hitsSkipped: 0 });
     }
     case 'battle/nextRound': {
       if (battle.cannonOnly) return state;
-      const next = (side: BattleSide): BattleSide => ({ ...side, roundStart: side.units, rolls: [], hitsTaken: 0 });
+      const next = (side: BattleSide): BattleSide => ({ ...side, roundStart: side.units, rolls: [], hitsTaken: 0, hitsSkipped: 0 });
       return {
         ...state,
         battle: {
