@@ -287,6 +287,8 @@ export type CardAction =
   | { type: 'strategy/pick'; id: string; player?: string }
   | { type: 'strategy/exhaust'; id: string; exhausted: boolean }
   | { type: 'strategy/tradeGoods'; id: string; amount: number }
+  /** Take every trade good off every strategy card (they go back to the supply, not to anyone). */
+  | { type: 'strategy/clearTradeGoods' }
   /** Status phase: every card goes back to the pool, readied. */
   | { type: 'strategy/returnAll' };
 
@@ -438,6 +440,8 @@ export function applyCardAction(cards: CardsState, action: CardAction): CardsSta
       return updateStrategy(cards, action.id, (s) => ({ ...s, exhausted: action.exhausted }));
     case 'strategy/tradeGoods':
       return updateStrategy(cards, action.id, (s) => ({ ...s, tradeGoods: Math.max(0, s.tradeGoods + action.amount) }));
+    case 'strategy/clearTradeGoods':
+      return { ...cards, strategy: cards.strategy.map((s) => ({ ...s, tradeGoods: 0 })) };
     case 'strategy/returnAll':
       return { ...cards, strategy: cards.strategy.map((s) => ({ ...s, holder: undefined, exhausted: false })) };
   }

@@ -196,6 +196,10 @@ export function describeAction(state: GameState, action: Action): string {
       return `${action.exhausted ? 'used' : 'readied'} ${STRATEGY_CARDS[action.id]?.name}`;
     case 'strategy/tradeGoods':
       return `${action.amount > 0 ? 'added' : 'removed'} ${Math.abs(action.amount)} trade good${Math.abs(action.amount) === 1 ? '' : 's'} on ${STRATEGY_CARDS[action.id]?.name}`;
+    case 'strategy/clearTradeGoods': {
+      const total = state.cards.strategy.reduce((n, s) => n + s.tradeGoods, 0);
+      return `removed all ${total} trade good${total === 1 ? '' : 's'} from the strategy cards`;
+    }
     case 'strategy/returnAll':
       return 'returned all strategy cards';
     case 'seat/color':

@@ -188,6 +188,13 @@ export function CardsPanel({ state, online, me, dispatch }: Props) {
               >
                 +1 TG on unpicked
               </button>
+              <button
+                disabled={!cards.strategy.some((s) => s.tradeGoods > 0)}
+                title="Remove every trade good from every strategy card"
+                onClick={() => dispatch({ type: 'strategy/clearTradeGoods' })}
+              >
+                Clear TG
+              </button>
               <button onClick={() => dispatch({ type: 'strategy/returnAll' })}>Return all</button>
             </div>
           </section>
