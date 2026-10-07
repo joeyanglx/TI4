@@ -10,7 +10,7 @@ import {
   promissoryNote,
 } from './cards';
 import { fightsIn, hitsToAssign, sideHits } from './battle';
-import { ROLL_KINDS, rollHits } from './dice';
+import { ROLL_KINDS, describeFreeRoll, rollHits } from './dice';
 import { hexKey, hexToPixel, pixelToHex } from './hex';
 import { planetAt } from './planets';
 import { applyAction, stackSize, type Action, type GameState, type Piece } from './state';
@@ -285,6 +285,7 @@ export function describeAction(state: GameState, action: Action): string {
     case 'battle/end':
       return action.apply ? 'ended the battle and applied the results' : 'cancelled the battle';
     case 'dice/roll': {
+      if (action.roll.kind === 'free') return `rolled ${describeFreeRoll(action.roll)}`;
       const hits = rollHits(action.roll);
       const dice = action.roll.groups.reduce((n, g) => n + g.results.length, 0);
       const kind = ROLL_KINDS.find((k) => k.kind === action.roll.kind)?.label.toLowerCase();

@@ -1977,3 +1977,20 @@ button {
   padding-left: 16px;
   line-height: 1.4;
 }
+
+.dice-roller {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dice-roller button,
+.dice-roller select {
+  padding: 2px 7px;
+}
+
+.dice-result {
+  margin-left: 4px;
+  font-size: 13px;
+  white-space: nowrap;
+}

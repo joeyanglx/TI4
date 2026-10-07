@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ROLL_KINDS, rollHits, type GameState, type Roll } from '@ti4/shared';
+import { ROLL_KINDS, describeFreeRoll, rollHits, type GameState, type Roll } from '@ti4/shared';
 
 const SHOW_MS = 6000;
 
@@ -25,6 +25,13 @@ export function RollToast({ state, me, online }: { state: GameState; me: string;
   }, [latest, me, online]);
 
   if (!shown) return null;
+  if (shown.kind === 'free') {
+    return (
+      <div className="roll-toast" onClick={() => setShown(null)}>
+        <b>{shown.player}</b> rolled <b>{describeFreeRoll(shown)}</b>
+      </div>
+    );
+  }
   const hits = rollHits(shown);
   const dice = shown.groups.reduce((n, g) => n + g.results.length, 0);
   return (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { PlayerColor } from '@ti4/shared';
 import { BattlePanel } from './components/BattlePanel';
+import { DiceRoller } from './components/DiceRoller';
 import { Board, type BoardMode } from './components/Board';
 import { FactionIcon } from './components/cardParts';
 import { EditionToggle } from './components/EditionToggle';
@@ -67,6 +68,7 @@ function Table({ room, name }: Session) {
             Edit map
           </button>
         </div>
+        <DiceRoller state={state} me={name} dispatch={dispatch} />
         <FeedbackButton me={name} room={room} />
         <span className="players">
           {players.map((p) => {
