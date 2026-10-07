@@ -1,7 +1,7 @@
 import { rollHits, type Roll, type RollKind } from './dice';
 import { hexKey, pixelToHex } from './hex';
 import { UNIT_KINDS, type PieceKind, type PlayerColor } from './pieces';
-import { planetAt } from './planets';
+import { planetAt, planetSpots } from './planets';
 import { spaceCannonsAt } from './spaceCannon';
 import type { GameState } from './state';
 
@@ -62,6 +62,11 @@ export interface Battle {
    * or deep-space units next to it, e.g. PDS II) at the defender's ships. One volley, no combat rounds.
    */
   cannonOnly?: boolean;
+  /**
+   * Ground combat where the attacker is landing: its ground forces in the system's space join the battle,
+   * and on `battle/end` with `apply` the survivors are put on the planet.
+   */
+  landing?: boolean;
 }
 
 /** A battle that could be started in a system. */
@@ -69,6 +74,7 @@ export interface BattleOption {
   attacker: PlayerColor;
   defender: PlayerColor;
   cannonOnly?: boolean;
+  landing?: boolean;
 }
 
 export type BattleAction =
@@ -110,14 +116,24 @@ export function hitsToAssign(battle: Battle, side: BattleSideId): number {
 
 /**
  * Units of each colour in a system, as battle stacks. With a planet, only units on that planet count,
- * plus ships in the system (they can support with BOMBARDMENT).
+ * plus ships in the system (they can support with BOMBARDMENT), plus the `landing` colour's ground forces
+ * in the system's space.
  */
-export function unitsInSystem(state: GameState, system: string, planet?: string): Map<PlayerColor, BattleUnit[]> {
+export function unitsInSystem(
+  state: GameState,
+  system: string,
+  planet?: string,
+  landing?: PlayerColor,
+): Map<PlayerColor, BattleUnit[]> {
   const byColor = new Map<PlayerColor, BattleUnit[]>();
   for (const piece of Object.values(state.pieces)) {
     if (!(UNIT_KINDS as readonly string[]).includes(piece.kind)) continue;
     if (hexKey(pixelToHex(piece)) !== system) continue;
-    if (planet && !fightsIn(piece.kind, 'space') && planetAt(state, piece)?.planet.name !== planet) continue;
+    if (planet && !fightsIn(piece.kind, 'space')) {
+      const on = planetAt(state, piece)?.planet.name;
+      const landsHere = piece.color === landing && !on && fightsIn(piece.kind, 'ground');
+      if (on !== planet && !landsHere) continue;
+    }
     const units = byColor.get(piece.color) ?? [];
     units.push({ piece: piece.id, kind: piece.kind, count: piece.count ?? 1, damaged: piece.damaged ?? 0 });
     byColor.set(piece.color, units);
@@ -126,24 +142,47 @@ export function unitsInSystem(state: GameState, system: string, planet?: string)
 }
 
 /**
- * Battles that could be fought here: two colours that both have units that fight in it. Ground combat
- * needs a planet, and only ground forces placed on that planet count. In space, a colour with no ships
- * but SPACE CANNON in or next to the system can also fire at another colour's ships (cannon only).
+ * Battles that could be fought here. Space combat: two colours with ships, or a colour with no ships but
+ * SPACE CANNON in or next to the system firing at another's ships (cannon only). Ground combat needs a
+ * planet; see possibleGroundBattles.
  */
 export function possibleBattles(state: GameState, system: string, kind: BattleKind, planet?: string): BattleOption[] {
-  if (kind === 'ground' && !planet) return [];
-  const colors = [...unitsInSystem(state, system, kind === 'ground' ? planet : undefined)]
-    .filter(([, units]) => units.some((u) => fightsIn(u.kind, kind)))
+  if (kind === 'ground') return planet ? possibleGroundBattles(state, system, planet) : [];
+  const colors = [...unitsInSystem(state, system)]
+    .filter(([, units]) => units.some((u) => fightsIn(u.kind, 'space')))
     .map(([color]) => color);
   const options: BattleOption[] = [];
   for (let i = 0; i < colors.length; i++) {
     for (let j = i + 1; j < colors.length; j++) options.push({ attacker: colors[i], defender: colors[j] });
   }
-  if (kind === 'space') {
-    for (const cannon of spaceCannonsAt(state, system).keys()) {
-      if (colors.includes(cannon)) continue;
-      for (const target of colors) options.push({ attacker: cannon, defender: target, cannonOnly: true });
-    }
+  for (const cannon of spaceCannonsAt(state, system).keys()) {
+    if (colors.includes(cannon)) continue;
+    for (const target of colors) options.push({ attacker: cannon, defender: target, cannonOnly: true });
+  }
+  return options;
+}
+
+/**
+ * Ground combat on a planet: two colours with ground forces on it, or a colour landing ground forces from the
+ * system's space onto a planet where another colour has ground forces.
+ */
+function possibleGroundBattles(state: GameState, system: string, planet: string): BattleOption[] {
+  const onPlanet = new Set<PlayerColor>();
+  const inSpace = new Set<PlayerColor>();
+  for (const piece of Object.values(state.pieces)) {
+    if (!fightsIn(piece.kind, 'ground') || hexKey(pixelToHex(piece)) !== system) continue;
+    const on = planetAt(state, piece)?.planet.name;
+    if (on === planet) onPlanet.add(piece.color);
+    else if (!on) inSpace.add(piece.color);
+  }
+  const defenders = [...onPlanet];
+  const options: BattleOption[] = [];
+  for (let i = 0; i < defenders.length; i++) {
+    for (let j = i + 1; j < defenders.length; j++) options.push({ attacker: defenders[i], defender: defenders[j] });
+  }
+  for (const attacker of inSpace) {
+    if (onPlanet.has(attacker)) continue;
+    for (const defender of defenders) options.push({ attacker, defender, landing: true });
   }
   return options;
 }
@@ -158,11 +197,13 @@ export function createBattle(
     attacker: PlayerColor;
     defender: PlayerColor;
     cannonOnly?: boolean;
+    landing?: boolean;
     startedBy: string;
   },
 ): Battle {
   const planet = options.kind === 'ground' ? options.planet : undefined;
-  const units = unitsInSystem(state, options.system, planet);
+  const landing = planet && options.landing ? options.attacker : undefined;
+  const units = unitsInSystem(state, options.system, planet, landing);
   const side = (color: PlayerColor): BattleSide => {
     const sideUnits = units.get(color) ?? [];
     return { color, units: sideUnits, roundStart: sideUnits, rolls: [], hitsTaken: 0 };
@@ -178,6 +219,7 @@ export function createBattle(
     defender: side(options.defender),
     pastRounds: [],
     ...(options.kind === 'space' && options.cannonOnly && { cannonOnly: true }),
+    ...(landing && { landing: true }),
   };
 }
 
@@ -246,15 +288,27 @@ export function applyBattleAction(state: GameState, action: BattleAction): GameS
     case 'battle/end': {
       if (!action.apply) return { ...state, battle: undefined };
       const pieces = { ...state.pieces };
+      const landingSpot = battle.landing ? landingPoint(state, battle) : undefined;
       for (const unit of [...battle.attacker.units, ...battle.defender.units]) {
         const piece = pieces[unit.piece];
         if (!piece) continue;
-        if (unit.count <= 0) delete pieces[unit.piece];
-        else pieces[unit.piece] = { ...piece, count: unit.count, damaged: unit.damaged };
+        if (unit.count <= 0) {
+          delete pieces[unit.piece];
+          continue;
+        }
+        const lands = landingSpot && piece.color === battle.attacker.color && fightsIn(piece.kind, 'ground') && !planetAt(state, piece);
+        pieces[unit.piece] = { ...piece, count: unit.count, damaged: unit.damaged, ...(lands && landingSpot) };
       }
       return { ...state, pieces, battle: undefined };
     }
   }
+}
+
+/** Where landing ground forces go: inside the planet's circle, below its centre so they don't cover the defenders. */
+function landingPoint(state: GameState, battle: Battle): { x: number; y: number } | undefined {
+  const tile = state.tiles[battle.system];
+  const spot = tile && planetSpots(tile).find((s) => s.planet.name === battle.planet);
+  return spot && { x: spot.x, y: spot.y + spot.radius * 0.5 };
 }
 
 function withSide(state: GameState, battle: Battle, id: BattleSideId, side: BattleSide): GameState {

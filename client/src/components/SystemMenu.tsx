@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   createBattle,
+  planetSpots,
   possibleBattles,
   type Action,
   type BattleKind,
@@ -47,13 +48,20 @@ export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose 
     };
   }, [onClose]);
 
-  // Space combat is fought in the system; ground combat only on the planet that was right-clicked.
+  // Space combat is fought in the system; ground combat on any of its planets, the clicked one first.
+  const tile = state.tiles[system];
+  const planets = (tile ? planetSpots(tile).map((s) => s.planet.name) : []).sort(
+    (a, b) => Number(b === planet) - Number(a === planet),
+  );
   const options = KINDS.flatMap(({ kind, label }) =>
-    possibleBattles(state, system, kind, planet).map((option) => ({
-      ...option,
-      kind,
-      label: option.cannonOnly ? 'Space cannon offense' : kind === 'ground' ? `${label} on ${planet}` : label,
-    })),
+    (kind === 'space' ? [undefined] : planets).flatMap((on) =>
+      possibleBattles(state, system, kind, on).map((option) => ({
+        ...option,
+        kind,
+        planet: on,
+        label: option.cannonOnly ? 'Space cannon offense' : on ? `${label} on ${on}` : label,
+      })),
+    ),
   );
 
   const owner = planet ? state.planets[planet]?.owner : undefined;
@@ -98,22 +106,22 @@ export function SystemMenu({ state, system, planet, me, x, y, dispatch, onClose 
       {state.battle && <div className="piece-menu-note">A battle is already in progress.</div>}
       {!state.battle && options.length === 0 && (
         <div className="piece-menu-note">
-          {planet
-            ? `Two players need ships here (or one ships and the other space cannon in range), or ground forces on ${planet}.`
-            : 'Two players need ships here, or one ships and the other space cannon in range. For ground combat, right-click a planet.'}
+          Two players need ships here (or one ships and the other space cannon in range). Ground combat needs one
+          player's ground forces on a planet and another's on it or in this system's space, ready to land.
+
         </div>
       )}
       {!state.battle &&
         options.map((o) => (
           <button
-            key={`${o.kind}-${o.attacker}-${o.defender}`}
+            key={`${o.kind}-${o.planet}-${o.attacker}-${o.defender}`}
             onClick={() => {
-              const battle = createBattle(state, { id: newId(), system, planet, startedBy: me, ...o });
+              const battle = createBattle(state, { id: newId(), system, startedBy: me, ...o });
               dispatch({ type: 'battle/start', battle });
               onClose();
             }}
           >
-            {o.label}: {o.attacker} {o.cannonOnly ? 'fires at' : 'vs'} {o.defender}
+            {o.label}: {o.attacker} {o.cannonOnly ? 'fires at' : o.landing ? 'lands against' : 'vs'} {o.defender}
           </button>
         ))}
     </div>

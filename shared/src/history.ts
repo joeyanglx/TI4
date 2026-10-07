@@ -246,9 +246,10 @@ export function describeAction(state: GameState, action: Action): string {
     case 'speaker/set':
       return action.player ? `made ${action.player} the speaker` : 'cleared the speaker';
     case 'battle/start': {
-      const { attacker, defender, kind, system, planet, cannonOnly } = action.battle;
+      const { attacker, defender, kind, system, planet, cannonOnly, landing } = action.battle;
       const where = planet ?? (state.tiles[system] ? placeName(state, ...pointOf(state, system)) : 'empty space');
       if (cannonOnly) return `started space cannon offense at ${where}: ${attacker.color} firing at ${defender.color}`;
+      if (landing) return `started ground combat on ${where}: ${attacker.color} landing against ${defender.color}`;
       return `started ${kind} combat ${planet ? 'on' : 'in'} ${where}: ${attacker.color} attacking ${defender.color}`;
     }
     case 'battle/swap':
