@@ -160,9 +160,9 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
     })
     .filter((r) => !!r);
   if (kind === 'spaceCannon') {
-    for (const { piece, stats } of adjacent) {
+    for (const { piece, stats, wormhole } of adjacent) {
       const stat = stats.unit.spaceCannon!;
-      rollers.push({ name: `${stats.unit.name} (adjacent)`, hitsOn: stat.hitsOn, dice: (piece.count ?? 1) * stat.dice });
+      rollers.push({ name: adjacentName(stats.unit.name, wormhole), hitsOn: stat.hitsOn, dice: (piece.count ?? 1) * stat.dice });
     }
   }
   const totalDice = rollers.reduce((n, r) => n + r.dice, 0);
@@ -262,13 +262,14 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
               );
             })}
           {kind === 'spaceCannon' &&
-            adjacent.map(({ piece, stats }) => {
-              const name = `${stats.unit.name} (adjacent)`;
+            adjacent.map(({ piece, stats, wormhole }) => {
+              const name = adjacentName(stats.unit.name, wormhole);
               const cannon = stats.unit.spaceCannon!;
               return (
                 <tr key={piece.id} className="support">
                   <td>
-                    {stats.unit.name} <span className="muted">(adjacent, deep space)</span>
+                    {stats.unit.name}{' '}
+                    <span className="muted">({wormhole ? `through the ${wormhole} wormhole` : 'adjacent'}, deep space)</span>
                   </td>
                   <td className="muted">{hitValue(effectiveHitsOn(cannon.hitsOn, modifierOf(name)), cannon.dice)}</td>
                   <td>
@@ -338,6 +339,11 @@ function SideColumn({ battle, side, state, me, dispatch }: SideProps) {
       ))}
     </section>
   );
+}
+
+/** Roll group name for a deep-space unit firing from another system, e.g. "PDS II (via alpha wormhole)". */
+function adjacentName(unit: string, wormhole?: string): string {
+  return `${unit} (${wormhole ? `via ${wormhole} wormhole` : 'adjacent'})`;
 }
 
 /** Whether hits or repairs have changed a side's units since the round started. */

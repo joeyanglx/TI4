@@ -1,3 +1,4 @@
+export * from './adjacency';
 export * from './battle';
 export * from './cards';
 export * from './dice';
