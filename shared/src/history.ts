@@ -219,7 +219,9 @@ export function describeAction(state: GameState, action: Action): string {
     case 'seat/color':
       return `picked the colour ${action.color}`;
     case 'seat/faction':
-      return action.faction ? `picked ${FACTIONS[action.faction]?.name ?? action.faction}` : 'cleared their faction';
+      return action.faction
+        ? `picked ${FACTIONS[action.faction]?.name ?? action.faction} (commodity limit ${FACTIONS[action.faction]?.commodities})`
+        : 'cleared their faction';
     case 'seat/bonusVp':
       return `${action.amount > 0 ? 'gave' : 'took'} ${Math.abs(action.amount)} VP ${action.amount > 0 ? 'to' : 'from'} ${action.player}`;
     case 'seat/tradeGoods':

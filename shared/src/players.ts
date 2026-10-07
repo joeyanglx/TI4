@@ -118,8 +118,12 @@ export function applyPlayerAction<S extends PlayersState>(state: S, action: Play
         const old = (s.faction && FACTIONS[s.faction]?.startingTech) || [];
         const starting = (action.faction && FACTIONS[action.faction]?.startingTech) || [];
         const kept = s.technologies.filter((t) => !old.includes(t));
+        // The faction sheet sets the commodity limit; clearing the faction leaves it as it was.
+        const commodityMax = (action.faction ? FACTIONS[action.faction]?.commodities : undefined) ?? s.commodityMax;
         return {
           faction: action.faction,
+          commodityMax,
+          commodities: Math.min(s.commodities, commodityMax),
           technologies: [...kept, ...starting.filter((t) => !kept.includes(t))],
           exhaustedTechnologies: s.exhaustedTechnologies.filter((t) => !old.includes(t)),
         };
