@@ -12,7 +12,7 @@ import {
   type SystemInfo,
   type SystemType,
   type Tile,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { SYSTEM_MIME } from '../dnd';
 import { newId } from '../id';
 import { systemImageUrl } from '../tiles';

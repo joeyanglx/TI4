@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { UNIT_KINDS, stackSize, type Action, type Piece } from '@ti4/shared';
+import { UNIT_KINDS, stackSize, type Action, type Piece } from '@joeyanglx/ti4-rules';
 import { newId } from '../id';
 
 interface Props {

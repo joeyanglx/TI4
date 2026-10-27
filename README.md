@@ -2,14 +2,19 @@
 
 A free-form, browser-based Twilight Imperium 4th Edition table for playing with friends. Like Tabletop Simulator, but only for TI4: there are no rules enforced, you just move pieces around a shared board.
 
+This is one of the games on [All Hands On Board](https://github.com/joeyanglx/AllHandsOnBoard) (`../AllHandsOnBoard`), the shared platform that hosts the lobby, rooms, history and rewind, feedback and the deployment. This repo publishes the game as `@joeyanglx/ti4-rules` and `@joeyanglx/ti4-client`, which the platform installs.
+
 ## Getting started
 
-Requires Node 22+.
+Requires Node 22+ and read access to the platform's packages on GitHub Packages: once per machine, log in with a GitHub classic token that has `read:packages` (see the platform's README):
 
 ```sh
+npm login --scope=@joeyanglx --auth-type=legacy --registry=https://npm.pkg.github.com
 npm install
 npm run dev
 ```
+
+This runs the platform's server and lobby with only this game, reading it from source.
 
 Open http://localhost:5173, enter a name and a room. Anyone who joins the same room shares the board. Friends on the same network can use the "Network" URL Vite prints.
 
@@ -34,55 +39,46 @@ Open http://localhost:5173, enter a name and a room. Anyone who joins the same r
 - **End round…** (table bar, under the strategy cards): after a confirmation, readies every controlled planet and technology, takes every command token off the board (back to reinforcements) and returns all strategy cards, which also clears passes. One history entry, so it can be rewound.
 - **Pass** (top bar): marks you as passed for the round; click again to take it back. Passed players get a PASSED badge in the Overview and are struck through in the top bar. *Return all* on the strategy cards (status phase) clears everyone's pass.
 - **Dice** (top bar): pick how many, then *D4*, *D6* or *D10*. Everyone sees the roll pop up and it goes in the history; your latest result stays next to the buttons.
-- **Feedback** (top bar): send a bug report or request to whoever runs the table, and see their replies and status (Seen, Working on it, Done, Not doing). A dot on the button means there's a new reply. Requests are saved in `server/data/feedback.json`; answers go in `server/data/feedback-replies.json` (`{ "<id>": { "status": "done", "reply": "…", "repliedAt": <ms> } }`), which the panel picks up without a restart.
+- **Feedback** (top bar): send a bug report or request to whoever runs the table, and see their replies and status (Seen, Working on it, Done, Not doing). A dot on the button means there's a new reply. Requests are saved in the platform's data folder, `feedback.json` (`dev/data/` here, `/var/lib/allhands/` on the server); answers go in `feedback-replies.json` next to it (`{ "<id>": { "status": "done", "reply": "…", "repliedAt": <ms> } }`), which the panel picks up without a restart.
 - Drag empty space to pan, scroll to zoom.
 
 ## Hosting a game
 
-```sh
-npm run build   # build the client into client/dist
-npm start       # serves the client and the websocket on port 3001 (set PORT to change)
-```
-
-Rooms are saved to `server/data/<room>.json`, with their history in `<room>.history.json`, and restored when the server restarts, including a battle in progress.
-
-Updating during a game: a change to `client/` only needs `npm run build` (the server reads `client/dist` on every request; players reload to get it). A change to `shared/` or `server/` also needs the server restarted; players reconnect on their own. On Windows, stopping `npm start` can leave its `node` process listening on 3001, so check the port is free before starting again.
-
-### Playing over the internet
-
-Friends on the same Wi-Fi can just use `http://<your-LAN-IP>:3001`. For friends elsewhere, put a temporary tunnel in front of the production server. Cloudflare's quick tunnel needs no account:
+Hosting is the platform's job: its README covers the Cloudflare quick tunnel, the always-on Google Cloud server and the Windows package. To get a change to the players:
 
 ```sh
-brew install cloudflared          # macOS; on Windows: winget install Cloudflare.cloudflared
-npm run build && npm start
-cloudflared tunnel --url http://localhost:3001   # prints a https://….trycloudflare.com link to share
+npm run release -- patch                  # version both packages together
+git commit -am "Release v0.1.1" && git tag v0.1.1 && git push --follow-tags   # the Publish workflow publishes them
 ```
 
-Stop the tunnel (Ctrl+C) after the game. There's no login yet: anyone with the link can join any room and change the board. Tunnel the production server (3001) rather than the Vite dev server: it's faster, won't hot-reload mid-game, and Vite rejects unknown hostnames by default.
+then in AllHandsOnBoard `npm run update:games`, commit and push, and `sudo ahob-update` on the server. Rooms (and a battle in progress) survive the restart; players reconnect on their own.
+
+`npm run build -w dev && npm start` here runs a local production copy with only this game on port 3001 (rooms in `dev/data/ti4/`).
 
 ## Project layout
 
 | Package | What it is |
 |---|---|
-| `shared/` | Game model used by both sides: hex math, piece types, `GameState`, `applyAction`, and the websocket message types |
-| `server/` | Node + `ws` server. Keeps each room's state, relays actions to other players, saves rooms to disk |
-| `client/` | Vite + React + `react-konva` board: pan/zoom hex map, system tiles, draggable pieces, sidebar palettes |
+| `shared/` | `@joeyanglx/ti4-rules`: the game model used by both sides (hex math, piece types, `GameState`, `applyAction`) and `ti4Rules`, the platform's `GameRules` for it |
+| `client/` | `@joeyanglx/ti4-client`: the `react-konva` board (pan/zoom hex map, system tiles, draggable pieces, sidebar palettes) and `ti4Client` for the platform; its images are in `assets/` |
+| `dev/` | Not published: the platform's server and lobby with only this game, for `npm run dev` |
 
 ## Tile data and images
 
-`shared/src/data/systems.json` and `client/public/tiles/` come from the [KeeganW/ti4](https://github.com/KeeganW/ti4) map generator (planet positions and circles from [AsyncTI4](https://github.com/AsyncTI4/TI4_map_generator_bot)'s tile layouts; Mecatol Rex and Mallice measured on these images), filtered to official tiles: base game (1–50), Prophecy of Kings (51–91, including hyperlanes 83A–91B) and Thunder's Edge (92–118). For private use with friends.
+`shared/src/data/systems.json` and `client/assets/tiles/` come from the [KeeganW/ti4](https://github.com/KeeganW/ti4) map generator (planet positions and circles from [AsyncTI4](https://github.com/AsyncTI4/TI4_map_generator_bot)'s tile layouts; Mecatol Rex and Mallice measured on these images), filtered to official tiles: base game (1–50), Prophecy of Kings (51–91, including hyperlanes 83A–91B) and Thunder's Edge (92–118). For private use with friends.
 
-`shared/src/data/cards.json` (action cards, objectives, agendas, relics, strategy cards, technologies, factions with their abilities, promissory notes and units) comes from the [AsyncTI4 bot](https://github.com/AsyncTI4/TI4_map_generator_bot), official cards only. Each edition's decks follow AsyncTI4's deck lists: base game (80 action cards, base objectives and agendas, no relics, base Construction), PoK (120 action cards, PoK objectives and agendas, 16 relics) and PoK + Thunder's Edge (140 action cards, 23 relics, Thunder's Edge Construction and Warfare). Factions also carry their starting fleet and home system ids from the bot's `factions/*.json`, used to set up a home system when a faction is picked. Regenerate it with `node scripts/import-cards.mjs <bot>/src/main/resources/data`. Faction icons in `client/public/factions/` come from the same repo: `python scripts/import-faction-icons.py <bot>/src/main/resources/emojis/factions` (needs Pillow).
+`shared/src/data/cards.json` (action cards, objectives, agendas, relics, strategy cards, technologies, factions with their abilities, promissory notes and units) comes from the [AsyncTI4 bot](https://github.com/AsyncTI4/TI4_map_generator_bot), official cards only. Each edition's decks follow AsyncTI4's deck lists: base game (80 action cards, base objectives and agendas, no relics, base Construction), PoK (120 action cards, PoK objectives and agendas, 16 relics) and PoK + Thunder's Edge (140 action cards, 23 relics, Thunder's Edge Construction and Warfare). Factions also carry their starting fleet and home system ids from the bot's `factions/*.json`, used to set up a home system when a faction is picked. Regenerate it with `node scripts/import-cards.mjs <bot>/src/main/resources/data`. Faction icons in `client/assets/factions/` come from the same repo: `python scripts/import-faction-icons.py <bot>/src/main/resources/emojis/factions` (needs Pillow).
 
 ## How syncing works
 
-Every change to the board is an `Action` (see `shared/src/state.ts`). The client applies it locally straight away so dragging feels instant, then sends it to the server. The server applies the same `applyAction` and forwards it to everyone else in the room. When someone joins, they get a full snapshot.
+Every change to the board is an `Action` (see `shared/src/state.ts`). The client applies it locally straight away so dragging feels instant, then sends it to the platform's server. The server applies the same `applyAction` and forwards it to everyone else in the room (card, seat, planet, battle and round actions wait for the server's echo instead: `isServerOrdered`). When someone joins, they get a full snapshot.
 
 To add a new kind of change (e.g. flipping a card), add an `Action` variant and handle it in `applyAction`. Both sides pick it up automatically.
 
 ## Scripts
 
-- `npm run dev` — server and client together, with hot reload
+- `npm run dev` — the platform's server and client with this game, with hot reload
 - `npm run typecheck` — type-check all packages
-- `npm run build` — production build of the client
-- `npm start` — run the server (serves the built client too)
+- `npm run build` — build both packages for publishing
+- `npm start` — run the dev harness's server (serves `dev/dist` after `npm run build -w dev`)
+- `npm run release -- <patch|minor|x.y.z>` — version both packages (push the tag to publish)

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { PLANETS, SYSTEMS, type Action, type GameState } from '@ti4/shared';
+import { PLANETS, SYSTEMS, type Action, type GameState } from '@joeyanglx/ti4-rules';
 import { CardDetails, GiveSelect } from './cardParts';
 
 interface Props {

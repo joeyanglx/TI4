@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Action, Edition, PlayerColor, Tile } from '@ti4/shared';
+import type { Action, Edition, PlayerColor, Tile } from '@joeyanglx/ti4-rules';
 import { PiecePalette } from './PiecePalette';
 import { SystemPalette } from './SystemPalette';
 

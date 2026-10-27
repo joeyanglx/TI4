@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ROLL_KINDS, describeFreeRoll, rollHits, type GameState, type Roll } from '@ti4/shared';
+import { ROLL_KINDS, describeFreeRoll, rollHits, type GameState, type Roll } from '@joeyanglx/ti4-rules';
 
 const SHOW_MS = 6000;
 

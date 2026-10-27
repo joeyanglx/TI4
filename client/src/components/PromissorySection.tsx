@@ -1,4 +1,4 @@
-import { promissoryText, type Action, type GameState } from '@ti4/shared';
+import { promissoryText, type Action, type GameState } from '@joeyanglx/ti4-rules';
 import { allPromissoryNotes, type HeldNote } from '../players';
 import { CardDetails, GiveSelect, PlayerTag } from './cardParts';
 

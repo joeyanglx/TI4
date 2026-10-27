@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Action, GameState } from '@ti4/shared';
+import type { Action, GameState } from '@joeyanglx/ti4-rules';
 import { knownPlayers } from '../players';
 import { AgendaSection } from './AgendaSection';
 import { RelicSection } from './RelicSection';

@@ -12,7 +12,7 @@ import {
   type Action,
   type CardExpansion,
   type GameState,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { newId } from '../id';
 import { FactionIcon } from './cardParts';
 

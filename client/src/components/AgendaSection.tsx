@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AGENDAS, SYSTEMS, randomSeed, type Action, type GameState, type Law } from '@ti4/shared';
+import { AGENDAS, SYSTEMS, randomSeed, type Action, type GameState, type Law } from '@joeyanglx/ti4-rules';
 import { CardDetails } from './cardParts';
 
 const PLANET_NAMES = [...new Set(Object.values(SYSTEMS).flatMap((s) => s.planets.map((p) => p.name)))].sort();

@@ -1,4 +1,4 @@
-import type { TokenSlot } from '@ti4/shared';
+import type { TokenSlot } from '@joeyanglx/ti4-rules';
 
 // Drag-and-drop payload types from the sidebar onto the board.
 export const PIECE_MIME = 'application/x-ti4-piece';

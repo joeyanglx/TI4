@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { EDITION_NAMES, cardsInUse, randomSeed, type Action, type Edition, type GameState } from '@ti4/shared';
+import { EDITION_NAMES, cardsInUse, randomSeed, type Action, type Edition, type GameState } from '@joeyanglx/ti4-rules';
 
 const LABELS: Record<Edition, string> = { base: 'Base', pok: 'PoK', te: 'PoK + TE' };
 

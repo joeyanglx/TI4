@@ -1,0 +1,25 @@
+{
+  "name": "@joeyanglx/ti4-dev",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"node --conditions=ahob-source --import tsx --watch server.mjs\" \"vite\"",
+    "build": "vite build",
+    "start": "node --conditions=ahob-source --import tsx server.mjs"
+  },
+  "dependencies": {
+    "@joeyanglx/ahob-client": "^0.1.0",
+    "@joeyanglx/ahob-server": "^0.1.0",
+    "@joeyanglx/ti4-client": "*",
+    "@joeyanglx/ti4-rules": "*",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.5",
+    "tsx": "^4.23.15",
+    "vite": "^8.3.3"
+  }
+}

@@ -1,4 +1,4 @@
-import { seatOf, type Action, type GameState } from '@ti4/shared';
+import { seatOf, type Action, type GameState } from '@joeyanglx/ti4-rules';
 import { GiveSelect } from './cardParts';
 
 interface Props {

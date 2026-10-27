@@ -21,7 +21,7 @@ import {
   type PieceKind,
   type PlayerColor,
   type Tile,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { PIECE_MIME, SYSTEM_MIME, TOKEN_MIME, tokenDropTarget, type TokenDrag } from '../dnd';
 import { newId } from '../id';
 import { PieceMenu } from './PieceMenu';

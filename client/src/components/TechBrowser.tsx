@@ -9,7 +9,7 @@ import {
   type Action,
   type GameState,
   type TechType,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { TECH_TYPES, describeRequirements } from '../techs';
 
 interface Props {

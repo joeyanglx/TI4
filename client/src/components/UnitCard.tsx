@@ -6,7 +6,7 @@ import {
   type DiceRoll,
   type GameState,
   type Piece,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { PlayerTag } from './cardParts';
 
 /** Stats panel for the unit under the mouse: its owner's faction unit, upgraded if researched. */

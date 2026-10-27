@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Circle, Group, Image, Line, Text } from 'react-konva';
 import type Konva from 'konva';
-import { HEX_SIZE, SYSTEMS, hexCorners, hexToPixel, pixelToHex, type Action, type Hex, type Tile } from '@ti4/shared';
+import { HEX_SIZE, SYSTEMS, hexCorners, hexToPixel, pixelToHex, type Action, type Hex, type Tile } from '@joeyanglx/ti4-rules';
 import { systemImageUrl, useImage } from '../tiles';
 
 const HEX_POINTS = hexCorners();

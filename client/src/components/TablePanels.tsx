@@ -8,7 +8,7 @@ import {
   type Action,
   type Edition,
   type GameState,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { CardDetails, PlayerTag } from './cardParts';
 
 // The shared table's cards: strategy cards and objectives (in the bar over the map), the action card discard

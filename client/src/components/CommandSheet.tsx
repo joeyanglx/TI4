@@ -5,7 +5,7 @@ import {
   type Action,
   type GameState,
   type TechnologyInfo,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { describeRequirements, techColor } from '../techs';
 import { CardDetails } from './cardParts';
 import { TechBrowser } from './TechBrowser';

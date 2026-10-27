@@ -23,7 +23,7 @@ import {
   type Roll,
   type RollKind,
   type UnitStats,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { d10s } from '../dice';
 import { newId } from '../id';
 import { systemName } from '../tiles';

@@ -7,7 +7,7 @@ import {
   type Edition,
   type PieceKind,
   type PlayerColor,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { PIECE_MIME } from '../dnd';
 
 interface Props {

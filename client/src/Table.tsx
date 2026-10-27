@@ -1,48 +1,18 @@
 import { useEffect, useState } from 'react';
-import type { PlayerColor } from '@ti4/shared';
+import { FeedbackButton, safeGet, safeSet, type TableProps } from '@joeyanglx/ahob-client';
+import type { Action, GameState, PlayerColor } from '@joeyanglx/ti4-rules';
 import { BattlePanel } from './components/BattlePanel';
 import { DiceRoller } from './components/DiceRoller';
 import { Board, type BoardMode } from './components/Board';
 import { FactionIcon } from './components/cardParts';
 import { EditionToggle } from './components/EditionToggle';
-import { FeedbackButton } from './components/FeedbackPanel';
-import { Lobby } from './components/Lobby';
 import { RightPanel } from './components/RightPanel';
 import { RollToast } from './components/RollToast';
 import { Sidebar } from './components/Sidebar';
 import { TableBar } from './components/TableBar';
-import { useGame } from './useGame';
 
-interface Session {
-  room: string;
-  name: string;
-}
-
-function initialSession(): Session | null {
-  const room = new URLSearchParams(location.search).get('room');
-  const name = safeGet('ti4.name');
-  return room && name ? { room, name } : null;
-}
-
-export function App() {
-  const [session, setSession] = useState<Session | null>(initialSession);
-
-  if (!session) {
-    return (
-      <Lobby
-        onJoin={(room, name) => {
-          safeSet('ti4.name', name);
-          history.replaceState(null, '', `?room=${room}`);
-          setSession({ room, name });
-        }}
-      />
-    );
-  }
-  return <Table room={session.room} name={session.name} />;
-}
-
-function Table({ room, name }: Session) {
-  const { state, players, status, history, dispatch, rewind } = useGame(room, name);
+/** The TI4 table, inside the platform: it hands over the synced room. */
+export function Table({ game, room, name, state, players, status, history, dispatch, rewind }: TableProps<GameState, Action>) {
   const [color, setColor] = useState<PlayerColor>(
     () => (safeGet('ti4.color') as PlayerColor | null) ?? 'red',
   );
@@ -78,7 +48,7 @@ function Table({ room, name }: Session) {
         >
           {passed ? 'Passed ✓' : 'Pass'}
         </button>
-        <FeedbackButton me={name} room={room} />
+        <FeedbackButton me={name} game={game} room={room} example="e.g. The space cannon roll didn't count the PDS on Mecatol" />
         <span className="players">
           {players.map((p) => {
             const faction = state.seats[p]?.faction;
@@ -119,21 +89,3 @@ function Table({ room, name }: Session) {
     </div>
   );
 }
-
-// localStorage can throw in private windows; it's only a convenience here.
-function safeGet(key: string): string | null {
-  try {
-    return localStorage.getItem(key);
-  } catch {
-    return null;
-  }
-}
-
-function safeSet(key: string, value: string) {
-  try {
-    localStorage.setItem(key, value);
-  } catch {
-    // ignore
-  }
-}
-

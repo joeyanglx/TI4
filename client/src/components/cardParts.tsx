@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
-import { FACTIONS, PLAYER_COLORS, type GameState } from '@ti4/shared';
+import { FACTIONS, PLAYER_COLORS, type GameState } from '@joeyanglx/ti4-rules';
+import { ASSETS } from '../assets';
 
 // Small pieces shared by the card panel sections.
 
@@ -58,7 +59,7 @@ export function FactionIcon({ faction, size = 18 }: { faction: string; size?: nu
   return (
     <img
       className="faction-icon"
-      src={`${import.meta.env.BASE_URL}factions/${faction}.webp`}
+      src={`${ASSETS}/factions/${faction}.webp`}
       alt={name}
       title={name}
       width={size}

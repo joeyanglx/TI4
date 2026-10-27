@@ -9,7 +9,7 @@ import {
   stackSize,
   type GameState,
   type PlayerColor,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 
 const SPACE = 'Space';
 

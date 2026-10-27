@@ -9,7 +9,7 @@ import {
   type DiceRoll,
   type Edition,
   type UnitInfo,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { TECH_TYPES, describeRequirements, techColor } from '../techs';
 import { FactionIcon } from './cardParts';
 

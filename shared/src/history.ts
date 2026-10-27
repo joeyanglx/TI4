@@ -1,3 +1,4 @@
+import { stateAt as coreStateAt, type Checkpoint, type HistoryEntry, type HistoryRecord as CoreRecord } from '@joeyanglx/ahob-core';
 import {
   ACTION_CARDS,
   AGENDAS,
@@ -16,43 +17,18 @@ import { planetAt } from './planets';
 import { applyAction, stackSize, type Action, type GameState, type Piece } from './state';
 import { SYSTEMS } from './systems';
 
-/** One step in a room's history, as the server keeps it. */
-export interface HistoryRecord {
-  seq: number;
-  player: string;
-  /** Milliseconds since the epoch. */
-  at: number;
-  /** Plain-English description, written when it happened; never reveals hidden cards. */
-  text: string;
-  action?: Action;
-  /** Set on a rewind: the table went back to how it was just after this entry (0 = start of history). */
-  rewindTo?: number;
+/** One step in a room's history, as the server keeps it (the platform's record, with TI4 actions). */
+export type HistoryRecord = CoreRecord<Action>;
+export type { HistoryEntry };
+
+/** Consecutive piece and tile moves by the same player collapse into one line in the history. */
+export function entryGroup(action: Action, player: string): string | undefined {
+  return action.type === 'piece/move' || action.type === 'tile/move' ? `move:${player}` : undefined;
 }
 
-/** What clients get: the record without the raw action. */
-export type HistoryEntry = Omit<HistoryRecord, 'action'> & {
-  /** Consecutive entries with the same group are collapsed in the log (piece and tile moves). */
-  group?: string;
-};
-
-export function toEntry(record: HistoryRecord): HistoryEntry {
-  const { action, ...entry } = record;
-  const move = action?.type === 'piece/move' || action?.type === 'tile/move';
-  return move ? { ...entry, group: `move:${record.player}` } : entry;
-}
-
-/**
- * The table as it was just after entry `seq`, replayed from the history's starting state. Every action
- * is deterministic (shuffle seeds, dice and new ids travel inside the action), so this is exact.
- */
-export function stateAt(base: GameState, records: HistoryRecord[], seq: number): GameState {
-  let state = base;
-  for (const record of records) {
-    if (record.seq > seq) break;
-    if (record.rewindTo !== undefined) state = stateAt(base, records, record.rewindTo);
-    else if (record.action) state = applyAction(state, record.action);
-  }
-  return state;
+/** The table as it was just after entry `seq` (see the platform's `stateAt`). */
+export function stateAt(base: GameState, records: HistoryRecord[], seq: number, checkpoints: Checkpoint<GameState>[] = []): GameState {
+  return coreStateAt(applyAction, base, records, seq, checkpoints);
 }
 
 const PIECE_NAMES: Partial<Record<Piece['kind'], string>> = {

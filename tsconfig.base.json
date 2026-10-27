@@ -10,6 +10,10 @@
     "isolatedModules": true,
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "customConditions": [
+      "ahob-source"
+    ],
+    "jsx": "react-jsx"
   }
 }

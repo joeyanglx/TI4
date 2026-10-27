@@ -5,7 +5,7 @@ import {
   seatOf,
   type GameState,
   type PromissoryNoteInfo,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 
 /** Everyone who's online or has left a mark on the game, you first. */
 export function knownPlayers(state: GameState, online: string[], me: string): string[] {

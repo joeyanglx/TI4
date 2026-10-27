@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import type { Action, GameState, HistoryEntry } from '@ti4/shared';
+import type { Action, GameState, HistoryEntry } from '@joeyanglx/ti4-rules';
 import { CardsPanel } from './CardsPanel';
-import { HistoryPanel } from './HistoryPanel';
+import { HistoryPanel } from '@joeyanglx/ahob-client';
+import { PlayerTag } from './cardParts';
 import { Overview } from './Overview';
 
 type Tab = 'board' | 'overview' | 'history';
@@ -40,7 +41,12 @@ export function RightPanel({ state, room, online, me, history, dispatch, onRewin
       <div className="right-panel-body">
         {tab === 'board' && <CardsPanel state={state} online={online} me={me} dispatch={dispatch} />}
         {tab === 'overview' && <Overview state={state} room={room} online={online} me={me} dispatch={dispatch} />}
-        {tab === 'history' && <HistoryPanel state={state} history={history} onRewind={onRewind} />}
+        {tab === 'history' && <HistoryPanel
+            history={history}
+            onRewind={onRewind}
+            renderPlayer={(p) => <PlayerTag player={p} state={state} />}
+            rewindWarning={(seq) => `Rewind the whole table to just after #${seq}? Everyone's board, cards and hands go back to that moment.`}
+          />}
       </div>
     </aside>
   );

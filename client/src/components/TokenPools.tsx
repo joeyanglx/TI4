@@ -7,7 +7,7 @@ import {
   type Action,
   type GameState,
   type TokenPool,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { TOKEN_MIME, type TokenDrag } from '../dnd';
 
 interface PoolsProps {

@@ -6,7 +6,7 @@ import {
   seatOf,
   type Action,
   type GameState,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { knownPlayers, victoryPoints } from '../players';
 import { CardDetails, GiveSelect } from './cardParts';
 import { TechSection, TokenSection } from './CommandSheet';

@@ -1,4 +1,4 @@
-import { SYSTEMS, type GameState } from '@ti4/shared';
+import { SYSTEMS, type GameState } from '@joeyanglx/ti4-rules';
 import { PlayerTag } from './cardParts';
 
 const EXPANSION_NAMES = { base: 'Base game', pok: 'Prophecy of Kings', te: "Thunder's Edge" };

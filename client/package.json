@@ -1,23 +1,60 @@
 {
-  "name": "@ti4/client",
-  "private": true,
+  "name": "@joeyanglx/ti4-client",
+  "version": "0.1.0",
+  "description": "Twilight Imperium 4 table for All Hands On Board (with its art in assets/)",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/joeyanglx/TI4.git",
+    "directory": "client"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist",
+    "src",
+    "assets"
+  ],
+  "sideEffects": [
+    "*.css",
+    "./src/index.ts",
+    "./dist/index.js"
+  ],
+  "exports": {
+    ".": {
+      "ahob-source": "./src/index.ts",
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "types": "./src/index.ts",
+  "ahob": {
+    "entries": {
+      "index": "src/index.ts"
+    },
+    "platform": "browser"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "ahob-build"
   },
   "dependencies": {
-    "@ti4/shared": "*",
+    "@joeyanglx/ahob-client": "^0.1.0",
+    "@joeyanglx/ahob-core": "^0.1.0",
+    "@joeyanglx/ti4-rules": "^0.1.0",
     "konva": "^10.7.1",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
     "react-konva": "^19.3.0"
   },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "devDependencies": {
+    "@joeyanglx/ahob-build": "^0.1.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.1.2",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "vite": "^8.3.3"
   }
 }

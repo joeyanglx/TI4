@@ -1,4 +1,4 @@
-"""Regenerates client/public/factions/<faction>.webp from the AsyncTI4 bot's faction emoji images.
+"""Regenerates client/assets/factions/<faction>.webp from the AsyncTI4 bot's faction emoji images.
 
     python scripts/import-faction-icons.py TI4_map_generator_bot/src/main/resources/emojis/factions
 """
@@ -26,7 +26,7 @@ ICONS = {
 }
 
 source = Path(sys.argv[1])
-out = Path(__file__).resolve().parent.parent / 'client' / 'public' / 'factions'
+out = Path(__file__).resolve().parent.parent / 'client' / 'assets' / 'factions'
 out.mkdir(parents=True, exist_ok=True)
 for alias, file in ICONS.items():
     image = Image.open(source / file).convert('RGBA')

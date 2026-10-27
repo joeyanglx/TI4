@@ -10,7 +10,7 @@ import {
   seatOf,
   type Action,
   type GameState,
-} from '@ti4/shared';
+} from '@joeyanglx/ti4-rules';
 import { allPromissoryNotes, knownPlayers, victoryPoints } from '../players';
 import { FactionIcon } from './cardParts';
 import { FactionSheet } from './FactionSheet';

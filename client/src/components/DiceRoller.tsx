@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FREE_DICE, rollTotal, type Action, type GameState } from '@ti4/shared';
+import { FREE_DICE, rollTotal, type Action, type GameState } from '@joeyanglx/ti4-rules';
 import { rollDice } from '../dice';
 import { newId } from '../id';
 

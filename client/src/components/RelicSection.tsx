@@ -1,4 +1,4 @@
-import { RELICS, type Action, type GameState } from '@ti4/shared';
+import { RELICS, type Action, type GameState } from '@joeyanglx/ti4-rules';
 import { CardDetails, GiveSelect, PlayerTag } from './cardParts';
 
 interface Props {

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { SYSTEMS, type GameState } from '@ti4/shared';
+import { SYSTEMS, type GameState } from '@joeyanglx/ti4-rules';
+import { ASSETS } from './assets';
 
 export function systemImageUrl(system: string): string {
-  return `${import.meta.env.BASE_URL}tiles/ST_${system}.webp`;
+  return `${ASSETS}/tiles/ST_${system}.webp`;
 }
 
 const cache = new Map<string, HTMLImageElement>();

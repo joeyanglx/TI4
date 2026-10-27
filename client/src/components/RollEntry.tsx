@@ -1,4 +1,4 @@
-import { ROLL_KINDS, isHit, rollHits, type GameState, type Roll } from '@ti4/shared';
+import { ROLL_KINDS, isHit, rollHits, type GameState, type Roll } from '@joeyanglx/ti4-rules';
 import { PlayerTag } from './cardParts';
 
 /** Misses in a roll, for offering a re-roll. */

@@ -1,7 +1,42 @@
 {
-  "name": "@ti4/shared",
-  "private": true,
+  "name": "@joeyanglx/ti4-rules",
+  "version": "0.1.0",
+  "description": "Twilight Imperium 4 table rules for All Hands On Board",
   "type": "module",
-  "main": "src/index.ts",
-  "types": "src/index.ts"
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/joeyanglx/TI4.git",
+    "directory": "shared"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "ahob-source": "./src/index.ts",
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "types": "./src/index.ts",
+  "ahob": {
+    "entries": {
+      "index": "src/index.ts"
+    },
+    "platform": "neutral"
+  },
+  "scripts": {
+    "build": "ahob-build"
+  },
+  "dependencies": {
+    "@joeyanglx/ahob-core": "^0.1.0"
+  },
+  "devDependencies": {
+    "@joeyanglx/ahob-build": "^0.1.0"
+  }
 }

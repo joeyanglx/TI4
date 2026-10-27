@@ -1,4 +1,4 @@
-import { TECHNOLOGIES, type TechType } from '@ti4/shared';
+import { TECHNOLOGIES, type TechType } from '@joeyanglx/ti4-rules';
 
 /** Technology colours as printed on the cards. */
 export const TECH_TYPES: { type: TechType; label: string; color: string }[] = [
